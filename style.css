@@ -70,6 +70,7 @@ html, body, head {
 
 #name {
     padding: 0px 30px;
+    font-weight: normal;
 }
 
 #bio {
@@ -121,7 +122,7 @@ html, body, head {
     float: right;
 }
 
-/* Text alignment required multiple id's due to different Font Awesome icon sizes */
+/* Text alignment required multiple id's due to non-standard Font Awesome icon sizes */
 
 #menu-text-1 {
     display: inline-block;
