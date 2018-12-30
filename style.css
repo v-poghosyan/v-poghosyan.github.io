@@ -1,7 +1,8 @@
 html, body, head {
     margin: 0px;
     padding: 0px;
-    height: 100%;
+    height: 100vh; /* 100% of viewport height */
+    width: 100vw; /* 100% of viewport width */
     font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
 }
@@ -23,18 +24,20 @@ html, body, head {
 }
 
 #menu-btn:hover {
-    background: #FFF;
+    background: #FFC000;
 }
 
-#menu-btn:hover img { 
-    content: url(/assets/VP_monogram_menu_black.png); 
+#menu-btn:hover svg .svg-path { 
+    fill: #000;
 }
 
-#menu-btn img {
+#menu-btn svg {
     position: relative;
     display: block;
-    height: 64px;
-    width: 64px;
+    height: 52px;
+    width: 52px;
+    top: 7px;
+    right: 1px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -44,14 +47,10 @@ html, body, head {
     position: absolute;
     z-index: 1;
     width: 250px;
-    height: 100%;
+    height: 100vh;
     overflow-x: hidden;
-    background: #FFC000;
+    background: #F2F2F2;
     transition: 0.4s;
-}
-
-#menu::selection {
-    background: #000;
 }
 
 #profile-picture-wrapper {
@@ -69,13 +68,25 @@ html, body, head {
 }
 
 #name {
-    padding: 0px 30px;
+    position: relative;
+    bottom: 19px;
+    padding: 10px 30px;
     font-weight: normal;
+    color: #000;
+    background: #FFF;
+    box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
 #bio {
+    position: relative;
+    bottom: 19px;
     font-size: 16px;
     padding: 0px 30px;
+    color: #000;
+}
+
+*::selection {
+    background: #FFC000;
 }
 
 .menu-link {
@@ -85,12 +96,11 @@ html, body, head {
 }
 
 .menu-link:hover {
-    background: #000;
-    color: #FFC000;
+    background: #FFC000;
     border-radius: 2px;
 }
 
-#menu .menu-btn {
+#menu .menu-choice {
     display: block;
     padding: 10px 30px;
     font-size: 20px;
@@ -99,8 +109,8 @@ html, body, head {
     transition: 0.4s;
 }
 
-#menu .menu-btn:hover {
-    background: #FFF;
+#menu .menu-choice:hover {
+    background: #FFC000;
     color: #000;
     border-width: 0px 0px 0px 10px;
     border-style: solid;
@@ -110,7 +120,7 @@ html, body, head {
 .left-icon {
     display: inline-block;
     position: relative;
-    top:1px;
+    top:2px;
     float: left;
 }
 
@@ -183,15 +193,202 @@ html, body, head {
     left: 250px;
 }
 
-.page-title {
-    display: inline-block;
-    position: relative;
-    margin: 10px;
-    left: 90px;
-}
-
 #content-wrapper {
     display: inline-block;
     position: relative;
-    left: 100px;
+    box-sizing: border-box; /* Fixes consitency of percentage width by applying inset borders */
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    left: 115px;
+    
 }
+
+.page-title {
+    display: block;
+    position: relative;
+    box-sizing: border-box; /* Fixes consitency of percentage width */
+    min-width: 90%;
+    max-width: 90%;
+    padding: 17px 17px 17px 0px;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: #000;
+    text-decoration: none;
+    font-size: 24px;
+    color: #000;
+}
+
+.page-title:hover {
+    color: #FFC000;
+}
+
+/* Home page */
+
+.section-title {
+    display: block;
+    position: relative;
+    top: 50px;
+    font-size: 24px;
+}
+
+#featured-topic-container { /* Grid container */
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-column-gap: 1em;
+    grid-row-gap: 2em;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box; /* Fixes consitency of percentage width */
+    top: 50px;
+    width: 90%;
+    padding: 20px 0px;
+}
+
+/* Overwritting some of imagehover.css styles */
+
+[class^='imghvr-'],
+[class*=' imghvr-'] {
+  background-color: #FFF;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+[class^='imghvr-']:hover,
+[class*=' imghvr-']:hover {
+  box-shadow: none;
+}
+
+
+[class^='imghvr-'] figcaption, [class*=' imghvr-'] figcaption {
+    background-color: #000;
+    color: #FFF;
+    transition: 0.6s;
+}
+
+[class^='imghvr-'] figcaption h1, [class^='imghvr-'] figcaption h2, [class^='imghvr-'] figcaption h3, [class^='imghvr-'] figcaption h4, [class^='imghvr-'] figcaption h5, [class^='imghvr-'] figcaption h6, [class*=' imghvr-'] figcaption h1, [class*=' imghvr-'] figcaption h2, [class*=' imghvr-'] figcaption h3, [class*=' imghvr-'] figcaption h4, [class*=' imghvr-'] figcaption h5, [class*=' imghvr-'] figcaption h6 {
+    color: #FCC000;
+}
+
+/* Contact Me section */
+
+#email-btn {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 64px;
+    top: 43px;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    line-height: 64px;  
+    background: #FFF;
+    transition: 0.4s;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgrey;
+    box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+#email-btn:hover {
+    background: #000;
+    color: #FFF;
+    box-shadow: none;
+}
+
+.badge-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: 70px;
+    background: #FFF;
+    transition: 0.4s;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgrey;
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+    box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+.badge-wrapper.fb:hover {
+    background: #3B5998;
+    box-shadow: none;
+}
+
+.badge-wrapper.git:hover {
+    background: #6e5494;
+    box-shadow: none;
+}
+.badge-wrapper.in:hover {
+    background: #4875B4;
+    box-shadow: none;
+}
+
+#badge-github:hover {
+    fill: #FFF;
+    transition: 0.4s;
+}
+
+#badge-linkedin:hover {
+    fill: #FFF;
+    transition: 0.4s;
+}
+
+#badge-facebook:hover {
+    fill: #FFF;
+    transition: 0.4s;
+}
+
+/* Responsive adjustments */
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    /* Styles */
+}
+    
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    /* Styles */
+}
+
+/* iPhone 6, 7, 8 ----------- */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    /* Styles */
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    /* Styles */
+}
+    
+/* iPhone 6+, 7+, 8+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+    /* Styles */
+}
+    
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+    /* Styles */
+}
+
+/* iPhone X ----------- */
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+    /* Styles */
+    }
+    
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    /* Styles */
+}
+    
+/* iPhone XS Max, XR ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+    /* Styles */
+}
+    
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+    /* Styles */
+}
+    
