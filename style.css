@@ -32,6 +32,14 @@ html, body, head {
     fill: #000;
 }
 
+.active-active #menu-btn:active{
+    background: #FFC000;
+}
+
+.active-active #menu-btn:active svg .svg-path { 
+    fill: #000;
+}
+
 #menu-btn svg {
     position: relative;
     display: block;
