@@ -1,8 +1,9 @@
 html, body, head {
+    position: absolute;
     margin: 0px;
     padding: 0px;
-    height: 100vh; /* 100% of viewport height */
-    width: 100vw; /* 100% of viewport width */
+    height: 100%; /* 100% of viewport height */
+    width: 100%; /* 100% of viewport width */
     font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
 }
@@ -11,7 +12,7 @@ html, body, head {
     position: absolute;
     display: inline-block;
     left: 0px;
-    background-color: #181818;
+    background-color: #000;
     z-index: 30;
     width: 80px;
     height: 64px;
@@ -23,11 +24,11 @@ html, body, head {
     left: 250px;
 }
 
-#menu-btn:hover {
+.hover-active #menu-btn:hover{
     background: #FFC000;
 }
 
-#menu-btn:hover svg .svg-path { 
+.hover-active #menu-btn:hover svg .svg-path { 
     fill: #000;
 }
 
@@ -47,7 +48,7 @@ html, body, head {
     position: absolute;
     z-index: 1;
     width: 250px;
-    height: 100vh;
+    height: 100%;
     overflow-x: hidden;
     background: #F2F2F2;
     transition: 0.4s;
@@ -109,7 +110,7 @@ html, body, head {
     transition: 0.4s;
 }
 
-#menu .menu-choice:hover {
+.hover-active #menu .menu-choice:hover {
     background: #FFC000;
     color: #000;
     border-width: 0px 0px 0px 10px;
@@ -219,7 +220,7 @@ html, body, head {
     color: #000;
 }
 
-.page-title:hover {
+.hover-active .page-title:hover {
     color: #FFC000;
 }
 
@@ -256,8 +257,8 @@ html, body, head {
   box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-[class^='imghvr-']:hover,
-[class*=' imghvr-']:hover {
+.hover-active [class^='imghvr-']:hover,
+.hover-active [class*=' imghvr-']:hover {
   box-shadow: none;
 }
 
@@ -279,8 +280,9 @@ html, body, head {
     position: relative;
     width: 100px;
     height: 64px;
-    top: 43px;
+    top: 45px;
     text-decoration: none;
+    font-size: 20px;
     color: #000;
     text-align: center;
     line-height: 64px;  
@@ -292,7 +294,7 @@ html, body, head {
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-#email-btn:hover {
+.hover-active #email-btn:hover {
     background: #000;
     color: #FFF;
     box-shadow: none;
@@ -315,31 +317,31 @@ html, body, head {
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-.badge-wrapper.fb:hover {
+.hover-active .badge-wrapper.fb:hover {
     background: #3B5998;
     box-shadow: none;
 }
 
-.badge-wrapper.git:hover {
+.hover-active .badge-wrapper.git:hover {
     background: #6e5494;
     box-shadow: none;
 }
-.badge-wrapper.in:hover {
+.hover-active .badge-wrapper.in:hover {
     background: #4875B4;
     box-shadow: none;
 }
 
-#badge-github:hover {
+.hover-active #badge-github:hover {
     fill: #FFF;
     transition: 0.4s;
 }
 
-#badge-linkedin:hover {
+.hover-active #badge-linkedin:hover {
     fill: #FFF;
     transition: 0.4s;
 }
 
-#badge-facebook:hover {
+.hover-active #badge-facebook:hover {
     fill: #FFF;
     transition: 0.4s;
 }
