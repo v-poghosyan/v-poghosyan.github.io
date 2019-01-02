@@ -32,11 +32,11 @@ html, body, head {
     fill: #000;
 }
 
-.active-active #menu-btn:focus{
+.active-active #menu-btn:target{
     background: #FFC000;
 }
 
-.active-active #menu-btn:focus svg .svg-path { 
+.active-active #menu-btn:target svg .svg-path { 
     fill: #000;
 }
 
