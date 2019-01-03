@@ -8,7 +8,15 @@ html, body, head {
     overflow-x: hidden;
 }
 
-#menu-btn {
+*::selection {
+    background: #FFC000;
+}
+
+label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
+    appearance: none;
+}
+
+#menu-btn-label {
     position: absolute;
     display: inline-block;
     left: 0px;
@@ -20,27 +28,19 @@ html, body, head {
     cursor: pointer;
 }
 
-#menu-btn.open {
+#menu-btn-label.open {
     left: 250px;
 }
 
-.hover-active #menu-btn:hover{
+#menu-btn-label:hover{
     background: #FFC000;
 }
 
-.hover-active #menu-btn:hover svg .svg-path { 
+#menu-btn-label:hover svg .svg-path { 
     fill: #000;
 }
 
-.active-active #menu-btn:active, .active-active #menu-btn:focus {
-    background: #FFC000;
-}
-
-.active-active #menu-btn:active svg .svg-path, .active-active #menu-btn:focus svg .svg-path { 
-    fill: #000;
-}
-
-#menu-btn svg {
+#menu-btn-label svg {
     position: relative;
     display: block;
     height: 52px;
@@ -92,10 +92,6 @@ html, body, head {
     font-size: 16px;
     padding: 0px 30px;
     color: #000;
-}
-
-*::selection {
-    background: #FFC000;
 }
 
 .menu-link {
