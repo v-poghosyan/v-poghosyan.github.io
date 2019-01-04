@@ -20,27 +20,5 @@ $(document).ready(function () {
 		menuBtn.toggleClass("open")
     	// Do something else, like open/close menu
 	});
-	
-	// Removes hover effects for touchscreens and adds active effects instead
-	(function () {
-		'use strict';
-		if (!('addEventListener' in window)) {
-			return;
-		}
-		var htmlElement = document.querySelector('html');
-		function touchStart () {
-			document.querySelector('html').classList.remove('hover-active'); // Remove hover effects
-			htmlElement.removeEventListener('touchstart', touchStart);
-		}
-		htmlElement.addEventListener('touchstart', touchStart);
-	}());
-
-	// Adds checked effects for touchscreens
-	(function () {
-		'use strict';
-		if (!(document.querySelector('html').hasClass('hover-active'))) {
-			document.querySelector('html').classList.add('check-active');
-		}
-	}());
 
 });

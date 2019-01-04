@@ -32,19 +32,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     left: 250px;
 }
 
-.hover-active #menu-btn-label:hover{
+#menu-btn-label:hover, #menu-btn-label:active {
     background: #FFC000;
 }
 
-.hover-active #menu-btn-label:hover svg .svg-path { 
-    fill: #000;
-}
-
-.check-active #menu-btn-label:checked{
-    background: #FFC000;
-}
-
-.check-active #menu-btn-label:checked svg .svg-path { 
+#menu-btn-label:hover svg, #menu-btn-label:active svg { 
     fill: #000;
 }
 
@@ -109,7 +101,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     color: #000;
 }
 
-.menu-link:hover {
+.menu-link:hover, .menu-link:active {
     background: #FFC000;
     border-radius: 2px;
 }
@@ -123,7 +115,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     transition: 0.4s;
 }
 
-#menu .menu-choice:hover {
+#menu .menu-choice:hover, #menu .menu-choice:active {
     background: #FFC000;
     color: #000;
     border-width: 0px 0px 0px 10px;
@@ -233,7 +225,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     color: #000;
 }
 
-.hover-active .page-title:hover {
+.page-title:hover, .page-title:active {
     color: #FFC000;
 }
 
@@ -257,6 +249,69 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     top: 50px;
     width: 90%;
     padding: 20px 0px;
+    margin-bottom: 60px;
+}
+
+/* Flickity */
+
+.gallery {
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgrey;
+    box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+.gallery:hover, .gallery:active {
+    border-color: #FFC000;
+}
+  
+.gallery-cell {
+    width: 100%;
+    height: 220px;
+    counter-increment: gallery-cell;
+    background-color: #FFF;
+}
+  
+/* cell number */
+.gallery-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: black;
+}
+
+.gallery-cell.second {
+      background: #FFC000;
+}
+
+/* hide buttons */
+.flickity-prev-next-button {
+    display: none;
+}
+
+.flickity-prev-next-button:disabled {
+    display: none;
+}
+  
+/* position dots in gallery */
+.flickity-page-dots {
+    bottom: 10px;
+}
+
+/* black circles */
+.flickity-page-dots .dot {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    background: transparent;
+    border: 2px solid #000;
+}
+
+/* fill-in selected dot */
+.flickity-page-dots .dot.is-selected {
+    background: #000;
 }
 
 /* Overwritting some of imagehover.css styles */
@@ -270,8 +325,8 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
   box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-.hover-active [class^='imghvr-']:hover,
-.hover-active [class*=' imghvr-']:hover {
+[class^='imghvr-']:hover,
+[class*=' imghvr-']:hover {
   box-shadow: none;
 }
 
@@ -307,7 +362,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-#email-btn:hover {
+#email-btn:hover, #email-btn:active {
     background: #000;
     color: #FFF;
     box-shadow: none;
@@ -330,31 +385,32 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-.badge-wrapper.fb:hover {
+.badge-wrapper.fb:hover, .badge-wrapper.fb:active {
     background: #3B5998;
     box-shadow: none;
 }
 
-.badge-wrapper.git:hover {
+.badge-wrapper.git:hover, .badge-wrapper.git:active {
     background: #6e5494;
     box-shadow: none;
 }
-.badge-wrapper.in:hover {
+
+.badge-wrapper.in:hover, .badge-wrapper.in:active {
     background: #4875B4;
     box-shadow: none;
 }
 
-#badge-github:hover {
+#badge-github:hover, #badge-github:active {
     fill: #FFF;
     transition: 0.4s;
 }
 
-#badge-linkedin:hover {
+#badge-linkedin:hover, #badge-linkedin:active {
     fill: #FFF;
     transition: 0.4s;
 }
 
-#badge-facebook:hover {
+#badge-facebook:hover, #badge-facebook:active {
     fill: #FFF;
     transition: 0.4s;
 }
