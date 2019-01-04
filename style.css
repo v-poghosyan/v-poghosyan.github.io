@@ -40,6 +40,15 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     fill: #000;
 }
 
+.check-active #menu-btn-label:checked{
+    background: #FFC000;
+}
+
+.check-active #menu-btn-label:checked svg .svg-path { 
+    fill: #000;
+}
+
+
 #menu-btn-label svg {
     position: relative;
     display: block;
@@ -114,7 +123,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     transition: 0.4s;
 }
 
-.hover-active #menu .menu-choice:hover {
+#menu .menu-choice:hover {
     background: #FFC000;
     color: #000;
     border-width: 0px 0px 0px 10px;
@@ -298,7 +307,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-.hover-active #email-btn:hover {
+#email-btn:hover {
     background: #000;
     color: #FFF;
     box-shadow: none;
@@ -321,31 +330,31 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
-.hover-active .badge-wrapper.fb:hover {
+.badge-wrapper.fb:hover {
     background: #3B5998;
     box-shadow: none;
 }
 
-.hover-active .badge-wrapper.git:hover {
+.badge-wrapper.git:hover {
     background: #6e5494;
     box-shadow: none;
 }
-.hover-active .badge-wrapper.in:hover {
+.badge-wrapper.in:hover {
     background: #4875B4;
     box-shadow: none;
 }
 
-.hover-active #badge-github:hover {
+#badge-github:hover {
     fill: #FFF;
     transition: 0.4s;
 }
 
-.hover-active #badge-linkedin:hover {
+#badge-linkedin:hover {
     fill: #FFF;
     transition: 0.4s;
 }
 
-.hover-active #badge-facebook:hover {
+#badge-facebook:hover {
     fill: #FFF;
     transition: 0.4s;
 }

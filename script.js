@@ -36,6 +36,11 @@ $(document).ready(function () {
 	}());
 
 	// Adds checked effects for touchscreens
-	
+	(function () {
+		'use strict';
+		if (!(document.querySelector('html').hasClass('hover-active'))) {
+			document.querySelector('html').classList.add('check-active');
+		}
+	}());
 
 });
