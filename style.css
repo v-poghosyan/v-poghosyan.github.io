@@ -209,7 +209,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     width: 100%;
     height: 100%;
     left: 115px;
-    
+    padding: 0px 0px 100px 0px; /* The 100px adds some space to the ending of the pages */
 }
 
 .page-title {
@@ -318,12 +318,21 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
 /* Contact Me section */
 
+#badge-container { /* Grid container */
+    position: relative;
+    display: grid;
+    grid-template-columns: 30% 15% 15% 15%;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    box-sizing: border-box; /* Fixes consitency of percentage width */
+    width: 40%;
+    top: 30px;
+    overflow: hidden;
+}
+
 #email-btn {
     display: inline-block;
     position: relative;
-    width: 100px;
-    height: 64px;
-    top: 15px;
     text-decoration: none;
     font-size: 20px;
     color: #000;
@@ -346,18 +355,18 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 .badge-wrapper {
     display: inline-block;
     position: relative;
-    width: 64px;
-    height: 64px;
-    top: 40px;
     background: #FFF;
     transition: 0.4s;
     border-width: 1px;
     border-style: solid;
     border-color: lightgrey;
-    display: inline-block;
-    position: relative;
-    margin: 0px 5px 100px 5px; /* The 100px adds some space to the ending of the index page */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+.badge-wrapper svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .badge-wrapper.fb:hover, .badge-wrapper.fb:active {
@@ -419,6 +428,18 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         grid-template-columns: 32% 32% 32%;
         width: 86%;
     }
+
+    #badge-container { /* Grid container */
+        position: relative;
+        display: grid;
+        grid-template-columns: 30% 15% 15% 15%;
+        grid-column-gap: 1em;
+        grid-row-gap: 1em;
+        box-sizing: border-box; /* Fixes consitency of percentage width */
+        width: 50%;
+        top: 30px;
+        overflow: hidden;
+    }
 }
 
 @media (max-width: 830px) { /* important specification forces correct behavior at this breakpoint with no conflict from iPads */
@@ -432,6 +453,22 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #featured-topic-container { /* Grid container */
         grid-template-columns: 48.5% 48.5% !important;
         width: 80% !important;
+    }
+
+    #badge-container { /* Grid container */
+        width: 70%;
+    }
+}
+
+@media (max-width: 600px) { 
+
+    /* <<< index.html >>> */
+    #badge-container { /* Grid container */
+        grid-template-columns: 30% 30%;
+    }
+
+    #email-btn {
+        grid-column: 1 / span 2;
     }
 }
 
@@ -494,6 +531,25 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 85%;
     }
 }
+    
+/* iPhone 6+, 7+, 8+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) {
+    /* Styles */
+}
+    
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) {
+
+    /* <<< default.html >>> */
+    .page-title {
+        width: 68% !important;
+    }
+    
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 99% !important;
+        width: 68% !important;
+    }
+}
 
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
@@ -501,25 +557,34 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-    /* Styles */
-}
+        /* <<< default.html >>> */
+        .page-title {
+            width: 65% !important;
+        }
     
-/* iPhone 6+, 7+, 8+ ----------- */
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
-    /* Styles */
-}
-    
-@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-    /* Styles */
+        /* <<< index.html >>> */
+        #featured-topic-container { /* Grid container */
+            grid-template-columns: 99% !important;
+            width: 65% !important;
+        }
 }
 
 /* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
     /* Styles */
-    }
+}
     
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
-    /* Styles */
+            /* <<< default.html >>> */
+            .page-title {
+                width: 62% !important;
+            }
+        
+            /* <<< index.html >>> */
+            #featured-topic-container { /* Grid container */
+                grid-template-columns: 99% !important;
+                width: 62% !important;
+            }
 }
     
 /* iPhone XS Max, XR ----------- */

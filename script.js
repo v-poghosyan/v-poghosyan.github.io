@@ -20,5 +20,5 @@ $(document).ready(function () {
 		menuBtn.toggleClass("open")
     	// Do something else, like open/close menu
 	});
-
+	
 });
