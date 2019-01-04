@@ -12,6 +12,8 @@ html, body, head {
     background: #FFC000;
 }
 
+/* <<< default.html >>> */
+
 label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     appearance: none;
 }
@@ -214,8 +216,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     display: block;
     position: relative;
     box-sizing: border-box; /* Fixes consitency of percentage width */
-    min-width: 90%;
-    max-width: 90%;
+    width: 90%;
     padding: 17px 17px 17px 0px;
     border-width: 0px 0px 1px 0px;
     border-style: solid;
@@ -229,12 +230,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     color: #FFC000;
 }
 
-/* Home page */
+/* <<< index.html >>> */
 
 .section-title {
     display: block;
     position: relative;
-    top: 50px;
+    top: 20px;
     font-size: 24px;
 }
 
@@ -246,10 +247,10 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     overflow: hidden;
     box-sizing: border-box; /* Fixes consitency of percentage width */
-    top: 50px;
+    top: 20px;
     width: 90%;
     padding: 20px 0px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 /* Flickity */
@@ -262,7 +263,8 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 .gallery:hover, .gallery:active {
-    border-color: #FFC000;
+    border-color: #000;
+    box-shadow: none;
 }
   
 .gallery-cell {
@@ -314,33 +316,6 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     background: #000;
 }
 
-/* Overwritting some of imagehover.css styles */
-
-[class^='imghvr-'],
-[class*=' imghvr-'] {
-  background-color: #FFF;
-  border-width: 1px;
-  border-style: solid;
-  border-color: lightgrey;
-  box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
-}
-
-[class^='imghvr-']:hover,
-[class*=' imghvr-']:hover {
-  box-shadow: none;
-}
-
-
-[class^='imghvr-'] figcaption, [class*=' imghvr-'] figcaption {
-    background-color: #000;
-    color: #FFF;
-    transition: 0.6s;
-}
-
-[class^='imghvr-'] figcaption h1, [class^='imghvr-'] figcaption h2, [class^='imghvr-'] figcaption h3, [class^='imghvr-'] figcaption h4, [class^='imghvr-'] figcaption h5, [class^='imghvr-'] figcaption h6, [class*=' imghvr-'] figcaption h1, [class*=' imghvr-'] figcaption h2, [class*=' imghvr-'] figcaption h3, [class*=' imghvr-'] figcaption h4, [class*=' imghvr-'] figcaption h5, [class*=' imghvr-'] figcaption h6 {
-    color: #FCC000;
-}
-
 /* Contact Me section */
 
 #email-btn {
@@ -348,7 +323,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     width: 100px;
     height: 64px;
-    top: 45px;
+    top: 15px;
     text-decoration: none;
     font-size: 20px;
     color: #000;
@@ -373,7 +348,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     width: 64px;
     height: 64px;
-    top: 70px;
+    top: 40px;
     background: #FFF;
     transition: 0.4s;
     border-width: 1px;
@@ -381,7 +356,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     border-color: lightgrey;
     display: inline-block;
     position: relative;
-    margin: 5px;
+    margin: 0px 5px 100px 5px; /* The 100px adds some space to the ending of the index page */
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
 
@@ -417,14 +392,107 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
 /* Responsive adjustments */
 
-/* iPads (landscape) ----------- */
+/* Desktop Browsers ----------- */
+@media (max-width: 1250px) {
+
+    /* <<< default.html >>> */
+    .page-title {
+        width: 88%;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 32% 32% 32%;
+        width: 88%;
+    }
+}
+
+@media (max-width: 1035px) {
+
+    /* <<< default.html >>> */
+    .page-title {
+        width: 86%;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 32% 32% 32%;
+        width: 86%;
+    }
+}
+
+@media (max-width: 830px) { /* important specification forces correct behavior at this breakpoint with no conflict from iPads */
+
+    /* <<< default.html >>> */
+    .page-title {
+        width: 80% !important;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 48.5% 48.5% !important;
+        width: 80% !important;
+    }
+}
+
+/* iPad (landscape) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-    /* Styles */
+    
+    /* <<< default.html >>> */
+    .page-title {
+        width: 85%;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 32% 32% 32%;
+        width: 85%;
+    }
 }
     
-/* iPads (portrait) ----------- */
+/* iPad (portrait) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    /* Styles */
+        
+        /* <<< default.html >>> */
+        .page-title {
+            width: 80%;
+        }
+    
+        /* <<< index.html >>> */
+        #featured-topic-container { /* Grid container */
+            grid-template-columns: 48.5% 48.5%;
+            width: 80%;
+        }
+}
+
+/* iPad Pro (landscape) ----------- */
+@media only screen and (min-device-width : 1336px) and (-webkit-min-device-pixel-ratio: 2) and (orientation : landscape) {
+    
+    /* <<< default.html >>> */
+    .page-title {
+        width: 88%;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 24% 24% 24% 24%;
+        width: 88%;
+    }
+}
+
+/* iPad Pro (portrait) ----------- */
+@media only screen and (min-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation : portrait) {
+        
+    /* <<< default.html >>> */
+    .page-title {
+        width: 85%;
+    }
+
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 32% 32% 32%;
+        width: 85%;
+    }
 }
 
 /* iPhone 6, 7, 8 ----------- */
