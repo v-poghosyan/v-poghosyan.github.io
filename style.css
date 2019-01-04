@@ -32,11 +32,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     left: 250px;
 }
 
-#menu-btn-label:hover{
+.hover-active #menu-btn-label:hover{
     background: #FFC000;
 }
 
-#menu-btn-label:hover svg .svg-path { 
+.hover-active #menu-btn-label:hover svg .svg-path { 
     fill: #000;
 }
 
