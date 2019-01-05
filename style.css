@@ -97,13 +97,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     color: #403F45;
 }
 
-.menu-link {
+.link {
     padding: 1px 6px 1px 5px;
     text-decoration: none;
-    color: #403F45;
+    color: #000;
 }
 
-.menu-link:hover, .menu-link:active {
+.link:hover, .menu-link:active {
     background: #FDEC00;
     border-radius: 2px;
 }
@@ -176,6 +176,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     transition: 0.4s;
     opacity: 0;
     pointer-events:none;
+    cursor: pointer;
 }
 
 #content-screen.active {
@@ -240,6 +241,8 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     top: 20px;
     font-size: 24px;
+    font-weight: normal;
+    color: #403F45;
 }
 
 #featured-topic-container { /* Grid container */
@@ -284,7 +287,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     content: counter(gallery-cell);
     line-height: 200px;
     font-size: 80px;
-    color: black;
+    color: #403F45;
 }
 
 .gallery-cell.second {
@@ -407,6 +410,58 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
 /* <<< blog.html >>> */
 
+#post-list {
+    display: block;
+    position: relative;
+    top: 20px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.post {
+    margin: 20px 0px;
+    padding: 20px 0px 20px 0px;
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: lightgrey;
+    width: 90%;
+}
+
+.tags-tab {
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+}
+
+.post-title {
+    font-size: 20px;
+}
+
+.post-date {
+    font-size: 14px;
+    padding: 0px 0px 0px 5px;
+}
+
+.post-description {
+    padding: 0px 0px 0px 5px;
+}
+
+.post-tags {
+    display: inline-block;
+    background: #403F45;
+    color: #FFF;
+    padding: 3px 6px 3px 5px;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+
+.post-tags:hover, .post-tags:active {
+    background: #FDEC00;
+    color: #403F45;
+    cursor: pointer;
+}
+
+
+
 
 
 /* Responsive adjustments */
@@ -422,6 +477,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     /* <<< index.html >>> */
     #featured-topic-container { /* Grid container */
         grid-template-columns: 32% 32% 32%;
+        width: 88%;
+    }
+
+    /* <<< blog.html >>> */
+    .post {
         width: 88%;
     }
 }
@@ -450,6 +510,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         top: 30px;
         overflow: hidden;
     }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 86%;
+    }
 }
 
 @media (max-width: 830px) { /* important specification forces correct behavior at this breakpoint with no conflict from iPads */
@@ -467,6 +532,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     #badge-container { /* Grid container */
         width: 70%;
+    }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 80% !important;
     }
 }
 
@@ -495,6 +565,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         grid-template-columns: 32% 32% 32%;
         width: 85%;
     }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 85%;
+    }
 }
     
 /* iPad (portrait) ----------- */
@@ -508,6 +583,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         /* <<< index.html >>> */
         #featured-topic-container { /* Grid container */
             grid-template-columns: 48.5% 48.5%;
+            width: 80%;
+        }
+
+        /* <<< blog.html >>> */
+        .post {
             width: 80%;
         }
 }
@@ -525,6 +605,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         grid-template-columns: 24% 24% 24% 24%;
         width: 88%;
     }
+
+    /* <<< blog.html >>> */
+    .post {
+            width: 88%;
+    }
 }
 
 /* iPad Pro (portrait) ----------- */
@@ -538,6 +623,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     /* <<< index.html >>> */
     #featured-topic-container { /* Grid container */
         grid-template-columns: 32% 32% 32%;
+        width: 85%;
+    }
+
+    /* <<< blog.html >>> */
+    .post {
         width: 85%;
     }
 }
@@ -559,6 +649,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         grid-template-columns: 99% !important;
         width: 68% !important;
     }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 68%;
+    }   
 }
 
 /* iPhone 6, 7, 8 ----------- */
@@ -567,16 +662,21 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-        /* <<< default.html >>> */
-        .page-title {
-            width: 65% !important;
-        }
+    /* <<< default.html >>> */
+    .page-title {
+        width: 65% !important;
+    }
     
-        /* <<< index.html >>> */
-        #featured-topic-container { /* Grid container */
-            grid-template-columns: 99% !important;
-            width: 65% !important;
-        }
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 99% !important;
+        width: 65% !important;
+    }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 65% !important;
+    }
 }
 
 /* iPhone X ----------- */
@@ -585,16 +685,29 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
     
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
-            /* <<< default.html >>> */
-            .page-title {
-                width: 62% !important;
-            }
+    /* <<< default.html >>> */
+    .page-title {
+        width: 62% !important;
+    }
         
-            /* <<< index.html >>> */
-            #featured-topic-container { /* Grid container */
-                grid-template-columns: 99% !important;
-                width: 62% !important;
-            }
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 99% !important;
+        width: 62% !important;
+    }
+
+    .section-title {
+        width: 62%;
+    }
+
+    /* <<< blog.html >>> */
+    .post {
+        width: 62% !important;
+    }
+
+    .post-tags {
+        margin: 5px;
+    }
 }
     
 /* iPhone XS Max, XR ----------- */

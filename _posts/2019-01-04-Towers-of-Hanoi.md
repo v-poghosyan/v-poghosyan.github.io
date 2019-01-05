@@ -1,7 +1,7 @@
 ---
 layout: blog
-category: blog
-tags: -recursion -induction
+categories: [discrete_mathematics]
+tags: recursion induction
 title: Towers of Hanoi
 meta: Towers of Hanoi is a peculiar recursion problem that is solved inductively (sort of).
 ---
