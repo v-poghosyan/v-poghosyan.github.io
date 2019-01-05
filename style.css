@@ -9,7 +9,7 @@ html, body, head {
 }
 
 *::selection {
-    background: #FFC000;
+    background: #FDEC00;
 }
 
 /* <<< default.html >>> */
@@ -22,7 +22,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: absolute;
     display: inline-block;
     left: 0px;
-    background-color: #000;
+    background-color: #403F45;
     z-index: 30;
     width: 80px;
     height: 64px;
@@ -35,11 +35,11 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 #menu-btn-label:hover, #menu-btn-label:active {
-    background: #FFC000;
+    background: #FDEC00;
 }
 
 #menu-btn-label:hover svg, #menu-btn-label:active svg { 
-    fill: #000;
+    fill: #403F45;
 }
 
 
@@ -84,7 +84,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     bottom: 19px;
     padding: 10px 30px;
     font-weight: normal;
-    color: #000;
+    color: #403F45;
     background: #FFF;
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
@@ -94,17 +94,17 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     bottom: 19px;
     font-size: 16px;
     padding: 0px 30px;
-    color: #000;
+    color: #403F45;
 }
 
 .menu-link {
     padding: 1px 6px 1px 5px;
     text-decoration: none;
-    color: #000;
+    color: #403F45;
 }
 
 .menu-link:hover, .menu-link:active {
-    background: #FFC000;
+    background: #FDEC00;
     border-radius: 2px;
 }
 
@@ -113,16 +113,16 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     padding: 10px 30px;
     font-size: 20px;
     text-decoration: none;
-    color: #000;
+    color: #403F45;
     transition: 0.4s;
 }
 
 #menu .menu-choice:hover, #menu .menu-choice:active {
-    background: #FFC000;
-    color: #000;
+    background: #FDEC00;
+    color: #403F45;
     border-width: 0px 0px 0px 10px;
     border-style: solid;
-    border-color: #000;
+    border-color: #403F45;
 }
 
 .left-icon {
@@ -227,14 +227,10 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     padding: 17px 17px 17px 0px;
     border-width: 0px 0px 1px 0px;
     border-style: solid;
-    border-color: #000;
+    border-color: #403F45;
     text-decoration: none;
     font-size: 24px;
-    color: #000;
-}
-
-.page-title:hover, .page-title:active {
-    color: #FFC000;
+    color: #403F45;
 }
 
 /* <<< index.html >>> */
@@ -270,7 +266,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 .gallery:hover, .gallery:active {
-    border-color: #000;
+    border-color: #403F45;
     box-shadow: none;
 }
   
@@ -292,7 +288,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 .gallery-cell.second {
-      background: #FFC000;
+      background: #FDEC00;
 }
 
 /* hide buttons */
@@ -315,12 +311,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     height: 12px;
     opacity: 1;
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid #403F45;
 }
 
 /* fill-in selected dot */
 .flickity-page-dots .dot.is-selected {
-    background: #000;
+    background: #403F45;
 }
 
 /* Contact Me section */
@@ -342,7 +338,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     text-decoration: none;
     font-size: 20px;
-    color: #000;
+    color: #403F45;
     text-align: center;
     line-height: 64px;  
     background: #FFF;
@@ -354,7 +350,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 }
 
 #email-btn:hover, #email-btn:active {
-    background: #000;
+    background: #403F45;
     color: #FFF;
     box-shadow: none;
 }
@@ -363,12 +359,15 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     display: inline-block;
     position: relative;
     background: #FFF;
+    width: 100%;
     transition: 0.4s;
     border-width: 1px;
     border-style: solid;
     border-color: lightgrey;
     box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
 }
+
+
 
 .badge-wrapper svg {
     display: block;
@@ -405,6 +404,10 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     fill: #FFF;
     transition: 0.4s;
 }
+
+/* <<< blog.html >>> */
+
+
 
 /* Responsive adjustments */
 
