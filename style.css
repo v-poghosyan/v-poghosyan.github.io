@@ -173,13 +173,20 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     left: 0px;
     height: 100%;
     width: 100%;
-    background: transparent;
     transition: 0.4s;
+    opacity: 0;
     pointer-events:none;
 }
 
 #content-screen.active {
-    background: rgba(0,0,0,0.4);
+    opacity: 0.5;
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(112, 112, 112),
+        rgb(112, 112, 112) 6px,
+        rgb(83, 83, 83) 6px,
+        rgb(83, 83, 83) 12px
+    );
     pointer-events: auto;
     left: 250px;
 }
