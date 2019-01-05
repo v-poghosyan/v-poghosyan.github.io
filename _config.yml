@@ -1,4 +1,3 @@
 markdown: redcarpet
 baseurl: ""
 exclude: ["README.md"]
-permalink: /:categories/:title/ #This is the format of the post links
