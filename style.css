@@ -100,6 +100,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 .link {
     padding: 1px 6px 1px 5px;
     text-decoration: none;
+    font-weight: bold;
     color: #000;
 }
 
@@ -460,9 +461,34 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     cursor: pointer;
 }
 
+/* <<< projects.html >>> */
 
+.projects-under-construction-sign {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    font-size: 16px;
+    color: #403F45;
+    padding: 0px 0px 0px 5px;
+}
 
+/* <<< cv.html >>> */
 
+#resume-box {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    width: 90%;
+    height: 600px;
+}
+
+/* <<< blog_post.html >>> */
+
+#post-wrapper {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+}
 
 /* Responsive adjustments */
 
@@ -482,6 +508,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     /* <<< blog.html >>> */
     .post {
+        width: 88%;
+    }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
         width: 88%;
     }
 }
@@ -515,6 +547,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
         width: 86%;
     }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 86%;
+    }
 }
 
 @media (max-width: 830px) { /* important specification forces correct behavior at this breakpoint with no conflict from iPads */
@@ -537,6 +575,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     /* <<< blog.html >>> */
     .post {
         width: 80% !important;
+    }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 80%;
     }
 }
 
@@ -570,26 +614,39 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
         width: 85%;
     }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 85%;
+    }
 }
     
 /* iPad (portrait) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
         
-        /* <<< default.html >>> */
-        .page-title {
-            width: 80%;
-        }
+    /* <<< default.html >>> */
+    .page-title {
+        width: 80%;
+    }
     
-        /* <<< index.html >>> */
-        #featured-topic-container { /* Grid container */
-            grid-template-columns: 48.5% 48.5%;
-            width: 80%;
-        }
+    /* <<< index.html >>> */
+    #featured-topic-container { /* Grid container */
+        grid-template-columns: 48.5% 48.5%;
+        width: 80%;
+    }
 
-        /* <<< blog.html >>> */
-        .post {
-            width: 80%;
-        }
+    /* <<< blog.html >>> */
+    .post {
+        width: 80%;
+    }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 80%;
+        height: 900px;
+    }
 }
 
 /* iPad Pro (landscape) ----------- */
@@ -610,6 +667,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
             width: 88%;
     }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 88%;
+        height: 900px;
+    }    
 }
 
 /* iPad Pro (portrait) ----------- */
@@ -630,11 +694,23 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
         width: 85%;
     }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 85%;
+        height: 1150px;
+    }
 }
     
 /* iPhone 6+, 7+, 8+ ----------- */
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) {
-    /* Styles */
+        
+    /* <<< cv.html >>> */
+
+        #resume-box {
+            height: 300px;
+        } 
 }
     
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) {
@@ -652,13 +728,23 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     /* <<< blog.html >>> */
     .post {
+        width: 68% !important;
+    }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
         width: 68%;
-    }   
+        height: 500px !important;
+    } 
 }
 
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
-    /* Styles */
+    
+    #resume-box {
+        height: 250px;
+    } 
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
@@ -677,11 +763,21 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
         width: 65% !important;
     }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 65% !important;
+        height: 400px !important;
+    }
 }
 
 /* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
-    /* Styles */
+    #resume-box {
+        width: 80%;
+        height: 250px;
+    }
 }
     
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
@@ -707,6 +803,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     .post-tags {
         margin: 5px;
+    }
+
+    /* <<< cv.html >>> */
+
+    #resume-box {
+        width: 62% !important;
+        height: 400px !important;
     }
 }
     

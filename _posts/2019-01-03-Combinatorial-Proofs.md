@@ -1,5 +1,5 @@
 ---
-layout: blog
+layout: blog_post # Extends default layout
 categories: [discrete_mathematics]
 tags: combinatorics proofs
 title: Combinatorial Proofs

@@ -2,24 +2,22 @@
 layout: default
 ---
 
-<a class="page-title" href="#">Blog</a>
+<a class="page-title" href="{{site.baseurl}}/blog.html">Blog</a>
 
 <h1 class="section-title">Discrete Mathematics</h1>
 
 <!-- Loops over all the posts in _posts -->
 <ul id="post-list">
-    {% for blog_post in site.posts %}
-        {% if blog_post.categories contains "discrete_mathematics" %} <!-- If belongs to above category (in this case Discrete Mathematics) -->
-            <li class="post">
-                <a href="" class="post-title link">{{blog_post.title}}</a> <!-- Title of the post -->
-                <p class="post-date">{{ blog_post.date | date: "%-d %B %Y" }}</p> <!-- Date of the post -->
-                <p class="post-description">{{blog_post.meta}}</p> <!-- Contents of the post -->
-                <!-- Loops over tags of current post -->
-                <p class="tags-tab">Tags: </p>
-                {% for tags in blog_post.tags %}
-                   <span class="post-tags">{{tags}}</span>
-                {% endfor %}
-            </li>
-        {% endif %}
+    {% for blog_post in site.categories.discrete_mathematics %} <!-- Loop over the category, replaces if else syntax -->
+        <li class="post">
+            <a href="{{site.baseurl}}{{blog_post.url}}" class="post-title link">{{blog_post.title}}</a> <!-- Title of the post -->
+            <p class="post-date">{{ blog_post.date | date: "%-d %B %Y" }}</p> <!-- Date of the post -->
+            <p class="post-description">{{blog_post.meta}}</p> <!-- Contents of the post -->
+            <!-- Loops over tags of current post -->
+            <p class="tags-tab">Tags: </p>
+            {% for tags in blog_post.tags %}
+                <span class="post-tags">{{tags}}</span>
+            {% endfor %}
+        </li>
     {% endfor %}
 </ul>
