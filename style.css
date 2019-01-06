@@ -489,6 +489,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     display: inline-block;
     position: relative;
     top: 20px;
+    width: 90%;
 }
 
 /* Responsive adjustments */
