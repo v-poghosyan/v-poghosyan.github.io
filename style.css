@@ -470,6 +470,7 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     font-size: 16px;
     color: #403F45;
     padding: 0px 0px 0px 5px;
+    width: 90%;
 }
 
 /* <<< cv.html >>> */
@@ -511,6 +512,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 88%;
     }
 
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 88%;
+    }
+
     /* <<< cv.html >>> */
 
     #resume-box {
@@ -532,15 +539,14 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     }
 
     #badge-container { /* Grid container */
-        position: relative;
-        display: grid;
         grid-template-columns: 30% 15% 15% 15%;
-        grid-column-gap: 1em;
-        grid-row-gap: 1em;
-        box-sizing: border-box; /* Fixes consitency of percentage width */
         width: 50%;
-        top: 30px;
-        overflow: hidden;
+    }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 86%;
     }
 
     /* <<< blog.html >>> */
@@ -571,6 +577,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #badge-container { /* Grid container */
         width: 70%;
     }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 80% !important;
+    }
+    
 
     /* <<< blog.html >>> */
     .post {
@@ -615,6 +628,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 85%;
     }
 
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 85%;
+    }
+
+
     /* <<< cv.html >>> */
 
     #resume-box {
@@ -638,6 +658,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     /* <<< blog.html >>> */
     .post {
+        width: 80%;
+    }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
         width: 80%;
     }
 
@@ -668,6 +694,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
             width: 88%;
     }
 
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 88%;
+    }
+
+
     /* <<< cv.html >>> */
 
     #resume-box {
@@ -692,6 +725,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     /* <<< blog.html >>> */
     .post {
+        width: 85%;
+    }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
         width: 85%;
     }
 
@@ -731,6 +770,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 68% !important;
     }
 
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 68% !important;
+    }
+
+
     /* <<< cv.html >>> */
 
     #resume-box {
@@ -763,6 +809,13 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     .post {
         width: 65% !important;
     }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 65% !important;
+    }
+
 
     /* <<< cv.html >>> */
 
@@ -803,6 +856,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     .post-tags {
         margin: 5px;
+    }
+
+    /* <<< projects.html >>> */
+
+    .projects-under-construction-sign {
+        width: 62% !important;
     }
 
     /* <<< cv.html >>> */
