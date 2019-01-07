@@ -12,6 +12,56 @@ html, body, head {
     background: #FDEC00;
 }
 
+/* Site-wide post styling */
+
+p {
+    font-size: 16px;
+    margin-left: 5px;
+    color: #403F45;
+}
+
+h1,h2,h3,h4,h5 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 5px;
+    color: #403F45;
+}
+
+.img-left {
+    display: inline-block;
+    float: left;
+    margin: 20px 20px 20px 0px;
+}
+
+.img-right {
+    display: inline-block;
+    float: right;
+    margin: 20px 0px 20px 20px;
+}
+
+.image {
+    display: block;
+    box-shadow: 0px 2px 8px -2px rgba(0,0,0,0.2);
+}
+
+.caption-right {
+    display: block;
+    margin: 10px 0px;
+    position: relative;
+    font-style: italic;
+    float: left;
+    clear: left;
+}
+
+.caption-left {
+    display: block;
+    margin: 10px 0px;
+    position: relative;
+    font-style: italic;
+    float: left;
+    clear: left;
+}
+
 /* <<< default.html >>> */
 
 label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
@@ -83,6 +133,8 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     position: relative;
     bottom: 19px;
     padding: 10px 30px;
+    margin: 0px;
+    font-size: 18px;
     font-weight: normal;
     color: #403F45;
     background: #FFF;
@@ -524,6 +576,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 88%;
     }
+    
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 88%;
+    }
 }
 
 @media (max-width: 1035px) {
@@ -558,6 +616,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     /* <<< cv.html >>> */
 
     #resume-box {
+        width: 86%;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
         width: 86%;
     }
 }
@@ -595,6 +659,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
 
     #resume-box {
         width: 80%;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 80% !important;
     }
 }
 
@@ -641,6 +711,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 85%;
     }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 85%;
+    }
 }
     
 /* iPad (portrait) ----------- */
@@ -673,6 +749,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 80%;
         height: 900px;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 80%;
     }
 }
 
@@ -708,6 +790,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 88%;
         height: 900px;
     }    
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 88%;
+    }
 }
 
 /* iPad Pro (portrait) ----------- */
@@ -740,6 +828,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 85%;
         height: 1150px;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 85%;
     }
 }
     
@@ -784,6 +878,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
         width: 68%;
         height: 500px !important;
     } 
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 68% !important;
+    }
 }
 
 /* iPhone 6, 7, 8 ----------- */
@@ -823,6 +923,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 65% !important;
         height: 400px !important;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 65% !important;
     }
 }
 
@@ -870,6 +976,12 @@ label#menu-btn input[type="checkbox"] { /* Removes default checkbox apperance */
     #resume-box {
         width: 62% !important;
         height: 400px !important;
+    }
+
+    /* <<< blog_post.html >>> */
+
+    #post-wrapper {
+        width: 62% !important;
     }
 }
     

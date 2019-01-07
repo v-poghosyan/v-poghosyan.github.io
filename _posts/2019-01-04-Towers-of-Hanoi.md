@@ -51,10 +51,32 @@ There are two types of synchronization and they can complement each other:
 
 ## Open a file
 
-<code>
-    s = "Python syntax highlighting"
-    print s
-<code>
+$ n \in \mathbb{N} $, prove that $ \sum_{i=1}^{n} i(i+1) =  1\cdot2 + 2\cdot3 + 3\cdot4 + n(n+1) = \frac{n(n+1)(n+2)}{3} $
+
+$ \begin{bmatrix}a & b \ c & d\end{bmatrix} $
+
+$\begin{pmatrix}a & b \\\ c & d\end{pmatrix}$
+..
+
+$$\forall \ T \in \{triangles\}$$
+
+... a given wire happens to be carrying "$$\lvert 0\rangle$$."
+By that we mean that it's carrying the linear combination
+\[\begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}\]...
+
+$\require{\AMScd}$
+
+$$\begin{CD}
+A @<<< B @>>> C\\
+@. @| @AAA\\
+@. D @= E
+\end{CD}$$
+
+<pre><code class="language-python">s = "Python syntax highlighting"
+print s
+
+# This is a comment
+</code></pre>
 
 <pre><code class="language-css">body {
   font: 100% Helvetica, sans-serif;
@@ -66,7 +88,13 @@ There are two types of synchronization and they can complement each other:
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
-}</code></pre>
+}
+
+/* This is a comment */
+</code></pre>
+
+<!-- For images with captions -->
+{% include image.html file="https://qph.fs.quoracdn.net/main-qimg-3944c1bf90289230287e7ceb26dc10c3" description="This is an image." class="img-right" caption-class="caption-right"%}
 
 
 You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
