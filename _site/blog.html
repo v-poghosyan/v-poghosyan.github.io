@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vahram Poghosyan - Personal Blog &amp; Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <!-- <link rel="shortcut icon" href="/assets/VP_monogram.png"/> --> <!-- Optional favicon -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="/flickity.css" media="screen">
+    <link rel="stylesheet" href="/Prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+    
+<body>
+    
+    <div id="menu">
+        
+        <!-- *** Menu *** -->
+        <h3 id="name"><i class="left-icon fas fa-fw fa-compass"></i>Menu</h3>
+
+        <!-- *** Menu choices *** -->
+        <div id= "menu-choice-wrapper">
+            <a class="menu-choice" href="/about.html"><i class="left-icon fas fa-fw fa-user"></i><span class="menu-text">About</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/index.html"><i class="left-icon fas fa-fw fa-home"></i><span class="menu-text">Home</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/blog.html"><i class="left-icon fas fa-fw fa-th-large"></i><span class="menu-text">Blog</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/projects.html"><i class="left-icon fas fa-fw fa-pencil-ruler"></i><span class="menu-text">Projects</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/assets/resume.pdf"><i class="left-icon fas fa-fw fa-file"></i><span class="menu-text">CV</span><i class="right-icon fas fa-angle-right"></i></a>
+        </div>
+    </div>
+    
+    <!-- *** Menu button *** -->
+    <label id="menu-btn-label" for="menu-btn">
+        <!-- Inline .svg needed to change fill color with CSS -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154.5 136.36" fill="#FFFFFF"><path class="svg-path" d="M154.5 12.03L108.78 40.1a1.9 1.9 0 0 0-.86 2.16 4.8 4.8 0 0 0 4.3 3.37c3 .18 6.75.88 9 3.1 1.92 1.9 2.72 8.76 2.72 11.65s-1 7.57-3.13 9.48-7.73 2.86-12.9 2.86h-8.2a2.4 2.4 0 0 1-2.38-2.38V47.08l-22.9 15.35v73.93l20.24-13.14a6.5 6.5 0 0 0 2.61-5.23V91.26c0-.5.2-1 .56-1.36s.85-.56 1.36-.56h11.55c11.5 0 22.2-2.5 27.8-7.5s8.4-14 8.4-22.9c0-7.2-1.8-15.9-5.36-21.3-.77-1.14-.64-2.67.3-3.67zM74.9.03a5.5 5.5 0 0 0-5.28 3.9L52.25 60.18a3 3 0 0 1-2.2 2.09c-1.4.3-2.8-.52-3.27-1.9L28 3.8A5.5 5.5 0 0 0 22.76.03H0l26.15 69.22c.7 1.85 1.35 2.78.35 5.78l-13 24L32.9 87.1l41.13-25.95L96.73.03z"/></svg>    </label>
+    <input id="menu-btn" type="checkbox"></input>
+    
+    <!-- *** Page content *** -->
+    <div id="content-screen"></div> <!-- applies shadow when not in focus -->
+    <div id="content">
+         <div id="content-wrapper">
+
+            <a class="page-title" href="/blog.html">Blog</a>
+
+<h1 class="section-title" id="discrete-mathematics">Discrete Mathematics</h1>
+
+<!-- Loops over all the posts in _posts -->
+<ul id="post-list">
+     <!-- Loop over the category, replaces if else syntax -->
+        <li class="post">
+            <a href="/discrete_mathematics/2019/01/04/Towers-of-Hanoi.html" class="post-title link">Towers of Hanoi</a> <!-- Title of the post -->
+            <p class="post-date">4 January 2019</p> <!-- Date of the post -->
+            <p class="post-description">Towers of Hanoi is a peculiar recursion problem that is solved inductively (sort of).</p> <!-- Contents of the post -->
+            <!-- Loops over tags of current post -->
+            <p class="tags-tab">Tags: </p>
+            
+                <span class="post-tags">recursion</span>
+            
+                <span class="post-tags">induction</span>
+            
+        </li>
+     <!-- Loop over the category, replaces if else syntax -->
+        <li class="post">
+            <a href="/discrete_mathematics/2019/01/03/Combinatorial-Proofs.html" class="post-title link">Combinatorial Proofs</a> <!-- Title of the post -->
+            <p class="post-date">3 January 2019</p> <!-- Date of the post -->
+            <p class="post-description">Combinatorial proofs outline the methodology of counting something in two different ways.</p> <!-- Contents of the post -->
+            <!-- Loops over tags of current post -->
+            <p class="tags-tab">Tags: </p>
+            
+                <span class="post-tags">combinatorics</span>
+            
+                <span class="post-tags">proofs</span>
+            
+        </li>
+    
+</ul> <!-- This is where Jekyll inserts the contents of the given page (Liquid syntax) -->
+
+        </div>
+    </div>
+
+    <!-- *** Scipts *** -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script src="/flickity.min.js"></script>
+    <script src="/Prism.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="/script.js"></script>
+
+</body>
+
+</html>

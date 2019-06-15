@@ -7,9 +7,9 @@
     <!-- <link rel="shortcut icon" href="/assets/VP_monogram.png"/> --> <!-- Optional favicon -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{site.baseurl}}/flickity.css" media="screen">
-    <link rel="stylesheet" href="{{site.baseurl}}/Prism.css">
-    <link rel="stylesheet" href="{{site.baseurl}}/style.css">
+    <link rel="stylesheet" href="/flickity.css" media="screen">
+    <link rel="stylesheet" href="/Prism.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
     
 <body>
@@ -21,11 +21,11 @@
 
         <!-- *** Menu choices *** -->
         <div id= "menu-choice-wrapper">
-            <a class="menu-choice" href="{{site.baseurl}}/about.html"><i class="left-icon fas fa-fw fa-user"></i><span class="menu-text">About</span><i class="right-icon fas fa-angle-right"></i></a>
-            <a class="menu-choice" href="{{site.baseurl}}/index.html"><i class="left-icon fas fa-fw fa-home"></i><span class="menu-text">Home</span><i class="right-icon fas fa-angle-right"></i></a>
-            <a class="menu-choice" href="{{site.baseurl}}/blog.html"><i class="left-icon fas fa-fw fa-th-large"></i><span class="menu-text">Blog</span><i class="right-icon fas fa-angle-right"></i></a>
-            <a class="menu-choice" href="{{site.baseurl}}/projects.html"><i class="left-icon fas fa-fw fa-pencil-ruler"></i><span class="menu-text">Projects</span><i class="right-icon fas fa-angle-right"></i></a>
-            <a class="menu-choice" href="{{site.baseur}}/assets/resume.pdf"><i class="left-icon fas fa-fw fa-file"></i><span class="menu-text">CV</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/about.html"><i class="left-icon fas fa-fw fa-user"></i><span class="menu-text">About</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/index.html"><i class="left-icon fas fa-fw fa-home"></i><span class="menu-text">Home</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/blog.html"><i class="left-icon fas fa-fw fa-th-large"></i><span class="menu-text">Blog</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/projects.html"><i class="left-icon fas fa-fw fa-pencil-ruler"></i><span class="menu-text">Projects</span><i class="right-icon fas fa-angle-right"></i></a>
+            <a class="menu-choice" href="/assets/resume.pdf"><i class="left-icon fas fa-fw fa-file"></i><span class="menu-text">CV</span><i class="right-icon fas fa-angle-right"></i></a>
         </div>
     </div>
     
@@ -40,7 +40,16 @@
     <div id="content">
          <div id="content-wrapper">
 
-            {{content}} <!-- This is where Jekyll inserts the contents of the given page (Liquid syntax) -->
+            <!-- This layout is for all blog posts, it extends the default layout -->
+
+<a class="page-title" href="/blog.html">Blog</a>
+
+<h1 class="section-title">Combinatorial Proofs</h1>
+
+<div id="post-wrapper">
+    <p>This is an example of a blog post on recursion (2).</p>
+
+</div> <!-- This is where Jekyll inserts the contents of the given page (Liquid syntax) -->
 
         </div>
     </div>
@@ -48,8 +57,8 @@
     <!-- *** Scipts *** -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
-    <script src="{{site.baseurl}}/flickity.min.js"></script>
-    <script src="{{site.baseurl}}/Prism.js"></script>
+    <script src="/flickity.min.js"></script>
+    <script src="/Prism.js"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {
@@ -59,7 +68,7 @@
         });
     </script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
-    <script src="{{site.baseurl}}/script.js"></script>
+    <script src="/script.js"></script>
 
 </body>
 
