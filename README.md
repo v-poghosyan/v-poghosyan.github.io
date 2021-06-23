@@ -1,2 +1,2 @@
-# v-poghosyan.github.io
-Jekyll blog with MathJax support &amp; Portfolio
+# [⛔ DEPRECATED] v-poghosyan.github.io
+A custom themed Jekyll blog and portfolio with MathJax support.
