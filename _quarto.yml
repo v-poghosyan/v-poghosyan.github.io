@@ -1,0 +1,51 @@
+project:
+  type: website
+
+website:
+  title: "Neuron"
+  page-navigation: true
+  favicon: favicon.png
+  navbar:
+    logo: logo.png
+    background: secondary
+    search: true
+    left:
+      - text: About
+        file: about.qmd
+      - text: Blog
+        file: index.qmd
+        
+  sidebar:
+  - title: "Posts"
+    style: "docked"
+    collapse-level: 3
+    pinned: true
+    border: false
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [flatly, theme-dark.scss]
+    contents: posts
+        
+  page-footer: 
+    left: "Copyright 2021, Vahram Poghosyan" 
+    right: 
+      - icon: github
+        href: https://www.github.com/v-poghosyan
+        aria-label: GitHub
+      - icon: linkedin 
+        href: https://www.linkedin.com/in/vahrampoghosyan/
+        aria-label: GitHub
+
+format:
+  html:
+    grid:
+      sidebar-width: 450px
+      margin-width: 350px
+      body-width: 1200px
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [flatly, theme-dark.scss]
+    toc: true
+
+
+

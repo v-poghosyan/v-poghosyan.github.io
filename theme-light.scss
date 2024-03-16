@@ -1,0 +1,282 @@
+/* custom scss styles */
+
+/*-- scss:defaults --*/
+// Base document colors
+$bg-primary: #EBE8E7;
+$code-color: #0A122A;
+$link-color: #EF767A;
+
+// Title banner and navbar
+.navbar-title {
+    color: #00B295 !important;
+}
+
+.navbar-title:hover {
+    color: #EF767A !important;
+}
+
+.aa-DetachedSearchButtonIcon svg:hover {
+    color: #EF767A !important;
+}
+
+.navbar.navbar-expand-lg.navbar-dark {
+    background-color: #0A122A;
+    // border-bottom: 1px solid #00B295;
+}
+
+a.nav-link .menu-text:hover {
+    color: #EF767A;
+}
+
+#quarto-header {
+    background-color: #000000 !important;
+}
+
+nav.quarto-secondary-nav {
+    background-color: #02060f !important;
+    border-color: #02060f !important;
+}
+
+.navbar .quarto-navbar-tools .quarto-navigation-tool:hover {
+    color: #FCA311 !important;
+}
+
+.nav.quarto-page-breadcrumbs {
+    color: #EBE8E7;
+}
+
+.quarto-secondary-nav nav.quarto-page-breadcrumbs {
+    color: #EBE8E7 !important;
+}
+
+.quarto-secondary-nav nav.quarto-page-breadcrumbs ol.breadcrumb li.breadcrumb-item a {
+    color: #EBE8E7;
+}
+
+button.quarto-btn-toggle.btn {
+    color: #EBE8E7;
+}
+
+h1.title {
+    color: #02060f;
+}
+
+.quarto-title-banner .quarto-title h1.title {
+    color: #EBE8E7 !important;
+}
+
+.quarto-title-banner .quarto-title .quarto-title-block h1.title {
+    color: #edf2d0 !important;
+}
+
+.btn.code-tools-button {
+    border: 1px solid #EBE8E7 !important;
+    padding: 5px !important;
+    border-radius: 0.25em !important;
+    opacity: 100%;
+}
+
+.btn.code-tools-button:hover {
+    background-color: #064a4f;
+}
+
+.quarto-category {
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.quarto-category:hover {
+    background-color: #064a4f;
+}
+
+div.quarto-post .listing-categories .listing-category {
+    color: #00B295 !important;
+    border-color: #00B295 !important;
+}
+
+div.quarto-post .listing-categories .listing-category:hover {
+    background-color: #d2ccd3 !important;
+}
+
+// Title banner
+.quarto-title-banner.page-columns.page-full {
+    background-color: #22878e;
+}
+
+.quarto-title-banner .quarto-title h1.title, .quarto-title-banner .quarto-title .title.h1 {
+    color: #edf2d0 !important;
+}
+
+// Page Body
+body {
+    background-color: #EBE8E7 !important;
+}
+
+#quarto-content {
+    background-color: #EBE8E7;
+}
+
+#title-block-header {
+    background-color: #EBE8E7;
+}
+
+blockquote.blockquote {
+    border-color: #02060f;
+}
+
+blockquote.blockquote p {
+    color: #02060f;
+}
+
+h2.anchored, .h2 {
+    border-color: #02060f;
+}
+
+h3.anchored, .h3 {
+    border-color: #02060f;
+}
+
+h4.anchored, .h4 {
+    border-color: #02060f;
+}
+
+h5.anchored, .h5 {
+    border-color: #02060f;
+}
+
+// Code blocks
+code {
+    background-color: #d2ccd3 !important;
+}
+
+.sourceCode {
+    border-radius: 0.25em !important;
+    background-color: #d2ccd3 !important;
+}
+
+.sourceCode.cell-code {
+    border-radius: 0.25em !important;
+    background-color: #d2ccd3 !important;
+}
+
+.sourceCode.numberSource {
+    background-color: #d2ccd3 !important;
+}
+
+// Sidebar
+
+#quarto-sidebar {
+    background-color: #EBE8E7;
+}
+
+.sidebar-navigation a {
+    color: #000000 !important;
+}
+
+.sidebar-navigation a:hover {
+    color: #EF767A !important;
+}
+
+.sidebar nav[role=doc-toc]>ul a {
+    border-color: #02060f !important;
+}
+
+.sidebar nav[role=doc-toc]>ul a.active {
+    border-color: #EF767A !important;
+}
+
+// Bottom Nav
+
+a.pagination-link {
+    color: #02060f !important;
+}
+
+.nav-page a {
+    color: #02060f;
+}
+
+.nav-page a:hover {
+    color: #EF767A !important;
+}
+
+// Callouts
+.callout.callout-style-simple.callout-tip.no-icon.callout-titled {
+    border-left-color: #FCA311;
+}
+
+.callout.callout-style-simple.callout-note.no-icon.callout-titled {
+    border-left-color: #00B295;
+}
+
+.callout.callout-style-simple.callout-important.no-icon.callout-titled {
+    border-left-color: #F46036;
+}
+
+// Search Results
+.search-match {
+    background-color: #00B295 !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item, #quarto-search-results li.aa-Item[aria-selected=true] .search-item {
+    background-color: #0A122A !important;
+}
+
+.aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item.search-result-more, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-section, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-title-container, .aa-DetachedOverlay li.aa-Item[aria-selected=true] .search-item .search-result-text-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item.search-result-more, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-section, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-title-container, #quarto-search-results li.aa-Item[aria-selected=true] .search-item .search-result-text-container {
+    background-color: #0A122A !important;
+}
+
+// Main Page Post List
+.no-anchor.listing-title:hover {
+    color: #EF767A !important;
+}
+
+.quarto-post {
+    border-bottom-color: #c3bebc !important;
+}
+
+.quarto-grid-item:hover {
+    border: 1px solid #EF767A !important;
+}
+
+// Main Page Categories
+.category:hover {
+    color: #EF767A !important;
+}
+
+// About Me Page
+.about-link {
+    color: #0A122A !important;
+    background-color: #EBE8E7 !important;
+    border-color: #0A122A !important;
+}
+
+.about-link:hover {
+    color: #EF767A !important;
+    border-color: #EF767A !important;
+}
+
+// Images
+.figure-img {
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+
+// Footer
+.footer .nav-footer {
+    background-color: #0A122A !important;
+    // border-top-color: #00B295 !important;
+}
+
+.nav-footer-left {
+    color: #EBE8E7;
+}
+
+.nav-link .bi {
+    color: #EBE8E7;
+}
+
+.nav-link .bi:hover {
+    color: #EF767A;
+}
