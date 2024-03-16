@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2023-01-13">
+
+<title>Neuron - Functional Programming</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/leetcode/lc11_container_with_most_water.html" rel="next">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Neuron</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Functional Programming</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Functional Programming</div>
+                <div class="quarto-category">Recursion</div>
+                <div class="quarto-category">Scala</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 13, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Posts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Functional Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Functional Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Leetcode</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC11 - Container with Most Water</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Linear Algebra</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra Refresher for Optimization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Network and Security</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSL - The Internet’s Trust Protocol</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Optimization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Optimization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-beginners-introduction-to-functional-programming-fp" id="toc-a-beginners-introduction-to-functional-programming-fp" class="nav-link active" data-scroll-target="#a-beginners-introduction-to-functional-programming-fp">A Beginner’s Introduction to Functional Programming (FP)</a>
+  <ul>
+  <li><a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions">Mathematical Functions</a></li>
+  <li><a href="#pure-functions-and-side-effects" id="toc-pure-functions-and-side-effects" class="nav-link" data-scroll-target="#pure-functions-and-side-effects">Pure Functions and Side Effects</a>
+  <ul>
+  <li><a href="#properties-of-pure-functions" id="toc-properties-of-pure-functions" class="nav-link" data-scroll-target="#properties-of-pure-functions">Properties of Pure Functions</a></li>
+  <li><a href="#side-effects" id="toc-side-effects" class="nav-link" data-scroll-target="#side-effects">Side Effects</a></li>
+  </ul></li>
+  <li><a href="#instructions-or-statements-vs-expressions" id="toc-instructions-or-statements-vs-expressions" class="nav-link" data-scroll-target="#instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</a>
+  <ul>
+  <li><a href="#conditional-statements-and-loops" id="toc-conditional-statements-and-loops" class="nav-link" data-scroll-target="#conditional-statements-and-loops">Conditional Statements and Loops</a></li>
+  <li><a href="#recursion-vs-iteration-and-higher-order-functions-hofs" id="toc-recursion-vs-iteration-and-higher-order-functions-hofs" class="nav-link" data-scroll-target="#recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher Order Functions (HOFs)</a></li>
+  <li><a href="#functional-programming-benefits-and-good-practices" id="toc-functional-programming-benefits-and-good-practices" class="nav-link" data-scroll-target="#functional-programming-benefits-and-good-practices">Functional Programming Benefits and Good Practices</a>
+  <ul class="collapse">
+  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">Parallelization</a></li>
+  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a>
+  <ul class="collapse">
+  <li><a href="#example-factorial" id="toc-example-factorial" class="nav-link" data-scroll-target="#example-factorial">Example: Factorial</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="a-beginners-introduction-to-functional-programming-fp" class="level1">
+<h1>A Beginner’s Introduction to Functional Programming (FP)</h1>
+<p>Functional programming draws inspiration from the mathematical definition of a function – a well-defined operation on sets.</p>
+<section id="mathematical-functions" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-functions">Mathematical Functions</h2>
+<p>Take <span class="math inline">\(f: X \rightarrow Y\)</span>, which is a function that maps elements of set <span class="math inline">\(X\)</span> to those of set <span class="math inline">\(Y\)</span> such that for each <span class="math inline">\(x \in X\)</span>, there’s one and only one <span class="math inline">\(y \in Y\)</span> which satisfies <span class="math inline">\(f(x) = y\)</span>. In ordinary language, we say that a mathematical function maps any given input to a single output. Notice that the output in set <span class="math inline">\(Y\)</span> depends only on the input from set <span class="math inline">\(X\)</span> and, crucially, <em>only</em> these two sets are known to the function <span class="math inline">\(f\)</span>. No value outside <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span> is affected by the application of <span class="math inline">\(f\)</span> and there is no <em>hidden state</em> (i.e.&nbsp;some value outside <span class="math inline">\(X\)</span>) that affects <span class="math inline">\(f\)</span>-s output.</p>
+</section>
+<section id="pure-functions-and-side-effects" class="level2">
+<h2 class="anchored" data-anchor-id="pure-functions-and-side-effects">Pure Functions and Side Effects</h2>
+<p>In functional programming, we can loosely think of chunks of computer memory as being the mathematical sets. A <em>pure function</em> then, in the FP sense, is a function which depends only on its input (and not on any other value stored elsewhere in computer memory or external source) and affects nothing outside itself. Additionally, just like mathematical functions, pure functions must return something. Finally, they should return one and only one output for any given input.</p>
+<p>To recap, here are some of the properties pure functions must satisfy.</p>
+<section id="properties-of-pure-functions" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-pure-functions">Properties of Pure Functions</h3>
+<ol type="1">
+<li>The function must return a single output for a given input</li>
+<li>The output should only depend on the input (no external hidden state should affect the output)</li>
+<li>The function shouldn’t change any chunk of computer memory not allocated for it (similar to how mathematical functions don’t affect any element outside <span class="math inline">\(X \cup Y\)</span>)</li>
+</ol>
+<p>Properties 1 and 2 make pure functions interchangeable with their output value just as, say, <span class="math inline">\(f(2)\)</span> given <span class="math inline">\(f(x)=x^2\)</span> can stand in for the number <span class="math inline">\(4\)</span>. This makes it possible to pass pure functions as arguments into other pure functions, and return them from within other pure functions with predictable results. In fact, truly functional programs are compositions of pure functions written in a declarative style.</p>
+</section>
+<section id="side-effects" class="level3">
+<h3 class="anchored" data-anchor-id="side-effects">Side Effects</h3>
+<p>Functions which violate any of these properties are said to produce <em>side effects</em>. The most common side effect is when a function modifies state (i.e.&nbsp;a chunk of computer memory) outside itself (violating property 3). Examples of side effects include:</p>
+<ul>
+<li>A function directly modifying a variable defined in the global scope.
+<ul>
+<li>The FP approach is to pass the global variable as input instead, and have the function return a modified copy of the input.</li>
+</ul></li>
+<li>A function writing to an external database
+<ul>
+<li>This is an example of an <em>unavoidable side effect</em> in practice. The FP approach is to mitigate. Specifics are language dependent, but usually the strategy involves gathering all such unavoidable side effects into one impure function at the top, and keeping the rest of the code pure.</li>
+</ul></li>
+<li>A function like the built-in functions of printing to the console, retrieving system time, or a random number generator (or those functions which use them)
+<ul>
+<li>Yet more examples of unavoidable side effects. Such functions are inherently dependent on external or hidden state such as the time of day in the real world and, in general, things other than their input.</li>
+</ul></li>
+</ul>
+<p>Although some side effects are unavoidable, we should minimize their use in our code. Functional programming languages offer to do just that.</p>
+</section>
+</section>
+<section id="instructions-or-statements-vs-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</h2>
+<p>In functional programming, we also distinguish between mere <em>instructions</em> to the computer (also known as <em>statements</em>) and pure <em>expressions</em>. This distinction is similar to the distinction between functions in the traditional programming sense and pure functions in that expressions must return a value (property 2 of functional programming). Contrast this with instructions like the <code>if</code>/<code>else</code> statements and <code>while</code> loops which simply tell the processor what to do and don’t necessarily evaluate to anything.</p>
+<p>As mentioned earlier, the use of instructions and impure functions is unavoidable at times. Different languages have different strategies of mitigating these impurities. Usually the aim is to gather the impurities together at the top in some clearly demarcated lexical block. Furthermore, some languages (such as Scala which is a blend of OOP and FP), go to great lengths to ensure there are no side effects by enforcing a requirement on each instruction. Each instruction evaluates to a value. The idea is to use a clever type system to capture impurities. If side effects must exist, the are captured by Scala which enforces that they return a type known as a <code>Unit</code> which can hold only <code>()</code> as a value (This is equivalent to Java’s <code>void</code>). So, in Scala, instructions are essentially treated as expressions which return this very specific type. In Java, the <code>void</code> keyword is used to denote a function that returns nothing. In Scala, <code>Unit</code> is used in a similar sense but it evaluates to a specific value <code>()</code>. So, from a mathematical standpoint, impure functions in Scala are just constant functions.</p>
+<p>We already touched on this briefly above, but the distinction between instruction and expression leads to favoring certain programming styles over others in FP.</p>
+<section id="conditional-statements-and-loops" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-statements-and-loops">Conditional Statements and Loops</h3>
+<p>In functional languages like Scala, <code>if</code> statements are implemented as expressions similar to the familiar <em>conditional</em> or <em>ternary expression</em> in Python. Scala also has an <code>if</code> statement (like the regular <code>if</code> statements in Python) but the expression form is preferred. Here are some examples to show the FP approach to writing <code>if</code> statements in both languages:</p>
+<p><strong>Python:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> condition <span class="op">==</span> <span class="va">True</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Scala:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> x <span class="op">=</span> <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, <code>x</code> evaluates to a value: one of possible two. The <code>if</code> expression may still produce a side effect, but it’s not as open-ended as a normal <code>if</code> statement. In a normal <code>if</code> statement, the programmer might do something entirely crazy and unheard of (/s) such as accessing a database, or printing a line to the console (both considered side effects).</p>
+<p>This brings us to an important point. It’s not that <code>if</code> statements would necessarily result in side effects, it’s that functional programming simply discourages the use of language constructs that lend themselves to producing side effects easier. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value rather than just syntax is very deliberate. In Scala, <code>for</code> loops are disfavored over <code>for</code> comprehensions which have the form:</p>
+<p><strong>Scala:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> myNewList <span class="op">=</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        element <span class="op">&lt;-</span> myOldList</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">yield</span> <span class="op">(</span>element<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s important to note that this isn’t the best way to copy a list in Scala, it’s just a toy example of <code>for</code> comprehensions with the intent to illustrate two things about them:</p>
+<ul>
+<li>The <code>for</code> comprehension is treated as an expression which returns a value captured by <code>myNewList</code></li>
+<li>If returning no value, syntactically we’d simply say <code>yield ()</code>. However, <code>()</code> actually <em>is</em> a value in Scala so even instructions which normally don’t return anything do return something in Scala</li>
+</ul>
+</section>
+<section id="recursion-vs-iteration-and-higher-order-functions-hofs" class="level3">
+<h3 class="anchored" data-anchor-id="recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher Order Functions (HOFs)</h3>
+<p>Similarly, <code>while</code> loops (and to a lesser extent also <code>for</code> loops) are considered unfavorable in functional programming because of their potential to produce side effects. Take, for example, a while loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in many cases. But then the FP approach would just be to contain this impurity somewhere with the rest of its kind in a clearly demarcated part of the codebase.</p>
+<p>In general, instead of iteration, recursion (or, more generally, function composition) is preferred. Of course, recursion is the best choice anyway if our data is represented in a recursive data structure (like a tree) or when the problem has some optimal substructure, but FP prefers this approach in general. This may sound unreasonable at first but one familiar example of function composition that’s has been adopted for common use in popular languages such as Python are the <code>map</code> and the <code>filter</code> functions. These are examples of <strong>higher order functions</strong> (<strong>HOF</strong>s) which are functions that are capable of taking, as input, other functions. The <code>map</code> and <code>filter</code> functions show that function composition can be very readable and intuitive. Furthermore, neither <code>map</code> nor <code>filter</code> modify their input in-place but rather return a modified copy of it avoiding state mutation which, as we know, is considered good practice in FP.</p>
+</section>
+<section id="functional-programming-benefits-and-good-practices" class="level3">
+<h3 class="anchored" data-anchor-id="functional-programming-benefits-and-good-practices">Functional Programming Benefits and Good Practices</h3>
+<section id="parallelization" class="level4">
+<h4 class="anchored" data-anchor-id="parallelization">Parallelization</h4>
+<p>In terms of <em>parallelization</em>, both iterative and recursive solutions can be sequential processes which don’t lend themselves well to parallelization (or independent processes which do). However, FP still confers some benefit in terms of parallelization. Not because it favors recursion but because:</p>
+<ul>
+<li>A common challenge in parallel programming is to avoid mutating data while another thread is using it. Due to immutability in FP, this problem is eliminated</li>
+<li>FP avoids hidden state, so functions can be executed in parallel without the concern of synchronizing access to some shared state.</li>
+<li>FP making it easier to identify opportunities for parallelization (arguably).</li>
+<li>Languages which are built around FP have powerful parallelization libraries that offer parallelized versions of common operations like <code>map</code></li>
+</ul>
+</section>
+<section id="tail-recursion---avoiding-stack-overflow" class="level4">
+<h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
+<p>If we’re going to favor the use of recursion in FP over iteration we must tread carefully as to not cause stack overflow (which, as we know, is when the machine runs out of working memory). This is an easy mistake to make due to the mounting function calls in recursive implementations. <strong>Tail recursion</strong> (similar to other techniques like <strong>memoization</strong>) helps us drastically cut the amount of stack memory in use. It takes a constant amount of memory on the stack, instead of the stack growing linearly (or worse) with input size.</p>
+<section id="example-factorial" class="level5">
+<h5 class="anchored" data-anchor-id="example-factorial">Example: Factorial</h5>
+<p>Let’s take the classic example of calculating a factorial. The naive recursive implementation is:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>) <span class="co"># Recursive step</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>24</code></pre>
+</div>
+</div>
+<p>The stack first fills up with frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, the last frame before evaluation happens. We can also see this clearly when we untangle the definition of factorial for a small <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{split}
+        factorial(4) &amp; = 4 * factorial(3) \\
+        &amp; = 4 * (3 * factorial(2)) \\
+        &amp; = 4 * (3 * (2 * factorial(1))) \\
+        &amp; = 4 * (3 * (2 * (1 * factorial(0)))) \\
+        &amp; = 4 * (3 * (2 * (1 * 1))) \\
+        &amp; = 4 * (3 * (2 * 1)) \\
+        &amp; = 4 * (3 * 2) \\
+        &amp; = 4 * 6 \\
+        &amp; = 24
+    \end{split}
+\end{equation}
+\]</span></p>
+<p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up) before evaluation even begins (on the 5-th equality sign). Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
+<p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this function fail to be tail-recursive). In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
+<p>In the case of the factorial function above, this means that in the tail-recursive implementation the stack is not filled up with as many frames of recursive <code>factorial</code> calls as the input (<span class="math inline">\(n\)</span>) is big. There are still <span class="math inline">\(n\)</span> total calls, however the memory use in the stack is held constant at a single frame as each old frame gives way to the new one. We will see this more clearly soon.</p>
+<p>Let’s define a magic function called <code>go(n,acc)</code> with inputs <code>n</code> and what’s called an <em>accumulator</em> <code>acc</code> such that <code>factorial(n) := go(n,1)</code>. This is by construction. The function <code>go</code> will be the tail-recursive helper of <code>factorial</code>. The accumulator <code>acc</code>, which is initialized to <code>1</code>, will be used to remember the state held inside the previous stack frame (in this case just the multiplicative factor before the recursive call).</p>
+<p>But so far we’ve only given <code>go(n, acc)</code> its desired properties without defining it. The following is the tail-recursive version of factorial complete with the definition of <code>go</code>.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> go(n,acc): <span class="co"># Helper function with an accumulator</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> acc</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> go(n<span class="op">-</span><span class="dv">1</span>, n <span class="op">*</span> acc) <span class="co"># Tail-recusrive step</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go(n,<span class="dv">1</span>) <span class="co"># Delegate the problem solution to a helper function</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>24</code></pre>
+</div>
+</div>
+<p>Let’s unpack this definition:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{split}
+        factorial(4) &amp; = go(4,1) \\
+        &amp; = go(3,4) \\
+        &amp; = go(2,12) \\
+        &amp; = go(1,24) \\
+        &amp; = go(0,24) \\
+        &amp; = 24
+    \end{split}
+\end{equation}
+\]</span></p>
+<p>Right away we can see that with this approach we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that the mathematical expression above evaluates to a number immediately rather than by collapsing down into a single value step-by-step (each step corresponding to a stack frame popping off) as it does in the naive implementation.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>It’s important to note that this effort only pays off if the language compiler in question supports <em>TCO</em> (<em>tail call optimization</em>). Most, in fact, do. If the language supports TCO the compiler can recognize tail calls and simply replace (i.e.&nbsp;pop) the current stack frame to replace it with the subsequent call (rather than stacking frames on top of each other like in the naive implementation)</p>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="pagination-link">
+        <span class="nav-page-text">LC11 - Container with Most Water</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2021, Vahram Poghosyan</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
+
+
+</body></html>
