@@ -11,6 +11,9 @@ website:
   navbar:
     logo: logo.png
     background: secondary
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [flatly, theme-dark.scss]
     search: true
     left:
       - text: About
