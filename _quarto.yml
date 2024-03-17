@@ -5,7 +5,7 @@ execute:
   freeze: auto
 
 website:
-  title: "Neuron"
+  title: "Vahram's blog"
   page-navigation: true
   favicon: favicon.png
   navbar:
