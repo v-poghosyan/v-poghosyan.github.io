@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -51,13 +51,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -66,7 +60,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -76,42 +69,15 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
 </head>
 
 <body class="nav-sidebar docked nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../logo.png" alt="" class="navbar-logo">
     </a>
@@ -126,33 +92,33 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools ms-auto">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra Refresher for Optimization</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra Refresher for Optimization</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra</a></li><li class="breadcrumb-item"><a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html">Linear Algebra Refresher for Optimization</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Linear Algebra Refresher for Optimization</h1>
@@ -185,7 +151,7 @@ window.Quarto = {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -287,7 +253,7 @@ window.Quarto = {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -322,7 +288,6 @@ window.Quarto = {
 
 
 
-
 <section id="review-of-linear-algebra-and-geometry" class="level1 page-columns page-full">
 <h1>Review of Linear Algebra and Geometry</h1>
 <p>Let’s start exploring mathematics for machine learning with a refresher on convexity in optimization and the linear algebra that’s commonly used in the subject.</p>
@@ -334,38 +299,26 @@ window.Quarto = {
 </blockquote>
 <p>That is, a set is convex if the parametrized line segment between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, any two points (or, more generally, vectors) in the set is also entirely inside the set. <br></p>
 <div id="fig-convexity" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-convexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-convexity" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-convex" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Convex
-</figcaption>
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-convex" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity"></p>
+<figcaption class="figure-caption">(a) Convex</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-convexity" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-non-convex" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-non-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/non_convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Non-convex
-</figcaption>
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-convex" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/non_convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity"></p>
+<figcaption class="figure-caption">(b) Non-convex</figcaption>
 </figure>
 </div>
 </div>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Set A is convex, set B is non-convex
-</figcaption>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Set A is convex, set B is non-convex</figcaption><p></p>
 </figure>
 </div>
 <section id="operations-that-preserve-convexity" class="level3">
@@ -382,19 +335,15 @@ Figure&nbsp;1: Set A is convex, set B is non-convex
 <h3 class="anchored" data-anchor-id="convex-hull-of-n-points">Convex Hull of <span class="math inline">\(n\)</span> Points</h3>
 <p>A <em>convex combination</em> of points <span class="math inline">\(x_1, ..., x_n\)</span> is a point of the form <span class="math inline">\(x = \theta_1 x_1 + ... + \theta_n x_n\)</span> where <span class="math inline">\(\sum_{i = 1}^{n} \theta_i = 1\)</span> and <span class="math inline">\(\theta_i \geq 0 \ \ \forall i\)</span>.</p>
 <p>Let <span class="math inline">\(x_1,x_2,...,x_n\)</span> be <span class="math inline">\(n\)</span> points in space. Their <em>convex hull</em> is the set of all points which can be written as some convex combination of them. By varying parameters <span class="math inline">\(\theta_i\)</span> we generate the convex hull as the set of all convex combinations of these points.</p>
-<div id="fig-convex-hull" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-convex-hull" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull.light.png" class="img-fluid figure-img" width="300"></p>
-<figcaption>Convex hull</figcaption>
+<figcaption class="figure-caption">Convex hull</figcaption>
 </figure>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: The convex hull can be visualized as the closed polygon formed when a rubber band is stretched around the <span class="math inline">\(n\)</span> points (if we imagine those to be pegs sticking out of the screen).
-</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: The convex hull can be visualized as the closed polygon formed when a rubber band is stretched around the <span class="math inline">\(n\)</span> points (if we imagine those to be pegs sticking out of the screen).</figcaption>
 </figure>
 </div>
 <p>The convex hull of two points is the line segment joining them. That of three points is the triangle whose vertices they form (complete with its inner region). In general, for <span class="math inline">\(n\)</span> points, the concept generalizes to an <span class="math inline">\(n\)</span>-dimensional polygon.</p>
@@ -423,19 +372,15 @@ Note
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>(†) <strong>Proof of uniqueness:</strong> Let <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> be two convex hulls of <span class="math inline">\(C\)</span>. Let <span class="math inline">\(c_1 \in C_1\)</span> be a point. Since <span class="math inline">\(c_1 \in C_1\)</span>, <span class="math inline">\(c_1 \in\)</span> at least one of the convex supersets <span class="math inline">\(C^{i}\)</span>of <span class="math inline">\(C\)</span>. Hence, <span class="math inline">\(c_1 \in C_2\)</span> since <span class="math inline">\(C_2 = \bigcap^{i=1 \to n}C^{i}\)</span>. Similarly, it can be shown that any <span class="math inline">\(c_2 \in C_2\)</span> also belongs to <span class="math inline">\(C_1\)</span>. Hence, <span class="math inline">\(C_1 \subseteq C_2\)</span> and vice versa. This proves that <span class="math inline">\(C_1 = C_2\)</span> and completes the proof of uniqueness.</p>
-</div></div><div id="fig-convex-hull" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</div></div><div id="fig-convex-hull" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull_set.light.png" class="img-fluid figure-img" width="300"></p>
-<figcaption>Convex hull of a set</figcaption>
+<figcaption class="figure-caption">Convex hull of a set</figcaption>
 </figure>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Visualizing the convex hull of a non-convex set is similar to visualizing that of <span class="math inline">\(n\)</span> points — it’s simply the shape enclosed by a rubber band stretched around the non-convex set.
-</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3: Visualizing the convex hull of a non-convex set is similar to visualizing that of <span class="math inline">\(n\)</span> points — it’s simply the shape enclosed by a rubber band stretched around the non-convex set.</figcaption>
 </figure>
 </div>
 </section>
@@ -453,7 +398,7 @@ Figure&nbsp;3: Visualizing the convex hull of a non-convex set is similar to vis
 <h4 class="anchored" data-anchor-id="hyperplanes">Hyperplanes</h4>
 <p>For fixed weights <span class="math inline">\(\theta_i = a_i \ \ \forall i\)</span>, a <em>hyperplane</em> is the set of all points <span class="math inline">\(x \in \mathbb{R^n}\)</span> whose linear combination equals a fixed constant <span class="math inline">\(b \in \mathbb{R}\)</span>.</p>
 <p>Formally, a hyperplane is the set <span class="math inline">\(\{ x : a_1 x_1 + ... a_n x_n = b\} = \{ x : a^T x = b\}\)</span></p>
-<p>There’s a geometric interpretation of the parameters <span class="math inline">\(a \in \mathbb{R^n}\)</span> and <span class="math inline">\(b \in \mathbb{R}\)</span>. Since the dot-product between perpendicular vectors is <span class="math inline">\(0\)</span>, <span class="math inline">\(\{ x :  a^T x = 0\}\)</span> is simply the set of all vectors perpendicular to <span class="math inline">\(a\)</span> (whose tail, as with all vectors in linear algebra, is considered to be fixed at the origin), making <span class="math inline">\(a\)</span> the <em>normal vector</em> to the hyperplane passing through the origin. To allow for parallel hyperplanes that are translated from the origin, the <em>offset</em> <span class="math inline">\(b \in \mathbb{R}\)</span> is introduced in the generalization <span class="math inline">\(\{ x : a^T x = b \}\)</span>. This is now the set of all vectors whose dot-product with <span class="math inline">\(a\)</span> is constant. These vectors are not quite perpendicular to <span class="math inline">\(a\)</span>, but they form a parallel hyperplane that’s been shifted from the origin by a distance of <span class="math inline">\(\frac{|b|}{\|a\|_2}\)</span>.</p>
+<p>There’s a geometric interpretation of the parameters <span class="math inline">\(a \in \mathbb{R^n}\)</span> and <span class="math inline">\(b \in \mathbb{R}\)</span>. Since the dot-product between perpendicular vectors is <span class="math inline">\(0\)</span>, <span class="math inline">\(\{ x : a^T x = 0\}\)</span> is simply the set of all vectors perpendicular to <span class="math inline">\(a\)</span> (whose tail, as with all vectors in linear algebra, is considered to be fixed at the origin), making <span class="math inline">\(a\)</span> the <em>normal vector</em> to the hyperplane passing through the origin. To allow for parallel hyperplanes that are translated from the origin, the <em>offset</em> <span class="math inline">\(b \in \mathbb{R}\)</span> is introduced in the generalization <span class="math inline">\(\{ x : a^T x = b \}\)</span>. This is now the set of all vectors whose dot-product with <span class="math inline">\(a\)</span> is constant. These vectors are not quite perpendicular to <span class="math inline">\(a\)</span>, but they form a parallel hyperplane that’s been shifted from the origin by a distance of <span class="math inline">\(\frac{|b|}{\|a\|_2}\)</span>.</p>
 <p>Since the sum <span class="math inline">\(a_1 x_1 + ... a_n x_n = b\)</span> is fixed, the last coordinate, which we’ll call <span class="math inline">\(x_k\)</span> for some <span class="math inline">\(k \in [1,...,n]\)</span>, is fixed by the choice of the other <span class="math inline">\(n-1\)</span> coordinates. Therefore, a hyperplane in <span class="math inline">\(\mathbb{R^n}\)</span> spans <span class="math inline">\(n-1\)</span> dimensions instead of <span class="math inline">\(n\)</span>. <br></p>
 </section>
 <section id="halfspaces" class="level4">
@@ -468,7 +413,7 @@ Figure&nbsp;3: Visualizing the convex hull of a non-convex set is similar to vis
 <section id="ellipses" class="level3">
 <h3 class="anchored" data-anchor-id="ellipses">Ellipses</h3>
 <p>Recall from Euclidean geometry that ellipses are conic sections. In general we define ellipses in <span class="math inline">\(n\)</span>-dimensions as the <a href="https://en.wikipedia.org/wiki/Level_set">sub-level sets</a> of <a href="https://en.wikipedia.org/wiki/Quadratic_form">quadratic forms</a>. That is <span class="math inline">\(\{ x : (x-c)^T M (x-c) \leq 1 \}\)</span> where <span class="math inline">\(M \succeq 0\)</span> defines the stretch along each principal axis, and <span class="math inline">\(c \in \mathbb{R^n}\)</span> is the center.</p>
-<p>An equivalent definition of an ellipse using the L2-norm is <span class="math inline">\(\{ x  : \|Ax - b\|_2 \leq 1 \}\)</span>. That is, for a given <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span> in the L2-norm definition, we can find an <span class="math inline">\(M\)</span> and <span class="math inline">\(c\)</span> in the sub-level set definition and vice versa.</p>
+<p>An equivalent definition of an ellipse using the L2-norm is <span class="math inline">\(\{ x : \|Ax - b\|_2 \leq 1 \}\)</span>. That is, for a given <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span> in the L2-norm definition, we can find an <span class="math inline">\(M\)</span> and <span class="math inline">\(c\)</span> in the sub-level set definition and vice versa.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -510,7 +455,7 @@ Note
 <section id="the-set-of-all-positive-semidefinite-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="the-set-of-all-positive-semidefinite-matrices">The Set of All Positive Semidefinite Matrices</h3>
 <p>The set of all PSD matrices <span class="math inline">\(\{ Q : x^TQx \geq 0, \ \ \forall x \in \mathbb{R^m}\}\)</span> is convex. We can, of course, use the definition of convexity to show this. But, a more elucidative approach would be the following remark.</p>
-<p>Note that <span class="math inline">\(Q \mapsto x^TQx\)</span> is a <a href="https://en.wikipedia.org/wiki/Linear_form">linear functional</a> that maps the space of all PSD matrices to its field of scalars. This is analogous to how <span class="math inline">\(a \mapsto x^Ta\)</span> is a linear functional so, just as <span class="math inline">\(\{ a : x^Ta \geq 0 \}\)</span> is a halfspace in the space of vectors, <span class="math inline">\(H_x = \{ Q : x^TQx \geq 0 \}\)</span> for a given choice of <span class="math inline">\(x \in \mathbb{R^m}\)</span> is a halfspace in the space of PSD matrices. Halfspaces, as we already know, are convex and <span class="math inline">\(\{ Q : x^TQx \geq 0, \forall x \in \mathbb{R^m}\}\)</span> is nothing but an intersection of halfspaces for each choice of <span class="math inline">\(x\)</span>. That is, <span class="math inline">\(\{ Q :  x^TQx \geq 0, \forall x \in \mathbb{R^m}\} = \bigcap_x H_x\)</span>, concluding the proof of its convexity.</p>
+<p>Note that <span class="math inline">\(Q \mapsto x^TQx\)</span> is a <a href="https://en.wikipedia.org/wiki/Linear_form">linear functional</a> that maps the space of all PSD matrices to its field of scalars. This is analogous to how <span class="math inline">\(a \mapsto x^Ta\)</span> is a linear functional so, just as <span class="math inline">\(\{ a : x^Ta \geq 0 \}\)</span> is a halfspace in the space of vectors, <span class="math inline">\(H_x = \{ Q : x^TQx \geq 0 \}\)</span> for a given choice of <span class="math inline">\(x \in \mathbb{R^m}\)</span> is a halfspace in the space of PSD matrices. Halfspaces, as we already know, are convex and <span class="math inline">\(\{ Q : x^TQx \geq 0, \forall x \in \mathbb{R^m}\}\)</span> is nothing but an intersection of halfspaces for each choice of <span class="math inline">\(x\)</span>. That is, <span class="math inline">\(\{ Q : x^TQx \geq 0, \forall x \in \mathbb{R^m}\} = \bigcap_x H_x\)</span>, concluding the proof of its convexity.</p>
 <p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/non_convex.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull_set.dark.png" height="0"></p>
 
 
@@ -560,33 +505,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -655,15 +573,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -742,27 +658,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -772,17 +671,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -794,130 +684,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -961,7 +728,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -987,32 +753,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1076,12 +816,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="pagination-link" aria-label="LC11 - Container with Most Water">
+      <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">LC11 - Container with Most Water</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="pagination-link" aria-label="SSL - The Internet's Trust Protocol">
+      <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="pagination-link">
         <span class="nav-page-text">SSL - The Internet’s Trust Protocol</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1089,9 +829,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>Copyright 2021, Vahram Poghosyan</p>
-</div>   
+    <div class="nav-footer-left">Copyright 2021, Vahram Poghosyan</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -1114,7 +852,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script type="application/javascript" src="../../javascript/light-dark.js"></script>
-
 
 
 
