@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2023-01-13">
 
-<title>Vahram’s blog - Functional Programming</title>
+<title>Vahram’s blog - Recursion Optimizations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/general_computer_science/recursion_optimizations.html" rel="next">
+<link href="../../posts/leetcode/lc11_container_with_most_water.html" rel="next">
+<link href="../../posts/functional_programming/functional_programming.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -144,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/general_computer_science/recursion_optimizations.html">General Computer Science</a></li><li class="breadcrumb-item"><a href="../../posts/general_computer_science/recursion_optimizations.html">Recursion Optimizations</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -154,11 +155,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Functional Programming</h1>
+      <h1 class="title">Recursion Optimizations</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Functional Programming</div>
                 <div class="quarto-category">Recursion</div>
-                <div class="quarto-category">Scala</div>
+                <div class="quarto-category">Functional Programming</div>
               </div>
                   </div>
   </div>
@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional Programming</span></a>
   </div>
 </li>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/general_computer_science/recursion_optimizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/general_computer_science/recursion_optimizations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Recursion Optimizations</span></a>
   </div>
 </li>
@@ -312,30 +312,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#a-beginners-introduction-to-functional-programming-fp" id="toc-a-beginners-introduction-to-functional-programming-fp" class="nav-link active" data-scroll-target="#a-beginners-introduction-to-functional-programming-fp">A Beginner’s Introduction to Functional Programming (FP)</a>
+  <li><a href="#recursion-optimizations" id="toc-recursion-optimizations" class="nav-link active" data-scroll-target="#recursion-optimizations">Recursion Optimizations</a>
   <ul>
-  <li><a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions">Mathematical Functions</a></li>
-  <li><a href="#pure-functions-and-side-effects" id="toc-pure-functions-and-side-effects" class="nav-link" data-scroll-target="#pure-functions-and-side-effects">Pure Functions and Side Effects</a>
+  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a>
   <ul>
-  <li><a href="#properties-of-pure-functions-software-engineering-perspective" id="toc-properties-of-pure-functions-software-engineering-perspective" class="nav-link" data-scroll-target="#properties-of-pure-functions-software-engineering-perspective">Properties of Pure Functions: Software Engineering Perspective</a>
-  <ul class="collapse">
-  <li><a href="#nice-consequences-of-working-with-pure-functions" id="toc-nice-consequences-of-working-with-pure-functions" class="nav-link" data-scroll-target="#nice-consequences-of-working-with-pure-functions">Nice Consequences of Working With Pure Functions</a></li>
-  </ul></li>
-  <li><a href="#declarative-vs-imperative-styles" id="toc-declarative-vs-imperative-styles" class="nav-link" data-scroll-target="#declarative-vs-imperative-styles">Declarative vs Imperative Styles</a></li>
-  <li><a href="#side-effects" id="toc-side-effects" class="nav-link" data-scroll-target="#side-effects">Side Effects</a></li>
-  </ul></li>
-  <li><a href="#instructions-or-statements-vs-expressions" id="toc-instructions-or-statements-vs-expressions" class="nav-link" data-scroll-target="#instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</a>
-  <ul>
-  <li><a href="#conditional-statements-and-loops" id="toc-conditional-statements-and-loops" class="nav-link" data-scroll-target="#conditional-statements-and-loops">Conditional Statements and Loops</a></li>
-  <li><a href="#recursion-vs-iteration-and-higher-order-functions-hofs" id="toc-recursion-vs-iteration-and-higher-order-functions-hofs" class="nav-link" data-scroll-target="#recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher-Order Functions (HOFs)</a></li>
-  <li><a href="#functional-programming-benefits" id="toc-functional-programming-benefits" class="nav-link" data-scroll-target="#functional-programming-benefits">Functional Programming Benefits</a>
-  <ul class="collapse">
-  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">Parallelization</a></li>
-  </ul></li>
-  <li><a href="#functional-programming-hazards" id="toc-functional-programming-hazards" class="nav-link" data-scroll-target="#functional-programming-hazards">Functional Programming Hazards</a>
-  <ul class="collapse">
-  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a></li>
-  </ul></li>
+  <li><a href="#classic-example-factorial" id="toc-classic-example-factorial" class="nav-link" data-scroll-target="#classic-example-factorial">Classic Example: Factorial</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -347,142 +328,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="a-beginners-introduction-to-functional-programming-fp" class="level1">
-<h1>A Beginner’s Introduction to Functional Programming (FP)</h1>
-<p>Functional programming draws inspiration from the mathematical definition of a function which is a well-defined operation on sets.</p>
-<section id="mathematical-functions" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-functions">Mathematical Functions</h2>
-<p>Take <span class="math inline">\(f: X \rightarrow Y\)</span>, which is a <strong>function</strong> that maps elements of set <span class="math inline">\(X\)</span> to those of set <span class="math inline">\(Y\)</span> such that for each <span class="math inline">\(x\)</span> in set <span class="math inline">\(X\)</span> (also denoted as “<span class="math inline">\(x \in X\)</span>”), there’s <em>one and only one</em> <span class="math inline">\(y \in Y\)</span> which satisfies <span class="math inline">\(f(x) = y\)</span>. In ordinary language, we say that a mathematical function maps any given input to a unique output. That’s not to say that <span class="math inline">\(f\)</span> can’t map the two different <span class="math inline">\(x\)</span>’s to the same <span class="math inline">\(y\)</span>, but it can’t map the same <span class="math inline">\(x\)</span> to more than one <span class="math inline">\(y\)</span>. Notice that the output in set <span class="math inline">\(Y\)</span> depends <em>only</em> on the input from set <span class="math inline">\(X\)</span> and <em>only</em> and that the function <span class="math inline">\(f\)</span> only operates on <span class="math inline">\(X\)</span> and nothing external to it. In other words there is no <em>hidden state</em> (i.e.&nbsp;some value outside <span class="math inline">\(X\)</span>) that affects <span class="math inline">\(f\)</span>-s output. Also, <span class="math inline">\(f\)</span> doesn’t affect any element in <span class="math inline">\(X\)</span> (or, for that matter, <span class="math inline">\(Y\)</span>). The expression <span class="math inline">\(f(x)\)</span> is simply understood as the function <span class="math inline">\(f\)</span> applied to an element <span class="math inline">\(x \in X\)</span> which produces a value from the set <span class="math inline">\(Y\)</span> (but, once again, it’s not like <em>the</em> specific element in the set <span class="math inline">\(Y\)</span> is somehow retrieved or affected in any way).</p>
-</section>
-<section id="pure-functions-and-side-effects" class="level2">
-<h2 class="anchored" data-anchor-id="pure-functions-and-side-effects">Pure Functions and Side Effects</h2>
-<p>In functional programming, we loosely think of built-in <strong>types</strong> or <strong>abstract classes</strong> (i.e.&nbsp;some chunks of computer memory) as being like sets. This lets us, somewhat awkwardly, pluck the mathematical definition of a function from the concrete world of mathematics and bring it into the practical world of software engineering.</p>
-<p>A <strong>pure function</strong> then, in the FP sense, is a function which depends only on its input (and not on any other value stored elsewhere in external computer memory or other external source) and it affects nothing outside itself. Additionally, like mathematical functions they draw inspiration from, pure functions have to output a value and, to top it all off, this output value must be unique for a given input.</p>
-<p>To recap, here are the above properties again.</p>
-<section id="properties-of-pure-functions-software-engineering-perspective" class="level3">
-<h3 class="anchored" data-anchor-id="properties-of-pure-functions-software-engineering-perspective">Properties of Pure Functions: Software Engineering Perspective</h3>
-<ol type="1">
-<li>A pure function must return a single output for a given input</li>
-<li>A pure function’s output should only depend on its input (in other words, no external hidden state should affect the output)</li>
-<li>A pure function shouldn’t change any external state (i.e.&nbsp;an external chunk of computer memory)</li>
-</ol>
-<section id="nice-consequences-of-working-with-pure-functions" class="level4">
-<h4 class="anchored" data-anchor-id="nice-consequences-of-working-with-pure-functions">Nice Consequences of Working With Pure Functions</h4>
-<p>Working with pure functions conveys some great benefits. For instance, properties 1 and 2 make pure functions interchangeable with their output value just as, say, <span class="math inline">\(f(2)\)</span> given <span class="math inline">\(f(x)=x^2\)</span> can, just as well, stand in for the number <span class="math inline">\(4\)</span>. This allows us to pass pure functions as arguments into other pure functions, and return pure functions from within other pure functions with entirely predictable results. By contrast, if our functions affected external state somewhere or produced other <strong>effects</strong> (more on these in the section on <strong>side effects</strong>) such as returning random and/or some other type of non-deterministic output for a given input, it would be a lot more difficult to reason about programs as chains of function calls. In fact, functional programs are compositions of pure functions written in a declarative (as opposed to an imperative) style.</p>
-</section>
-</section>
-<section id="declarative-vs-imperative-styles" class="level3">
-<h3 class="anchored" data-anchor-id="declarative-vs-imperative-styles">Declarative vs Imperative Styles</h3>
-<p>An example is worth a thousand words. Since Python provides a good enough playground for showcasing both of these approaches, here is an example in Python.</p>
-<p><strong>Imperative Style</strong></p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> []</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="kw">in</span> numbers:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    squared.append(num <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1, 4, 9, 16, 25]</code></pre>
-</div>
-</div>
-<p><strong>Declarative Style</strong></p>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span>, numbers)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(squared))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1, 4, 9, 16, 25]</code></pre>
-</div>
-</div>
-<p>At a very basic level, an imperative style can be likened to cooking at home with a cookbook. Imperative languages look more like a list of commands directed at the computer. Declarative writing, by contrast, can be compared to dining at a restaurant. We aren’t issuing commands at a grueling level of granularity (e.g.&nbsp;iterating over an array manually, appending to a list manually, etc.). Instead, we’re specifying the desired outcome without the implementation details.</p>
-<p>In the imperative style, we’re saying “step through the list, read each item, square it and append it to a new list.” In the declarative style we’re simply saying “square every element of the list.” Of course these differences are highly semantic and in real life projects contain a mix of both styles, so there’s no clear black and white separation.</p>
-</section>
-<section id="side-effects" class="level3">
-<h3 class="anchored" data-anchor-id="side-effects">Side Effects</h3>
-<p>Functions which violate any of these properties are said to produce <strong>side effects</strong>. The most common side effect is when a function modifies state (i.e.&nbsp;a chunk of computer memory) outside itself (violating property 3). Examples of side effects include:</p>
-<table class="table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Effect</th>
-<th>Functional Programming Way</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A function directly modifying a variable defined in the global scope.</td>
-<td>The FP approach is to pass the global variable as input instead, and have the function return a modified copy of the input.</td>
-</tr>
-<tr class="even">
-<td>A function writing to an external database.</td>
-<td>This is an example of an <em>unavoidable side effect</em> in practice. The FP approach is to mitigate. Specifics are language dependent, but usually the strategy involves gathering all such unavoidable side effects into one impure corner of the code, and keeping the rest of the code pure.</td>
-</tr>
-<tr class="odd">
-<td>A function like the built-in functions of printing to the console, retrieving system time, or a random number generator (or those functions which use them)</td>
-<td>Yet more examples of unavoidable side effects. Such functions are inherently dependent on external or hidden state such as the time of day in the real world and, in general, things other than their input.</td>
-</tr>
-</tbody>
-</table>
-<p>Although some side effects are unavoidable, we should minimize their use in our code. Functional programming languages offer to do just that.</p>
-</section>
-</section>
-<section id="instructions-or-statements-vs-expressions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</h2>
-<p>In functional programming, we also distinguish between mere <strong>instructions</strong> to the computer (also known as <strong>statements</strong>) and <strong>expressions</strong>. This distinction is similar to the distinction between functions in the traditional programming sense and pure functions in that expressions must also return a value. Contrast this requirement with instructions like the <code>if</code>/<code>else</code> statements and <code>while</code> loops which simply direct the control flow but don’t necessarily evaluate to anything.</p>
-<p>As mentioned earlier, the use of instructions and impure functions is unavoidable at times. Different languages have different strategies of mitigating these impurities. Usually the aim is to gather the impurities together at the top in some clearly demarcated lexical block. Furthermore, some languages (such as Scala which is a blend of OOP and FP), go to great lengths to minimize side effects by enforcing the return requirement on instructions. All instructions in Scala evaluate to a value, effectively making them expressions.</p>
-<p>The idea is to use a clever type system to capture impurities. If side effects must exist, they should be known to Scala. To achieve this, instructions in Scala return a type known as <code>Unit</code> which can hold only <code>()</code> as its value. So, in Scala, instructions are essentially treated as expressions which return this very specific type. We will see an example illustrating the power of this design choice in the next section.</p>
-<p>We already touched on this briefly when we discussed declarative and imperative styles of writing code, but the distinction between instruction and expression further leads functional programming to favor certain programming styles over others.</p>
-<section id="conditional-statements-and-loops" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-statements-and-loops">Conditional Statements and Loops</h3>
-<p>In functional languages like Scala, <code>if</code> statements are implemented as expressions similar to the familiar <strong>ternary expressions</strong> in Python. Scala also has an <code>if</code> statement like the regular <code>if</code> statements of Python, but the expression is what’s preferred. Here are some examples to show the FP approach to writing <code>if</code> statements in both languages:</p>
-<p><strong>Python:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> condition <span class="op">==</span> <span class="va">True</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Scala:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> x <span class="op">=</span> <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this example, <code>x</code> evaluates to a value: one of possible two. The <code>if</code> expression may still produce a side effect, but it’s not as open-ended as a normal <code>if</code> statement. In a normal <code>if</code> statement, the programmer <em>might</em> do something entirely crazy and unheard of such as accessing a database, or printing a line to the console (both considered side effects).</p>
-<p>This brings us to an important point. It’s not that <code>if</code> statements would <em>necessarily</em> result in side effects, it’s that functional programming simply discourages the use of language constructs that lend themselves to producing side effects. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value rather than just syntax is very deliberate. In Scala, <code>for</code> comprehensions are favored over <code>for</code> loops.</p>
-<p><strong>Scala For Comprehension:</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> myNewList <span class="op">=</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        element <span class="op">&lt;-</span> myOldList</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">yield</span> <span class="op">(</span>element<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s important to note that this isn’t the best way to copy a list in Scala, it’s just a toy example of <code>for</code> comprehensions with the intent to illustrate two things about them:</p>
-<ul>
-<li>The <code>for</code> comprehension is treated as an expression which returns a value captured by <code>myNewList</code></li>
-<li>If returning no value, we’d normally simply say <code>yield ()</code>. However, because of Scala’s clever design, <code>()</code> actually <em>is</em> a value in Scala so even instructions, which normally wouldn’t return anything, do return something in Scala</li>
-</ul>
-</section>
-<section id="recursion-vs-iteration-and-higher-order-functions-hofs" class="level3">
-<h3 class="anchored" data-anchor-id="recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher-Order Functions (HOFs)</h3>
-<p>Similarly, <code>while</code> loops (and to a lesser extent also <code>for</code> loops) are considered bad practice in functional programming because of their potential to produce side effects. Take, for example, a while loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in many cases. But then the FP approach would just be to contain this impurity somewhere with the rest of its kind.</p>
-<p>In general, instead of <strong>iteration</strong>, <strong>recursion</strong> (or, more generally, <strong>function composition</strong>) is preferred. Of course, recursion is the best choice anyway if our data is represented in a recursive data structure (like a tree) or when the problem has <em>some</em> optimal substructure, but FP prefers this approach in general. This may sound unreasonable at first but a couple of familiar examples of function composition that’s have been adopted by popular languages like Python are the <code>map</code> and the <code>filter</code> functions. We already saw an example of <code>map</code> in the declarative code snippet above, so we won’t dive into its details here. Both <code>map</code>and <code>filter</code> are examples of <strong>higher-order functions</strong> (<strong>HOF</strong>s) – functions that either take other functions as input or output other functions. The <code>map</code> and <code>filter</code> functions show that function composition can be very readable and intuitive. Furthermore, neither <code>map</code> nor <code>filter</code> modify their input in-place but rather return a modified copy of it avoiding external state mutation which, as we know, is considered good practice in FP.</p>
-</section>
-<section id="functional-programming-benefits" class="level3">
-<h3 class="anchored" data-anchor-id="functional-programming-benefits">Functional Programming Benefits</h3>
-<section id="parallelization" class="level4">
-<h4 class="anchored" data-anchor-id="parallelization">Parallelization</h4>
-<p>In terms of <em>parallelization</em>, both iterative and recursive solutions can be sequential processes which don’t lend themselves well to parallelization (or independent processes which do). However, FP still confers some benefit in terms of parallelization. Not because it favors recursion but because:</p>
-<ul>
-<li>A common challenge in parallel programming is to avoid mutating data while another thread is using it. Due to immutability in FP, this problem is eliminated</li>
-<li>FP avoids hidden state, so functions can be executed in parallel without the concern of synchronizing access to some shared state.</li>
-<li>FP making it easier to identify opportunities for parallelization (arguably).</li>
-<li>Languages which are built around FP have powerful parallelization libraries that offer parallelized versions of common operations like <code>map</code></li>
-</ul>
-</section>
-</section>
-<section id="functional-programming-hazards" class="level3">
-<h3 class="anchored" data-anchor-id="functional-programming-hazards">Functional Programming Hazards</h3>
+<section id="recursion-optimizations" class="level1">
+<h1>Recursion Optimizations</h1>
+<p>Recursive algorithms, while elegant and expressive, can sometimes lead to performance issues due to the overhead of function calls and potential for repeated computations. Several optimization techniques can be employed to enhance their efficiency. One common method is <strong>memoization</strong>, which stores the results of expensive function calls and reuses them when the same inputs occur again, avoiding repeated computations. Another technique is <strong>tail recursion optimization</strong>, where the recursive call is the final operation in the function, allowing the system to reuse the current stack frame for each recursive call. Tail recursion optimization reduces the space complexity from <span class="math inline">\(O(n)\)</span> to <span class="math inline">\(O(1)\)</span>. Additionally, <strong>iterative solutions</strong> can often be more efficient than their recursive counterparts, so converting a recursive algorithm to an iterative one can be considered an optimization. Understanding these techniques, and variations on them, can greatly improve the performance of our recursive algorithms.</p>
 <section id="tail-recursion---avoiding-stack-overflow" class="level4">
 <h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p>If we’re going to favor the use of recursion (or, in general function composition) in FP over the more imperative style of writing iterative algorithms, we ought to tread carefully as to not cause <strong>stack overflow</strong> (which, as we know, is when the system runs out of working memory). <strong>Tail recursion optimization</strong> (similar to other techniques like <strong>memoization</strong>) helps us drastically cut the amount of stack memory used. It takes a constant amount of memory on the stack, instead of the linear, with input size, or worse. Read more about tail recursive optimization <a href="../../posts/general_computer_science/recursion_optimizations.html">here</a>.</p>
+<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames. It makes our recursive algorithms take a constant amount of space, <span class="math inline">\(O(1)\)</span>, instead of a linear amount, $O(n) where <span class="math inline">\(n\)</span> is the input size, or worse.</p>
+<section id="classic-example-factorial" class="level5">
+<h5 class="anchored" data-anchor-id="classic-example-factorial">Classic Example: Factorial</h5>
+<p>Let’s take the classic example of calculating a factorial.</p>
+<p><strong>Naive Recursive Implementation:</strong></p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>) <span class="co"># Recursive step</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>24</code></pre>
+</div>
+</div>
+<p>From the below untangled definition of factorial (for <span class="math inline">\(n=4\)</span>) we can surmise what goes on in the stack. The stack first fills up with stack frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, which is the last frame on the stack before it begins to pop and actual evaluation happens.</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{split}
+        factorial(4) &amp; = 4 * factorial(3) \\
+        &amp; = 4 * (3 * factorial(2)) \\
+        &amp; = 4 * (3 * (2 * factorial(1))) \\
+        &amp; = 4 * (3 * (2 * (1 * factorial(0)))) \\
+        &amp; = 4 * (3 * (2 * (1 * 1))) \\
+        &amp; = 4 * (3 * (2 * 1)) \\
+        &amp; = 4 * (3 * 2) \\
+        &amp; = 4 * 6 \\
+        &amp; = 24
+    \end{split}
+\end{equation}
+\]</span></p>
+<p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up in memory) before evaluation even begins. Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
+<p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this particular function <em>fail</em> to be tail-recursive). It helps to think in terms of <em>carried state</em>. In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next frame. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
+<p>In the case of the factorial function above, this means that in the tail-recursive implementation the stack is not filled up with as many frames of recursive <code>factorial</code> calls as the input (<span class="math inline">\(n\)</span>) is big. There are still <span class="math inline">\(n\)</span> total calls, however the memory used in the stack is held constant (at a single frame in this case) as each old frame gives way to the new one.</p>
+<p>So, for now, let’s <em>define</em> a magic function called <code>go(n,acc)</code> with inputs <code>n</code> and what’s called an <em>accumulator</em> <code>acc</code> such that <code>factorial(n) := go(n,1)</code>. We take this to be <em>by construction</em>. The function <code>go</code> will be the <em>tail-recursive helper</em> of <code>factorial</code>. The accumulator <code>acc</code>, which is initialized to <code>1</code>, will be used to remember the state inside the current stack frame (in this case just the multiplicative factor before the recursive call).</p>
+<p>But so far we’ve only given <code>go(n, acc)</code> its desired properties without actually defining it. The following is the tail-recursive version of factorial which includes the definition of <code>go</code>.</p>
+<p><strong>Tail-Recursive Factorial:</strong></p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> go(n,acc): <span class="co"># Helper function with an accumulator</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> acc</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> go(n<span class="op">-</span><span class="dv">1</span>, n <span class="op">*</span> acc) <span class="co"># Tail-recusrive step</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go(n,<span class="dv">1</span>) <span class="co"># Delegate the problem solution to a helper function</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>24</code></pre>
+</div>
+</div>
+<p>Let’s unpack this:</p>
+<p><span class="math display">\[
+\begin{equation}
+    \begin{split}
+        factorial(4) &amp; = go(4,1) \\
+        &amp; = go(3,4) \\
+        &amp; = go(2,12) \\
+        &amp; = go(1,24) \\
+        &amp; = go(0,24) \\
+        &amp; = 24
+    \end{split}
+\end{equation}
+\]</span></p>
+<p>Right away we can see that, with this approach, we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that in the expression above evaluation happens immediately, rather than step-by-step (with each step corresponding to the popping of a stack frame), as is the case in the naive implementation.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>It’s important to note that this effort only pays off if the language compiler in question supports <strong>TCO</strong> (<strong>Tail Call Optimization</strong>). Most, in fact, do. If the language supports TCO the compiler can recognize tail calls and simply pop the current stack frame after the recursive call, replacing it with the subsequent call (rather than blindly stacking frames on top of each other as in the naive recursive algorithm)</p>
+</div>
+</div>
+</div>
 
 
-</section>
 </section>
 </section>
 </section>
@@ -840,10 +776,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../posts/functional_programming/functional_programming.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Functional Programming</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/general_computer_science/recursion_optimizations.html" class="pagination-link">
-        <span class="nav-page-text">Recursion Optimizations</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="pagination-link">
+        <span class="nav-page-text">LC11 - Container with Most Water</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
