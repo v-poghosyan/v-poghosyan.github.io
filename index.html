@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -92,6 +92,15 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -170,6 +179,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parallel Programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional Programming</span></a>
   </div>
@@ -206,6 +221,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">LC11 - Container with Most Water</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
   </div>
 </li>
       </ul>
@@ -268,11 +289,11 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Algorithms">Algorithms <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Functional Programming">Functional Programming <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Leetcode">Leetcode <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Linear Algebra">Linear Algebra <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Network Security">Network Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Optimization">Optimization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Recursion">Recursion <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Scala">Scala <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
@@ -323,7 +344,7 @@ Jan 13, 2023
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="Recursion,Functional Programming" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1714246175622" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="g-col-1" data-index="1" data-categories="Recursion,Functional Programming" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1714354030688" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <a href="./posts/general_computer_science/recursion_optimizations.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -342,7 +363,26 @@ Jan 13, 2023
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="Functional Programming,Recursion,Scala" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1714248060007" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="g-col-1" data-index="2" data-categories="Functional Programming,Recursion,Scala" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1714357486677" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<a href="./posts/functional_programming/asynchronous_programming.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/functional_programming/functional_programming.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Parallel Programming
+</h5>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Jan 13, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="Functional Programming,Recursion,Scala" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1714797170761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
 <a href="./posts/functional_programming/functional_programming.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -361,7 +401,26 @@ Jan 13, 2023
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="Leetcode,Algorithms" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1710647957920" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="g-col-1" data-index="4" data-categories="Leetcode,Algorithms" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1714798640372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<a href="./posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/leetcode/leetcode.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+LC121 - Best Time to Buy and Sell Stock
+</h5>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Jan 23, 2022
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="5" data-categories="Leetcode,Algorithms" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1714519549153" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <a href="./posts/leetcode/lc11_container_with_most_water.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -380,7 +439,7 @@ Jan 23, 2022
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1710647957921" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="g-col-1" data-index="6" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1710647957921" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <a href="./posts/optimization/introduction_to_optimization.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -399,7 +458,7 @@ Jan 23, 2022
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="Linear Algebra" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1710647957921" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="g-col-1" data-index="7" data-categories="Linear Algebra" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1710647957921" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
 <a href="./posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">

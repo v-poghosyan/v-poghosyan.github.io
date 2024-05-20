@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" rel="next">
+<link href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" rel="next">
 <link href="../../posts/general_computer_science/recursion_optimizations.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -99,6 +99,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -184,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -207,6 +216,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parallel Programming</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
@@ -245,6 +260,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">LC11 - Container with Most Water</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
   </div>
 </li>
       </ul>
@@ -312,32 +333,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
-  <li><a href="#foreword" id="toc-foreword" class="nav-link" data-scroll-target="#foreword">Foreword</a>
-  <ul class="collapse">
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
   <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute Force Solution</a></li>
-  <li><a href="#two-pointer-solution" id="toc-two-pointer-solution" class="nav-link" data-scroll-target="#two-pointer-solution">Two Pointer Solution</a></li>
+  <li><a href="#the-two-pointer-solution" id="toc-the-two-pointer-solution" class="nav-link" data-scroll-target="#the-two-pointer-solution">The Two Pointer Solution</a>
+  <ul class="collapse">
+  <li><a href="#optimal-substructure" id="toc-optimal-substructure" class="nav-link" data-scroll-target="#optimal-substructure">Optimal Substructure</a>
+  <ul class="collapse">
+  <li><a href="#proof-of-optimal-substructure" id="toc-proof-of-optimal-substructure" class="nav-link" data-scroll-target="#proof-of-optimal-substructure">Proof of Optimal Substructure</a></li>
   </ul></li>
+  <li><a href="#the-two-pointers-algorithm" id="toc-the-two-pointers-algorithm" class="nav-link" data-scroll-target="#the-two-pointers-algorithm">The Two Pointers Algorithm</a></li>
+  <li><a href="#the-code" id="toc-the-code" class="nav-link" data-scroll-target="#the-code">The Code</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="problem-statement" class="level2">
-<h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
-<p>We are given an integer array <code>height</code> of length <code>n</code>. There are <code>n</code> vertical lines drawn such that the two endpoints of the <code>i</code>-th line are <code>(i, 0)</code> and <code>(i, height[i])</code>.</p>
-<p>The objective is to find two lines which, together with the x-axis, form a container which can hold the most water.</p>
-<p>We should return the maximum amount of water this container can store.</p>
+<section id="problem-statement" class="level1">
+<h1>Problem Statement</h1>
+<p>We are given an integer array <code>height</code> of length <code>n</code>. Each element of the array corresponds to a vertical line (of <code>n</code> total lines) drawn from the horizontal axis such that the <code>i</code>-th line’s two endpoints are <code>(i, 0)</code> and <code>(i, height[i])</code> (see the figure below).</p>
+<p>Find two lines which, together with the x-axis, form a container which can hold the most water. Return the maximum amount of water this container can store.</p>
 <p><strong>Example</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -350,23 +370,21 @@ Output: 49</code></pre>
 <p><strong>Explanation</strong></p>
 <p>The above vertical lines are represented by array <code>[1,8,6,2,5,4,8,3,7]</code>. In this case, the max area of the water (highlighted section) the container can contain is 49 (in units of area).</p>
 </section>
-<section id="foreword" class="level2">
-<h2 class="anchored" data-anchor-id="foreword">Foreword</h2>
-<section id="brute-force-solution" class="level3">
-<h3 class="anchored" data-anchor-id="brute-force-solution">Brute Force Solution</h3>
-<p>The brute force solution to this problem consists of checking each pair of vertical lines (or each subarray of size <span class="math inline">\(\geq 2)\)</span>. Since order of any given pair does not matter, this solution has time complexity <span class="math inline">\({O \left ({n \choose 2} \right )= O \left (\frac{n(n-1)}{2} \right ) = O(n^2)}\)</span> where <span class="math inline">\(n\)</span> is the length of the <code>height</code> array.</p>
+<section id="brute-force-solution" class="level1">
+<h1>Brute Force Solution</h1>
+<p>The brute force solution to this problem checks each pair of vertical lines (or each subset of size <span class="math inline">\(2\)</span>). Since the order of any given pair in the subset does not matter, this solution has time complexity <span class="math inline">\({O \left ({n \choose 2} \right )= O \left (\frac{n(n-1)}{2} \right ) = O(n^2)}\)</span> where <span class="math inline">\(n\)</span> is the length of the <code>height</code> array.</p>
 </section>
-<section id="two-pointer-solution" class="level3">
-<h3 class="anchored" data-anchor-id="two-pointer-solution">Two Pointer Solution</h3>
-<p>The non-brute-force solution, i.e.&nbsp;the <em>Two Pointer Solution</em>, follows trivially after discovering an optimal substructure of the problem. The optimal substructure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> from consideration, thereby reducing the number of pairs to be considered.The difficulty lies in noticing and proving the optimal substructure.</p>
-<section id="optimal-substructure" class="level4">
-<h4 class="anchored" data-anchor-id="optimal-substructure">Optimal Substructure</h4>
+<section id="the-two-pointer-solution" class="level1">
+<h1>The Two Pointer Solution</h1>
+<p>The non-brute-force solution (i.e.&nbsp;the <strong>Two Pointer Solution</strong>), follows almost trivially after noticing an <em>optimal substructure</em> to the problem. This optimal substructure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal substructure.</p>
+<section id="optimal-substructure" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-substructure">Optimal Substructure</h2>
 <ul>
 <li><p>Let <span class="math inline">\(h(i)\)</span> denote the height of the <span class="math inline">\(i\)</span>-th vertical line.</p></li>
 <li><p>Let <span class="math inline">\(a(i,j)\)</span> denote the area of the container formed by the pair of vertical lines <span class="math inline">\((i,j)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(maxArea(i,j)\)</span> denote the maximum area formed by the lines <span class="math inline">\({i,...,j}\)</span> – that is the output of the procedure on the subarray <code>height[i:j]</code>.</p></li>
 </ul>
-<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span>. Then, the problem has top-down optimal substructure:</p>
+<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). Then, the problem has <em>top-down optimal substructure</em>:</p>
 <p><br> <span class="math display">\[maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\]</span> <br></p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -380,20 +398,20 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>The optimal substructure also offers an obvious DP solution to the problem. We simply consider the sub-problems of sizes <span class="math inline">\(n-1\)</span>, <span class="math inline">\(n-2\)</span>, and so on. However, in order to minimize the complexity, we offer a tabulation approach instead — the Two Pointer Solution.</p>
+<p>This optimal substructure also exposes an obvious dynamic programming approach to the problem (we simply consider the sub-problems of sizes <span class="math inline">\(n-1\)</span>, <span class="math inline">\(n-2\)</span>, and so on). However, in order to minimize the complexity, we offer a <em>tabulation</em> approach instead — the Two Pointer Solution.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="proof-of-optimal-substructure" class="level4">
-<h4 class="anchored" data-anchor-id="proof-of-optimal-substructure">Proof of Optimal Substructure</h4>
+<section id="proof-of-optimal-substructure" class="level3">
+<h3 class="anchored" data-anchor-id="proof-of-optimal-substructure">Proof of Optimal Substructure</h3>
 <p>For the initial pair <span class="math inline">\((1,n)\)</span> where <span class="math inline">\(h(1) \leq h(n)\)</span> we have <span class="math inline">\(a(1,n) &gt; a(1,k) \ \ \forall k\)</span>. This is because we’re starting out from the <em>widest container</em> formed by <span class="math inline">\({(1,n)}\)</span> and considering containers of decreasing width formed by the pairs <span class="math inline">\({(1, n-1), (1, n-2), ..., (1,2)}\)</span>.</p>
 <p>In case <span class="math inline">\({h(k) &gt; h(1)}\)</span> for some <span class="math inline">\({n \geq k &gt; 1}\)</span> the area of the container formed by <span class="math inline">\({(1,k)}\)</span> is still determined by <span class="math inline">\({h(1)}\)</span>, except now it’s less wide. Whereas if <span class="math inline">\({h(k) &lt; h(1)}\)</span> the area of the container decreases not only in width but also in height.</p>
 <p>In both cases we have <span class="math inline">\({a(1,n) &gt; a(1,k)}\)</span> which means in general <span class="math inline">\({a(1,n) &gt; a(1, k) \ \ \forall k}\)</span>.</p>
 <p>Therefore, we may omit the first vertical line from consideration and consider the subproblem on the indices <span class="math inline">\({2,...,n}\)</span>. The overall optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
 </section>
-<section id="the-two-pointers-algorithm" class="level4">
-<h4 class="anchored" data-anchor-id="the-two-pointers-algorithm">The Two Pointers Algorithm</h4>
+</section>
+<section id="the-two-pointers-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-pointers-algorithm">The Two Pointers Algorithm</h2>
 <p>At this point, the Two Pointers Algorithm is trivial to come up with:</p>
 <ul>
 <li>Initialize two pointers, ‘left’ and ‘right’, at the first and last index respectively.</li>
@@ -404,8 +422,9 @@ Note
 <li>Advance the pointer of vertical line that’s shorter towards the fixed pointer</li>
 </ul></li>
 </ul>
-<section id="the-code" class="level5">
-<h5 class="anchored" data-anchor-id="the-code">The Code</h5>
+</section>
+<section id="the-code" class="level2">
+<h2 class="anchored" data-anchor-id="the-code">The Code</h2>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxArea(height) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> <span class="dv">0</span>, <span class="bu">len</span>(height) <span class="op">-</span> <span class="dv">1</span></span>
@@ -425,9 +444,6 @@ Note
 <pre><code>The container with most water has area: 49</code></pre>
 </div>
 </div>
-</section>
-</section>
-</section>
 </section>
 </section>
 <section id="conclusion" class="level1">
@@ -789,15 +805,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../posts/general_computer_science/recursion_optimizations.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Recursion Optimizations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="pagination-link">
-        <span class="nav-page-text">Linear Algebra Refresher for Optimization</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="pagination-link">
+        <span class="nav-page-text">LC121 - Best Time to Buy and Sell Stock</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

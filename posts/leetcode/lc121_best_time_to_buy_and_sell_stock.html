@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2023-10-27">
+<meta name="dcterms.date" content="2022-01-23">
 
-<title>Vahram’s blog - Convolutional Neural Networks</title>
+<title>Vahram’s blog - LC121 - Best Time to Buy and Sell Stock</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" rel="next">
+<link href="../../posts/leetcode/lc11_container_with_most_water.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -107,6 +109,8 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -150,14 +154,46 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Convolutional Neural Networks</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc11_container_with_most_water.html">Leetcode</a></li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">LC121 - Best Time to Buy and Sell Stock</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LC121 - Best Time to Buy and Sell Stock</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Leetcode</div>
+                <div class="quarto-category">Algorithms</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 23, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -228,7 +264,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
   </div>
 </li>
@@ -292,101 +328,91 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a>
+  <ul class="collapse">
+  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute Force Solution</a></li>
+  <li><a href="#non-brute-solution" id="toc-non-brute-solution" class="nav-link" data-scroll-target="#non-brute-solution">Non-Brute Solution</a>
+  <ul class="collapse">
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  </ul></li>
+  <li><a href="#proof-of-correctness" id="toc-proof-of-correctness" class="nav-link" data-scroll-target="#proof-of-correctness">Proof of Correctness</a>
+  <ul class="collapse">
+  <li><a href="#proof-of-invariance" id="toc-proof-of-invariance" class="nav-link" data-scroll-target="#proof-of-invariance">Proof of Invariance</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Convolutional Neural Networks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="repo"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">Image Recognition</div>
-    <div class="quarto-category">Machine Learning</div>
-  </div>
-  </div>
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Vahram Poghosyan </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 27, 2023</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Let’s ask ChatGPT to create a CNN with some given specifications using the following prompt:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="an">Using tensorflow build a CNN model with the following specifications:</span><span class="co"> </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="ss">1. </span>Input shape (28,28,1)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="ss">2. </span>2d convolutional layer with 32 filters, kernel size (3,3), and relu activation</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="ss">3. </span>MaxPooling2D layer with pool size of (2,2)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="ss">4. </span>A flatten layer to convert the 2d output into a 1d vector</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="ss">5. </span>A dense layer with 128 units and relu activation</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="ss">6. </span>An output layer with 1o units and softmax activation</span>
-<span id="cb1-8"><a href="#cb1-8"></a>Give the model summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The output is:</p>
+<section id="problem-statement" class="level1">
+<h1>Problem Statement</h1>
+<p>We are given an array of <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day.</p>
+<p>We want to maximize our profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return <code>0</code>.</p>
+<p><strong>Example 1</strong></p>
+<pre><code>Input: prices = [7,1,5,3,6,4]
+Output: 5</code></pre>
+<p><strong>Explanation</strong></p>
+<p>Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell</p>
+<p><strong>Example 2:</strong></p>
+<pre><code>Input: prices = [7,6,4,3,1]
+Output: 0</code></pre>
+<p><strong>Explanation</strong></p>
+<p>In this case, no transactions are done and the max profit = 0.</p>
+<section id="brute-force-solution" class="level2">
+<h2 class="anchored" data-anchor-id="brute-force-solution">Brute Force Solution</h2>
+<p>Consider each viable pair of days. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^2)\)</span> because, for each possible day <code>i</code> that we choose to buy the stock on, there are <span class="math inline">\(n-i\)</span> possible days that we can sell the stock on. Since there are <span class="math inline">\(n\)</span> choices for which day to buy the stock on, the number of total pairs has a leading term of <span class="math inline">\(n(n-1)\)</span>, so is quadratic in <span class="math inline">\(n\)</span>.</p>
+<p>We can also think of choosing a subset of size <span class="math inline">\(2\)</span> and discarding those which have a reverse order of days. This essentially means choosing a subset of size <span class="math inline">\(2\)</span> without order (since each pair is either in the correct order or not, and we only count the one that is), so <span class="math inline">\({O \left ({n \choose 2} \right )}\)</span> which is, of course, <span class="math inline">\(O(n^2)\)</span>.</p>
+</section>
+<section id="non-brute-solution" class="level2">
+<h2 class="anchored" data-anchor-id="non-brute-solution">Non-Brute Solution</h2>
+<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by a variation on <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>. Whereas Kadane is concerned with the contiguous subarray with maximum sum, in our case we’re interested in keeping track of maximum profit. <span id="my-text-highlight">We can easily generalize Kadane’s algorithm by swapping out maximum sum with our own scoring function (maximum profit)</span>. Like Kadane’s, we can also prove this aglorithm’s correctness using <em>loop invariants</em>. Now for the solution.</p>
+<section id="code" class="level3">
+<h3 class="anchored" data-anchor-id="code">Code</h3>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Sequential</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Conv2D, MaxPooling2D, Flatten, Dense</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Define the CNN model</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>model <span class="op">=</span> Sequential([</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    Conv2D(<span class="dv">32</span>, kernel_size<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)),</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    Flatten(),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb2-11"><a href="#cb2-11"></a>    Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>])</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Compile the model</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'sparse_categorical_crossentropy'</span>, </span>
-<span id="cb2-16"><a href="#cb2-16"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>, </span>
-<span id="cb2-17"><a href="#cb2-17"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Print the model summary</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxProfit(prices):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    min_price <span class="op">=</span> <span class="bu">float</span>(<span class="st">"inf"</span>) <span class="co"># +infinity</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    max_profit <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prices)):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prices[i] <span class="op">&lt;</span> min_price:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            min_price <span class="op">=</span> prices[i]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> prices[i] <span class="op">-</span> min_price <span class="op">&gt;</span> max_profit:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            max_profit <span class="op">=</span> prices[i] <span class="op">-</span> min_price</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_profit</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maxProfit(prices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Model: "sequential"
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- conv2d (Conv2D)             (None, 26, 26, 32)        320       
-                                                                 
- max_pooling2d (MaxPooling2  (None, 13, 13, 32)        0         
- D)                                                              
-                                                                 
- flatten (Flatten)           (None, 5408)              0         
-                                                                 
- dense (Dense)               (None, 128)               692352    
-                                                                 
- dense_1 (Dense)             (None, 10)                1290      
-                                                                 
-=================================================================
-Total params: 693962 (2.65 MB)
-Trainable params: 693962 (2.65 MB)
-Non-trainable params: 0 (0.00 Byte)
-_________________________________________________________________</code></pre>
+<pre><code>5</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="proof-of-correctness" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-correctness">Proof of Correctness</h2>
+<p>It’s easy to show that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code> (since it’s the first thing that’s set in the loop). This is called a loop invariant. Showing something is a loop invariant is similar, in concept, to proving the <em>inductive step</em> in a proof by induction when dealing with recursive algorithms.</p>
+<p>Similarly, it can be shown that <code>max_profit</code> is another loop invariant that holds the maximum profit up to, and including, the index <code>i</code>.</p>
+<section id="proof-of-invariance" class="level3">
+<h3 class="anchored" data-anchor-id="proof-of-invariance">Proof of Invariance</h3>
+<p>The loop does only one of two things: either it updates <code>min_price</code> or it doesn’t.</p>
+<p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
+<p>In the remaining case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar <strong>case </strong>1 again. Hence, <code>max_profit</code> is shown to be a loop invariant. Once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -583,57 +609,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -788,6 +763,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">LC11 - Container with Most Water</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="pagination-link">
+        <span class="nav-page-text">Linear Algebra Refresher for Optimization</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -813,6 +802,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 

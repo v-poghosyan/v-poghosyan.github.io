@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2023-10-27">
+<meta name="dcterms.date" content="2023-01-13">
 
-<title>Vahram’s blog - Convolutional Neural Networks</title>
+<title>Vahram’s blog - Parallel Programming</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -65,6 +31,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../posts/functional_programming/functional_programming.html" rel="next">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -150,14 +117,47 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Convolutional Neural Networks</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/asynchronous_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/asynchronous_programming.html">Parallel Programming</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Parallel Programming</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Functional Programming</div>
+                <div class="quarto-category">Recursion</div>
+                <div class="quarto-category">Scala</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 13, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -182,7 +182,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Parallel Programming</span></a>
   </div>
 </li>
@@ -292,101 +292,65 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cpu-threads" id="toc-cpu-threads" class="nav-link active" data-scroll-target="#cpu-threads">CPU Threads</a></li>
+  <li><a href="#parallelism-vs-concurrency-vs-asynchronicity" id="toc-parallelism-vs-concurrency-vs-asynchronicity" class="nav-link" data-scroll-target="#parallelism-vs-concurrency-vs-asynchronicity">Parallelism vs Concurrency vs Asynchronicity</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Convolutional Neural Networks</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="repo"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">Image Recognition</div>
-    <div class="quarto-category">Machine Learning</div>
-  </div>
-  </div>
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Vahram Poghosyan </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 27, 2023</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Let’s ask ChatGPT to create a CNN with some given specifications using the following prompt:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="an">Using tensorflow build a CNN model with the following specifications:</span><span class="co"> </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="ss">1. </span>Input shape (28,28,1)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="ss">2. </span>2d convolutional layer with 32 filters, kernel size (3,3), and relu activation</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="ss">3. </span>MaxPooling2D layer with pool size of (2,2)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="ss">4. </span>A flatten layer to convert the 2d output into a 1d vector</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="ss">5. </span>A dense layer with 128 units and relu activation</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="ss">6. </span>An output layer with 1o units and softmax activation</span>
-<span id="cb1-8"><a href="#cb1-8"></a>Give the model summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The output is:</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Sequential</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Conv2D, MaxPooling2D, Flatten, Dense</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Define the CNN model</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>model <span class="op">=</span> Sequential([</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    Conv2D(<span class="dv">32</span>, kernel_size<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)),</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)),</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    Flatten(),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb2-11"><a href="#cb2-11"></a>    Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>])</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Compile the model</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'sparse_categorical_crossentropy'</span>, </span>
-<span id="cb2-16"><a href="#cb2-16"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>, </span>
-<span id="cb2-17"><a href="#cb2-17"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Print the model summary</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Model: "sequential"
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- conv2d (Conv2D)             (None, 26, 26, 32)        320       
-                                                                 
- max_pooling2d (MaxPooling2  (None, 13, 13, 32)        0         
- D)                                                              
-                                                                 
- flatten (Flatten)           (None, 5408)              0         
-                                                                 
- dense (Dense)               (None, 128)               692352    
-                                                                 
- dense_1 (Dense)             (None, 10)                1290      
-                                                                 
-=================================================================
-Total params: 693962 (2.65 MB)
-Trainable params: 693962 (2.65 MB)
-Non-trainable params: 0 (0.00 Byte)
-_________________________________________________________________</code></pre>
-</div>
-</div>
+<section id="cpu-threads" class="level1">
+<h1>CPU Threads</h1>
+<p>It all begins with CPU threads….</p>
+</section>
+<section id="parallelism-vs-concurrency-vs-asynchronicity" class="level1">
+<h1>Parallelism vs Concurrency vs Asynchronicity</h1>
+<p><strong>Asynchronicity</strong> is about processes that do not overalap in time. When it comes to <strong>concurrency</strong> and <strong>parallelism</strong>, the distinction is subtle. Quoting <a href="https://docs.oracle.com/cd/E19253-01/816-5137/816-5137.pdf">Sun’s Multithreaded Programming Guide</a>:</p>
+<blockquote class="blockquote">
+<p><strong>Concurrency:</strong> A condition that exists when at least two <strong>threads</strong> are making progress. A more generalized form of parallelism that can include time-slicing as a form of virtual parallelism.</p>
+<p><strong>Parallelism:</strong> A condition that arises when at least two threads are executing simultaneously.</p>
+</blockquote>
+<p>So it appears <strong>concurrency</strong> is more about processes that may overlap somewhat in time, whereas <strong>parallelism</strong> is about processes that literally occupy the same instance/interval in time.</p>
+<p>All of these use similar or related constructs to help them achieve this. The use of <strong>callbacks</strong>, <strong>promises</strong>, or other constructs is common in handle=ng the execution of asynchronous code (such as file I/O, network requests, or user input). Instead of waiting, it’s about not <em>blocking</em> the execution of the main program’s thread which allows the program to move on to other tasks. When the long-running code is finished, the program is notified and can move on to other tasks. It’s all about multi-threaded architecture, and bringing it all together at the end to notify the <em>calling thread</em> of the asynchronous code’s completion, failure, or progress.</p>
+<p>These programming paradigms can make our application more responsive and improve its speed, but they can also make the code more complex and harder to debug, as we now have to deal with issues like <strong>synchronization</strong> and the <strong>management of shared resources</strong>. One way to mitigate these problems is <strong>functional programming</strong> which you can read more about <a href="../../posts/functional_programming/functional_programming.html">here</a>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Useful Plumbing Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Latency</td>
+<td>The amount of time it takes to travel through a tube</td>
+</tr>
+<tr class="even">
+<td>Bandwidth</td>
+<td>How wide the tube is</td>
+</tr>
+<tr class="odd">
+<td>Throughput</td>
+<td>The rate of water flow</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -583,57 +547,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -788,6 +701,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/functional_programming/functional_programming.html" class="pagination-link">
+        <span class="nav-page-text">Functional Programming</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -813,6 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 

@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../posts/general_computer_science/recursion_optimizations.html" rel="next">
+<link href="../../posts/functional_programming/asynchronous_programming.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -98,6 +99,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -144,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/asynchronous_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -184,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -207,6 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parallel Programming</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link active">
@@ -245,6 +261,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">LC11 - Container with Most Water</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
   </div>
 </li>
       </ul>
@@ -330,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#recursion-vs-iteration-and-higher-order-functions-hofs" id="toc-recursion-vs-iteration-and-higher-order-functions-hofs" class="nav-link" data-scroll-target="#recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher-Order Functions (HOFs)</a></li>
   <li><a href="#functional-programming-benefits" id="toc-functional-programming-benefits" class="nav-link" data-scroll-target="#functional-programming-benefits">Functional Programming Benefits</a>
   <ul class="collapse">
-  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">Parallelization</a></li>
+  <li><a href="#parallelization-parallel-programming" id="toc-parallelization-parallel-programming" class="nav-link" data-scroll-target="#parallelization-parallel-programming">Parallelization / Parallel Programming</a></li>
   </ul></li>
   <li><a href="#functional-programming-hazards" id="toc-functional-programming-hazards" class="nav-link" data-scroll-target="#functional-programming-hazards">Functional Programming Hazards</a>
   <ul class="collapse">
@@ -342,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
@@ -365,6 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A pure function must return a single output for a given input</li>
 <li>A pure function’s output should only depend on its input (in other words, no external hidden state should affect the output)</li>
 <li>A pure function shouldn’t change any external state (i.e.&nbsp;an external chunk of computer memory)</li>
+<li><span id="my-text-highlight">There shall be no mutation of state, in general</span></li>
 </ol>
 <section id="nice-consequences-of-working-with-pure-functions" class="level4">
 <h4 class="anchored" data-anchor-id="nice-consequences-of-working-with-pure-functions">Nice Consequences of Working With Pure Functions</h4>
@@ -439,19 +462,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We already touched on this briefly when we discussed declarative and imperative styles of writing code, but the distinction between instruction and expression further leads functional programming to favor certain programming styles over others.</p>
 <section id="conditional-statements-and-loops" class="level3">
 <h3 class="anchored" data-anchor-id="conditional-statements-and-loops">Conditional Statements and Loops</h3>
-<p>In functional languages like Scala, <code>if</code> statements are implemented as expressions similar to the familiar <strong>ternary expressions</strong> in Python. Scala also has an <code>if</code> statement like the regular <code>if</code> statements of Python, but the expression is what’s preferred. Here are some examples to show the FP approach to writing <code>if</code> statements in both languages:</p>
+<p>In functional languages like Scala, <code>if</code> statements are implemented as expressions similar to the familiar <strong>ternary expressions</strong> in Python. Scala also has <code>if</code> statement like the regular <code>if</code> statements of Python, but the expression is what’s preferred. Here are some examples to show the FP approach to writing <code>if</code> statements in both languages:</p>
 <p><strong>Python:</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> condition <span class="op">==</span> <span class="va">True</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Scala:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> x <span class="op">=</span> <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example, <code>x</code> evaluates to a value: one of possible two. The <code>if</code> expression may still produce a side effect, but it’s not as open-ended as a normal <code>if</code> statement. In a normal <code>if</code> statement, the programmer <em>might</em> do something entirely crazy and unheard of such as accessing a database, or printing a line to the console (both considered side effects).</p>
-<p>This brings us to an important point. It’s not that <code>if</code> statements would <em>necessarily</em> result in side effects, it’s that functional programming simply discourages the use of language constructs that lend themselves to producing side effects. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value rather than just syntax is very deliberate. In Scala, <code>for</code> comprehensions are favored over <code>for</code> loops.</p>
+<p>This brings us to an important point. It’s not that <code>if</code> statements would <em>necessarily</em> result in side effects, it’s that functional programming simply discourages the use of language constructs that lend themselves to producing side effects. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value rather than just syntax is very deliberate. In Scala, <code>for</code>-comprehensions are favored over <code>for</code> loops.</p>
 <p><strong>Scala For Comprehension:</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> myNewList <span class="op">=</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">{</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        element <span class="op">&lt;-</span> myOldList</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">yield</span> <span class="op">(</span>element<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s important to note that this isn’t the best way to copy a list in Scala, it’s just a toy example of <code>for</code> comprehensions with the intent to illustrate two things about them:</p>
+<p>It’s important to note that this isn’t the best way to copy a list in Scala, it’s just a toy example of <code>for</code>-comprehensions with the intent to illustrate two things about them:</p>
 <ul>
 <li>The <code>for</code> comprehension is treated as an expression which returns a value captured by <code>myNewList</code></li>
 <li>If returning no value, we’d normally simply say <code>yield ()</code>. However, because of Scala’s clever design, <code>()</code> actually <em>is</em> a value in Scala so even instructions, which normally wouldn’t return anything, do return something in Scala</li>
@@ -459,18 +482,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="recursion-vs-iteration-and-higher-order-functions-hofs" class="level3">
 <h3 class="anchored" data-anchor-id="recursion-vs-iteration-and-higher-order-functions-hofs">Recursion vs Iteration and Higher-Order Functions (HOFs)</h3>
-<p>Similarly, <code>while</code> loops (and to a lesser extent also <code>for</code> loops) are considered bad practice in functional programming because of their potential to produce side effects. Take, for example, a while loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in many cases. But then the FP approach would just be to contain this impurity somewhere with the rest of its kind.</p>
+<p>Similarly, <code>while</code> loops (and to a lesser extent also <code>for</code> loops) are considered bad practice in functional programming because, of course, the iterator is modified at each iteration and <span id="my-text-highlight">functional programming frowns upon mutation of state in general</span>. Take, for example, a while loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in many cases. But then the FP approach would just be to contain this impurity somewhere with the rest of its kind.</p>
 <p>In general, instead of <strong>iteration</strong>, <strong>recursion</strong> (or, more generally, <strong>function composition</strong>) is preferred. Of course, recursion is the best choice anyway if our data is represented in a recursive data structure (like a tree) or when the problem has <em>some</em> optimal substructure, but FP prefers this approach in general. This may sound unreasonable at first but a couple of familiar examples of function composition that’s have been adopted by popular languages like Python are the <code>map</code> and the <code>filter</code> functions. We already saw an example of <code>map</code> in the declarative code snippet above, so we won’t dive into its details here. Both <code>map</code>and <code>filter</code> are examples of <strong>higher-order functions</strong> (<strong>HOF</strong>s) – functions that either take other functions as input or output other functions. The <code>map</code> and <code>filter</code> functions show that function composition can be very readable and intuitive. Furthermore, neither <code>map</code> nor <code>filter</code> modify their input in-place but rather return a modified copy of it avoiding external state mutation which, as we know, is considered good practice in FP.</p>
 </section>
 <section id="functional-programming-benefits" class="level3">
 <h3 class="anchored" data-anchor-id="functional-programming-benefits">Functional Programming Benefits</h3>
-<section id="parallelization" class="level4">
-<h4 class="anchored" data-anchor-id="parallelization">Parallelization</h4>
-<p>In terms of <em>parallelization</em>, both iterative and recursive solutions can be sequential processes which don’t lend themselves well to parallelization (or independent processes which do). However, FP still confers some benefit in terms of parallelization. Not because it favors recursion but because:</p>
+<section id="parallelization-parallel-programming" class="level4">
+<h4 class="anchored" data-anchor-id="parallelization-parallel-programming">Parallelization / Parallel Programming</h4>
+<p>In terms of <em>parallelization</em>, both iterative and recursive solutions can be <em>sequential processes</em>, which don’t lend themselves well to parallelization, or <em>independent processes</em> which do. However, FP still confers some benefit in terms of parallelization – not because it favors recursion but, instead, because:</p>
 <ul>
-<li>A common challenge in parallel programming is to avoid mutating data while another thread is using it. Due to immutability in FP, this problem is eliminated</li>
-<li>FP avoids hidden state, so functions can be executed in parallel without the concern of synchronizing access to some shared state.</li>
-<li>FP making it easier to identify opportunities for parallelization (arguably).</li>
+<li>A common challenge in parallel programming is to avoid mutating data while another <strong>thread</strong> is using it. Due to state immutability principles in FP, this problem is eliminated</li>
+<li>FP avoids writing functions which rely on hidden state (i.e.&nbsp;any state that’s not a direct input), so functions can be executed in parallel without the concern of synchronizing access to some shared state.</li>
+<li>FP can make it easier to identify opportunities for parallelization</li>
 <li>Languages which are built around FP have powerful parallelization libraries that offer parallelized versions of common operations like <code>map</code></li>
 </ul>
 </section>
@@ -838,8 +861,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
+      <a href="../../posts/functional_programming/asynchronous_programming.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Parallel Programming</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../posts/general_computer_science/recursion_optimizations.html" class="pagination-link">
