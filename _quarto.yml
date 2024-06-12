@@ -18,8 +18,6 @@ website:
       dark: [flatly, theme-dark.scss]
     search: true
     left:
-      - text: About
-        file: about.qmd
       - text: Blog
         file: index.qmd
         
