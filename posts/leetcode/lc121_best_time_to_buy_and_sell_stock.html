@@ -218,12 +218,6 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Parallel Programming</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional Programming</span></a>
   </div>
@@ -282,7 +276,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra Refresher for Optimization</span></a>
+ <span class="menu-text">Linear Algebra for Optimization</span></a>
   </div>
 </li>
       </ul>
@@ -290,7 +284,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Network and Security</span></a>
+ <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -298,25 +292,32 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SSL - The Internet’s Trust Protocol</span></a>
+  <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithms for Unconstrained Optimization</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/duality-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Duality Theory</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Programs and LP Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
   </div>
 </li>
       </ul>
@@ -375,7 +376,7 @@ Output: 0</code></pre>
 </section>
 <section id="non-brute-solution" class="level2">
 <h2 class="anchored" data-anchor-id="non-brute-solution">Non-Brute Solution</h2>
-<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by a variation on <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>. Whereas Kadane is concerned with the contiguous subarray with maximum sum, in our case we’re interested in keeping track of maximum profit. <span id="my-text-highlight">We can easily generalize Kadane’s algorithm by swapping out maximum sum with our own scoring function (maximum profit)</span>. Like Kadane’s, we can also prove this aglorithm’s correctness using <em>loop invariants</em>. Now for the solution.</p>
+<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by a variation on <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>. Whereas Kadane is concerned with the contiguous subarray with maximum sum, in our case we’re interested in keeping track of maximum profit. We can easily generalize Kadane’s algorithm by swapping out maximum sum with our own scoring function (maximum profit). Like Kadane’s, we can also prove this aglorithm’s correctness using <em>loop invariants</em>. Now for the solution.</p>
 <section id="code" class="level3">
 <h3 class="anchored" data-anchor-id="code">Code</h3>
 <div class="cell" data-execution_count="1">
@@ -401,13 +402,14 @@ Output: 0</code></pre>
 </section>
 <section id="proof-of-correctness" class="level2">
 <h2 class="anchored" data-anchor-id="proof-of-correctness">Proof of Correctness</h2>
-<p>It’s easy to show that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code> (since it’s the first thing that’s set in the loop). This is called a loop invariant. Showing something is a loop invariant is similar, in concept, to proving the <em>inductive step</em> in a proof by induction when dealing with recursive algorithms.</p>
-<p>Similarly, it can be shown that <code>max_profit</code> is another loop invariant that holds the maximum profit up to, and including, the index <code>i</code>.</p>
+<p>It’s easy to see that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code>. This is called a loop invariant. Showing something is a loop invariant is a lot like proving the <em>inductive step</em> in a proof by induction (for example, when proving with recursive algorithms).</p>
+<p>It can also be shown that <code>max_profit</code> is another loop invariant, and that it holds the maximum profit up to, and including, the index <code>i</code>.</p>
 <section id="proof-of-invariance" class="level3">
 <h3 class="anchored" data-anchor-id="proof-of-invariance">Proof of Invariance</h3>
-<p>The loop does only one of two things: either it updates <code>min_price</code> or it doesn’t.</p>
+<p>The loop does one of two things exclusively: either it updates <code>min_price</code> or it doesn’t.</p>
 <p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<p>In the remaining case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar <strong>case </strong>1 again. Hence, <code>max_profit</code> is shown to be a loop invariant. Once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
+<p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration of the loop, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar again (<strong>case 1</strong>). Hence, <code>max_profit</code> is a loop invariant.</p>
+<p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
 
 
 </section>
@@ -773,7 +775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="pagination-link">
-        <span class="nav-page-text">Linear Algebra Refresher for Optimization</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Linear Algebra for Optimization</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2023-01-13">
+
+<title>Vahram’s blog - Introduction to Pandas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Vahram’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Introduction to Pandas</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Posts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Functional Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Programming</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">General Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/general_computer_science/recursion_optimizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Recursion Optimizations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Leetcode</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC11 - Container with Most Water</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Linear Algebra</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Algebra for Optimization</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Optimization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithms for Unconstrained Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/duality-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Duality Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Programs and LP Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#importing-pandas" id="toc-importing-pandas" class="nav-link active" data-scroll-target="#importing-pandas">Importing Pandas</a></li>
+  <li><a href="#two-underlying-data-types" id="toc-two-underlying-data-types" class="nav-link" data-scroll-target="#two-underlying-data-types">Two Underlying Data Types</a>
+  <ul class="collapse">
+  <li><a href="#series" id="toc-series" class="nav-link" data-scroll-target="#series">Series</a>
+  <ul class="collapse">
+  <li><a href="#indexing" id="toc-indexing" class="nav-link" data-scroll-target="#indexing">Indexing</a></li>
+  <li><a href="#broadcasted-and-vectorized-operations" id="toc-broadcasted-and-vectorized-operations" class="nav-link" data-scroll-target="#broadcasted-and-vectorized-operations">Broadcasted and Vectorized Operations</a></li>
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
+  </ul></li>
+  <li><a href="#dataframe" id="toc-dataframe" class="nav-link" data-scroll-target="#dataframe">DataFrame</a>
+  <ul class="collapse">
+  <li><a href="#common-methods" id="toc-common-methods" class="nav-link" data-scroll-target="#common-methods">Common Methods</a></li>
+  <li><a href="#indexing-1" id="toc-indexing-1" class="nav-link" data-scroll-target="#indexing-1">Indexing</a></li>
+  <li><a href="#filtering-1" id="toc-filtering-1" class="nav-link" data-scroll-target="#filtering-1">Filtering</a></li>
+  <li><a href="#adding-dropping-and-renaming-columns-and-rows" id="toc-adding-dropping-and-renaming-columns-and-rows" class="nav-link" data-scroll-target="#adding-dropping-and-renaming-columns-and-rows">Adding, Dropping, and Renaming Columns and Rows</a></li>
+  <li><a href="#manipulating-columns" id="toc-manipulating-columns" class="nav-link" data-scroll-target="#manipulating-columns">Manipulating Columns</a></li>
+  <li><a href="#worked-example---bitcoin-price-timeseries-cleaning-and-reindexing" id="toc-worked-example---bitcoin-price-timeseries-cleaning-and-reindexing" class="nav-link" data-scroll-target="#worked-example---bitcoin-price-timeseries-cleaning-and-reindexing">Worked Example - Bitcoin Price Timeseries: Cleaning and Reindexing</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#common-workflows" id="toc-common-workflows" class="nav-link" data-scroll-target="#common-workflows">Common Workflows</a>
+  <ul class="collapse">
+  <li><a href="#finding-the-unique-elements-in-a-column" id="toc-finding-the-unique-elements-in-a-column" class="nav-link" data-scroll-target="#finding-the-unique-elements-in-a-column">Finding the Unique Elements in a Column</a></li>
+  <li><a href="#saving-data" id="toc-saving-data" class="nav-link" data-scroll-target="#saving-data">Saving Data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to Pandas</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">Python Scientific Libraries</div>
+    <div class="quarto-category">Pandas</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vahram Poghosyan </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="importing-pandas" class="level1">
+<h1>Importing Pandas</h1>
+<p><a href="https://pandas.pydata.org/">Pandas</a> is a library that contains pre-written code to help wrangle with data. We can think of it as Python’s equivalent of Excel.</p>
+<p>We import Pandas into our development environment as we import any other library — using the <code>import</code> command.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s standard to import Pandas with the shorthand <code>pd</code> in order to avoid typing <code>pandas</code> all the time.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This gives us access to a vast array of pre-built objects, functions, and methods which are detailed in the <a href="https://pandas.pydata.org/docs/reference/index.html#api">API reference</a>.</p>
+</section>
+<section id="two-underlying-data-types" class="level1">
+<h1>Two Underlying Data Types</h1>
+<section id="series" class="level2">
+<h2 class="anchored" data-anchor-id="series">Series</h2>
+<p>The basic unit of Pandas is the <code>pandas.Series</code> object which, in keeping with the Excel analogy, can be thought of as a column in an Excel table. It’s a one-dimensional data structure that’s derived from a <a href="https://numpy.org/">NumPy</a> array. However, unlike a NumPy array, the indices of a <code>Series</code> object aren’t limited to the integer values <span class="math inline">\(0,1,...n\)</span> — they can also be descriptive labels.</p>
+<p>Let’s create a <code>Series</code> object representing the populations of the G-7 countries in units of millions.</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>g7_pop <span class="op">=</span> pd.Series([<span class="dv">35</span>,<span class="dv">63</span>,<span class="dv">80</span>,<span class="dv">60</span>,<span class="dv">127</span>,<span class="dv">64</span>,<span class="dv">318</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>As we can see, creating a series is a matter of passing a Python list (or a Numpy array) into the <code>Series</code> constructor.</p>
+<section id="indexing" class="level3">
+<h3 class="anchored" data-anchor-id="indexing">Indexing</h3>
+<p>Indexing a <code>Series</code> object is similar to indexing a Python list. For instance, let’s print the first element in the above series.</p>
+<div class="cell" data-execution_count="57">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g7_pop[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<pre><code>35</code></pre>
+</div>
+</div>
+<p>Let’s now swap out the integer-based indices with descriptive labels. Each <code>Series</code> object has an <code>index</code> argument that can be overwritten.</p>
+<div class="cell" data-execution_count="58">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g7_pop.index <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Canada'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'France'</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Germany'</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Italy'</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Japan'</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UK'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'US'</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now, we can print the first element of the series using its descriptive label.</p>
+<div class="cell" data-scrolled="true" data-execution_count="59">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g7_pop[<span class="st">'Canada'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>35</code></pre>
+</div>
+</div>
+<p>We may notice a similarity between a standard Python dictionary and a labeled <code>Series</code> object. Namely, indexing a series with a label and keying into a Python dictionary have similar syntax. In fact, it’s possible to create a labeled <code>Series</code> object directly from a Python dictionary.</p>
+<div class="cell" data-execution_count="79">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g7_pop <span class="op">=</span> pd.Series({</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Canada'</span> : <span class="dv">35</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'France'</span> : <span class="dv">63</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Germany'</span> : <span class="dv">80</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Italy'</span> : <span class="dv">60</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Japan'</span> : <span class="dv">127</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UK'</span> : <span class="dv">64</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'US'</span> : <span class="dv">318</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>g7_pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<pre><code>Canada      35
+France      63
+Germany     80
+Italy       60
+Japan      127
+UK          64
+US         318
+dtype: int64</code></pre>
+</div>
+</div>
+<p>In the event of overriding the integer-based indices, it’s still possible to access the elements of a <code>Series</code> sequentially using the <code>iloc</code> method (short for “integer location”). To retrieve the population of Canada, we can do as follows:</p>
+<div class="cell" data-execution_count="94">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>g7_pop.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="94">
+<pre><code>35</code></pre>
+</div>
+</div>
+<p>It’s also possible to use a range when indexing. For instance, suppose we’d like to retrieve the populations of the first three countries from <code>g7_pop</code>. We can simply write:</p>
+<div class="cell" data-execution_count="95">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>g7_pop[<span class="st">'Canada'</span>:<span class="st">'Germany'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="95">
+<pre><code>Canada     35
+France     63
+Germany    80
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Or equivalently:</p>
+<div class="cell" data-execution_count="99">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>g7_pop.iloc[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="99">
+<pre><code>Canada     35
+France     63
+Germany    80
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Since the <code>Series</code> object is based on a Numpy array, it also supports <em>multi-indexing</em> through passing a list of indices or a Boolean mask.</p>
+<p>For instance, to print the populations of Canada and Germany at the same time, we can pass in the list <code>['Canada','Germany']</code> or the Boolean mask <code>[True, False, True, False, False, False, False]</code>.</p>
+<div class="cell" data-execution_count="61">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>g7_pop[[<span class="st">'Canada'</span>,<span class="st">'Germany'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<pre><code>Canada     35
+Germany    80
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="62">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>g7_pop[[<span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<pre><code>Canada     35
+Germany    80
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="broadcasted-and-vectorized-operations" class="level3">
+<h3 class="anchored" data-anchor-id="broadcasted-and-vectorized-operations">Broadcasted and Vectorized Operations</h3>
+<p>Since it’s based on a NumPy array, a <code>Series</code> object also supports vectorization and broadcasted operations.</p>
+<p>As a quick reminder, <em>vectorization</em> is the process by which NumPy optimizes looping in Python. It stores the array internally in a contiguous block of memory and restricts its contents to only one data type. Letting Python know this data type in advance, NumPy can then skip the per-iteration type checking that Python normally does in order to speed up our code. In fact, NumPy delegates most of the operations on such optimized arrays to pre-written C code under the hood.</p>
+<p><em>Broadcasting</em>, on the other hand, is the optimized process by which NumPy performs arithmetic and Boolean operations on arrays of unequal dimensions. It’s an overloading of arithmetic and Boolean operators.</p>
+<p>For instance, suppose the projected population growth of each G-7 country is <code>10 mln</code> by the year 2030. Instead of looping through the <code>Series</code> object and adding <code>10</code> to each row (or using a list comprehension), we can simply use broadcasted addition.</p>
+<div class="cell" data-scrolled="true" data-execution_count="64">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>g7_2030_pop <span class="op">=</span> g7_pop <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>g7_2030_pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>Canada      45
+France      73
+Germany     90
+Italy       70
+Japan      137
+UK          74
+US         328
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="filtering" class="level3">
+<h3 class="anchored" data-anchor-id="filtering">Filtering</h3>
+<p>Thanks to broadcasted Boolean operations and multi-indexing with a Boolean mask, it’s possible to write concise and readable filtering expressions on <code>Series</code>.</p>
+<p>For instance, let’s return the list of countries with a population over <code>70 mln</code>.</p>
+<div class="cell" data-execution_count="65">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>g7_pop[g7_pop <span class="op">&gt;=</span> <span class="dv">70</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>Germany     80
+Japan      127
+US         318
+dtype: int64</code></pre>
+</div>
+</div>
+<p>The expression <code>g7_pop &gt;= 70</code> is a broadcasted Boolean operation on the <code>Series</code> object <code>g7_pop</code> which returns a Boolean array <code>[False, False, True, False, True, False, True]</code>. Then <code>g7_pop</code> is multi-indexed using this Boolean mask.</p>
+<p>As another example of readable filtering expressions, we can return the list of countries whose populations exceed the mean population.</p>
+<div class="cell" data-execution_count="66">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>g7_pop[g7_pop <span class="op">&gt;=</span> g7_pop.mean()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<pre><code>Japan    127
+US       318
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="dataframe">DataFrame</h2>
+<p>Each <code>DataFrame</code> is composed of one or more <code>Series</code>. Whereas a <code>Series</code> is analogous to a column of an Excel table, a <code>DataFrame</code> is analogous to the table itself.</p>
+<p>The <code>DataFrame</code> constructor accepts a variety of input types, among them an ndarray and a dictionary.</p>
+<p>If we’re passing an ndarray, it becomes necessary to specify the column labels separately. Additionally, we may overwrite the integer-based indexing as we did with the <code>Series</code> object.</p>
+<div class="cell" data-scrolled="true" data-execution_count="77">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data, index <span class="op">=</span> [<span class="st">'R1'</span>,<span class="st">'R2'</span>,<span class="st">'R3'</span>], columns <span class="op">=</span> [<span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">C1</th>
+<th data-quarto-table-cell-role="th">C2</th>
+<th data-quarto-table-cell-role="th">C3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">R1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">R2</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">R3</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We may bypass specifying columns manually by passing in a dictionary instead:</p>
+<div class="cell" data-scrolled="true" data-execution_count="88">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C1'</span> : [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C2'</span> : [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C3'</span> : [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data, index <span class="op">=</span> [<span class="st">'R1'</span>,<span class="st">'R2'</span>,<span class="st">'R3'</span>])</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">C1</th>
+<th data-quarto-table-cell-role="th">C2</th>
+<th data-quarto-table-cell-role="th">C3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">R1</td>
+<td>1</td>
+<td>4</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">R2</td>
+<td>2</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">R3</td>
+<td>3</td>
+<td>6</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Note: Whereas in a <code>Series</code> the keys of the input dictionary were the row labels, in a <code>DataFrame</code> they’re the column labels.</p>
+</blockquote>
+<p>In practice we often create a <code>DataFrame</code> from a CSV file using the <code>pandas.read_csv()</code> method like so:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#hide-output</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> <span class="st">'file.csv'</span> <span class="co">#Stores the path to a CSV</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>Tip: We may optionally pass <code>header = None</code> as an argument to <code>read_csv()</code> after <code>csv_path</code> if the first row of the CSV file itself is a data point, and not a header.</p>
+</blockquote>
+<p><br></p>
+<blockquote class="blockquote">
+<p>Tip: Pandas also supports reading an Excel file into a <code>DataFrame</code> using the <code>pandas.read_excel()</code> method.</p>
+</blockquote>
+<section id="common-methods" class="level3">
+<h3 class="anchored" data-anchor-id="common-methods">Common Methods</h3>
+<p>Here are the common <code>DataFrame</code> methods that we should keep in our toolbox. These methods give us an overview of our data, and help us clean it up.</p>
+<ul>
+<li><code>df.head()</code> shows, by default, the first 5 rows of the dataset. Accepts an integer argument for the number of rows to display.</li>
+<li><code>df.tail()</code> shows the last 5 rows, and also accepts an integer argument.</li>
+<li><code>df.info()</code> gives a bird’s eye overview of the dataset by showing the total rows/columns, the number of non-null datapoints, and the data types.</li>
+<li><code>df.describe()</code> returns statistically significant values for each column such as, the mean, standard deviation, minimum, and maximum values.</li>
+<li><code>df.shape</code> - returns the dimension of the dataset as an <span class="math inline">\((m,n)\)</span> tuple.</li>
+</ul>
+</section>
+<section id="indexing-1" class="level3">
+<h3 class="anchored" data-anchor-id="indexing-1">Indexing</h3>
+<p>Let’s add to the dataset of G-7 countries the columns <code>'GDP'</code> and <code>'Surface Area'</code>.</p>
+<div class="cell" data-execution_count="89">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>g7_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Population'</span> : g7_pop,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GDP'</span> : [<span class="fl">1.7</span>, <span class="fl">2.8</span>, <span class="fl">3.8</span>, <span class="fl">2.1</span>, <span class="fl">4.6</span>, <span class="fl">2.9</span>, <span class="fl">1.7</span>],</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Surface Area'</span> : [<span class="fl">9.0</span>, <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">9.0</span>]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>g7_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Whereas in a <code>Series</code>, the primary axis of indexing are the rows, in a <code>DataFrame</code> the primary axis are the columns. Thus, indexing a column works as expected.</p>
+<div class="cell" data-execution_count="92">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>g7_df[<span class="st">'GDP'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="92">
+<pre><code>Canada     1.7
+France     2.8
+Germany    3.8
+Italy      2.1
+Japan      4.6
+UK         2.9
+US         1.7
+Name: GDP, dtype: float64</code></pre>
+</div>
+</div>
+<p>Multi-indexing also works in the familiar way:</p>
+<div class="cell" data-execution_count="93">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>g7_df[[<span class="st">'Population'</span>,<span class="st">'GDP'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="93">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>If we want to index rows, however, we must use the <code>loc</code> or <code>iloc</code> methods.</p>
+<p>For instance, say we are interested in the population, GDP, and surface area of only the first three countries. We could query the dataset like so:</p>
+<div class="cell" data-execution_count="100">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>g7_df.loc[<span class="st">'Canada'</span>:<span class="st">'Germany'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="100">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>If we’re only interested in the population and GDP of the first three countries, then we could instead do the following:</p>
+<div class="cell" data-execution_count="104">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>g7_df[[<span class="st">'Population'</span>, <span class="st">'GDP'</span>]].loc[<span class="st">'Canada'</span>:<span class="st">'Germany'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="104">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Noting that <code>loc</code> accepts two inputs, one for the selection of rows and one for columns, we can achieve the above more concisely as follows:</p>
+<div class="cell" data-execution_count="105">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>g7_df.loc[<span class="st">'Canada'</span>:<span class="st">'Germany'</span>, [<span class="st">'Population'</span>, <span class="st">'GDP'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="105">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="filtering-1" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-1">Filtering</h3>
+<p>Since the <code>loc</code> method also accepts a Boolean mask as input, we use it to filter the <code>DataFrame</code> by row. For instance, suppose we want the GDP of countries with a population over <code>70 mln</code>. We query the dataset as follows:</p>
+<div class="cell" data-execution_count="106">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>g7_df.loc[g7_df[<span class="st">'Population'</span>] <span class="op">&gt;=</span> <span class="dv">70</span>, <span class="st">'GDP'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="106">
+<pre><code>Germany    3.8
+Japan      4.6
+US         1.7
+Name: GDP, dtype: float64</code></pre>
+</div>
+</div>
+<p>As additional exercise, suppose we are only interested in the population and GDP of countries that are smaller than <code>1.0 mln</code> square kilometers.</p>
+<div class="cell" data-execution_count="108">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>g7_df.loc[g7_df[<span class="st">'Surface Area'</span>] <span class="op">&lt;=</span> <span class="fl">1.0</span>, [<span class="st">'Population'</span>,<span class="st">'GDP'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="108">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="adding-dropping-and-renaming-columns-and-rows" class="level3">
+<h3 class="anchored" data-anchor-id="adding-dropping-and-renaming-columns-and-rows">Adding, Dropping, and Renaming Columns and Rows</h3>
+<p>Let’s add a <code>'Languages'</code> column to <code>g7_df</code>. We simply follow the same syntax as adding a key to a dictionary…</p>
+<div class="cell" data-execution_count="125">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A DataFrame row is a series, so first we define one...</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>languages <span class="op">=</span> pd.Series({</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Canada'</span> : <span class="st">'French, English'</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'France'</span> : <span class="st">'French'</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Germany'</span> : <span class="st">'German'</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Italy'</span> : <span class="st">'Italian'</span>,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Japan'</span> : <span class="st">'Japanese'</span>,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UK'</span> : <span class="st">'English'</span>,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'US'</span> : <span class="st">'English'</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we add the series as a column to the DataFrame</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>g7_df[<span class="st">'Languages'</span>] <span class="op">=</span> languages</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>g7_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="125">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+<th data-quarto-table-cell-role="th">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>French, English</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+<td>French</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+<td>German</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+<td>Italian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+<td>Japanese</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+<td>English</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>English</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We can also drop a column or a row using the <code>drop()</code> method.</p>
+<p>Let’s drop the newly created <code>'Languages'</code> column. To drop a column, we specify a <code>columns</code> argument in the <code>drop()</code> method like so:</p>
+<div class="cell" data-execution_count="126">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>g7_df.drop(columns <span class="op">=</span> <span class="st">'Languages'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="126">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The method <code>drop()</code> returns a new <code>DataFrame</code> which does not contain the unneeded column, but the original <code>g7_df</code> still contains this column. To prove this, let’s print it:</p>
+<div class="cell" data-execution_count="127">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>g7_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="127">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+<th data-quarto-table-cell-role="th">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>French, English</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+<td>French</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+<td>German</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+<td>Italian</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+<td>Japanese</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+<td>English</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>English</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>As we can see the <code>'Languages'</code> column is still there. The solution is to specify an <code>inplace = True</code> argument so that the column is dropped in-place.</p>
+<div class="cell" data-scrolled="true" data-execution_count="128">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>g7_df.drop(columns <span class="op">=</span> <span class="st">'Languages'</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>g7_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="128">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>In order to drop rows, we specify the <code>index</code> argument instead. Suppose we want to remove Canada and Italy from the dataset.</p>
+<div class="cell" data-scrolled="true" data-execution_count="129">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>g7_df.drop(index <span class="op">=</span> [<span class="st">'Canada'</span>, <span class="st">'Italy'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="129">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>It is also possible to rename a column or a row using the <code>rename()</code> method.</p>
+<p>Suppose we’d like to rename the columns to include the units of measurement, and suppose we’d also like to expand the UK and US to their full names.</p>
+<div class="cell" data-execution_count="130">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>g7_df.rename(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> {</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Population'</span> : <span class="st">'Population (mln)'</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'GDP'</span> : <span class="st">'GDP (USD)'</span>,</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Surface Area'</span> : <span class="st">'Surface Area (mln sq. km)'</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> {</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'UK'</span> : <span class="st">'United Kingdom'</span>,</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'US'</span> : <span class="st">'United States'</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="130">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population (mln)</th>
+<th data-quarto-table-cell-role="th">GDP (USD)</th>
+<th data-quarto-table-cell-role="th">Surface Area (mln sq. km)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">United Kingdom</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">United States</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="manipulating-columns" class="level3">
+<h3 class="anchored" data-anchor-id="manipulating-columns">Manipulating Columns</h3>
+<p>Those of us familiar with Excel know the <em>functions</em> feature which allows users to select specific cells or combinations of cells, perform algebraic or logical operations with their contents, and store the results in new cells. The way to do that in Pandas is, once again, through broadcasted operations.</p>
+<p>For instance, suppose we’d like to add a new <code>'GDP Per Capita'</code> column to the <code>g7_df</code> dataset. This is simply a matter of dividing the GDP of each country by its population.</p>
+<p>Using broadcasted division, the code is simply:</p>
+<div class="cell" data-execution_count="133">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>g7_df[<span class="st">'GDP Per Capita'</span>] <span class="op">=</span> g7_df[<span class="st">'GDP'</span>] <span class="op">/</span> g7_df[<span class="st">'Population'</span>]</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>g7_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="133">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Population</th>
+<th data-quarto-table-cell-role="th">GDP</th>
+<th data-quarto-table-cell-role="th">Surface Area</th>
+<th data-quarto-table-cell-role="th">GDP Per Capita</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Canada</td>
+<td>35</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>0.048571</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">France</td>
+<td>63</td>
+<td>2.8</td>
+<td>0.6</td>
+<td>0.044444</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Germany</td>
+<td>80</td>
+<td>3.8</td>
+<td>0.3</td>
+<td>0.047500</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Italy</td>
+<td>60</td>
+<td>2.1</td>
+<td>0.3</td>
+<td>0.035000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Japan</td>
+<td>127</td>
+<td>4.6</td>
+<td>0.3</td>
+<td>0.036220</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">UK</td>
+<td>64</td>
+<td>2.9</td>
+<td>0.2</td>
+<td>0.045312</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">US</td>
+<td>318</td>
+<td>1.7</td>
+<td>9.0</td>
+<td>0.005346</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="worked-example---bitcoin-price-timeseries-cleaning-and-reindexing" class="level3">
+<h3 class="anchored" data-anchor-id="worked-example---bitcoin-price-timeseries-cleaning-and-reindexing">Worked Example - Bitcoin Price Timeseries: Cleaning and Reindexing</h3>
+<p>Sometimes we may wish to use a certain column to index a <code>DataFrame</code>. For instance, if we’re working with a dataset of Bitcoin prices, it would be wise to use the <code>'Time'</code> column as the index so that we can easily access the value of Bitcoin at a given time.</p>
+<blockquote class="blockquote">
+<p>Note: Data that’s indexed by time is called a <a href="https://en.wikipedia.org/wiki/Time_series">timeseries</a>…</p>
+</blockquote>
+<p>For this example, we will retrieve the actual daily Bitcoin price history from <a href="https://docs.coincap.io/#ee30bea9-bb6b-469d-958a-d3e35d442d7a">CoinCap API 2.0</a>. Feel free to check out the code that fetches the data as JSON and converts it into a Pandas <code>DataFrame</code> in the collapsable code below.</p>
+<div class="cell" data-execution_count="33">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#collapse-hide</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Specifying request URL, payload, and headers</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1'</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>payload <span class="op">=</span> {}</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {}</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Making the request and parsing it as JSON</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.request(<span class="st">'GET'</span>, url, headers <span class="op">=</span> headers, data <span class="op">=</span> payload)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>json_data <span class="op">=</span> json.loads(response.text)[<span class="st">'data'</span>]</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the result into a DataFrame</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>bitcoin_df <span class="op">=</span> pd.json_normalize(json_data)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleanup</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>bitcoin_df.rename(</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> {</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'priceUsd'</span> : <span class="st">'priceInUSD'</span>,</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'time'</span> : <span class="st">'Time'</span>,</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'date'</span> : <span class="st">'Date'</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>    inplace <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The result of this is the following <code>DataFrame</code>:</p>
+<div class="cell" data-execution_count="34">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>bitcoin_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">priceInUSD</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>37480.8939504110899664</td>
+<td>1610668800000</td>
+<td>2021-01-15T00:00:00.000Z</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>36853.8623471143090244</td>
+<td>1610755200000</td>
+<td>2021-01-16T00:00:00.000Z</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>35670.6623897365179078</td>
+<td>1610841600000</td>
+<td>2021-01-17T00:00:00.000Z</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>36061.4760792230247237</td>
+<td>1610928000000</td>
+<td>2021-01-18T00:00:00.000Z</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>36868.3293610208260669</td>
+<td>1611014400000</td>
+<td>2021-01-19T00:00:00.000Z</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now that we have the dataset as a cleaned-up Pandas <code>DataFrame</code> called <code>bitcoin_df</code>, we can get to work.</p>
+<p>First order of business is to re-index the dataset based on the <code>'Time'</code> column. We can set a column as index using the <code>set_index()</code> method in the following way:</p>
+<div class="cell" data-execution_count="35">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>bitcoin_df.set_index(<span class="st">'Time'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>bitcoin_df.index.name <span class="op">=</span> <span class="va">None</span> <span class="co"># The index column shouldn't have a name — this removes the name 'Time'</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>bitcoin_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">priceInUSD</th>
+<th data-quarto-table-cell-role="th">Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1610668800000</td>
+<td>37480.8939504110899664</td>
+<td>2021-01-15T00:00:00.000Z</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1610755200000</td>
+<td>36853.8623471143090244</td>
+<td>2021-01-16T00:00:00.000Z</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1610841600000</td>
+<td>35670.6623897365179078</td>
+<td>2021-01-17T00:00:00.000Z</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1610928000000</td>
+<td>36061.4760792230247237</td>
+<td>2021-01-18T00:00:00.000Z</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1611014400000</td>
+<td>36868.3293610208260669</td>
+<td>2021-01-19T00:00:00.000Z</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>As we can see the column that was previously named <code>'Time'</code> now acts as index.</p>
+<p>Next, we should convert the entries of the index from a Unix <code>timestamp</code> into a Python <code>datetime</code> for more clarity. While doing this, let’s also convert the entries of the <code>'Date'</code> column which are currently in string format.</p>
+<div class="cell" data-execution_count="70">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bitcoin_df.index <span class="op">=</span> pd.to_datetime(bitcoin_df.index, unit<span class="op">=</span><span class="st">'us'</span>) <span class="co"># Converting index to datetime from Unix seconds</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>bitcoin_df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_datetime(bitcoin_df[<span class="st">'Date'</span>]) <span class="co"># Converting 'Date' to datetime from string</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>bitcoin_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="70">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">priceInUSD</th>
+<th data-quarto-table-cell-role="th">Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2021-01-15</td>
+<td>37480.8939504110899664</td>
+<td>2021-01-15 00:00:00+00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2021-01-16</td>
+<td>36853.8623471143090244</td>
+<td>2021-01-16 00:00:00+00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2021-01-17</td>
+<td>35670.6623897365179078</td>
+<td>2021-01-17 00:00:00+00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2021-01-18</td>
+<td>36061.4760792230247237</td>
+<td>2021-01-18 00:00:00+00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2021-01-19</td>
+<td>36868.3293610208260669</td>
+<td>2021-01-19 00:00:00+00:00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now we can comfortably access the price of Bitcoin on any given day. Suppose we’d like to know its price on <code>2021-12-28</code>, the day of writing this post… We can simply do:</p>
+<div class="cell" data-scrolled="true" data-execution_count="68">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>bitcoin_df.loc[<span class="st">'2021-12-28'</span>, <span class="st">'priceInUSD'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="68">
+<pre><code>'48995.0145281203441155'</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="common-workflows" class="level1">
+<h1>Common Workflows</h1>
+<section id="finding-the-unique-elements-in-a-column" class="level2">
+<h2 class="anchored" data-anchor-id="finding-the-unique-elements-in-a-column">Finding the Unique Elements in a Column</h2>
+<p>Pandas comes with the method <code>unique()</code> which can be applied to a <code>Series</code> object.</p>
+<p>Let’s fetch some data about the planets in our solar system from the <a href="https://github.com/devstronomy/nasa-data-scraper/blob/master/data/csv/planets.csv">devstronomy repository</a>.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>planets_df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/devstronomy/nasa-data-scraper/master/data/csv/planets.csv'</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>planets_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">planet</th>
+<th data-quarto-table-cell-role="th">mass</th>
+<th data-quarto-table-cell-role="th">diameter</th>
+<th data-quarto-table-cell-role="th">density</th>
+<th data-quarto-table-cell-role="th">gravity</th>
+<th data-quarto-table-cell-role="th">escape_velocity</th>
+<th data-quarto-table-cell-role="th">rotation_period</th>
+<th data-quarto-table-cell-role="th">length_of_day</th>
+<th data-quarto-table-cell-role="th">distance_from_sun</th>
+<th data-quarto-table-cell-role="th">perihelion</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">orbital_period</th>
+<th data-quarto-table-cell-role="th">orbital_velocity</th>
+<th data-quarto-table-cell-role="th">orbital_inclination</th>
+<th data-quarto-table-cell-role="th">orbital_eccentricity</th>
+<th data-quarto-table-cell-role="th">obliquity_to_orbit</th>
+<th data-quarto-table-cell-role="th">mean_temperature</th>
+<th data-quarto-table-cell-role="th">surface_pressure</th>
+<th data-quarto-table-cell-role="th">number_of_moons</th>
+<th data-quarto-table-cell-role="th">has_ring_system</th>
+<th data-quarto-table-cell-role="th">has_global_magnetic_field</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Mercury</td>
+<td>0.3300</td>
+<td>4879</td>
+<td>5427</td>
+<td>3.7</td>
+<td>4.3</td>
+<td>1407.6</td>
+<td>4222.6</td>
+<td>57.9</td>
+<td>46.0</td>
+<td>...</td>
+<td>88.0</td>
+<td>47.4</td>
+<td>7.0</td>
+<td>0.205</td>
+<td>0.034</td>
+<td>167</td>
+<td>0</td>
+<td>0</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Venus</td>
+<td>4.8700</td>
+<td>12104</td>
+<td>5243</td>
+<td>8.9</td>
+<td>10.4</td>
+<td>-5832.5</td>
+<td>2802.0</td>
+<td>108.2</td>
+<td>107.5</td>
+<td>...</td>
+<td>224.7</td>
+<td>35.0</td>
+<td>3.4</td>
+<td>0.007</td>
+<td>177.400</td>
+<td>464</td>
+<td>92</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Earth</td>
+<td>5.9700</td>
+<td>12756</td>
+<td>5514</td>
+<td>9.8</td>
+<td>11.2</td>
+<td>23.9</td>
+<td>24.0</td>
+<td>149.6</td>
+<td>147.1</td>
+<td>...</td>
+<td>365.2</td>
+<td>29.8</td>
+<td>0.0</td>
+<td>0.017</td>
+<td>23.400</td>
+<td>15</td>
+<td>1</td>
+<td>1</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Mars</td>
+<td>0.6420</td>
+<td>6792</td>
+<td>3933</td>
+<td>3.7</td>
+<td>5.0</td>
+<td>24.6</td>
+<td>24.7</td>
+<td>227.9</td>
+<td>206.6</td>
+<td>...</td>
+<td>687.0</td>
+<td>24.1</td>
+<td>1.9</td>
+<td>0.094</td>
+<td>25.200</td>
+<td>-65</td>
+<td>0.01</td>
+<td>2</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Jupiter</td>
+<td>1898.0000</td>
+<td>142984</td>
+<td>1326</td>
+<td>23.1</td>
+<td>59.5</td>
+<td>9.9</td>
+<td>9.9</td>
+<td>778.6</td>
+<td>740.5</td>
+<td>...</td>
+<td>4331.0</td>
+<td>13.1</td>
+<td>1.3</td>
+<td>0.049</td>
+<td>3.100</td>
+<td>-110</td>
+<td>Unknown*</td>
+<td>79</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Saturn</td>
+<td>568.0000</td>
+<td>120536</td>
+<td>687</td>
+<td>9.0</td>
+<td>35.5</td>
+<td>10.7</td>
+<td>10.7</td>
+<td>1433.5</td>
+<td>1352.6</td>
+<td>...</td>
+<td>10747.0</td>
+<td>9.7</td>
+<td>2.5</td>
+<td>0.057</td>
+<td>26.700</td>
+<td>-140</td>
+<td>Unknown*</td>
+<td>62</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Uranus</td>
+<td>86.8000</td>
+<td>51118</td>
+<td>1271</td>
+<td>8.7</td>
+<td>21.3</td>
+<td>-17.2</td>
+<td>17.2</td>
+<td>2872.5</td>
+<td>2741.3</td>
+<td>...</td>
+<td>30589.0</td>
+<td>6.8</td>
+<td>0.8</td>
+<td>0.046</td>
+<td>97.800</td>
+<td>-195</td>
+<td>Unknown*</td>
+<td>27</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Neptune</td>
+<td>102.0000</td>
+<td>49528</td>
+<td>1638</td>
+<td>11.0</td>
+<td>23.5</td>
+<td>16.1</td>
+<td>16.1</td>
+<td>4495.1</td>
+<td>4444.5</td>
+<td>...</td>
+<td>59800.0</td>
+<td>5.4</td>
+<td>1.8</td>
+<td>0.011</td>
+<td>28.300</td>
+<td>-200</td>
+<td>Unknown*</td>
+<td>14</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Pluto</td>
+<td>0.0146</td>
+<td>2370</td>
+<td>2095</td>
+<td>0.7</td>
+<td>1.3</td>
+<td>-153.3</td>
+<td>153.3</td>
+<td>5906.4</td>
+<td>4436.8</td>
+<td>...</td>
+<td>90560.0</td>
+<td>4.7</td>
+<td>17.2</td>
+<td>0.244</td>
+<td>122.500</td>
+<td>-225</td>
+<td>0.00001</td>
+<td>5</td>
+<td>No</td>
+<td>Unknown</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 21 columns</p>
+</div>
+</div>
+</div>
+<p>If we want to find out the unique number of moons each planet has, we can simply do:</p>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>planets_df[<span class="st">'number_of_moons'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>array([ 0,  1,  2, 79, 62, 27, 14,  5], dtype=int64)</code></pre>
+</div>
+</div>
+<p>As we can see, the 9 planets in our solar system (counting Pluto) have 8 unique number of moons. This is because, as we can see from the dataset, Mercury and Venus both have 0 moons.</p>
+</section>
+<section id="saving-data" class="level2">
+<h2 class="anchored" data-anchor-id="saving-data">Saving Data</h2>
+<p>After all the data manipulation, it would be useful to save the resulting dataset locally on our machine. Pandas offers us a way to do that using the <code>DataFrame.to_csv()</code> method.</p>
+<p>Working with the <code>planets_df</code> defined above, we can narrow the dataset down to the planets which have a gravitational force that’s close to that of the Earth (<span class="math inline">\(9.8 \ m/s^2\)</span>).</p>
+<div class="cell" data-execution_count="44">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>earthlike_planets_df <span class="op">=</span> planets_df[(planets_df[<span class="st">'gravity'</span>] <span class="op">&gt;=</span> <span class="fl">9.8</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">&amp;</span> (planets_df[<span class="st">'gravity'</span>] <span class="op">&lt;=</span> <span class="fl">9.8</span> <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>earthlike_planets_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">planet</th>
+<th data-quarto-table-cell-role="th">mass</th>
+<th data-quarto-table-cell-role="th">diameter</th>
+<th data-quarto-table-cell-role="th">density</th>
+<th data-quarto-table-cell-role="th">gravity</th>
+<th data-quarto-table-cell-role="th">escape_velocity</th>
+<th data-quarto-table-cell-role="th">rotation_period</th>
+<th data-quarto-table-cell-role="th">length_of_day</th>
+<th data-quarto-table-cell-role="th">distance_from_sun</th>
+<th data-quarto-table-cell-role="th">perihelion</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">orbital_period</th>
+<th data-quarto-table-cell-role="th">orbital_velocity</th>
+<th data-quarto-table-cell-role="th">orbital_inclination</th>
+<th data-quarto-table-cell-role="th">orbital_eccentricity</th>
+<th data-quarto-table-cell-role="th">obliquity_to_orbit</th>
+<th data-quarto-table-cell-role="th">mean_temperature</th>
+<th data-quarto-table-cell-role="th">surface_pressure</th>
+<th data-quarto-table-cell-role="th">number_of_moons</th>
+<th data-quarto-table-cell-role="th">has_ring_system</th>
+<th data-quarto-table-cell-role="th">has_global_magnetic_field</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Venus</td>
+<td>4.87</td>
+<td>12104</td>
+<td>5243</td>
+<td>8.9</td>
+<td>10.4</td>
+<td>-5832.5</td>
+<td>2802.0</td>
+<td>108.2</td>
+<td>107.5</td>
+<td>...</td>
+<td>224.7</td>
+<td>35.0</td>
+<td>3.4</td>
+<td>0.007</td>
+<td>177.4</td>
+<td>464</td>
+<td>92</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Earth</td>
+<td>5.97</td>
+<td>12756</td>
+<td>5514</td>
+<td>9.8</td>
+<td>11.2</td>
+<td>23.9</td>
+<td>24.0</td>
+<td>149.6</td>
+<td>147.1</td>
+<td>...</td>
+<td>365.2</td>
+<td>29.8</td>
+<td>0.0</td>
+<td>0.017</td>
+<td>23.4</td>
+<td>15</td>
+<td>1</td>
+<td>1</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Saturn</td>
+<td>568.00</td>
+<td>120536</td>
+<td>687</td>
+<td>9.0</td>
+<td>35.5</td>
+<td>10.7</td>
+<td>10.7</td>
+<td>1433.5</td>
+<td>1352.6</td>
+<td>...</td>
+<td>10747.0</td>
+<td>9.7</td>
+<td>2.5</td>
+<td>0.057</td>
+<td>26.7</td>
+<td>-140</td>
+<td>Unknown*</td>
+<td>62</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+
+<p>3 rows × 21 columns</p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Tip: Pandas prefers the use of bitwise Boolean operators <code>&amp;</code> and <code>|</code>, instead of the Python’s default <code>and</code> and <code>or</code>. This is because Pandas relies on NumPy, which in turn relies on the capacity of the bitwise operators to be overloaded.</p>
+</blockquote>
+<p><br></p>
+<p>We can now save this new dataset to our desktop as follows:</p>
+<div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>earthlike_planets_df.to_csv(<span class="st">'C:/Users/Vahram/Desktop/earthlike_planets.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2021, Vahram Poghosyan</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
+
+
+</body></html>

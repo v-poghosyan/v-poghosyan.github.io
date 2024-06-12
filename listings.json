@@ -2,13 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/network_and_security/ssl_the_internets_trust_protocol.html",
       "/posts/general_computer_science/recursion_optimizations.html",
-      "/posts/functional_programming/asynchronous_programming.html",
       "/posts/functional_programming/functional_programming.html",
       "/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html",
       "/posts/leetcode/lc11_container_with_most_water.html",
+      "/posts/optimization/linear-programs-and-lp-geometry.html",
+      "/posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html",
       "/posts/optimization/introduction_to_optimization.html",
+      "/posts/optimization/robust-lps-modelling-discrete-failures.html",
+      "/posts/optimization/duality-theory.html",
       "/posts/linear_algebra/linear_algebra_refresher_for_optimization.html"
     ]
   }

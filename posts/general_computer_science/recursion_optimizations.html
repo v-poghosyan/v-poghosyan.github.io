@@ -218,12 +218,6 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Parallel Programming</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional Programming</span></a>
   </div>
@@ -282,7 +276,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra Refresher for Optimization</span></a>
+ <span class="menu-text">Linear Algebra for Optimization</span></a>
   </div>
 </li>
       </ul>
@@ -290,7 +284,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Network and Security</span></a>
+ <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -298,25 +292,32 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SSL - The Internet’s Trust Protocol</span></a>
+  <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithms for Unconstrained Optimization</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/duality-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Duality Theory</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Programs and LP Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
   </div>
 </li>
       </ul>
@@ -354,7 +355,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>Recursive algorithms, while elegant and expressive, can sometimes lead to performance issues due to the overhead of function calls and potential for repeated computations. Several optimization techniques can be employed to enhance their efficiency. One common method is <strong>memoization</strong>, which stores the results of expensive function calls and reuses them when the same inputs occur again, avoiding repeated computations. Another technique is <strong>tail recursion optimization</strong>, where the recursive call is the final operation in the function, allowing the system to reuse the current stack frame for each recursive call. Tail recursion optimization reduces the space complexity from <span class="math inline">\(O(n)\)</span> to <span class="math inline">\(O(1)\)</span>. Additionally, <strong>iterative solutions</strong> can often be more efficient than their recursive counterparts, so converting a recursive algorithm to an iterative one can be considered an optimization. Understanding these techniques, and variations on them, can greatly improve the performance of our recursive algorithms.</p>
 <section id="tail-recursion---avoiding-stack-overflow" class="level4">
 <h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames. It makes our recursive algorithms take a constant amount of space instead of a linear amount where, or worse.</p>
+<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames and, as mentioned earlier, makes our recursive algorithms take a constant amount of space instead of a linear amount (or worse).</p>
 <section id="classic-example-factorial" class="level5">
 <h5 class="anchored" data-anchor-id="classic-example-factorial">Classic Example: Factorial</h5>
 <p>Let’s take the classic example of calculating a factorial.</p>

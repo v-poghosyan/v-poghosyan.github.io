@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" rel="prev">
+<link href="../../posts/optimization/linear-programs-and-lp-geometry.html" rel="next">
+<link href="../../posts/optimization/duality-theory.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +120,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/optimization/introduction_to_optimization.html">Optimization</a></li><li class="breadcrumb-item"><a href="../../posts/optimization/introduction_to_optimization.html">Introduction to Optimization</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html">Optimization</a></li><li class="breadcrumb-item"><a href="../../posts/optimization/introduction_to_optimization.html">Introduction to Optimization</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -182,12 +183,6 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/asynchronous_programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Parallel Programming</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional Programming</span></a>
   </div>
@@ -246,7 +241,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra Refresher for Optimization</span></a>
+ <span class="menu-text">Linear Algebra for Optimization</span></a>
   </div>
 </li>
       </ul>
@@ -254,7 +249,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Network and Security</span></a>
+ <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,25 +257,32 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SSL - The Internet’s Trust Protocol</span></a>
+  <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algorithms for Unconstrained Optimization</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/duality-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Duality Theory</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Programs and LP Geometry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +322,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>This post is the first in a series of posts on optimization. In this series, we frame an optimization problem in the following form:</p>
 <p><span class="math display">\[\textrm{minimize}: f(x)\]</span> <span class="math display">\[\textrm{subject to}: x \in \mathcal{X}\]</span></p>
 <p>where the <em>objective function</em> <span class="math inline">\(f\)</span> is a <em>convex function</em>, and the <em>constraint set</em> <span class="math inline">\(\mathcal{X}\)</span> is a <em>convex set</em>.</p>
-<p>We will not go over the ways in which we can model a real-world problem as one in the given form. There are many creative ways of doing that, one of which you can read about in <a href="https://v-poghosyan.github.io/blog/optimization/combinatorics/applied%20mathematics/2022/02/09/Optimization-Robust-Linear-Programs-Modelling-Discrete-Failures.html">this post</a>.</p>
+<p>We will not go over the ways in which we can model a real-world problem as one in the given form. There are many creative ways of doing that, one of which you can read about in <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html">this post</a>.</p>
 </section>
 <section id="why-convex-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="why-convex-optimization">Why Convex Optimization?</h2>
@@ -684,11 +686,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/network_and_security/ssl_the_internets_trust_protocol.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SSL - The Internet’s Trust Protocol</span>
+      <a href="../../posts/optimization/duality-theory.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Duality Theory</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="pagination-link">
+        <span class="nav-page-text">Linear Programs and LP Geometry</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

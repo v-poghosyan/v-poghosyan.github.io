@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2023-01-13">
 
-<title>Vahram's blog – ny_housing_market_analysis</title>
+<title>Vahram’s blog - SSL - The Internet’s Trust Protocol</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -148,7 +116,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">SSL - The Internet’s Trust Protocol</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -291,155 +259,104 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ssltls---the-internets-trust-protocol" id="toc-ssltls---the-internets-trust-protocol" class="nav-link active" data-scroll-target="#ssltls---the-internets-trust-protocol">SSL/TLS - The Internet’s Trust Protocol</a>
+  <ul class="collapse">
+  <li><a href="#asymmetric-encryption" id="toc-asymmetric-encryption" class="nav-link" data-scroll-target="#asymmetric-encryption">Asymmetric Encryption</a></li>
+  <li><a href="#encryption" id="toc-encryption" class="nav-link" data-scroll-target="#encryption">Encryption</a></li>
+  <li><a href="#secure-communication" id="toc-secure-communication" class="nav-link" data-scroll-target="#secure-communication">Secure Communication</a></li>
+  <li><a href="#decryption" id="toc-decryption" class="nav-link" data-scroll-target="#decryption">Decryption</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SSL - The Internet’s Trust Protocol</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Network Security</div>
+  </div>
+  </div>
 
 
 
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"C://Users/vapog/Downloads/airbnb_data.csv"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the dataframe</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(file_path)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     id                                              name  host_id  \
-0  2539                Clean &amp; quiet apt home by the park     2787   
-1  2595                             Skylit Midtown Castle     2845   
-2  3647               THE VILLAGE OF HARLEM....NEW YORK !     4632   
-3  3831                   Cozy Entire Floor of Brownstone     4869   
-4  5022  Entire Apt: Spacious Studio/Loft by central park     7192   
-5  5099         Large Cozy 1 BR Apartment In Midtown East     7322   
-6  5121                                   BlissArtsSpace!     7356   
-7  5178                  Large Furnished Room Near B'way      8967   
-8  5203                Cozy Clean Guest Room - Family Apt     7490   
-9  5238                Cute &amp; Cozy Lower East Side 1 bdrm     7549   
+<div class="quarto-title-meta">
 
-     host_name neighbourhood_group       neighbourhood  latitude  longitude  \
-0         John            Brooklyn          Kensington  40.64749  -73.97237   
-1     Jennifer           Manhattan             Midtown  40.75362  -73.98377   
-2    Elisabeth           Manhattan              Harlem  40.80902  -73.94190   
-3  LisaRoxanne            Brooklyn        Clinton Hill  40.68514  -73.95976   
-4        Laura           Manhattan         East Harlem  40.79851  -73.94399   
-5        Chris           Manhattan         Murray Hill  40.74767  -73.97500   
-6        Garon            Brooklyn  Bedford-Stuyvesant  40.68688  -73.95596   
-7     Shunichi           Manhattan      Hell's Kitchen  40.76489  -73.98493   
-8    MaryEllen           Manhattan     Upper West Side  40.80178  -73.96723   
-9          Ben           Manhattan           Chinatown  40.71344  -73.99037   
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vahram Poghosyan </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
-         room_type  price  minimum_nights  number_of_reviews last_review  \
-0     Private room    149               1                  9  2018-10-19   
-1  Entire home/apt    225               1                 45  2019-05-21   
-2     Private room    150               3                  0         NaN   
-3  Entire home/apt     89               1                270  2019-07-05   
-4  Entire home/apt     80              10                  9  2018-11-19   
-5  Entire home/apt    200               3                 74  2019-06-22   
-6     Private room     60              45                 49  2017-10-05   
-7     Private room     79               2                430  2019-06-24   
-8     Private room     79               2                118  2017-07-21   
-9  Entire home/apt    150               1                160  2019-06-09   
+</header>
 
-   reviews_per_month  calculated_host_listings_count  availability_365  
-0               0.21                               6               365  
-1               0.38                               2               355  
-2                NaN                               1               365  
-3               4.64                               1               194  
-4               0.10                               1                 0  
-5               0.59                               1               129  
-6               0.40                               1                 0  
-7               3.47                               1               220  
-8               0.99                               1                 0  
-9               1.33                               4               188  </code></pre>
+<section id="ssltls---the-internets-trust-protocol" class="level1">
+<h1>SSL/TLS - The Internet’s Trust Protocol</h1>
+<p><strong>Secure Sockets Layer</strong> (<strong>SSL</strong>) and its successor <strong>Transport Layer Security</strong> (<strong>TLS</strong>) are cryptographic protocols that provide security in communication over a computer network using a combination of <em>symmetric</em> and <em>asymmetric encryption</em> (both of which are introduced later in this post). The protocol is widely used for such applications as HTTPS (HTTP protocol extended with TLS encryption), email, instant messaging, etc.</p>
+<section id="asymmetric-encryption" class="level2">
+<h2 class="anchored" data-anchor-id="asymmetric-encryption">Asymmetric Encryption</h2>
+<div id="fig-asymmetric-encryption" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="fig-keys" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram0.drawio.light.png" class="img-fluid figure-img" data-ref-parent="fig-asymmetric-encryption"></p>
+<figcaption class="figure-caption">(a) Private and public keys</figcaption>
+</figure>
 </div>
+<figcaption class="figure-caption">Figure&nbsp;1: Each party has a set of public and private keys.</figcaption>
+</figure>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of rentals by New York borough</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bronx_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Bronx'</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bronx: # of rentals "</span>,bronx_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>brooklyn_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Brooklyn'</span>]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Brooklyn: # of rentals "</span>,brooklyn_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>manhattan_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Manhattan'</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Manhattan: # of rentals "</span>,manhattan_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>staten_island_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Staten Island'</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Staten Island: # of rentals "</span>,staten_island_df.shape[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bronx: # of rentals  1091
-Brooklyn: # of rentals  20104
-Manhattan: # of rentals  21661
-Staten Island: # of rentals  373</code></pre>
+</section>
+<section id="encryption" class="level2">
+<h2 class="anchored" data-anchor-id="encryption">Encryption</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram1.drawio.light.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SSL figure 1</figcaption>
+</figure>
 </div>
+</section>
+<section id="secure-communication" class="level2">
+<h2 class="anchored" data-anchor-id="secure-communication">Secure Communication</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram3.drawio.light.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SSL figure 3</figcaption>
+</figure>
 </div>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most popular neighborhood by number of reviews</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sorted_df <span class="op">=</span> df.sort_values(by<span class="op">=</span><span class="st">'number_of_reviews'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>locations_and_num_reviews_df <span class="op">=</span> sorted_df[[<span class="st">'neighbourhood'</span>,<span class="st">'number_of_reviews'</span>]]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>top_20_df <span class="op">=</span> locations_and_num_reviews_df.head(<span class="dv">20</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by neighborhood and take aggregate mean</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="op">=</span> top_20_df.groupby(<span class="st">'neighbourhood'</span>)[<span class="st">'number_of_reviews'</span>].mean()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grouped_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>neighbourhood
-Astoria            441.0
-Bushwick           480.0
-East Elmhurst      485.2
-East Village       451.0
-Flushing           474.0
-Harlem             564.0
-Jamaica            553.0
-Lower East Side    540.0
-Park Slope         488.0
-South Slope        467.0
-Tribeca            447.0
-Name: number_of_reviews, dtype: float64</code></pre>
+</section>
+<section id="decryption" class="level2">
+<h2 class="anchored" data-anchor-id="decryption">Decryption</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram2.drawio.light.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SSL figure w</figcaption>
+</figure>
 </div>
-</div>
-<div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering for a client by price in Manhattan's Upper East Side</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>upper_east_df <span class="op">=</span> df[df[<span class="st">'neighbourhood'</span>] <span class="op">==</span> <span class="st">'Upper East Side'</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ninetieth_percentile <span class="op">=</span> np.quantile(upper_east_df[<span class="st">'number_of_reviews'</span>], <span class="fl">0.85</span>) <span class="co"># Normalizes the results by getting rid of bad postings</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>upper_east_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'number_of_reviews'</span>] <span class="op">&gt;=</span> ninetieth_percentile]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Used to examine the unique room types available</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'room_type'</span>].unique())</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Cheapest private room type rental in Manhattan's Upper East Side</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'room_type'</span>] <span class="op">==</span> <span class="st">'Private room'</span>]</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> private_rooms_df.sort_values(<span class="st">'price'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> private_rooms_df[[<span class="st">'neighbourhood'</span>,<span class="st">'room_type'</span>,<span class="st">'price'</span>]]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(private_rooms_df.head(<span class="dv">5</span>))</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">## Cheapest entire homes/appartments</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'room_type'</span>] <span class="op">==</span> <span class="st">'Entire home/apt'</span>]</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> entire_homes_df.sort_values(<span class="st">'price'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> entire_homes_df[[<span class="st">'neighbourhood'</span>,<span class="st">'room_type'</span>,<span class="st">'price'</span>]]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(entire_homes_df.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>['Private room' 'Entire home/apt' 'Shared room']
-         neighbourhood     room_type  price
-8416   Upper East Side  Private room     49
-40185  Upper East Side  Private room     50
-35976  Upper East Side  Private room     60
-21283  Upper East Side  Private room     65
-19830  Upper East Side  Private room     65
-         neighbourhood        room_type  price
-18882  Upper East Side  Entire home/apt     69
-7181   Upper East Side  Entire home/apt     75
-5759   Upper East Side  Entire home/apt     92
-22122  Upper East Side  Entire home/apt     95
-27040  Upper East Side  Entire home/apt     95</code></pre>
-</div>
-</div>
+<p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram1.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram2.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram3.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram0.drawio.dark.png" height="0"></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -815,6 +732,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2022-01-23">
 
-<title>Vahram's blog – ny_housing_market_analysis</title>
+<title>Vahram’s blog - Robust Linear Programs - Modelling Discrete Failures</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -63,6 +31,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../posts/optimization/linear-programs-and-lp-geometry.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -105,6 +74,8 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -148,14 +119,45 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html">Optimization</a></li><li class="breadcrumb-item"><a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html">Robust Linear Programs - Modelling Discrete Failures</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Robust Linear Programs - Modelling Discrete Failures</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Optimization</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 23, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -278,7 +280,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
   </div>
 </li>
@@ -291,155 +293,253 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#model" id="toc-model" class="nav-link active" data-scroll-target="#model">Model</a></li>
+  <li><a href="#formulating-as-an-optimization-problem" id="toc-formulating-as-an-optimization-problem" class="nav-link" data-scroll-target="#formulating-as-an-optimization-problem">Formulating as an Optimization Problem</a>
+  <ul class="collapse">
+  <li><a href="#formulating-the-inner-problem-as-a-linear-program" id="toc-formulating-the-inner-problem-as-a-linear-program" class="nav-link" data-scroll-target="#formulating-the-inner-problem-as-a-linear-program">Formulating the Inner Problem as a Linear Program</a>
+  <ul class="collapse">
+  <li><a href="#relaxing-the-combinatorial-constraint-with-a-continuous-constraint" id="toc-relaxing-the-combinatorial-constraint-with-a-continuous-constraint" class="nav-link" data-scroll-target="#relaxing-the-combinatorial-constraint-with-a-continuous-constraint">Relaxing the Combinatorial Constraint with a Continuous Constraint</a></li>
+  </ul></li>
+  <li><a href="#putting-the-inner-and-outer-problems-together" id="toc-putting-the-inner-and-outer-problems-together" class="nav-link" data-scroll-target="#putting-the-inner-and-outer-problems-together">Putting the Inner and Outer Problems Together</a>
+  <ul class="collapse">
+  <li><a href="#taking-the-dual-of-the-inner" id="toc-taking-the-dual-of-the-inner" class="nav-link" data-scroll-target="#taking-the-dual-of-the-inner">Taking the Dual of the Inner</a></li>
+  <li><a href="#linearizing-the-absolute-value-constraints" id="toc-linearizing-the-absolute-value-constraints" class="nav-link" data-scroll-target="#linearizing-the-absolute-value-constraints">Linearizing the Absolute Value Constraints</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"C://Users/vapog/Downloads/airbnb_data.csv"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the dataframe</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(file_path)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     id                                              name  host_id  \
-0  2539                Clean &amp; quiet apt home by the park     2787   
-1  2595                             Skylit Midtown Castle     2845   
-2  3647               THE VILLAGE OF HARLEM....NEW YORK !     4632   
-3  3831                   Cozy Entire Floor of Brownstone     4869   
-4  5022  Entire Apt: Spacious Studio/Loft by central park     7192   
-5  5099         Large Cozy 1 BR Apartment In Midtown East     7322   
-6  5121                                   BlissArtsSpace!     7356   
-7  5178                  Large Furnished Room Near B'way      8967   
-8  5203                Cozy Clean Guest Room - Family Apt     7490   
-9  5238                Cute &amp; Cozy Lower East Side 1 bdrm     7549   
 
-     host_name neighbourhood_group       neighbourhood  latitude  longitude  \
-0         John            Brooklyn          Kensington  40.64749  -73.97237   
-1     Jennifer           Manhattan             Midtown  40.75362  -73.98377   
-2    Elisabeth           Manhattan              Harlem  40.80902  -73.94190   
-3  LisaRoxanne            Brooklyn        Clinton Hill  40.68514  -73.95976   
-4        Laura           Manhattan         East Harlem  40.79851  -73.94399   
-5        Chris           Manhattan         Murray Hill  40.74767  -73.97500   
-6        Garon            Brooklyn  Bedford-Stuyvesant  40.68688  -73.95596   
-7     Shunichi           Manhattan      Hell's Kitchen  40.76489  -73.98493   
-8    MaryEllen           Manhattan     Upper West Side  40.80178  -73.96723   
-9          Ben           Manhattan           Chinatown  40.71344  -73.99037   
+<section id="model" class="level1">
+<h1>Model</h1>
+<p>We are faced with the task of modeling a scenario in which at most <span class="math inline">\(k\)</span> of the total <span class="math inline">\(n\)</span> workers, machines, sensors, or other system components can fail. The task is to minimize the amount of system components needed, thereby minimizing cost, subject to certain known and robust constraints.</p>
+<p>We will assume the linear cost function to be <span class="math inline">\(c^Tx\)</span>, and the known constraints to be <span class="math inline">\(Ax \leq b\)</span>. The robust constraint is <span class="math inline">\(a_R^Tx \leq b_R, \ \ \forall a_R \in D_k\)</span> where <span class="math inline">\(b_R\)</span> is a known vector, and <span class="math inline">\(D_k\)</span> is the following interval uncertainty set with an additional combinatorial constraint:</p>
+<p><span class="math display">\[
+D_k = \{ a : a_i \in [\hat a_i - \delta_i, \hat a_i + \delta_i] \wedge \textrm{at least $n-k$ of the $a_i$'s exactly equal $\hat a_i$}\}
+\]</span></p>
+<p>In <span class="math inline">\(D_k\)</span>, we can think of each <span class="math inline">\(\hat a_i\)</span> as the spec at which the <span class="math inline">\(i\)</span>-th component should operate, and the <span class="math inline">\(\delta_i\)</span>’s as the <span class="math inline">\(i\)</span>-th component’s deviation from this spec. Thus, <span class="math inline">\(D_k\)</span> models the discrete failures scenario exactly…</p>
+</section>
+<section id="formulating-as-an-optimization-problem" class="level1">
+<h1>Formulating as an Optimization Problem</h1>
+<p>Let’s attempt to formulate this problem as a robust LP.</p>
+<p>So far we have</p>
+<p><span class="math display">\[
+\begin{cases}
+min: c^Tx
+\\
+s.t.: \begin{aligned} &amp;Ax \leq b
+\\
+&amp;a_R^Tx \leq b_R \ \ \forall a_r \in D_k
+\end{aligned}
+\end{cases}
+\]</span></p>
+<p>Which is, of course, not in standard form.</p>
+<p>For a fixed <span class="math inline">\(x\)</span>, <span class="math inline">\(a_R^Tx \leq b_R \ \ \forall a_r \ \ \implies \ \ a_{R \ max}^Tx \leq b_R\)</span>. But since we don’t know the value of <span class="math inline">\(a_{R \ max}\)</span>, we can formulate an inner optimization problem for which it is the optimal value.</p>
+<p>So we can state the following equivalent optimization problem</p>
+<p><span class="math display">\[
+\begin{cases}
+min: c^Tx
+\\
+s.t.: Ax \leq b
+\\
+\begin{cases}
+max_{a_R}: &amp;a_R^Tx
+\\
+s.t.: &amp;a_R \in D_k
+\end{cases} \leq b_R
+\end{cases}
+\]</span></p>
+<section id="formulating-the-inner-problem-as-a-linear-program" class="level2">
+<h2 class="anchored" data-anchor-id="formulating-the-inner-problem-as-a-linear-program">Formulating the Inner Problem as a Linear Program</h2>
+<p>Let’s focus on the inner problem</p>
+<p><span class="math display">\[
+\begin{cases}
+max_{a_R}: &amp;a_R^Tx
+\\
+s.t.: &amp;a_R \in D_k
+\end{cases} \leq b_R
+\]</span></p>
+<p>Our strategy now is to expand the constraint set <span class="math inline">\(D_k\)</span>.</p>
+<p>To that end, let’s introduce slack variables <span class="math inline">\(-1 \leq z_i \leq 1 \ \ \forall i\)</span>, which represent the direction of each component’s deviation from its spec. We can now rewrite the objective as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+a_R^Tx &amp; = \sum a_ix_i
+\\
+&amp; = \sum (\hat a_i + z_i\delta_i)x_i
+\\
+&amp; = \sum \hat a_ix_i + \sum \delta_iz_ix_i
+\end{aligned}
+\]</span></p>
+<p>So the optimization problem, which is now in the variables <span class="math inline">\(z_i\)</span>, becomes</p>
+<p><span class="math display">\[
+\begin{cases}
+max_{z}: \sum \hat a_ix_i + \sum \delta_iz_ix_i
+\\
+s.t.: \begin{aligned} &amp;-1 \leq z_i \leq 1 \ \ \forall i
+\\
+&amp; \textrm{at most $k$ of the $z_i \ne 0$}
+\end{aligned}
+\end{cases}
+\]</span></p>
+<p>We still have the combinatorial constraint ‘at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i \ne 0\)</span>,’ which makes this into a mixed optimization problem…</p>
+<p>We need to massage this problem more to bring it to standard form.</p>
+<p>Note that we’re dealing with a problem of maximization. In the objective, <span class="math inline">\(\sum \hat a_ix_i\)</span> is fixed by virtue of the <span class="math inline">\(\hat a_i\)</span>’s being fixed by the given <span class="math inline">\(D_k\)</span> and the <span class="math inline">\(x_i\)</span>’s being fixed by the outer optimization problem. Note that the <span class="math inline">\(\delta_i\)</span>’s are also fixed by <span class="math inline">\(D_k\)</span>. Therefore, what would maximize the objective is each term of <span class="math inline">\(\sum \delta_i z_i x_i\)</span> contributing positively to the sum.</p>
+<p>This happens when <span class="math inline">\(z_i\)</span> and <span class="math inline">\(x_i\)</span> have the same sign <span class="math inline">\(\forall i\)</span>. That is, their product <span class="math inline">\(z_ix_i\)</span> takes values in <span class="math inline">\([0, |x_i|]\)</span>.</p>
+<p>The remaining cases can be disposed of without changing the optimal value of the optimization problem.</p>
+<p>Rewriting the problem, we have</p>
+<p><span class="math display">\[
+\begin{cases}
+max_{z}: \sum \hat a_ix_i + \sum \delta_iz_i|x_i|
+\\
+s.t.: \begin{aligned} &amp;0 \leq z_i \leq 1 \ \ \forall i
+\\
+&amp; \textrm{at most $k$ of the $z_i \ne 0$}
+\end{aligned}
+\end{cases} \dagger
+\]</span></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Note that <span class="math inline">\(|x_i|\)</span> does not make the objective non-linear because the <span class="math inline">\(x_i\)</span>’s are fixed values, and not the decision variables.</p>
+</div>
+</div>
+</div>
+<section id="relaxing-the-combinatorial-constraint-with-a-continuous-constraint" class="level3">
+<h3 class="anchored" data-anchor-id="relaxing-the-combinatorial-constraint-with-a-continuous-constraint">Relaxing the Combinatorial Constraint with a Continuous Constraint</h3>
+<p>We will relax the combinatorial constraint ‘at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i \ne 0\)</span>’ by replacing it with <span class="math inline">\(\sum z_i \leq k\)</span>.</p>
+<p>Although this is a relaxation of the constraint, we will show that it makes no difference within the context of preserving the optimization problem. That is, it does not affect the optimal value of the problem.</p>
+<p>First and foremost, it’s easy to see that ‘at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i \ne 0\)</span>’ <span class="math inline">\(\implies\)</span> <span class="math inline">\(\sum z_i \leq k\)</span> since each <span class="math inline">\(z_i \in [0,1]\)</span>.</p>
+<p>We claim the converse is true as well, given that we restrict our attention to the optimal solution to the above LP <span class="math inline">\(\dagger\)</span>. That is ‘at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i \ne 0\)</span>’ <span class="math inline">\(\impliedby\)</span> <span class="math inline">\(\sum z_i \leq k\)</span>.</p>
+<p>This claim is true by the geometry of linear programs. An optimal solution to the LP can only occur at an extreme point, and those are defined exactly by <span class="math inline">\(n\)</span> independent active constraints.</p>
+<p>In the above LP, <span class="math inline">\(0 \leq z_i \leq 1 \ \ \forall i\)</span> represent a set of <span class="math inline">\(2n\)</span> independent constraints, and <span class="math inline">\(\sum z_i \leq k\)</span> is just one additional constraint.</p>
+<p>If all of the <span class="math inline">\(n\)</span> active constraints come from <span class="math inline">\(0 \leq z_i \leq 1 \ \ \forall i\)</span>, then since a given <span class="math inline">\(z_i\)</span> cannot simultaneously be <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> the <span class="math inline">\(z_i\)</span>’s of the optimal solution must take integral values (that is, either <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span> and nothing in between).</p>
+<p>In the general case, at least <span class="math inline">\(n-1\)</span> constraints must come from <span class="math inline">\(0 \leq z_i \leq 1 \ \ \forall i\)</span>, which implies at least <span class="math inline">\(n-1\)</span> of the <span class="math inline">\(z_i\)</span>’s take integral values and the remaining active constraint is <span class="math inline">\(\sum z_i = k\)</span>. But <span class="math inline">\(n\)</span> numbers, of which <span class="math inline">\(n-1\)</span> are integers, cannot add up to an integer value <span class="math inline">\(k\)</span> unless the remaining number is also an integer. So, once again we have that all the <span class="math inline">\(z_i\)</span>’s are integral valued.</p>
+<p>Then <span class="math inline">\(\sum z_i \leq k\)</span> <span class="math inline">\(\implies\)</span> at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i = 1\)</span> <span class="math inline">\(\implies\)</span> ‘at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(z_i \ne 0\)</span>’ as was the claim.</p>
+<p>This leaves us with the inner optimization problem</p>
+<p><span class="math display">\[
+\begin{cases}
+max_{z}: \sum \hat a_ix_i + \sum \delta_iz_i|x_i|
+\\
+s.t.: \begin{aligned} &amp;0 \leq z_i \leq 1 \ \ \forall i
+\\
+&amp; \sum z_i \leq k
+\end{aligned}
+\end{cases}
+\]</span></p>
+<p>which is finally a linear program.</p>
+</section>
+</section>
+<section id="putting-the-inner-and-outer-problems-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-the-inner-and-outer-problems-together">Putting the Inner and Outer Problems Together</h2>
+<p>The combined optimization problem becomes</p>
+<p><span class="math display">\[
+\begin{cases}
+min: c^Tx
+\\
+s.t.: Ax \leq b
+\\
+\begin{cases}
+max_{z}: \sum \hat a_ix_i + \sum \delta_iz_i|x_i|
+\\
+s.t.: \begin{aligned} &amp;0 \leq z_i \leq 1 \ \ \forall i
+\\
+&amp; \sum z_i \leq k
+\end{aligned}
+\end{cases} \leq b_R
+\end{cases}
+\]</span></p>
+<p>This is, of course, still not a linear program. Firstly, it’s a mixture between minimization and maximization. Secondly, since the variables are <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(z_i\)</span>, the term <span class="math inline">\(\sum \delta_iz_ix_i\)</span> is not linear in the decision variables. Thirdly, <span class="math inline">\(|x_i|\)</span> is not linear in <span class="math inline">\(x_i\)</span>.</p>
+<p>We can address these issues one by one…</p>
+<section id="taking-the-dual-of-the-inner" class="level3">
+<h3 class="anchored" data-anchor-id="taking-the-dual-of-the-inner">Taking the Dual of the Inner</h3>
+<p>We can turn the inner maximization problem to an inner minimization problem by taking its dual. As we know, by LP-duality (otherwise known as <a href="https://en.wikipedia.org/wiki/Strong_duality">strong duality</a>) this does not affect the optimal value of the problem.</p>
+<p>The overall problem becomes</p>
+<p><span class="math display">\[
+\begin{cases}
+min: c^Tx
+\\
+s.t.: Ax \leq b
+\\
+\begin{cases}
+min_{\lambda}: \sum \hat a_ix_i + \sum \lambda_i + \lambda_0k
+\\
+s.t.: \begin{aligned} &amp;\lambda_0 + \lambda_i \geq \delta_i|x_i| \ \ \forall i
+\\
+&amp; \lambda \geq 0
+\end{aligned}
+\end{cases} \leq b_R
+\end{cases}
+\]</span></p>
+<p>Flattening the problems, since both are now minimization, we arrive at the following</p>
+<p><span class="math display">\[
+\begin{cases}
+min_{x,\lambda}: c^Tx
+\\
+s.t.: \begin{aligned} &amp;Ax \leq b
+\\
+&amp;\sum \hat a_ix_i + \sum \lambda_i + \lambda_0k \leq b_R
+\\
+&amp;\lambda_0 + \lambda_i \geq \delta_i|x_i| \ \ \forall i
+\\
+&amp; \lambda \geq 0
+\end{aligned}
+\end{cases}
+\]</span></p>
+</section>
+<section id="linearizing-the-absolute-value-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="linearizing-the-absolute-value-constraints">Linearizing the Absolute Value Constraints</h3>
+<p>This is almost a linear program, except for the fact that <span class="math inline">\(|x_i|\)</span>’s are nonlinear terms in the constraint. The last step is to split these constraints into corresponding pairs of linear constraints.</p>
+<p>For each <span class="math inline">\(i\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned} \lambda_0 + \lambda_i \geq \delta_i|x_i| &amp;\implies -\lambda_0 - \lambda_i \leq \delta_ix_i \leq \lambda_0 + \lambda_i  \\ &amp;\implies \begin{cases} \lambda_0 + \lambda_i &amp;\geq \delta_ix_i \\ &amp;\textrm{and} \\ \lambda_0 + \lambda_i &amp;\geq -\delta_ix_i \end{cases}\end{aligned}
+\]</span></p>
+<p>So, the final problem, which is a linear program in every right, is</p>
+<p><span class="math display">\[
+\begin{cases}
+min_{x,\lambda}: c^Tx
+\\
+s.t.: \begin{aligned} &amp;Ax \leq b
+\\
+&amp;\sum \hat a_ix_i + \sum \lambda_i + \lambda_0k \leq b_R
+\\
+&amp;\lambda_0 + \lambda_i \geq \delta_ix_i \ \ \forall i
+\\
+&amp;\lambda_0 + \lambda_i \geq -\delta_ix_i \ \ \forall i
+\\
+&amp; \lambda \geq 0
+\end{aligned}
+\end{cases}
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Using the geometry of linear programs and LP duality, we were able to sidestep the complexity of a robust problem with a combinatorial constraint by formulating it as a linear program which can be solved by a number of fast algorithms such as the <a href="https://en.wikipedia.org/wiki/Simplex_algorithm">Simplex Algorithm</a> or the <a href="https://en.wikipedia.org/wiki/Interior-point_method">Interior Point Method</a>.</p>
+<p>This shows the versatility of linear programs in addressing a variety of interesting mixed optimization problems.</p>
 
-         room_type  price  minimum_nights  number_of_reviews last_review  \
-0     Private room    149               1                  9  2018-10-19   
-1  Entire home/apt    225               1                 45  2019-05-21   
-2     Private room    150               3                  0         NaN   
-3  Entire home/apt     89               1                270  2019-07-05   
-4  Entire home/apt     80              10                  9  2018-11-19   
-5  Entire home/apt    200               3                 74  2019-06-22   
-6     Private room     60              45                 49  2017-10-05   
-7     Private room     79               2                430  2019-06-24   
-8     Private room     79               2                118  2017-07-21   
-9  Entire home/apt    150               1                160  2019-06-09   
 
-   reviews_per_month  calculated_host_listings_count  availability_365  
-0               0.21                               6               365  
-1               0.38                               2               355  
-2                NaN                               1               365  
-3               4.64                               1               194  
-4               0.10                               1                 0  
-5               0.59                               1               129  
-6               0.40                               1                 0  
-7               3.47                               1               220  
-8               0.99                               1                 0  
-9               1.33                               4               188  </code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of rentals by New York borough</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bronx_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Bronx'</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bronx: # of rentals "</span>,bronx_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>brooklyn_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Brooklyn'</span>]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Brooklyn: # of rentals "</span>,brooklyn_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>manhattan_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Manhattan'</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Manhattan: # of rentals "</span>,manhattan_df.shape[<span class="dv">0</span>])</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>staten_island_df <span class="op">=</span> df[df[<span class="st">'neighbourhood_group'</span>] <span class="op">==</span> <span class="st">'Staten Island'</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Staten Island: # of rentals "</span>,staten_island_df.shape[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bronx: # of rentals  1091
-Brooklyn: # of rentals  20104
-Manhattan: # of rentals  21661
-Staten Island: # of rentals  373</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most popular neighborhood by number of reviews</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sorted_df <span class="op">=</span> df.sort_values(by<span class="op">=</span><span class="st">'number_of_reviews'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>locations_and_num_reviews_df <span class="op">=</span> sorted_df[[<span class="st">'neighbourhood'</span>,<span class="st">'number_of_reviews'</span>]]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>top_20_df <span class="op">=</span> locations_and_num_reviews_df.head(<span class="dv">20</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by neighborhood and take aggregate mean</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="op">=</span> top_20_df.groupby(<span class="st">'neighbourhood'</span>)[<span class="st">'number_of_reviews'</span>].mean()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grouped_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>neighbourhood
-Astoria            441.0
-Bushwick           480.0
-East Elmhurst      485.2
-East Village       451.0
-Flushing           474.0
-Harlem             564.0
-Jamaica            553.0
-Lower East Side    540.0
-Park Slope         488.0
-South Slope        467.0
-Tribeca            447.0
-Name: number_of_reviews, dtype: float64</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering for a client by price in Manhattan's Upper East Side</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>upper_east_df <span class="op">=</span> df[df[<span class="st">'neighbourhood'</span>] <span class="op">==</span> <span class="st">'Upper East Side'</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ninetieth_percentile <span class="op">=</span> np.quantile(upper_east_df[<span class="st">'number_of_reviews'</span>], <span class="fl">0.85</span>) <span class="co"># Normalizes the results by getting rid of bad postings</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>upper_east_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'number_of_reviews'</span>] <span class="op">&gt;=</span> ninetieth_percentile]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Used to examine the unique room types available</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'room_type'</span>].unique())</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Cheapest private room type rental in Manhattan's Upper East Side</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'room_type'</span>] <span class="op">==</span> <span class="st">'Private room'</span>]</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> private_rooms_df.sort_values(<span class="st">'price'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>private_rooms_df <span class="op">=</span> private_rooms_df[[<span class="st">'neighbourhood'</span>,<span class="st">'room_type'</span>,<span class="st">'price'</span>]]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(private_rooms_df.head(<span class="dv">5</span>))</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">## Cheapest entire homes/appartments</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> upper_east_df[upper_east_df[<span class="st">'room_type'</span>] <span class="op">==</span> <span class="st">'Entire home/apt'</span>]</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> entire_homes_df.sort_values(<span class="st">'price'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>entire_homes_df <span class="op">=</span> entire_homes_df[[<span class="st">'neighbourhood'</span>,<span class="st">'room_type'</span>,<span class="st">'price'</span>]]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(entire_homes_df.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>['Private room' 'Entire home/apt' 'Shared room']
-         neighbourhood     room_type  price
-8416   Upper East Side  Private room     49
-40185  Upper East Side  Private room     50
-35976  Upper East Side  Private room     60
-21283  Upper East Side  Private room     65
-19830  Upper East Side  Private room     65
-         neighbourhood        room_type  price
-18882  Upper East Side  Entire home/apt     69
-7181   Upper East Side  Entire home/apt     75
-5759   Upper East Side  Entire home/apt     92
-22122  Upper East Side  Entire home/apt     95
-27040  Upper East Side  Entire home/apt     95</code></pre>
-</div>
-</div>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -790,6 +890,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Linear Programs and LP Geometry</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -815,6 +926,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 
