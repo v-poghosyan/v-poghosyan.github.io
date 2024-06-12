@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: _site
 
 execute:
   freeze: auto
@@ -8,6 +9,7 @@ website:
   title: "Vahram's blog"
   page-navigation: true
   favicon: favicon.png
+  google-analytics: "G-KLCX05QFPN"
   navbar:
     logo: logo.png
     background: secondary
@@ -44,6 +46,7 @@ website:
 
 format:
   html:
+    page-layout: full
     grid:
       sidebar-width: 450px
       margin-width: 350px

@@ -1,8 +1,7 @@
 ---
 title: "About this blog"
-image: profile.png
 about:
-  template: trestles
+  template: marquee
   links:
     - icon: linkedin
       text: LinkedIn

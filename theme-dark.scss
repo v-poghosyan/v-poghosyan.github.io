@@ -6,14 +6,16 @@ $body-bg: #191516;
 $body-color: #EBE8E7;
 $code-color: #ac90c2;
 $link-color: #EF767A;
+$activated-color-1: #00B295;
+$activated-color-2: #FFD700;
 
 // Title banner and navbar
 .navbar-title {
-    color: #EF767A !important;
+    color: #EBE8E7 !important;
 }
 
 .navbar-title:hover {
-    color: #00B295 !important;
+    color: #EF767A !important;
 }
 
 .aa-DetachedSearchButtonIcon svg:hover {
@@ -21,7 +23,7 @@ $link-color: #EF767A;
 }
 
 .navbar.navbar-expand-lg.navbar-dark {
-    background-color: #2f273b; 
+    background-color: #1d132c; 
     // border-bottom: 1px solid #00B295;
 }
 
@@ -297,4 +299,15 @@ a.pagination-link {
 
 .nav-link .bi:hover {
     color: #EF767A;
+}
+
+
+////////////////////////////////////////////////////////////
+/// MY CUSTOM THEMES
+////////////////////////////////////////////////////////////
+
+#my-text-highlight {
+    background-color: rgba(255, 215, 0, 0.4); /* Less bright yellow with some transparency */
+    padding: 2px 6px; /* Vertical padding of 3px, horizontal padding of 6px */
+    border-radius: 5px; /* Rounded corners */
 }

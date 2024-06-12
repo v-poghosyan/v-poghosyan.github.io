@@ -4,7 +4,7 @@ listing:
   sort: "date desc"
   type: grid
   fields: [image, date, title]
-  categories: false
+  categories: true
   sort-ui: true
   filter-ui: true
 page-layout: full
