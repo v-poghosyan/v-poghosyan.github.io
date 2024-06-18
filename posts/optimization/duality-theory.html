@@ -279,12 +279,29 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
+ <span class="menu-text">Networking</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/networking/self-hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Self Hosting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Optimization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
@@ -681,9 +698,21 @@ Note
 </div>
 <section id="game-theoretic-interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="game-theoretic-interpretation">Game-Theoretic Interpretation</h3>
-<p>The Max-Min Inequality is perhaps best understood intuitively as a game between two adversarial players (represented by the optimizers in this case).</p>
-<p>The LHS of the Max-Min Inequality can be interpreted as the following game. First, the outer maximizer, player <span class="math inline">\(Y\)</span>, fixes its choice <span class="math inline">\(y\)</span>. Then, the inner minimizer, player <span class="math inline">\(X\)</span>, chooses <span class="math inline">\(x_y = \arg \inf_x f(x,y)\)</span> which depends on the outer’s choice of <span class="math inline">\(y\)</span>. Suppose <span class="math inline">\(y^* = \arg \inf_y f(x,y)\)</span> is what player <span class="math inline">\(Y\)</span>’s choice would have been were it to act independently of the actions of player <span class="math inline">\(X\)</span>. We can imagine a scenario in which the score <span class="math inline">\(f(x_{y^*}, y^*)\)</span> is less than the score <span class="math inline">\(f(x_y, y)\)</span> for some other choice of <span class="math inline">\(y\)</span>. So, player <span class="math inline">\(Y\)</span> cannot do as well as it would’ve done independently, whereas player <span class="math inline">\(X\)</span> is free to do its best. Hence, player <span class="math inline">\(X\)</span>, the second player, restricts the choices of player <span class="math inline">\(Y\)</span>, the first player.</p>
-<p>If the goal is to score low then player <span class="math inline">\(X\)</span> has the advantage by playing second turn. Conversely, if the goal is to score high player <span class="math inline">\(Y\)</span> has the advantage by playing second turn. This is exactly what the Max-Min Inequality says in mathematical terms.</p>
+<p>The Max-Min Inequality is perhaps best understood intuitively as a game between two adversarial players (the optimizers above).</p>
+<p>Let’s represent the game using a value tree. The nodes are the final scores, and the junctures represent player choices. The first juncture represents Player 1’s turn, and the second that of Player 2.</p>
+<pre class="mermaid"><code>   graph TD;
+      A--&gt;B;
+      A--&gt;C;
+      B--&gt;D;
+      C--&gt;D;</code></pre>
+<p>To the minimizer, as Player 1, the game tree above might as well be an imaginary tree shrouded in the mist of uncertainty because the true min of <span class="math inline">\(1\)</span> is unattainable. Player 2 has final say, and if the minimizer chooses <span class="math inline">\(1\)</span>’s subtree, the maximizer will choose <span class="math inline">\(8\)</span>. The minimizer must be more pragmatic and choose <em>not</em> the subtree that contains the true min, but rather that which restricts the maximizer’s choice most to the compromise: <span class="math inline">\(7\)</span>. That means, we can compute a hidden value tree for our minimizer.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">INSERT VALUE TREE</figcaption>
+</figure>
+</div>
+<p>The outcome of this game is then determined. It’s 7. That’s a score player 2, the maximizer, is highly satisfied with. Note that if we reverse the turns, the score of the game changes to favors the minimizer.</p>
 </section>
 </section>
 </section>

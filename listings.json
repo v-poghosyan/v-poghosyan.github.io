@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/general_computer_science/recursion_optimizations.html",
+      "/posts/networking/self-hosting.html",
       "/posts/functional_programming/functional_programming.html",
       "/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html",
       "/posts/leetcode/lc11_container_with_most_water.html",
