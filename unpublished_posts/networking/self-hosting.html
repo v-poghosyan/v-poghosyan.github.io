@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2023-10-27">
+<meta name="dcterms.date" content="2023-01-13">
 
-<title>Vahram’s blog - NumPy: Quick Start Guide</title>
+<title>Vahram’s blog - Self Hosting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NumPy: Quick Start Guide</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Self Hosting</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -294,16 +294,13 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quick-introduction-to-numpy" id="toc-quick-introduction-to-numpy" class="nav-link active" data-scroll-target="#quick-introduction-to-numpy">Quick Introduction to NumPy</a>
-  <ul class="collapse">
-  <li><a href="#pythons-built-in-data-types" id="toc-pythons-built-in-data-types" class="nav-link" data-scroll-target="#pythons-built-in-data-types">Python’s Built-In Data Types</a>
-  <ul class="collapse">
-  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays">Arrays</a></li>
+  <li><a href="#quick-setup-of-a-mac-local-development-environment" id="toc-quick-setup-of-a-mac-local-development-environment" class="nav-link active" data-scroll-target="#quick-setup-of-a-mac-local-development-environment">Quick Setup of a Mac Local Development Environment</a>
+  <ul>
+  <li><a href="#whats-my-localhost" id="toc-whats-my-localhost" class="nav-link" data-scroll-target="#whats-my-localhost">What’s My Localhost?</a></li>
   </ul></li>
-  <li><a href="#numpy-data-types" id="toc-numpy-data-types" class="nav-link" data-scroll-target="#numpy-data-types">NumPy Data Types</a>
-  <ul class="collapse">
-  <li><a href="#working-with-ndarrays" id="toc-working-with-ndarrays" class="nav-link" data-scroll-target="#working-with-ndarrays">Working with <code>ndarray</code>s</a></li>
-  </ul></li>
+  <li><a href="#docker-intro" id="toc-docker-intro" class="nav-link" data-scroll-target="#docker-intro">Docker Intro</a>
+  <ul>
+  <li><a href="#creating-a-docker-container" id="toc-creating-a-docker-container" class="nav-link" data-scroll-target="#creating-a-docker-container">Creating a Docker Container</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -313,11 +310,11 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">NumPy: Quick Start Guide</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="repo"><i class="bi"></i> Code</button></div></div>
+<h1 class="title">Self Hosting</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Python</div>
-    <div class="quarto-category">NumPy</div>
-    <div class="quarto-category">Machine Learning</div>
+    <div class="quarto-category">Networking</div>
+    <div class="quarto-category">Docker</div>
+    <div class="quarto-category">Linux</div>
   </div>
   </div>
 
@@ -335,7 +332,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 27, 2023</p>
+      <p class="date">January 13, 2023</p>
     </div>
   </div>
   
@@ -345,173 +342,46 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 
 </header>
 
-<section id="quick-introduction-to-numpy" class="level1">
-<h1>Quick Introduction to NumPy</h1>
-<p>Perhaps the most important package for scientific computing included with Conda is NumPy. Let’s get a feel for what NumPy offers.</p>
-<section id="pythons-built-in-data-types" class="level2">
-<h2 class="anchored" data-anchor-id="pythons-built-in-data-types">Python’s Built-In Data Types</h2>
-<section id="arrays" class="level3">
-<h3 class="anchored" data-anchor-id="arrays">Arrays</h3>
-<p>A 1D array, or a <strong>vector</strong>, is a collection of scalars (usually, but not necessarily, of similar data type) in a contiguous chunk of computer memory. A 2D array, or a <strong>matrix</strong>, is a collection of vectors. A 3D array (or a higher dimensional array), also referred to as a <strong>tensor</strong>, is a collection of matrices.</p>
+<section id="quick-setup-of-a-mac-local-development-environment" class="level1">
+<h1>Quick Setup of a Mac Local Development Environment</h1>
+<p>Useful Mac utilities:</p>
+<ul>
+<li><a href="https://ohmyz.sh/">Oh My Zsh</a></li>
+<li><a href="">Homebrew</a></li>
+<li><a href="">Vim</a></li>
+<li>[Docker]</li>
+</ul>
+<section id="whats-my-localhost" class="level2">
+<h2 class="anchored" data-anchor-id="whats-my-localhost">What’s My Localhost?</h2>
+<p>After installing <a href="https://ohmyz.sh/">oh my zsh</a>, we can set environment variables in <code>~/.zshrc</code> using <code>export</code>. We can even set environment variables that affect the Z shell’s appearance. For example, adding the following in the initialization file <code>~/.zshrc</code> displays the localhost, current working directory, and the prompt character (root vs user) in the shell prompt.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define color codes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">RED</span><span class="op">=</span><span class="st">"%F{red}"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">GREEN</span><span class="op">=</span><span class="st">"%F{green}"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">YELLOW</span><span class="op">=</span><span class="st">"%F{yellow}"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">BLUE</span><span class="op">=</span><span class="st">"%F{blue}"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">MAGENTA</span><span class="op">=</span><span class="st">"%F{magenta}"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">CYAN</span><span class="op">=</span><span class="st">"%F{cyan}"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">WHITE</span><span class="op">=</span><span class="st">"%F{white}"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">RESET</span><span class="op">=</span><span class="st">"%f"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the prompt with colors</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="va">PROMPT</span><span class="op">=</span><span class="st">'${CYAN}%n@%m ${YELLOW}%1~ ${RESET}%# '</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A shell also knows of ‘hostname’ from a system command that’s part of the OS.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Some other variables the shell knows of include:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$USER</span><span class="st">"</span> <span class="co"># The name of the logged-in user.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">"</span> <span class="co"># The path to the current user's home directory.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$PATH</span><span class="st">"</span> <span class="co"># The list of directories that the shell searches for executable files.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These are set by the login process, rather than being exposed by OS commands like <code>hostname</code> or being defined by the user in an initialization files like <code>~/.zshrc</code>.</p>
 </section>
 </section>
-<section id="numpy-data-types" class="level2">
-<h2 class="anchored" data-anchor-id="numpy-data-types">NumPy Data Types</h2>
-<p>NumPy exposes the <code>ndarray</code> type. This is a multidimensional, homogeneous array type (i.e.&nbsp;its elements are of the same data type) optimized for computing and indexed by a <strong>tuple</strong>. It offeres mathematical indexing (based on Boolean expressions) so that we don’t have to write inefficient loops. The terms vector, matrix, and tensor equally apply to <code>ndarray</code>s.</p>
-<p>To import NumPy, we can type:</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="working-with-ndarrays" class="level3">
-<h3 class="anchored" data-anchor-id="working-with-ndarrays">Working with <code>ndarray</code>s</h3>
-<section id="creating-ndarrays-arange-zero-one" class="level4">
-<h4 class="anchored" data-anchor-id="creating-ndarrays-arange-zero-one">Creating <code>ndarray</code>s (arange, zero, one)</h4>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>sequence_array <span class="op">=</span> np.arange(<span class="dv">10</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(sequence_array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[0 1 2 3 4 5 6 7 8 9]</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>zeros_array <span class="op">=</span> np.zeros((<span class="dv">3</span>,<span class="dv">4</span>),dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(zeros_array)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(zeros_array.dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[0 0 0 0]
- [0 0 0 0]
- [0 0 0 0]]
-int32</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ones_array <span class="op">=</span> np.ones((<span class="dv">3</span>,<span class="dv">2</span>))</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(ones_array)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">print</span>(ones_array.dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1. 1.]
- [1. 1.]
- [1. 1.]]
-float64</code></pre>
-</div>
-</div>
-</section>
-<section id="verifying-type" class="level4">
-<h4 class="anchored" data-anchor-id="verifying-type">Verifying Type</h4>
-<p>We can verify that the object we’re working with is, indeed, and <code>ndarray</code> by using the built-in Python <code>type</code> function.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>array1 <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(<span class="st">'array1 type: '</span>, <span class="bu">type</span>(array1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array1 type:  &lt;class 'numpy.ndarray'&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="getting-the-shape" class="level4">
-<h4 class="anchored" data-anchor-id="getting-the-shape">Getting the Shape</h4>
-<p>The <strong>shape</strong> of an <code>ndarray</code> is in format <code>(x,y,...)</code> where <code>x</code> corresponds to the number <strong>rows</strong>, <code>y</code> corresponds to the number of <strong>columns</strong>, and so on.</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">print</span>(<span class="st">'array1 shape: '</span>, array1.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array1 shape:  (3,)</code></pre>
-</div>
-</div>
-<p>Higher dimensional <code>ndarray</code>s take tuples of arrays as input:</p>
-<section id="contrived-example-of-a-multidimensional-ndarray" class="level5">
-<h5 class="anchored" data-anchor-id="contrived-example-of-a-multidimensional-ndarray">Contrived Example of a Multidimensional <code>ndarray</code></h5>
-<p>There is a subtle difference between a 1D array and a 2D array with a single column which is worth exploring.</p>
-<p>As we saw above, <code>array1</code> was of shape <code>(3,)</code>. Now let’s examine the shape of a similar <code>ndarray</code> instance.</p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>array2 <span class="op">=</span> np.array([[<span class="dv">1</span>],[<span class="dv">2</span>],[<span class="dv">3</span>]])</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="bu">print</span>(<span class="st">'array2 shape: '</span>, array2.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array2 shape:  (3, 1)</code></pre>
-</div>
-</div>
-<p>As we can see, this one’s shape is <code>(3,1)</code>.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="📖 Note">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📖 Note
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>The shape <code>(3,)</code> means a 1D array with 3 elements, meanwhile the shape <code>(3,1)</code> means a 2D array with 3 rows and a single column.</p>
-</div>
-</div>
-</div>
-<p>Sometimes these differences are just superficial, or the result of data impurities. NumPy provides a method called <code>np.squeeze</code> which flattens the arrays by removing axes of length 1.</p>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="bu">print</span>(np.squeeze(array2).shape <span class="op">==</span> array1.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>True</code></pre>
-</div>
-</div>
-</section>
-<section id="a-more-natural-example-of-a-multidimensional-ndarray" class="level5">
-<h5 class="anchored" data-anchor-id="a-more-natural-example-of-a-multidimensional-ndarray">A More Natural Example of a Multidimensional <code>ndarray</code></h5>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>array3 <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], </span>
-<span id="cb16-2"><a href="#cb16-2"></a>                  [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]])</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="bu">print</span>(<span class="st">'array3 shape: '</span>, array3.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>array3 shape:  (2, 3)</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="getting-the-dimension" class="level4">
-<h4 class="anchored" data-anchor-id="getting-the-dimension">Getting the Dimension</h4>
-<p>To get the dimension, we use <code>ndarray.ndim</code>.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="bu">print</span>(array1.ndim, array2.ndim, array3.ndim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1 2 2</code></pre>
-</div>
-</div>
-</section>
-<section id="getting-the-data-types-of-the-elements" class="level4">
-<h4 class="anchored" data-anchor-id="getting-the-data-types-of-the-elements">Getting the Data Types of The Elements</h4>
-<p><code>ndarray</code>s can include numeric types (int, unsigned int, float, complex), text types (string), and null. However, as mentioned above, <code>ndarrays</code> can’t include more than one data type. To get the data type of the elements, we use <code>ndarray.dtype</code>.</p>
-</section>
-<section id="reshape" class="level4">
-<h4 class="anchored" data-anchor-id="reshape">Reshape</h4>
-<p>We can reshape <code>ndarrays</code> where it makes sense. For example, we can reshape <code>array3</code>, of shape <code>(2,3)</code> into an array of shape <code>(3,2)</code>, <code>(6,1)</code>, or <code>(1,6)</code>.</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="bu">print</span>(array3)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="bu">print</span>(array3.shape)</span>
-<span id="cb20-3"><a href="#cb20-3"></a>array4 <span class="op">=</span> array3.reshape(<span class="dv">3</span>,<span class="dv">2</span>)</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="bu">print</span>(array4)</span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="bu">print</span>(array4.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1 2 3]
- [4 5 6]]
-(2, 3)
-[[1 2]
- [3 4]
- [5 6]]
-(3, 2)</code></pre>
-</div>
-</div>
-<p>Providing the value <code>-1</code> for either row or column makes the reshape automatic across that dimension. For instance, instead of <code>array3.reshape(3,2)</code> we could say <code>array3.reshape(-1,2)</code> or <code>array3.reshape(3,-1)</code>. This would achieve the same effect.</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>a<span class="op">=</span>np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
-<span id="cb22-2"><a href="#cb22-2"></a>b<span class="op">=</span>np.array([<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>])</span>
-<span id="cb22-3"><a href="#cb22-3"></a>c<span class="op">=</span>np.stack((a,b), axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="bu">print</span>(c.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(3, 2)</code></pre>
-</div>
-</div>
+<section id="docker-intro" class="level1">
+<h1>Docker Intro</h1>
+<p>Docker’s an alternative to VMs. Whereas VMs run on a Hypervisor which runs on bare metal and distributes the hardware among the guest VMs, Docker containers run inside a Docker Engine which runs on the host operating system. In other words, virtualization distributes the hardware among multiple guest operating systems whereas containerization does the same, in concept, but works on top of the host operating system while still managing to provide isolated containers each running its own OS.</p>
+<section id="creating-a-docker-container" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-docker-container">Creating a Docker Container</h2>
 
 
-</section>
-</section>
 </section>
 </section>
 
@@ -710,57 +580,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -940,6 +759,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 

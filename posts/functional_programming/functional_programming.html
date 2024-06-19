@@ -280,29 +280,12 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Networking</span></a>
+ <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/networking/self-hosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Self Hosting</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
@@ -546,15 +529,16 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">sumFn</span><span class="op">(</span>a<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> b<span class="op">:</span> <span class="bu">Int</span><span class="op">):</span> <span class="bu">Int</span> <span class="op">=</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&gt;</span> b then <span class="dv">0</span> <span class="cf">else</span> <span class="fu">f</span><span class="op">(</span>a<span class="op">)</span> <span class="op">+</span> <span class="fu">sumF</span><span class="op">(</span>a <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> b<span class="op">)</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    sumF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Our <code>sum</code> functions now constructs and returns a new function which takes the rest of input (<code>a</code> and <code>b</code>). In other words, we’ve split the <code>sum</code> into two parts. The first part accepts just the function <code>f</code> as input, the second one accepts the rest of the arguments.</p>
-<p>Now we can define <code>sumInts</code> and <code>sumSquares</code> respectively just as:</p>
+<p>Our <code>sum</code> functions now constructs and returns a new function which takes the rest of input the (<code>a</code> and <code>b</code>). This is called <em>partial-application</em>. We’ve split the <code>sum</code> into two parts: the first part accepts only the argument <code>f</code> as input, the second one accepts the rest of the arguments.</p>
+<p>Now we can define <code>sumInts</code> and <code>sumSquares</code> respectively as just:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sumInts <span class="op">=</span> <span class="fu">sum</span><span class="op">(</span>x <span class="op">=&gt;</span> x<span class="op">)</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sumSquares <span class="op">=</span> <span class="fu">sum</span><span class="op">(</span>x <span class="op">=&gt;</span> x<span class="op">*</span>x<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When we call sum it returns a function with the signature <code>(Int, Int) =&gt; Int</code> which is exactly the signature we want for <code>sumInts</code> and <code>sumSquares</code>. We can now use readable syntax like <code>sum(cube)(1,5) + sum(squares)(5,10)</code> doing away with <code>sumInts</code> and <code>sumSquares</code> using which we’d have written the above as: <code>sumInts(1,5) + sumSquares(5,10)</code></p>
-<p>Since it’s quite clumsy to write curried functions, Scala provides a shorthand. The following is equivalent to the curried <code>sum</code> written above.</p>
+<p>Note that when we call <code>sum</code>, we get back a function with signature <code>(Int, Int) =&gt; Int</code> (which is exactly the signature we want for <code>sumInts</code> and <code>sumSquares</code>). We can now use better readable syntax like <code>sum(cube)(1,5) + sum(squares)(5,10)</code> doing away with <code>sumInts</code> and <code>sumSquares</code> (using which we’d have to write the above as: <code>sumInts(1,5) + sumSquares(5,10)</code>).</p>
+<p>Since it can get quite clumsy to write curried functions, Scala provides a shorthand. This is equivalent to the curried <code>sum</code> written above.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">sum</span><span class="op">(</span>f<span class="op">:</span> <span class="bu">Int</span> <span class="op">=&gt;</span> <span class="bu">Int</span><span class="op">)(</span>a<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> b<span class="op">:</span> <span class="bu">Int</span><span class="op">):</span> <span class="bu">Int</span> <span class="op">=</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&gt;</span> b then <span class="dv">0</span> <span class="cf">else</span> <span class="fu">f</span><span class="op">(</span>a<span class="op">)</span> <span class="fu">sum</span><span class="op">(</span>f<span class="op">)(</span>a <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> b<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Currying, in general, can be applied to all <span class="math inline">\(n\)</span> parameters of a given function, making it a parameterless. It’s a way to write functions with no parameters using anonymous functions instead.</p>
+<p>In Python, there’s support for curried functions in the functools library (<a href="https://docs.python.org/3/library/functools.html#functools.partial">functools.partial</a>, which is itself just a curried function).</p>
+<p>Currying, in general, can be applied <span class="math inline">\(n\)</span> times to an <span class="math inline">\(n\)</span>-dimensional function where each outer function returns an anonymous inner function which takes care of the partial application of the rest of the parameters. This means languages need not have support for functions with parameters, as long as they have support for anonymous functions.</p>
 </section>
 </section>
 <section id="functional-programming-benefits" class="level3">

@@ -279,29 +279,12 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Networking</span></a>
+ <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/networking/self-hosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Self Hosting</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
@@ -701,18 +684,17 @@ Note
 <p>The Max-Min Inequality is perhaps best understood intuitively as a game between two adversarial players (the optimizers above).</p>
 <p>Let’s represent the game using a value tree. The nodes are the final scores, and the junctures represent player choices. The first juncture represents Player 1’s turn, and the second that of Player 2.</p>
 <pre class="mermaid"><code>   graph TD;
-      A--&gt;B;
-      A--&gt;C;
-      B--&gt;D;
-      C--&gt;D;</code></pre>
-<p>To the minimizer, as Player 1, the game tree above might as well be an imaginary tree shrouded in the mist of uncertainty because the true min of <span class="math inline">\(1\)</span> is unattainable. Player 2 has final say, and if the minimizer chooses <span class="math inline">\(1\)</span>’s subtree, the maximizer will choose <span class="math inline">\(8\)</span>. The minimizer must be more pragmatic and choose <em>not</em> the subtree that contains the true min, but rather that which restricts the maximizer’s choice most to the compromise: <span class="math inline">\(7\)</span>. That means, we can compute a hidden value tree for our minimizer.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src=".png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">INSERT VALUE TREE</figcaption>
-</figure>
-</div>
-<p>The outcome of this game is then determined. It’s 7. That’s a score player 2, the maximizer, is highly satisfied with. Note that if we reverse the turns, the score of the game changes to favors the minimizer.</p>
+      A[Turn 1] --&gt; B[Turn 2];
+      A--&gt;C[Turn 2];
+      B--&gt;D[2];
+      B--&gt;E[7];
+      C--&gt;F[1];
+      C--&gt;G[8];</code></pre>
+<p>To the minimizer, as Player 1, the game tree above might as well be an imaginary tree shrouded in the mist of uncertainty because the true min of <span class="math inline">\(1\)</span> is unattainable. Player 2 has final say, and if the minimizer chooses <span class="math inline">\(1\)</span>’s subtree, the maximizer will choose <span class="math inline">\(8\)</span>. The minimizer must be more pragmatic and choose <em>not</em> the subtree that contains the true min, but rather that which restricts the maximizer’s choice most to the compromise: <span class="math inline">\(7\)</span>. That means, we can compute a hidden value tree for our minimizer (giving us a glimpse into one frame of the recursive <a href="https://en.wikipedia.org/wiki/Minimax">Minimax algorithm</a> which is used to maximize the minimum gain or minimize the maximum loss).</p>
+<pre class="mermaid"><code>   graph TD;
+      A[Turn 1] --&gt; B[7];
+      A--&gt;C[8];</code></pre>
+<p>The outcome of this game is determinedly <span class="math inline">\(7\)</span>. That’s a score Player 2, the maximizer, is <em>very</em> satisfied with. Note that if we reverse the turns, the score of the game will favor the minimizer. That’s exactly what the max-min inequality is saying: a game that’s rigged in favor of Player 2 will always result in a better outcome for Player 2 than if the turns were reversed.</p>
 </section>
 </section>
 </section>
@@ -767,7 +749,7 @@ h_i(\hat x) &amp;= 0, \ i = 1,...,p
 </section>
 <section id="the-max-min-equality" class="level2">
 <h2 class="anchored" data-anchor-id="the-max-min-equality">The Max-Min Equality</h2>
-<p>Just as weak duality is the Max-Min Inequality in disguise, strong duality is the <a href="https://en.wikipedia.org/wiki/Minimax_theorem">Minimax Theorem</a> in disguise. The Minimax Theorem is the special case of the Max-Min Inequality in which the LHS and the RHS are strictly equal. It holds for any function <span class="math inline">\(f: X \times Y \rightarrow \mathbb{R}\)</span> that has some additional structure. Roughly speaking, when <span class="math inline">\(f\)</span> is saddle-shaped, convex in one variable and concave in the other, the Max-Min Inequality holds with strict equality.</p>
+<p>Just as weak duality is the Max-Min Inequality in disguise, strong duality is the <a href="https://en.wikipedia.org/wiki/Minimax_theorem">Minimax Theorem</a> in disguise. The Minimax Theorem is about the special case of the Max-Min Inequality in which the LHS and the RHS are strictly equal. It holds for any function <span class="math inline">\(f: X \times Y \rightarrow \mathbb{R}\)</span> that has some additional structure. Roughly speaking, when <span class="math inline">\(f\)</span> is saddle-shaped, convex in one variable and concave in the other, the Max-Min Inequality holds with strict equality.</p>
 <p>The following theorem, which is offered without proof, translates this result into the setting of optimization.</p>
 <blockquote class="blockquote">
 <p><strong>Saddle Point Theorem:</strong> &nbsp; If <span class="math inline">\(x^*\)</span> and <span class="math inline">\((\lambda^*, \mu^*)\)</span> are primal and dual optimal solutions for a convex problem which satisfies Slater’s condition, they form a saddle point of the associated Lagrangian. Furthermore, if <span class="math inline">\((x^*, (\lambda^*, \mu^*))\)</span> is a saddle point of a Lagrangian, then <span class="math inline">\(x^*\)</span> is primal optimal and <span class="math inline">\((\lambda^*, \mu^*)\)</span> is dual optimal for the associated problem, and the <strong><em>duality gap</em></strong> is zero.</p>
