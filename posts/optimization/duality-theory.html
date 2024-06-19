@@ -108,6 +108,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -683,17 +686,35 @@ Note
 <h3 class="anchored" data-anchor-id="game-theoretic-interpretation">Game-Theoretic Interpretation</h3>
 <p>The Max-Min Inequality is perhaps best understood intuitively as a game between two adversarial players (the optimizers above).</p>
 <p>Let’s represent the game using a value tree. The nodes are the final scores, and the junctures represent player choices. The first juncture represents Player 1’s turn, and the second that of Player 2.</p>
-<pre class="mermaid"><code>   graph TD;
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">   graph TD;
       A[Turn 1] --&gt; B[Turn 2];
       A--&gt;C[Turn 2];
       B--&gt;D[2];
       B--&gt;E[7];
       C--&gt;F[1];
-      C--&gt;G[8];</code></pre>
+      C--&gt;G[8];
+</pre>
+</div>
+</div>
+</div>
+</div>
 <p>To the minimizer, as Player 1, the game tree above might as well be an imaginary tree shrouded in the mist of uncertainty because the true min of <span class="math inline">\(1\)</span> is unattainable. Player 2 has final say, and if the minimizer chooses <span class="math inline">\(1\)</span>’s subtree, the maximizer will choose <span class="math inline">\(8\)</span>. The minimizer must be more pragmatic and choose <em>not</em> the subtree that contains the true min, but rather that which restricts the maximizer’s choice most to the compromise: <span class="math inline">\(7\)</span>. That means, we can compute a hidden value tree for our minimizer (giving us a glimpse into one frame of the recursive <a href="https://en.wikipedia.org/wiki/Minimax">Minimax algorithm</a> which is used to maximize the minimum gain or minimize the maximum loss).</p>
-<pre class="mermaid"><code>   graph TD;
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">   graph TD;
       A[Turn 1] --&gt; B[7];
-      A--&gt;C[8];</code></pre>
+      A--&gt;C[8];
+</pre>
+</div>
+</div>
+</div>
+</div>
 <p>The outcome of this game is determinedly <span class="math inline">\(7\)</span>. That’s a score Player 2, the maximizer, is <em>very</em> satisfied with. Note that if we reverse the turns, the score of the game will favor the minimizer. That’s exactly what the max-min inequality is saying: a game that’s rigged in favor of Player 2 will always result in a better outcome for Player 2 than if the turns were reversed.</p>
 </section>
 </section>
