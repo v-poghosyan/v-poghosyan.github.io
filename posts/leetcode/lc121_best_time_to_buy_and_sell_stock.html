@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2022-01-23">
 
-<title>Vahram’s blog - LC121 - Best Time to Buy and Sell Stock</title>
+<title>Vahram’s blog - LC121 and LC53 - Kadane’s Algorithm</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,7 +150,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc11_container_with_most_water.html">Leetcode</a></li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">LC121 - Best Time to Buy and Sell Stock</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc11_container_with_most_water.html">Leetcode</a></li><li class="breadcrumb-item"><a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">LC121 and LC53 - Kadane’s Algorithm</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -160,10 +160,11 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">LC121 - Best Time to Buy and Sell Stock</h1>
+      <h1 class="title">LC121 and LC53 - Kadane’s Algorithm</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Leetcode</div>
                 <div class="quarto-category">Algorithms</div>
+                <div class="quarto-category">Dyanmic Progamming</div>
               </div>
                   </div>
   </div>
@@ -255,7 +256,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">LC121 - Best Time to Buy and Sell Stock</span></a>
+ <span class="menu-text">LC121 and LC53 - Kadane’s Algorithm</span></a>
   </div>
 </li>
       </ul>
@@ -341,6 +342,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#proof-of-invariance" id="toc-proof-of-invariance" class="nav-link" data-scroll-target="#proof-of-invariance">Proof of Invariance</a></li>
   </ul></li>
+  <li><a href="#kadanes-algorithm---maximum-subarray" id="toc-kadanes-algorithm---maximum-subarray" class="nav-link" data-scroll-target="#kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -372,7 +374,7 @@ Output: 0</code></pre>
 </section>
 <section id="non-brute-solution" class="level2">
 <h2 class="anchored" data-anchor-id="non-brute-solution">Non-Brute Solution</h2>
-<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by a variation on <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>. Whereas Kadane is concerned with the contiguous subarray with maximum sum, in our case we’re interested in keeping track of maximum profit. We can easily generalize Kadane’s algorithm by swapping out maximum sum with our own scoring function (maximum profit). Like Kadane’s, we can also prove this aglorithm’s correctness using <em>loop invariants</em>. Now for the solution.</p>
+<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by a DP algorithm similar to <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a> which solves the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray</a> problem. Some of the similarity is due to fact that both problems are concerned with some score over a <em>contiguous</em> array. Whereas Kadane’s is concerned with the contiguous subarray with maximum sum, this algorithm is interested in the maximum profit were the elements in the array envisioned to be stock prices. Like Kadane’s algorithm, we can also prove its correctness using <em>loop invariants</em>. We will give the solution and prove the correctness. As for building intuition for why this solution works, we will focus on the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray problem</a> which is a more general application of Kadane’s.</p>
 <section id="code" class="level3">
 <h3 class="anchored" data-anchor-id="code">Code</h3>
 <div class="cell" data-execution_count="1">
@@ -406,9 +408,53 @@ Output: 0</code></pre>
 <p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
 <p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration of the loop, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar again (<strong>case 1</strong>). Hence, <code>max_profit</code> is a loop invariant.</p>
 <p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
-
-
 </section>
+</section>
+<section id="kadanes-algorithm---maximum-subarray" class="level2">
+<h2 class="anchored" data-anchor-id="kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</h2>
+<p>At the heart of Kadane’s algorithm is an optimal substructure which lends itself to optimization using the principles of dynamic programming.</p>
+<p>Any subarray ends (or begins, but let’s go with ends for now) at some index. This means we can have the notion of the solution up to index <code>i</code>. Le’t call that <code>global_max(i)</code>. This is, effectively, the final solution to the problem if the problem had size <code>i</code> (i.e.&nbsp;if <code>nums</code> had size <code>i</code>).</p>
+<p>A relationship we may initially notice when looking at the problem is that:</p>
+<pre><code>local_max[i] = max(local_max[i-1] + nums[i], nums[i])</code></pre>
+<p>Where <code>local_max[i]</code> is the maximum of all subarrays ending at index <code>i</code> but, crucially, <em>not</em> the solution of the problem up to index <code>i</code>. It’s easy to get lost in this problem by conflating these two loop invariants, but we should be mindful of this mistake.</p>
+<p>Feel free to tinker with the problem to notice this relationship. In my experience, it helps to illustrate the arrays.</p>
+<p>The final answer is then the maximum over all the local maxima (this is trivially true).</p>
+<p>Thinking this way opens the doors to dynamic programming, the idea with which is to cut down on the number of subarrays considered in the brute force approach by coming up with a simple, cheap rule that gives us the solution to the current sub-problem based on the retrieved value of a previously solved sub-problem (whatever the relationship between these sub-problems may be). In the case of the Maximum Subarray problem the sub-problems are the local maxima discussed above. It turns out that if we know <code>local_max[i-1]</code>, <code>local_max[i]</code> is all but known through the above relationship.</p>
+<p>If we further work through an example, the act of solving will give us insight into the implementation of the single pass, iterative algorithm (the recursive solution is already betrayed by the optimal substructure uncovered above, to further make it dynamic we can implement memoization on top). Let’s take the first step, then generalize:</p>
+<p>In the beginning, there’s just <code>nums[0]</code>. By virtue of being the only subarray that ends at index <code>0</code> it is its own <code>local_max[0]</code>. In situations like this we initialize <code>local_max</code> to <span class="math inline">\(-\inf\)</span> in order not to resort to handling special cases, like singleton arrays, in the loop.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s immediately clear that, since <code>local_max</code> is initialized to <span class="math inline">\(-\inf\)</span> (let’s call this <code>local_max[-1]</code> to stay consistent with array notation of the optimal substructure), <code>num &gt; local_max</code> is equivalent to:</p>
+<pre><code>nums[0] &gt; local_max[-1] + nums[0]</code></pre>
+<p>This is true in general for any <code>num[0]</code>. So the desired condition is actually:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As it is, the loop invariant <code>local_max</code> will contain the local maximum at the last element of the <code>nums</code> array. We need to figure out what to do with the other loop invariant <code>global_max</code> which is supposed to be the solution to the problem of size <code>i</code>. Well, <code>global_max</code> is clearly just:</p>
+<pre><code>global_max[i] = max(global_max[i-1], local_max[i])</code></pre>
+<p>We need to implement this relationship just as we implemented the previous one. Let’s take the first step. In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and global_max[-1] (as per earlier abuse of notation) is <span class="math inline">\(-\inf\)</span> by choice.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> global_max <span class="op">&lt;</span> local_max:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        global_max <span class="op">=</span> local_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can reference <code>local_max</code> and assume its value to be as the promised invariant on line 9.</p>
+<p>Notice that <code>global_max</code> has two meanings, as does <code>local_max</code> in the implementation. It is used as the previous iterate <code>global_max[i-1]</code> (in the Boolean comparison) as well as the current (or next, depending on frame of reference) iterate <code>global_max[i]</code> (in the assignment operation).</p>
+
+
 </section>
 </section>
 
