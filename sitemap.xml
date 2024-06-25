@@ -2,106 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
-    <lastmod>2024-06-21T20:51:59.370Z</lastmod>
+    <lastmod>2024-06-25T16:06:56.690Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/functional_programming/functional_programming.html</loc>
-    <lastmod>2024-06-21T20:51:58.890Z</lastmod>
+    <lastmod>2024-06-25T16:06:56.189Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/ny_housing_market_analysis.html</loc>
-    <lastmod>2024-06-21T20:51:58.045Z</lastmod>
+    <lastmod>2024-06-25T16:06:55.379Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/numpy_quick_start_guide.html</loc>
-    <lastmod>2024-06-21T20:51:57.245Z</lastmod>
+    <lastmod>2024-06-25T16:06:54.613Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-numpy.html</loc>
-    <lastmod>2024-06-21T20:51:55.694Z</lastmod>
+    <lastmod>2024-06-25T16:06:52.935Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/unreal_engine_first_steps.html</loc>
-    <lastmod>2024-06-21T20:51:54.937Z</lastmod>
+    <lastmod>2024-06-25T16:06:52.180Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/contract_testing.html</loc>
-    <lastmod>2024-06-21T20:51:54.445Z</lastmod>
+    <lastmod>2024-06-25T16:06:51.713Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/about.html</loc>
-    <lastmod>2024-06-21T20:51:53.093Z</lastmod>
+    <lastmod>2024-06-25T16:06:51.253Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/linear_algebra/linear_algebra_refresher_for_optimization.html</loc>
-    <lastmod>2024-06-21T20:51:52.409Z</lastmod>
+    <lastmod>2024-06-25T16:06:50.564Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/duality-theory.html</loc>
-    <lastmod>2024-06-21T20:51:51.174Z</lastmod>
+    <lastmod>2024-06-25T16:06:49.499Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/introduction_to_optimization.html</loc>
-    <lastmod>2024-06-21T20:51:49.493Z</lastmod>
+    <lastmod>2024-06-25T16:06:47.766Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/linear-programs-and-lp-geometry.html</loc>
-    <lastmod>2024-06-21T20:51:48.223Z</lastmod>
+    <lastmod>2024-06-25T16:06:46.500Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc11_container_with_most_water.html</loc>
-    <lastmod>2024-06-21T20:51:47.376Z</lastmod>
+    <lastmod>2024-06-25T16:06:45.643Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html</loc>
-    <lastmod>2024-06-21T20:51:47.037Z</lastmod>
+    <lastmod>2024-06-25T16:06:45.304Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/general_computer_science/recursion_optimizations.html</loc>
-    <lastmod>2024-06-21T20:51:47.701Z</lastmod>
+    <lastmod>2024-06-25T16:06:45.972Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html</loc>
-    <lastmod>2024-06-21T20:51:49.229Z</lastmod>
+    <lastmod>2024-06-25T16:06:47.506Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/robust-lps-modelling-discrete-failures.html</loc>
-    <lastmod>2024-06-21T20:51:49.831Z</lastmod>
+    <lastmod>2024-06-25T16:06:48.141Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/functional_programming/functional_programming.html</loc>
-    <lastmod>2024-06-21T20:51:51.750Z</lastmod>
+    <lastmod>2024-06-25T16:06:50.135Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/index.html</loc>
-    <lastmod>2024-06-21T20:51:52.864Z</lastmod>
+    <lastmod>2024-06-25T16:06:51.011Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/neuroscience_notes/grief.html</loc>
-    <lastmod>2024-06-21T20:51:54.192Z</lastmod>
+    <lastmod>2024-06-25T16:06:51.487Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/ssl_the_internets_trust_protocol.html</loc>
-    <lastmod>2024-06-21T20:51:54.706Z</lastmod>
+    <lastmod>2024-06-25T16:06:51.953Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/conways_game_of_life.html</loc>
-    <lastmod>2024-06-21T20:51:55.193Z</lastmod>
+    <lastmod>2024-06-25T16:06:52.447Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-pandas.html</loc>
-    <lastmod>2024-06-21T20:51:56.945Z</lastmod>
+    <lastmod>2024-06-25T16:06:54.272Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/set_up_a_local_development_environment_for_ML.html</loc>
-    <lastmod>2024-06-21T20:51:57.803Z</lastmod>
+    <lastmod>2024-06-25T16:06:55.154Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/networking/self-hosting.html</loc>
-    <lastmod>2024-06-21T20:51:58.296Z</lastmod>
+    <lastmod>2024-06-25T16:06:55.644Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
-    <lastmod>2024-06-21T20:51:59.101Z</lastmod>
+    <lastmod>2024-06-25T16:06:56.419Z</lastmod>
   </url>
 </urlset>

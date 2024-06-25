@@ -331,7 +331,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
-  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute Force Solution</a></li>
+  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
   <li><a href="#the-two-pointer-solution" id="toc-the-two-pointer-solution" class="nav-link" data-scroll-target="#the-two-pointer-solution">The Two Pointer Solution</a>
   <ul class="collapse">
   <li><a href="#optimal-substructure" id="toc-optimal-substructure" class="nav-link" data-scroll-target="#optimal-substructure">Optimal Substructure</a>
@@ -368,7 +368,7 @@ Output: 49</code></pre>
 <p>The above vertical lines are represented by array <code>[1,8,6,2,5,4,8,3,7]</code>. In this case, the max area of the water (highlighted section) the container can contain is 49 (in units of area).</p>
 </section>
 <section id="brute-force-solution" class="level1">
-<h1>Brute Force Solution</h1>
+<h1>Brute-Force Solution</h1>
 <p>The brute force solution to this problem checks each pair of vertical lines (or each subset of size <span class="math inline">\(2\)</span>). Since the order of any given pair in the subset does not matter, this solution has time complexity <span class="math inline">\({O \left ({n \choose 2} \right )= O \left (\frac{n(n-1)}{2} \right ) = O(n^2)}\)</span> where <span class="math inline">\(n\)</span> is the length of the <code>height</code> array.</p>
 </section>
 <section id="the-two-pointer-solution" class="level1">
@@ -409,7 +409,7 @@ Note
 </section>
 <section id="the-two-pointers-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="the-two-pointers-algorithm">The Two Pointers Algorithm</h2>
-<p>At this point, the Two Pointers Algorithm is trivial to come up with:</p>
+<p>At this point, the Two Pointers Algorithm is almost trivially easy to implement:</p>
 <ul>
 <li>Initialize two pointers, ‘left’ and ‘right’, at the first and last index respectively.</li>
 <li>While the pointers do not intersect:
