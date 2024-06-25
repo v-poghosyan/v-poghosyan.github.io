@@ -306,8 +306,34 @@ a.pagination-link {
 /// MY CUSTOM THEMES
 ////////////////////////////////////////////////////////////
 
+
+// Highlightter
+
 #my-text-highlight {
     background-color: rgba(255, 215, 0, 0.4); /* Less bright yellow with some transparency */
     padding: 2px 6px; /* Vertical padding of 3px, horizontal padding of 6px */
     border-radius: 5px; /* Rounded corners */
+}
+
+// Custom blockquotes
+
+#custom-blockquote-wrapper {
+    margin: 0 auto;
+    width: 90%;
+    padding-bottom: 50px;
+}
+  
+.custom-blockquote {
+    padding: 20px 30px 20px 30px;
+    margin: 50px auto;
+    width: 100%;
+}
+
+#shadow {
+    border: solid 1px;
+    box-shadow: 5px 5px 0 0;
+}
+
+#custom-cite {
+
 }
