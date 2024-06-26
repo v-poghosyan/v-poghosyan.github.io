@@ -442,7 +442,7 @@ Output: 0</code></pre>
 <pre><code>global_max[i] = max(global_max[i-1], local_max[i])</code></pre>
 <p>Which is the promised greedy-choice update for <code>global_max</code> – the loop invariant which will hold the final solution to the problem.</p>
 <p>We need to implement this relationship just as we implemented the previous one unless we just use the built in <code>max</code> function to essentially just update both loop invariants in sequence and be done with it. But let’s go with the more imperative version. Let’s take the first step.</p>
-<p>In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and global_max[-1] (as per our earlier abuse of notation) is <span class="math inline">\(-\infty\)</span> by choice.</p>
+<p>In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and <code>global_max[-1]</code> (as per our earlier abuse of notation) is <span class="math inline">\(-\infty\)</span> by choice.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
