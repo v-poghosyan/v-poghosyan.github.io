@@ -295,22 +295,20 @@ a.pagination-link {
     border-radius: 5px; /* Rounded corners */
 }
 
+// Custom blockquotes?
 
-// Custom blockquotes
+// Custom Keyboard Shortcuts
 
-#custom-blockquote-wrapper {
-    margin: 0 auto;
-    width: 90%;
-    padding-bottom: 50px;
+kbd {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    margin: 0 0.2em;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+    background-color: #f7f7f7;
 }
-  
-.custom-blockquote {
-    padding: 20px 30px 20px 30px;
-    margin: 50px auto;
-    width: 100%;
-}
 
-#shadow {
-    border: solid 1px;
-    box-shadow: 5px 5px 0 0;
+kbd.inline {
+    padding: 0.1em 0.2em;
 }

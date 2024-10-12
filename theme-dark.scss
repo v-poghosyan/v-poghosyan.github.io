@@ -315,25 +315,21 @@ a.pagination-link {
     border-radius: 5px; /* Rounded corners */
 }
 
-// Custom blockquotes
+// Custom blockquotes?
 
-#custom-blockquote-wrapper {
-    margin: 0 auto;
-    width: 90%;
-    padding-bottom: 50px;
-}
-  
-.custom-blockquote {
-    padding: 20px 30px 20px 30px;
-    margin: 50px auto;
-    width: 100%;
-}
+// Custom Keyboard Shortcuts
 
-#shadow {
-    border: solid 1px;
-    box-shadow: 5px 5px 0 0;
+kbd {
+    color: #191516 !important;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    margin: 0 0.2em;
+    box-shadow: 0 1px 0px rgba(255, 254, 180, 0.6), 0 0 0 2px #dad0b1 inset;
+    background-color: #f0e1c6;
 }
 
-#custom-cite {
-
+kbd.inline {
+    padding: 0.1em 0.2em;
 }
