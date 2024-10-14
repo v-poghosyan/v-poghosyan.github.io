@@ -5,9 +5,9 @@
 $body-bg: #191516;
 $body-color: #EBE8E7;
 $code-color: #ac90c2;
-$link-color: #EF767A;
+$link-color: #F9C22E;
 $activated-color-1: #00B295;
-$activated-color-2: #FFD700;
+$activated-color-2: #F9C22E;
 
 // Title banner and navbar
 .navbar-title {
@@ -15,28 +15,40 @@ $activated-color-2: #FFD700;
 }
 
 .navbar-title:hover {
-    color: #EF767A !important;
+    color: #F9C22E !important;
 }
 
 .aa-DetachedSearchButtonIcon svg:hover {
-    color: #EF767A !important;
+    color: #F9C22E !important;
 }
 
-.navbar.navbar-expand-lg.navbar-dark {
-    background-color: #1d132c; 
-    // border-bottom: 1px solid #00B295;
+// .navbar.navbar-expand-lg.navbar-dark {
+//     background-color: #1d132c; 
+//     // border-bottom: 1px solid #00B295;
+// }
+
+.navbar.navbar-expand-lg {
+    background-color: #022F40 !important; 
+} 
+
+.navbar-container.container-fluid {
+    background-color: #022F40 !important; 
+}
+
+.headroom .quarto-banner {
+    background-color: #022F40 !important; 
 }
 
 a.nav-link .menu-text:hover {
-    color: #EF767A;
+    color: #F9C22E;
 }
 
 #quarto-header {
-    background-color: #02060f !important;
+    background-color: #022F40 !important;
 }
 
 nav.quarto-secondary-nav {
-    background-color: #02060f !important;
+    background-color: #022F40 !important;
     border-color: #EBE8E7 !important;
 }
 
@@ -167,6 +179,14 @@ code {
     background-color: #060505 !important;
 }
 
+.cell-output.cell-output-stdout code {
+    color: #EBE8E7 !important;
+}
+
+pre code {
+    color: #EBE8E7 !important;
+}
+
 // Sidebar
 
 #quarto-sidebar {
@@ -178,7 +198,7 @@ code {
 }
 
 .sidebar-navigation a:hover {
-    color: #EF767A !important;
+    color: #F9C22E !important;
 }
 
 .sidebar nav[role=doc-toc]>ul a {
@@ -186,7 +206,7 @@ code {
 }
 
 .sidebar nav[role=doc-toc]>ul a.active {
-    border-color: #EF767A !important;
+    border-color: #F9C22E !important;
 }
 
 // Bottom Nav
@@ -200,7 +220,7 @@ a.pagination-link {
 }
 
 .nav-page a:hover {
-    color: #EF767A !important;
+    color: #F9C22E !important;
 }
 
 // Callouts
@@ -238,7 +258,7 @@ a.pagination-link {
 
 // Main Page Post List
 .no-anchor.listing-title:hover {
-    color: #EF767A !important;
+    color: #FCA311 !important;
 }
 
 .quarto-post {
@@ -250,12 +270,12 @@ a.pagination-link {
 }
 
 .quarto-grid-item:hover {
-    border: 1px solid #EF767A !important;
+    border: 1px solid #F9C22E !important;
 }
 
 // Main Page Categories
 .category:hover {
-    color: #EF767A !important;
+    color: #F9C22E !important;
 }
 
 // About Me Page
@@ -266,8 +286,8 @@ a.pagination-link {
 }
 
 .about-link:hover {
-    color: #EF767A !important;
-    border-color: #EF767A !important;
+    color: #F9C22E !important;
+    border-color: #F9C22E !important;
 }
 
 .about-contents {
@@ -284,7 +304,7 @@ a.pagination-link {
 
 // Footer
 .footer .nav-footer {
-    background-color: #2f273b !important;
+    background-color: #022F40 !important;
     border-top: 0px !important;
     // border-top-color: #00B295 !important;
 }
@@ -298,7 +318,7 @@ a.pagination-link {
 }
 
 .nav-link .bi:hover {
-    color: #EF767A;
+    color: #F9C22E;
 }
 
 
@@ -333,3 +353,51 @@ kbd {
 kbd.inline {
     padding: 0.1em 0.2em;
 }
+
+// Table styling
+
+.quarto-listing-table.table .list tr {
+    background-color: #191516 !important;
+}
+
+.quarto-listing-table.table thead {
+    background-color: #191516 !important;
+}
+
+.input-group.input-group-sm.quarto-listing-sort .input-group-text {
+    color: #191516 !important;
+}
+
+.input-group.input-group-sm.quarto-listing-filter .input-group-text {
+    color: #191516 !important;
+}
+
+.caption-top.table thead {
+    color: #EBE8E7 !important;
+}
+
+.caption-top.table thead tr {
+    color: #EBE8E7 !important;
+    background-color: #191516 !important;
+}
+
+.caption-top.table tbody {
+    color: #EBE8E7 !important;
+}
+
+.caption-top.table tbody tr {
+    color: #EBE8E7 !important;
+    background-color: #191516 !important;
+}
+
+// Mermaid Graphs
+
+.nodeLabel {
+    color: #EF767A !important;
+}
+
+// Listing titles should be differently colored than normal links in Dark mode
+
+// .title.listing-title {
+//     color: #00B295 !important;
+// }

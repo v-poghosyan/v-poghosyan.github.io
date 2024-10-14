@@ -2,8 +2,8 @@
 listing:
   contents: posts
   sort: "date desc"
-  type: grid
-  fields: [image, date, title]
+  type: table
+  fields: [title, date]
   categories: true
   sort-ui: true
   filter-ui: true

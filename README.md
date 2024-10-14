@@ -1,9 +1,17 @@
-# Vahram - Personal Blog
+# Blog
 
-## Adding posts
+## About this blog
+
+This blog is where I write about the subjects that interest me. It's where I collect my notes and ideas on the web. I started it in late 2021 from some notes I took in Jupyter Notebooks. 
+
+The content will be centered around machine learning, however I will expand into other subject areas as well. In the spirit of AI the thumbnails and other images featured in this blog are generated using DALL-E. The content, however, will not be AI generated.
+
+### Notes
+
+#### Adding posts
 Contribute posts in the `blog/posts/<subject_area>/` directory in `.ipynb` format.
 
-## Adding images
+#### Adding images
 
 1. Make two images named `<img_name>.light.png` and .dark respectively. Here are the color codes for reference:
 
@@ -18,22 +26,20 @@ Contribute posts in the `blog/posts/<subject_area>/` directory in `.ipynb` forma
 
 2. In the document, reference the `.light` version of the image.
 3. Include the `.dark` version in a hidden markdown cell at the end of the document for quarto to load it as a resource on render.
-4. Set the height of the included .dark images to 0.
+4. (Temporary hack): Set the height of the included .dark images to 0. There's a better way to do this (#TODO)
 
     For example:
     ```markdown
     ![](../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.dark.png){height=0}
     ```
 
-## Rendering
+#### Rendering Pages
 
-Navigate to `/blog` subdirectory:
+From the root directory, issue:
 
-Use:
 ```bash
-quarto render --cache-refresh
+quarto render [--cache-refresh]
 ```
-
 Then:
 ```bash
 quarto preview

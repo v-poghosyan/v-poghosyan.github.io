@@ -6,31 +6,29 @@ execute:
   freeze: auto
 
 website:
-  title: "Vahram's blog"
+  title: "v-poghosyan.github.io"
   page-navigation: true
   favicon: favicon.png
   google-analytics: "G-KLCX05QFPN"
   navbar:
     logo: logo.png
+    pinned: true
     background: secondary
     theme:
       light: [flatly, theme-light.scss]
       dark: [flatly, theme-dark.scss]
     search: true
-    left:
-      - text: Blog
-        file: index.qmd
         
-  sidebar:
-  - title: "Posts"
-    style: "docked"
-    collapse-level: 3
-    pinned: true
-    border: false
-    theme:
-      light: [flatly, theme-light.scss]
-      dark: [flatly, theme-dark.scss]
-    contents: posts
+  # sidebar:
+  # - title: "Posts"
+  #   style: "docked"
+  #   collapse-level: 3
+  #   pinned: true
+  #   border: false
+  #   theme:
+  #     light: [flatly, theme-light.scss]
+  #     dark: [flatly, theme-dark.scss]
+  #   contents: posts
         
   page-footer: 
     left: "Copyright 2021, Vahram Poghosyan" 

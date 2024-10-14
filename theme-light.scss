@@ -31,12 +31,12 @@ a.nav-link .menu-text:hover {
 }
 
 #quarto-header {
-    background-color: #000000 !important;
+    background-color: #0A122A !important;
 }
 
 nav.quarto-secondary-nav {
-    background-color: #02060f !important;
-    border-color: #02060f !important;
+    background-color: #0A122A !important;
+    border-color: #0A122A !important;
 }
 
 .navbar .quarto-navbar-tools .quarto-navigation-tool:hover {
@@ -50,6 +50,19 @@ nav.quarto-secondary-nav {
 .quarto-secondary-nav nav.quarto-page-breadcrumbs {
     color: #EBE8E7 !important;
 }
+
+.navbar.navbar-expand-lg {
+    background-color: #0A122A !important; 
+} 
+
+.navbar-container.container-fluid {
+    background-color: #0A122A !important; 
+}
+
+.headroom .quarto-banner {
+    background-color: #0A122A !important; 
+}
+
 
 .quarto-secondary-nav nav.quarto-page-breadcrumbs ol.breadcrumb li.breadcrumb-item a {
     color: #EBE8E7;
@@ -311,4 +324,18 @@ kbd {
 
 kbd.inline {
     padding: 0.1em 0.2em;
+}
+
+// Table styling
+
+.quarto-listing-table.table .list tr {
+    background-color: #EBE8E7 !important;
+}
+
+.quarto-listing-table.table thead {
+    background-color: #EBE8E7 !important;
+}
+
+.caption-top.table tr {
+    background-color: #EBE8E7 !important;;
 }
