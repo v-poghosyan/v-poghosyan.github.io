@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2023-01-13">
 
-<title>Contract Testing – v-poghosyan.github.io</title>
+<title>Unreal Engine - First Steps – v-poghosyan.github.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,7 +86,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -105,7 +105,38 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Unreal Engine - First Steps</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Game Development</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 13, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -113,51 +144,390 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pactflow" id="toc-pactflow" class="nav-link active" data-scroll-target="#pactflow">PactFlow</a></li>
+  <li><a href="#getting-started-installation-and-setup" id="toc-getting-started-installation-and-setup" class="nav-link active" data-scroll-target="#getting-started-installation-and-setup">Getting Started (Installation and Setup)</a>
+  <ul class="collapse">
+  <li><a href="#option-1-cloning-unrealengine-project-from-github" id="toc-option-1-cloning-unrealengine-project-from-github" class="nav-link" data-scroll-target="#option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</a></li>
+  <li><a href="#option-2-install-using-unreal-launcher" id="toc-option-2-install-using-unreal-launcher" class="nav-link" data-scroll-target="#option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</a></li>
+  <li><a href="#starting-a-project" id="toc-starting-a-project" class="nav-link" data-scroll-target="#starting-a-project">Starting a Project</a></li>
+  <li><a href="#unreal-cheat-sheet" id="toc-unreal-cheat-sheet" class="nav-link" data-scroll-target="#unreal-cheat-sheet">Unreal Cheat Sheet</a>
+  <ul class="collapse">
+  <li><a href="#key-bindings-and-shortcuts" id="toc-key-bindings-and-shortcuts" class="nav-link" data-scroll-target="#key-bindings-and-shortcuts">Key Bindings and Shortcuts</a></li>
+  <li><a href="#view-mode-options" id="toc-view-mode-options" class="nav-link" data-scroll-target="#view-mode-options">View Mode Options</a></li>
+  <li><a href="#translation-and-snap-tools" id="toc-translation-and-snap-tools" class="nav-link" data-scroll-target="#translation-and-snap-tools">Translation and Snap Tools</a></li>
+  <li><a href="#working-with-objects" id="toc-working-with-objects" class="nav-link" data-scroll-target="#working-with-objects">Working with Objects</a></li>
+  <li><a href="#ui-windows" id="toc-ui-windows" class="nav-link" data-scroll-target="#ui-windows">UI Windows</a></li>
+  <li><a href="#blueprint-programming" id="toc-blueprint-programming" class="nav-link" data-scroll-target="#blueprint-programming">Blueprint Programming</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#understanding-the-character-model-blueprints" id="toc-understanding-the-character-model-blueprints" class="nav-link" data-scroll-target="#understanding-the-character-model-blueprints">Understanding the Character Model (Blueprints)</a></li>
+  <li><a href="#understanding-the-environment-builder" id="toc-understanding-the-environment-builder" class="nav-link" data-scroll-target="#understanding-the-environment-builder">Understanding the Environment Builder</a></li>
+  <li><a href="#understanding-daynight-cycles" id="toc-understanding-daynight-cycles" class="nav-link" data-scroll-target="#understanding-daynight-cycles">Understanding Day/Night Cycles</a></li>
+  <li><a href="#creating-a-world" id="toc-creating-a-world" class="nav-link" data-scroll-target="#creating-a-world">Creating a World</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Contract Testing</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">APIs</div>
-    <div class="quarto-category">Microservices</div>
-  </div>
-  </div>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Vahram Poghosyan </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 13, 2023</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<section id="pactflow" class="level1">
-<h1>PactFlow</h1>
-<p>The idea behind bi-directional contract tracing, within the conmtext of API testing, is the client testing against a fresh mock of the server and the server, in reciprocation, testing against a fresh mock of the client. If the pact between the client and server is breached, neither the server team nor the client team can merge their code into the release branch.</p>
+<section id="getting-started-installation-and-setup" class="level1">
+<h1>Getting Started (Installation and Setup)</h1>
+<section id="option-1-cloning-unrealengine-project-from-github" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</h2>
+<p>The following steps are meant broadly as the specific instructions might change over time. You will need to download the latest version of <a href="https://developer.apple.com/xcode/">Xcode</a>.</p>
+<ol type="1">
+<li>Navigate to the Unreal Engine <a href="https://www.unrealengine.com/">website</a>.</li>
+<li>Register an account.</li>
+<li>Request access to the <a href="https://github.com/EpicGames">GitHub org</a></li>
+<li>Fork the <a href="https://github.com/EpicGames/UnrealEngine">UnrealEngine</a> repo and clone to local</li>
+<li>Follow the README to compile and run the Unreal Editor. The Editor uses a version of the Unreal Engine which can be downloaded by running a few installation scripts in the <code>UnrealEngine</code> project that download the engine and game files.</li>
+</ol>
+</section>
+<section id="option-2-install-using-unreal-launcher" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</h2>
+<p>We can also install Unreal Engine through the <a href="https://www.unrealengine.com/en-US/download">Unreal Launcher</a>.</p>
+</section>
+<section id="starting-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="starting-a-project">Starting a Project</h2>
+<p>Before starting a project, make sure to:</p>
+<ol type="1">
+<li>Load <strong>static content</strong></li>
+<li>Enable <strong>raytracing</strong></li>
+</ol>
+<p>Feel free to pick a template project from the project browser, such as a first-person or a third-person game. Once the new project opens a <code>.uproject</code> file is created in the default <code>~/Documents/Unreal Projects</code> directory. We can click this file directly to open the project to continue where we left it off in the future.</p>
+</section>
+<section id="unreal-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="unreal-cheat-sheet">Unreal Cheat Sheet</h2>
+<section id="key-bindings-and-shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="key-bindings-and-shortcuts">Key Bindings and Shortcuts</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RMB</td>
+<td>Rotate camera</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RMB + <kbd>W</kbd> or <kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd></td>
+<td>Movement front/left/back/right</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RMB + <kbd>E</kbd> or <kbd>Q</kbd></td>
+<td>Movement up or down</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Scroll Wheel Up/Down + RMB</td>
+<td>Adjust camera speed</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>LMB</td>
+<td>Select object in world</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Q</kbd></td>
+<td>Object selection mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>W</kbd></td>
+<td>Movement translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>E</kbd></td>
+<td>Rotation translation mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>R</kbd></td>
+<td>Scale translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Del</kbd></td>
+<td>Delete selected object</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>H</kbd></td>
+<td>Hide selected object</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd>D</kbd></td>
+<td>Duplicate selected object</td>
+<td>Another shortcut is holding <kbd class="inline">Opt</kbd> and dragging the selected object</td>
+</tr>
+<tr class="odd">
+<td>Hold <kbd>Shift</kbd> + LMB</td>
+<td>Select multiple objects</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>Ctrl</kbd> + LMB</td>
+<td>Deselect multiple objects from a multi-object selection</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>F</kbd></td>
+<td>Focus on selected object</td>
+<td>If we’re lost in our scene we can always select an object in the <strong>Outliner</strong> window and press <kbd class="inline">F</kbd> to re-focus on the object</td>
+</tr>
+<tr class="even">
+<td><kbd>G</kbd></td>
+<td>Game view mode</td>
+<td>Hides widgets, see the world as if in-game</td>
+</tr>
+<tr class="odd">
+<td><kbd>Cmd</kbd> + <kbd>F11</kbd></td>
+<td>Immersive mode</td>
+<td>Hides all windows and shows the world in full screen (note: we may also need to press <kbd class="inline">Fn</kbd>)</td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd>‎ ‎ ‎ ‎ Space ‎ ‎ ‎ ‎</kbd></td>
+<td>Open <strong>Content Drawer</strong></td>
+<td>The Content Drawer is what contains all of our in-game assets (3D/2D assets, code, etc.)</td>
+</tr>
+<tr class="odd">
+<td><kbd>Opt</kbd> + <kbd>P</kbd></td>
+<td>Play game</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Esc</kbd></td>
+<td>Exit game and go back to Edit mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>Shift</kbd> + <kbd>1</kbd> or <kbd>2</kbd>/<kbd>3</kbd>/…</td>
+<td>Change Unreal Editor mode</td>
+<td>The default is <strong>Selection Mode</strong>. Other modes include <strong>Landsaping Mode</strong>, <strong>Foliage Mode</strong>, etc. These bring up various tools to edit landscapes and make foliage (as their names suggest)</td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>L</kbd> + LMB</td>
+<td>Rotate sun</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="view-mode-options" class="level3">
+<h3 class="anchored" data-anchor-id="view-mode-options">View Mode Options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>View mode</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wireframe</td>
+<td>Shows only the wireframe mesh</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Unlit</td>
+<td>Shows the world disregarding lighting information</td>
+<td>Useful for visibility when editing in dark environments</td>
+</tr>
+<tr class="odd">
+<td>Light only</td>
+<td>The world with lighting alone (i.e.&nbsp;without material information)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="translation-and-snap-tools" class="level3">
+<h3 class="anchored" data-anchor-id="translation-and-snap-tools">Translation and Snap Tools</h3>
+<p>The translation modes and snap tools are available in the top-right corner of the viewport.</p>
+<div id="fig-unreal-translation-snap-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/translate_snap_modes.png" class="img-fluid figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Translation and snap tools
+</figcaption>
+</figure>
+</div>
+<p>From left to right, we have:</p>
+<ul>
+<li>Object selection mode</li>
+<li>Translation mode</li>
+<li>Rotation mode</li>
+<li>Scale mode</li>
+<li>Toggle for coordinate system (global vs local) relative to which the transform gizmo is shown</li>
+<li>Surface snapping options (controls how objects snap to existing surfaces)</li>
+<li>Translation snapping</li>
+<li>Rotation snapping</li>
+<li>Scale snapping</li>
+<li>Camera speed adjustment</li>
+<li>Minimize/maximize current viewport</li>
+</ul>
+<p>The default viewport includes a grid, this can be disabled in <strong>Show</strong> menu in the top-left corner of the viewport by un-checking <strong>Grid</strong>.</p>
+</section>
+<section id="working-with-objects" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-objects">Working with Objects</h3>
+<p>There are two ways to add objects to the scene. The first is through <strong>Add Object</strong> in the top-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/add_object.png" class="img-fluid"></p>
+<p>The second way is by using the <strong>Content Drawer</strong> in the bottom-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/content_drawer.png" class="img-fluid"> or use shortcut <kbd class="inline">Ctrl</kbd> + <kbd class="inline">‎ ‎ ‎ ‎ Space ‎ ‎ ‎ ‎</kbd></p>
+<p>The latter method is for adding custom game objects (blueprints as well as 2D/3D assets and more).</p>
+<p>We often need to see where a particular game asset is located in the Content Drawer. The shortcut to find any object inside the Content Drawer is <kbd class="inline">Ctrl</kbd> + <kbd class="inline">B</kbd> while having the object selected.</p>
+<p>All the assets that make up our game, such as custom 3D assets, custom blueprints (code), etc are stored within the <code>/Content</code> folder of the project.</p>
+</section>
+<section id="ui-windows" class="level3">
+<h3 class="anchored" data-anchor-id="ui-windows">UI Windows</h3>
+<section id="details" class="level4">
+<h4 class="anchored" data-anchor-id="details">Details</h4>
+<p>The <strong>Details</strong> window looks as follows.</p>
+<div id="fig-unreal-details" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/details.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Details window
+</figcaption>
+</figure>
+</div>
+<p>It contains all the details about a selected object such as:</p>
+<ul>
+<li>Transformation information (coordinates, angle of rotation, and scale)</li>
+<li>Material information</li>
+<li>Physics and many more…</li>
+</ul>
+</section>
+<section id="outliner" class="level4">
+<h4 class="anchored" data-anchor-id="outliner">Outliner</h4>
+<p>The <strong>Outliner</strong> window looks as follows.</p>
+<div id="fig-unreal-outliner" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/outliner.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Outliner window
+</figcaption>
+</figure>
+</div>
+<p>It contains all the objects that make up the scene, as well as options to show/hide, save, and pin objects:</p>
+</section>
+</section>
+<section id="blueprint-programming" class="level3">
+<h3 class="anchored" data-anchor-id="blueprint-programming">Blueprint Programming</h3>
+<p>Assuming we’ve selected the third person template, go into the Content Browser and go to <code>/Content/ThirdPerson/Blueprints</code> to access the blueprints of the third person character.</p>
+<div id="fig-unreal-third-person-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/blueprints.png" class="img-fluid figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Content Drawer - Third person blueprints
+</figcaption>
+</figure>
+</div>
+<p>Click on the humanoid. Feel free to dock the newly opened window (as a new tab) next to the open viewport in the Unreal Editor.</p>
+<p>A blueprint consists of three views:</p>
+<ol type="1">
+<li><strong>EventGraph</strong></li>
+<li><strong>Construction Script</strong></li>
+<li><strong>Viewport</strong></li>
+</ol>
+<section id="eventgraph" class="level4">
+<h4 class="anchored" data-anchor-id="eventgraph">EventGraph</h4>
+<p>Contains most of the blueprint’s logic.</p>
+<div id="fig-unreal-event-graph" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/event_graph.png" class="img-fluid figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Blueprints - Event graph
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="construction-script" class="level4">
+<h4 class="anchored" data-anchor-id="construction-script">Construction Script</h4>
+<p>More on this later…</p>
+</section>
+<section id="viewport" class="level4">
+<h4 class="anchored" data-anchor-id="viewport">Viewport</h4>
+<div id="fig-unreal-viewport" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/viewport.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Blueprints - Viewport
+</figcaption>
+</figure>
+</div>
+<p>This view shows everything within the selected blueprint as an object. Objects in a blueprint are called <strong>components</strong>. The <strong>Components</strong> window is the equivalent of the Outliner window but for blueprints. Rather than showing every object in the world, it shows every component in the blueprint.</p>
+<div id="fig-unreal-components" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/components.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Blueprints - Components window
+</figcaption>
+</figure>
+</div>
+<p>The <strong>My Blueprint</strong> window contains all the nodes and variables contained in the blueprint. We can click on the EventGraph in the <strong>Graphs</strong> tab of this window to go into the EventGraph view directly.</p>
+<div id="fig-unreal-my-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/my_blueprint.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Blueprints - My Blueprint window
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="understanding-the-character-model-blueprints" class="level1">
+<h1>Understanding the Character Model (Blueprints)</h1>
+</section>
+<section id="understanding-the-environment-builder" class="level1">
+<h1>Understanding the Environment Builder</h1>
+</section>
+<section id="understanding-daynight-cycles" class="level1">
+<h1>Understanding Day/Night Cycles</h1>
+</section>
+<section id="creating-a-world" class="level1">
+<h1>Creating a World</h1>
 
 
 </section>
@@ -726,6 +1096,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

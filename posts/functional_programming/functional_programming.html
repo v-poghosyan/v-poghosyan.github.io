@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2023-01-13">
 
-<title>Vahram’s blog - Functional Programming</title>
+<title>Functional Programming – v-poghosyan.github.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/general_computer_science/recursion_optimizations.html" rel="next">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -84,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -93,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -108,57 +114,63 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../logo.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Vahram’s blog</span>
+    <span class="navbar-title">v-poghosyan.github.io</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
-  </li>  
-</ul>
-            <div class="quarto-navbar-tools ms-auto">
+        <div class="quarto-navbar-tools tools-end">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
+          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li><li class="breadcrumb-item"><a href="../../posts/functional_programming/functional_programming.html">Functional Programming</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Functional Programming</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Functional Programming</div>
@@ -169,7 +181,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -191,139 +203,6 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Posts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Functional Programming</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/functional_programming/functional_programming.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Functional Programming</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">General Computer Science</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/general_computer_science/recursion_optimizations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Recursion Optimizations</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Leetcode</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/leetcode/lc11_container_with_most_water.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">LC11 - Container with Most Water</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">LC121 and LC53 - Kadane’s Algorithm</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Linear Algebra</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Algebra for Optimization</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Algorithms for Unconstrained Optimization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/duality-theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Duality Theory</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/introduction_to_optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Optimization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/linear-programs-and-lp-geometry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Programs and LP Geometry</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Robust Linear Programs - Modelling Discrete Failures</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -335,17 +214,14 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <li><a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions">Mathematical Functions</a></li>
   <li><a href="#pure-functions-and-side-effects" id="toc-pure-functions-and-side-effects" class="nav-link" data-scroll-target="#pure-functions-and-side-effects">Pure Functions and Side Effects</a>
   <ul>
-  <li><a href="#properties-of-pure-functions-software-engineering-perspective" id="toc-properties-of-pure-functions-software-engineering-perspective" class="nav-link" data-scroll-target="#properties-of-pure-functions-software-engineering-perspective">Properties of Pure Functions: Software Engineering Perspective</a>
-  <ul class="collapse">
   <li><a href="#nice-consequences-of-working-with-pure-functions" id="toc-nice-consequences-of-working-with-pure-functions" class="nav-link" data-scroll-target="#nice-consequences-of-working-with-pure-functions">Nice Consequences of Working With Pure Functions</a></li>
-  </ul></li>
   <li><a href="#declarative-vs-imperative-styles" id="toc-declarative-vs-imperative-styles" class="nav-link" data-scroll-target="#declarative-vs-imperative-styles">Declarative vs Imperative Styles</a></li>
   <li><a href="#side-effects" id="toc-side-effects" class="nav-link" data-scroll-target="#side-effects">Side Effects</a></li>
   </ul></li>
-  <li><a href="#instructions-or-statements-vs-expressions" id="toc-instructions-or-statements-vs-expressions" class="nav-link" data-scroll-target="#instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</a>
+  <li><a href="#instructions-statements-vs-expressions" id="toc-instructions-statements-vs-expressions" class="nav-link" data-scroll-target="#instructions-statements-vs-expressions">Instructions (Statements) vs Expressions</a>
   <ul>
   <li><a href="#control-flow-conditional-statements-and-loops" id="toc-control-flow-conditional-statements-and-loops" class="nav-link" data-scroll-target="#control-flow-conditional-statements-and-loops">Control Flow: Conditional Statements and Loops</a></li>
-  <li><a href="#function-composition-vs-iteration-higher-order-functions-hofs" id="toc-function-composition-vs-iteration-higher-order-functions-hofs" class="nav-link" data-scroll-target="#function-composition-vs-iteration-higher-order-functions-hofs">Function Composition vs Iteration: Higher-Order Functions (HOFs)</a>
+  <li><a href="#function-composition-vs-iteration-and-higher-order-functions-hofs" id="toc-function-composition-vs-iteration-and-higher-order-functions-hofs" class="nav-link" data-scroll-target="#function-composition-vs-iteration-and-higher-order-functions-hofs">Function Composition vs Iteration and Higher-Order Functions (HOFs)</a>
   <ul class="collapse">
   <li><a href="#higher-order-functions" id="toc-higher-order-functions" class="nav-link" data-scroll-target="#higher-order-functions">Higher-Order Functions</a></li>
   <li><a href="#currying" id="toc-currying" class="nav-link" data-scroll-target="#currying">Currying</a></li>
@@ -365,7 +241,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
 
 
 
@@ -375,33 +252,33 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>Functional programming draws inspiration from the mathematical definition of a function which is a well-defined operation on sets.</p>
 <section id="mathematical-functions" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-functions">Mathematical Functions</h2>
-<p>Take <span class="math inline">\(f: X \rightarrow Y\)</span>, which is a <strong>function</strong> that maps elements of set <span class="math inline">\(X\)</span> to those of set <span class="math inline">\(Y\)</span> such that for each <span class="math inline">\(x\)</span> in set <span class="math inline">\(X\)</span> (also denoted as “<span class="math inline">\(x \in X\)</span>”), there’s <em>one and only one</em> <span class="math inline">\(y \in Y\)</span> which satisfies <span class="math inline">\(f(x) = y\)</span>. In ordinary language, we say that a mathematical function maps any given input to a unique output. That’s not to say that <span class="math inline">\(f\)</span> can’t map the two different <span class="math inline">\(x\)</span>’s to the same <span class="math inline">\(y\)</span>, but it can’t map the same <span class="math inline">\(x\)</span> to more than one <span class="math inline">\(y\)</span>. Notice that the output in set <span class="math inline">\(Y\)</span> depends <em>only</em> on the input from set <span class="math inline">\(X\)</span>, and that the function <span class="math inline">\(f\)</span> <em>only</em> operates on set <span class="math inline">\(X\)</span> and nothing external to it. In other words there is no <em>hidden state</em> (i.e.&nbsp;some value outside <span class="math inline">\(X\)</span>) that affects <span class="math inline">\(f\)</span>-s output, so <span class="math inline">\(f\)</span> always produces predictable output. Also, <span class="math inline">\(f\)</span> doesn’t affect any element in <span class="math inline">\(X\)</span> (or, for that matter, <span class="math inline">\(Y\)</span>). The expression <span class="math inline">\(f(x)\)</span> is simply understood as the function <span class="math inline">\(f\)</span> applied to an element <span class="math inline">\(x \in X\)</span> which produces a value from the set <span class="math inline">\(Y\)</span> (but, once again, it’s not like <em>the</em> specific element in the set <span class="math inline">\(Y\)</span> is somehow retrieved or affected in any way).</p>
+<p>Take <span class="math inline">\(f: X \rightarrow Y\)</span>, which is a <strong>function</strong> that maps elements of the set <span class="math inline">\(X\)</span> to those of the set <span class="math inline">\(Y\)</span>, such that for each <span class="math inline">\(x\)</span> in <span class="math inline">\(X\)</span> (also denoted “<span class="math inline">\(x \in X\)</span>”), there’s <em>one and only one</em> <span class="math inline">\(y \in Y\)</span> that satisfies the equation <span class="math inline">\(f(x) = y\)</span>. In plain language we say that a mathematical function maps any given input to its own unique output (that depends only on the input). That’s not to say that <span class="math inline">\(f\)</span> can’t map the two different inputs, <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(x_j\)</span>, to the same output <span class="math inline">\(y\)</span>, but it <em>cannot</em> map the same input <span class="math inline">\(x_i\)</span> to more than one output.</p>
+<p>Notice that the output in <span class="math inline">\(Y\)</span> depends <em>only</em> on the input from set <span class="math inline">\(X\)</span>, and that the function <span class="math inline">\(f\)</span> <em>only</em> operates on set <span class="math inline">\(X\)</span> and nothing external to it. In other words there is no <em>hidden state</em> (some value outside of <span class="math inline">\(X\)</span>) that affects <span class="math inline">\(f\)</span>-s output, so <span class="math inline">\(f\)</span> always produces predictable output. What’s more <span class="math inline">\(f\)</span> doesn’t really alter any element in <span class="math inline">\(X\)</span> itself (or, for that matter, in <span class="math inline">\(Y\)</span>). The expression <span class="math inline">\(f(x)\)</span> is simply understood as the function <span class="math inline">\(f\)</span> applied to an element <span class="math inline">\(x \in X\)</span> which maps it to an element in set <span class="math inline">\(Y\)</span>. However, it’s not like <em>the</em> specific element in the set <span class="math inline">\(X\)</span> is somehow retrieved (as it is sometimes, by reference, in programming) and overwritten in any way.</p>
+<p>The idea behind functional programming is to bring code close to this mathematical elegance, allowing us to better reason about the systems we write.</p>
 </section>
 <section id="pure-functions-and-side-effects" class="level2">
 <h2 class="anchored" data-anchor-id="pure-functions-and-side-effects">Pure Functions and Side Effects</h2>
-<p>In functional programming, we loosely think of built-in <strong>types</strong> or abstract types (i.e.&nbsp;some chunks of computer memory) as being like sets. This lets us, somewhat awkwardly, pluck the mathematical definition of a function from the concrete world of mathematics and bring it into the practical world of software engineering.</p>
-<p>A <strong>pure function</strong> then, in the FP sense, is a function which depends only on its input (and not on any other value stored elsewhere in external computer memory or other external source) and it affects nothing outside itself. Additionally, like the mathematical functions they try to emulate, pure functions <em>have</em> to output a value and that value must be unique for a given input.</p>
-<p>To recap, here are the above properties again.</p>
-<section id="properties-of-pure-functions-software-engineering-perspective" class="level3">
-<h3 class="anchored" data-anchor-id="properties-of-pure-functions-software-engineering-perspective">Properties of Pure Functions: Software Engineering Perspective</h3>
+<p>We can define some rules for the functions we write in our code to match the mathematical properties of functions, bridging the concrete world of mathematics with the practical world of software engineering.</p>
+<p>A <strong>pure function</strong>, in the FP sense, is a function which depends only on its input (and not on any other value stored elsewhere in external computer memory or other external source). A pure function affects nothing outside itself. Additionally, pure functions <em>must</em> output a value and that value must be unique for a given input.</p>
+<p>To recap:</p>
 <ol type="1">
 <li>A pure function must return a single output for a given input</li>
-<li>A pure function’s output should only depend on its input (in other words, no external hidden state should affect the output)</li>
-<li>A pure function shouldn’t change any external state (i.e.&nbsp;an external chunk of computer memory)</li>
-<li><span id="my-text-highlight">There shall be no mutation of state, in general</span></li>
+<li>Its output should only depend on its input</li>
+<li>A pure function shouldn’t change any external state</li>
 </ol>
+<p>The last property effectively means that <span id="my-text-highlight">pure functions don’t mutate state, in general</span>. Given that a functional program is just a composition of pure functions, state mutation is often frowned upon in general. This presents unique challenges, as you might expect given that so many operations, in the traditional paradigm of programming, mutate a state (for instance, a <code>for</code> loop increments its index on each iteration). We will see how functional programming languages attempt to solve this problem (with a lot of syntactic sugar).</p>
 <section id="nice-consequences-of-working-with-pure-functions" class="level4">
 <h4 class="anchored" data-anchor-id="nice-consequences-of-working-with-pure-functions">Nice Consequences of Working With Pure Functions</h4>
-<p>Working with pure functions conveys some great benefits. For instance, properties 1 and 2 make pure functions interchangeable with their output value just as, say, <span class="math inline">\(f(2)\)</span> given <span class="math inline">\(f(x)=x^2\)</span> can, just as well, stand in for the number <span class="math inline">\(4\)</span>. This allows us to pass pure functions as arguments into other pure functions, as well as return pure functions from other pure functions with entirely predictable results just as we often do in mathematics where we are comfortable substituting the representation of a value for the value itself (for instance when computing partial derivatives on computation graphs or, as it’s more commonly known, calculating the gradient of the loss function using a back-propagation algorithm in machine learning). By contrast, if our functions affected external state somewhere or produced other such <strong>effects</strong> (more on these in the section on <strong>side effects</strong>) such as returning random output or some other type of non-deterministic output (i.e.&nbsp;output that doesn’t strictly depend on input), it would be a lot more difficult to model our programs as pure chains of function calls (making them harder to reason about mathematically). So, functional programs are essentially those programs that are as close to being represented as a composition of pure functions as we can get. There is also some mathematical syntactic sugar that comes with reasoning about our software as a complex chain of pure functions. It’s the difference between having a <em>declarative</em> (as opposed to an <em>imperative</em>) style of writing software. Read the next section to see what <em>declarative</em> and <em>imperative</em> mean in the given context.</p>
-</section>
+<p>Working with pure functions conveys some great benefits. For instance, properties (1) and (2) make pure functions interchangeable with their output (just as, say, <span class="math inline">\(f(2)\)</span> given <span class="math inline">\(f(x)=x^2\)</span> can reliably be substituted for the number <span class="math inline">\(4\)</span> in math). This allows us to pass in pure functions as arguments into other pure functions (as well as return them as output) with entirely predictable results. If a function, by contrast, printed something to the console, along with evaluating the square, we would consider that an <strong>effectful</strong> function (and therefore it would be considered impure). Such a function <em>cannot</em> be reliably substituted by its output because it also affects an external state, producing an effect that the output alone does not capture. This benefit, to reliably substitute the representation of a value for the value itself, yields nice benefints. In mathematics, for example, we can cheaply compute the gradient of a loss function using the back-propagation algorithm by storing intermediate values during the forward pass so that, during the backwards pass (back-propagation) we avoid redundant calculations. By contrast, if our functions affected external state somewhere, or produced other such effects (more of which we will see in the section on <strong>side effects</strong>), it would be a lot more difficult to model our programs as chains of pure function calls making them harder to reason about mathematically.</p>
+<p>In the next section we look at the differences between <strong>declarative</strong> and <strong>imperative</strong> styles of writing software and why functional programming prefers the former style.</p>
 </section>
 <section id="declarative-vs-imperative-styles" class="level3">
 <h3 class="anchored" data-anchor-id="declarative-vs-imperative-styles">Declarative vs Imperative Styles</h3>
-<p>At a basic level, an <em>imperative</em> style of programming can be likened to cooking at home with a cookbook. Imperative languages look more like a list of commands directed at the computer. Declarative writing, by contrast, can be compared to dining at a restaurant. We aren’t issuing commands at a grueling level of granularity (e.g.&nbsp;iterating over an array manually, appending to a list manually, etc.). Instead, we’re specifying the desired outcome without the implementation details like we would in mathematics when we, for instance, write <span class="math inline">\(f(x)=x^2\)</span> succinctly and know it to mean <em>“square the value of <span class="math inline">\(x\)</span> if <span class="math inline">\(x\)</span> is scalar, or square every feature of <span class="math inline">\(x\)</span> if <span class="math inline">\(x\)</span> is a vector.”</em></p>
-<p>In the imperative style, we’re saying “step through the list, read each item, square it and append it to a new list.” In the declarative style we’re simply saying “square every element of the list.” Of course these differences are semantic, and in real life software contains a healthy mix of both styles. The distinction is not really black or white, and is often dependent on the implementation of the given language.</p>
-<p>However, an example is worth a thousand words and, since Python provides a good enough playground for showcasing both of these styles, here is an example in Python.</p>
+<p>At a basic level, an <em>imperative</em> style of programming can be likened to cooking at home with a cookbook. Imperative languages look more like a list of commands directed at the computer. Declarative writing, by contrast, can be compared to dining at a restaurant. We aren’t issuing commands at a grueling level of granularity (e.g.&nbsp;iterating over an array manually, or appending to a list). Instead, we’re specifying the desired outcome without the implementation details like we would in mathematics when we, for instance, write <span class="math inline">\(f(x)=x^2\)</span> succinctly (implying to square every feature of the input vector <span class="math inline">\(x\)</span>). We prefer declarative code to imperative in FP partly because imperative code involves a lot of state mutation and partly because writing pure functions facilitates writing declarative code.</p>
+<p>In the imperative style, we’re saying “step through the list, read each item, square it and append it to a new list.” In the declarative style we’re saying “just square every element of this list.” These differences are mostly semantic and, in real life, software contains a mix of both styles. The distinction is also not really black or white, and is often dependent on the implementation of the given language.</p>
+<p>An example is worth a thousand words and, since Python provides a good enough playground for showcasing these styles, here is an example in Python.</p>
 <p><strong>Imperative Style</strong></p>
-<div class="cell" data-execution_count="2">
+<div id="cell-2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> []</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="kw">in</span> numbers:</span>
@@ -413,7 +290,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </div>
 </div>
 <p><strong>Declarative Style</strong></p>
-<div class="cell" data-execution_count="5">
+<div id="cell-4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span>, numbers)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -422,11 +299,12 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <pre><code>[1, 4, 9, 16, 25]</code></pre>
 </div>
 </div>
+<p>Notice how in the declarative style we merely instructed our function to square each feature, but we didn’t tell the program how to do it in grueling detail and we avoided the use of a <code>for</code> loop (which means we avoided mutating the state of the index of the loop). Also, more lines in the declarative style return a value, rather than just carrying our instructions (we will see the difference between mere instructions, or <strong>statements</strong> and pure expressions later on). However, since there’s printing to the console at the end, even the declarative program would not be considered functional.</p>
 </section>
 <section id="side-effects" class="level3">
 <h3 class="anchored" data-anchor-id="side-effects">Side Effects</h3>
-<p>Functions which violate any of these properties are said to produce <strong>side effects</strong>. The most common side effect is when a function modifies state (i.e.&nbsp;a chunk of computer memory) outside itself (violating property 3). Examples of side effects include:</p>
-<table class="table">
+<p>Functions which violate any of the three afforementioned properties are said to produce <strong>side effects</strong> (or simply <em>effects</em>). The most common side effect is when a function modifies a state (i.e.&nbsp;a chunk of computer memory) outside itself (violating property (3)). Examples of side effects include:</p>
+<table class="caption-top table">
 <colgroup>
 <col style="width: 26%">
 <col style="width: 73%">
@@ -452,43 +330,45 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<p>Although some side effects are unavoidable, we should minimize their use in our code. Functional programming languages offer to do just that.</p>
+<p>Although some side effects are unavoidable, we should minimize their use in our code. Functional programming languages offer just that ability.</p>
 </section>
 </section>
-<section id="instructions-or-statements-vs-expressions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions-or-statements-vs-expressions">Instructions (or Statements) vs Expressions</h2>
-<p>In functional programming, we also distinguish between mere <strong>instructions</strong> to the computer (also known as <strong>statements</strong>) and <strong>expressions</strong>. This distinction is similar to the distinction between functions in the traditional programming sense and pure functions in that expressions must also return a value. Contrast this requirement with instructions like the <code>if</code>/<code>else</code> statements and <code>while</code> loops which simply direct the control flow but don’t necessarily evaluate to anything.</p>
-<p>As mentioned earlier, the use of instructions and impure functions is unavoidable at times. Different languages have different strategies of mitigating these impurities. Usually the aim is to gather the impurities together at the top in some clearly demarcated lexical block. Furthermore, some languages (such as Scala which is a blend of OOP and FP), go to great lengths to minimize side effects by enforcing the return requirement on instructions. All instructions in Scala evaluate to a value, effectively making them expressions.</p>
-<p>The idea is to use a clever type system to capture impurities. If side effects must exist, they should be known to Scala. To achieve this, expressions in Scala return a type known as <code>Unit</code> which can hold only <code>()</code> as its value. So, whereas non-functional programming languages have no requirements on the instructions they operate on, in functional programming languages expressions which don’t naturally return anything can be elevated to the status of pure expression by returning a dedicated side effect type (in practice there are many types for different side effects, for example <code>IO</code> side effects capture side effects produced by operations such as logging). This also gives us a bit of syntactic sugar we will see in the next section.</p>
-<p>We already touched on this briefly when we discussed declarative and imperative styles of writing code, but the distinction between instruction and expression further leads functional programming to favor certain programming styles over others.</p>
+<section id="instructions-statements-vs-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions-statements-vs-expressions">Instructions (Statements) vs Expressions</h2>
+<p>In functional programming, we distinguish between mere <strong>instructions</strong> to the computer (which are also sometimes known as <strong>statements</strong>) and <strong>expressions</strong> (or <strong>pure expressions</strong>). This distinction is similar to that between functions, in the programming sense, and pure functions in the mathematical sense – Expressions, like functions, must always return a value. Contrast this with instructions like the traditional <code>if</code>/<code>else</code> statements or loops like <code>while</code> which control the flow of execution, but don’t evaluate to anything.</p>
+<p>As mentioned earlier, such effects are unavoidable at times. However, functional languages have different strategies of mitigating these impurities and writing pure code anyway. Usually they aim to gather the impurities together at the top or bottom of the code. Some languages (such as Scala which is a blend of OOP and FP), go to great lengths to minimize side effects by enforcing the return requirement of its syntactic structures. Even though Scala has the traditional <code>for</code> loop as an instruction, it favors the use of <code>for</code>-comprehensions which are essentially syntactic sugar (enabled by <strong>monadic</strong> types that capture effects, more on these later). Each line of a <code>for</code>-comprehension in Scala evaluates to a value.</p>
+<p>The idea is to use a clever type system to capture effects. If side effects must exist, they should be known to Scala. To achieve this, Scala has a monadic type known as <code>Unit</code> which can hold only <code>()</code> as its value. This is its designated side effect type. So, functional programming languages elevate instructions or statements, which normally don’t return anything, the status of pure expressions by returning a dedicated side effect type. In practice there are many types for different side effects (for example, an <code>IO</code> monadic type captures side effects produced by operations like console logging). Let’s see some examples of how Scala does away with traditional <code>for</code> loops and <code>if</code>/<code>else</code> statements and uses pure expressions instead.</p>
 <section id="control-flow-conditional-statements-and-loops" class="level3">
 <h3 class="anchored" data-anchor-id="control-flow-conditional-statements-and-loops">Control Flow: Conditional Statements and Loops</h3>
-<p>In functional languages like Scala, <code>if</code> statements are implemented as expressions similar to the familiar <strong>ternary expressions</strong> in Python. Scala also has <code>if</code> statement like the regular <code>if</code> statements of Python, but the expression is what’s preferred. Here are some examples to show the FP approach to writing <code>if</code> statements in both languages:</p>
+<p>In Scala, <code>if</code> statements are implemented as expressions similar to the familiar <strong>ternary expressions</strong> in Python. Scala has traditional <code>if</code> statements too, but the <code>if</code> pure expression is what’s preferred. Here are some examples that demonstrate difference the difference in both Python and Scala:</p>
 <p><strong>Python:</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> condition <span class="op">==</span> <span class="va">True</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Scala:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> x <span class="op">=</span> <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this example, <code>x</code> evaluates to a value: one of possible two. The <code>if</code> expression may still produce a side effect, but it’s not as open-ended as a normal <code>if</code> statement. In a normal <code>if</code> statement, the programmer <em>might</em> do something entirely crazy and unheard of such as accessing a database, or printing a line to the console (both considered side effects).</p>
-<p>This brings us to an important point. It’s not that <code>if</code> statements would <em>necessarily</em> result in side effects, it’s that functional programming discourages the use of language constructs that lend themselves to producing side effects more easily. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value rather than just syntax is very deliberate. In Scala, <code>for</code>-comprehensions are favored over <code>for</code> loops.</p>
+<p>In this example, <code>x</code> necessarily evaluates to a value: one of possible two. This <code>if</code> expression will not produce a side effect as would an open-ended <code>if</code> statement. Inside an <code>if</code> statement, the programmer <em>might</em> just do something crazy and unheard of like accessing a database, or printing a line to the console (both considered side effects).</p>
+<p>This brings us to an important point. It’s not that <code>if</code> statements would <em>necessarily</em> result in side effects, it’s just that functional programming discourages the use of language constructs that lend themselves to producing side effects more easily. Syntactic choices like this are a common theme in FP. For instance, Scala’s choice to treat <code>()</code> as a returnable value (of type <code>Unit</code>) rather than just a piece of syntax is very deliberate. Let’s see why by examining a Scala, <code>for</code>-comprehension.</p>
 <p><strong>Scala For Comprehension:</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> myNewList <span class="op">=</span> </span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode scala code-with-copy"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> result <span class="op">=</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        element <span class="op">&lt;-</span> myOldList</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">yield</span> <span class="op">(</span>element<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The above snippet copies the contents of <code>myOldList</code> into <code>myNewList</code>. It’s important to note that this isn’t the best way to copy a list in Scala, it’s just a toy example of <code>for</code>-comprehensions (One of the ways in Scala to chain many potentially side-effect producing operations together) with the intent to demonstrate two things about them:</p>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">&lt;-</span> <span class="fu">print</span><span class="op">(</span><span class="st">"Hello"</span><span class="op">)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">&lt;-</span> <span class="fu">print</span><span class="op">(</span><span class="st">"World!"</span><span class="op">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">yield</span> <span class="op">()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It may not look like it, but the code snippet above (showing a <code>for</code>-comprehension) is one of the ways in which Scala actually chains many potentially side-effect producing operations together via function composition (which is what’s going on in the background). Notice three things about it:</p>
 <ul>
-<li>The <code>for</code> comprehension is treated as an expression which returns a value captured by <code>myNewList</code>.</li>
-<li>If we wished to return no value, we’d simply say <code>yield ()</code>. However, because of Scala’s cleverly designed type system, <code>()</code> actually <em>is</em> a value so even instructions, which normally wouldn’t return anything, do return <em>something</em> in Scala, satisfying that FP requirement trivially.</li>
+<li>The <code>for</code> comprehension returns a value captured by <code>result</code>.</li>
+<li>The print statement produces a side effect which is discarded as _.</li>
+<li>At the end we simply say <code>yield ()</code>… If we wished to return a value instead we would do so inside the <code>()</code> however, because Scala associates a type with <code>()</code>, what’s actually returned is the side effect captured as a <code>Unit</code> (so the for comprehension returns <em>something</em>)</li>
 </ul>
 </section>
-<section id="function-composition-vs-iteration-higher-order-functions-hofs" class="level3">
-<h3 class="anchored" data-anchor-id="function-composition-vs-iteration-higher-order-functions-hofs">Function Composition vs Iteration: Higher-Order Functions (HOFs)</h3>
-<p>Similarly to frowning upon the use of <code>if</code> statements, <code>while</code> loops (and, to an extent, also <code>for</code> loops) are considered bad practice in functional programming because, of course, the iterator is modified at each iteration and <span id="my-text-highlight">functional programming frowns upon mutation of state in general</span>.</p>
-<p>Take, for example, a while loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in many cases. But then the FP approach would just be to contain this impurity somewhere with the rest of its kind.</p>
-<p>In general, instead of <strong>iteration</strong>, <strong>recursion</strong> (or, more generally, <strong>function composition</strong>) is preferred. Normally, we use recursion when dealing with recursive data structures (like trees) or when the problem has some <a href="https://en.wikipedia.org/wiki/Optimal_substructure">optimal substructure</a>, but functional programming prefers this approach in general. This may sound tedious and almost like re-learning how to program at first, but syntactic sugars and other abstractions exist to make this pattern more readable. For example, there are a few familiar examples of function composition that have been adopted by popular languages like Python and are very intuitive to work with (especially when dealing with data pipelines, or modelling real world interactions in terms of sequential actions). Some of these examples are the <code>map</code> and the <code>filter</code> functions. We already saw an example of <code>map</code> in the declarative code snippet above, so we won’t dive into its details here. Both <code>map</code>and <code>filter</code> are examples of <strong>higher-order functions</strong> (<strong>HoF</strong>s) – functions which take other functions as input and/or themselves otput other functions. The <code>map</code> and <code>filter</code> functions show that function composition can be very readable and intuitive. Furthermore, neither <code>map</code> nor <code>filter</code> modify their input in-place, but rather return a modified copy of it to avoid external state mutation which, as we know, is considered good practice in FP. Later on we will see that a related method called <code>flatMap</code> turns out to play a <em>key</em> role in allowing functional programmers to write useful programs by chaining multiple potentially side effect-producing functions together (due to their unique function signature which flattens many arrays into one)</p>
+<section id="function-composition-vs-iteration-and-higher-order-functions-hofs" class="level3">
+<h3 class="anchored" data-anchor-id="function-composition-vs-iteration-and-higher-order-functions-hofs">Function Composition vs Iteration and Higher-Order Functions (HOFs)</h3>
+<p>Because FP frowns upon the use of <code>if</code>/<code>else</code> and <code>for</code>/<code>while</code> statements, it prefers function composition to iteration. In fact, the <code>for</code>-comprehension above is just cleverly disguised function composition.</p>
+<p>Take, for example, a <code>while</code> loop that runs until a key press (or any other user input). Of course, this may be an unavoidable side effect in the real world. The FP approach would, then, just be to contain this impurity somewhere with the rest of its kind.</p>
+<p>In general, instead of iteration, function composition is preferred (mathematical readers will understand that <em>recursion</em>, which often offers itself as an alternative to iteration when there’s <a href="https://en.wikipedia.org/wiki/Optimal_substructure">optimal substructure</a>, is a type of function composition). Functional programming prefers this approach in general. This may sound tedious and almost like re-learning how to program at first, but syntactic sugars and other abstractions exist to make this pattern more readable (like the <code>for</code>-comprehension we already saw in Scala).</p>
+<p>There are already a few familiar examples of function composition that have been adopted by popular languages like Python, and are very intuitive (especially when dealing with data pipelines or modelling real world interactions in terms of sequential actions). Some examples are the <code>map</code> and the <code>filter</code> functions in Python. We already saw an example of <code>map</code> in the declarative code snippet above, so we won’t dive into its specifics here. Both <code>map</code>and <code>filter</code> are examples of <strong>higher-order functions</strong> (<strong>HoF</strong>s) – functions which take other functions as input and/or themselves output functions. <code>map</code> and <code>filter</code> show that function composition can be very readable and intuitive. Furthermore, neither <code>map</code> nor <code>filter</code> modify their input in-place. Rather, they return a modified copy of the input to avoid external state mutation which is considered poor practice in FP. Later on we shall see that a related method called <code>flatMap</code> exists which turns out to play a key role in letting functional programmers write useful programs by chaining multiple potentially side effect-producing functions together. This is due to <code>flatMap</code>’s unique function signature (which flattens arrays of arrays into one array).</p>
 <section id="higher-order-functions" class="level4">
 <h4 class="anchored" data-anchor-id="higher-order-functions">Higher-Order Functions</h4>
-<p>To pipe functions into other functions (as in function composition), we need functions that take other functions as input and can output functions. When we treat functions this way, we basically treat them as <em>first-class values</em> which means like any other value, they can be passed and returned around. There is a mathematically-inspired reason, other than designing software as function composition, for using HoFs.</p>
+<p>To pipe functions into other functions (as in function composition), we need functions that take other functions as input and can also output functions. When we treat functions this way, we basically treat them as <em>first-class values</em> which means like any other value, they can be passed and returned around. There is a mathematically-inspired reason, other than designing software as function composition, for using HoFs.</p>
 <p>When mathematicians write:</p>
 <p><span class="math display">\[
 \sum_{x=a}^{b} f(x)
@@ -565,7 +445,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="functional-programming-hazards">Functional Programming Hazards</h3>
 <section id="tail-recursion---avoiding-stack-overflow" class="level4">
 <h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p>If we’re going to favor the use of recursion (or, in general function composition) in FP over the more imperative style of writing iterative algorithms, we ought to tread carefully as to not cause <strong>stack overflow</strong> (which, as we know, is when the system runs out of working memory). <strong>Tail recursion optimization</strong> (similar to other techniques like <strong>memoization</strong>) helps us drastically cut the amount of stack memory used. It takes a constant amount of memory on the stack, instead of the linear, with input size, or worse. Read more about tail recursive optimization <a href="../../posts/general_computer_science/recursion_optimizations.html">here</a>.</p>
+<p>If we’re going to favor the use of recursion (or, in general function composition) in FP over the more imperative style of writing iterative algorithms, we ought to tread carefully as to not cause <strong>stack overflow</strong> (which, as we know, is when the system runs out of working memory). <strong>Tail recursion optimization</strong> (similar to other techniques like <strong>memoization</strong>) helps us drastically cut the amount of stack memory used. It takes a constant amount of memory on the stack, instead of the linear, with input size, or worse. Read more about tail recursive optimization <a href="../general_computer_science/recursion_optimizations.ipynb">here</a>.</p>
 
 
 </section>
@@ -615,6 +495,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -683,13 +590,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -724,18 +633,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -767,11 +665,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -781,8 +718,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -794,7 +740,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -838,6 +907,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -863,6 +933,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -924,19 +1020,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
-<nav class="page-navigation column-body">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../posts/general_computer_science/recursion_optimizations.html" class="pagination-link">
-        <span class="nav-page-text">Recursion Optimizations</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2021, Vahram Poghosyan</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -959,6 +1048,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
 
 
 
