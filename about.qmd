@@ -1,0 +1,27 @@
+---
+about:
+  template: marquee
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/vahrampoghosyan/
+    - icon: github
+      text: LinkedIn
+      href: https://www.github.com/v-poghosyan
+page-layout: full
+sidebar: false
+toc: false
+---
+
+# About this site
+Hi there, I'm Vahram. 
+
+These are my notes on the internet. I started them in late 2021 from some university notes I took in Jupyter Notebooks (and online material I was learning in my free time). None of this is intended as original work, although some of it may be (and I will try to clearly communicate that where possible). Please refer to the copyright note below for more details. More recently I started using various static page generators (such as [quarto](https://github.com/quarto-dev)) to convert my notes into a form that looks presentable in a browser while preserving the interactibility of Jupyter Notebooks. 
+
+# License
+
+Copyright (c) 2023 Vahram Poghosyan
+
+The styling, assets (including pictures, videos, code, etc.) and most of the written content (with the exception of attributed content or such content that is in the common domain) on these pages are strictly copyrighted. Exceptions will be considered, please reach out to vapogyan@gmail.com to inquire about re-using specific assets.
+
+
