@@ -2,7 +2,7 @@
 
 ## About
 
-These are just my notes on the internet. I started them in late 2021 from some ccourse notes I took in Jupyter Notebooks. Later I used various static page generators (such as fast.io and, most recently, quarto) to convert them into notes that look presentable in a browser... 
+These are just my notes on the internet. I started them in late 2021 from some ccourse notes I took in Jupyter Notebooks. Later I used various static page generators (such as fast.io and, most recently, [quarto](https://github.com/quarto-dev)) to convert them into notes that look presentable in a browser... 
 
 ### Contribution Notes for Self
 
