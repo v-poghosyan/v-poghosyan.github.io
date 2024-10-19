@@ -2,7 +2,9 @@
 
 ## About
 
-These are just my notes on the internet. I started them in late 2021 from some university notes I took in Jupyter Notebooks (and online material I was learning in my free time). None of this is intended as original work, although some of it may be (and I will try to clearly communicate that where possible). More recently I started using various static page generators (such as fast.io and [quarto](https://github.com/quarto-dev)) to convert these notes into a form that looks presentable in a browser.
+Hi there, I'm Vahram,
+
+This is my [digital garden](https://maggieappleton.com/garden-history?ref=ideasurg.pub), my notes on the internet. I started them in late 2021 from some university notes I took in Jupyter Notebooks (and from some online material I learned in my free time). While this is generally not intended as original work (and I will do my best to communicate that and cite my sources), I would like to have a say in how my work (the work that *is* original) is used. Please refer to the copyright section for more details. Recently, I started trying out various static page generators (such as fast.io and [quarto](https://github.com/quarto-dev)) to convert my notes into a form that looks presentable in a browser.
 
 ### Contribution Notes for Self
 
