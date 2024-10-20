@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/projects/water-me.html",
       "/posts/game_development/unreal_engine_first_steps.html",
       "/posts/machine_learning/builing-an-LLM.html",
       "/posts/functional_programming/functional_programming.html",

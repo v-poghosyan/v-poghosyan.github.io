@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
-    <lastmod>2024-10-14T22:08:33.738Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/manim.html</loc>
+    <lastmod>2024-10-20T00:19:25.348Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/networking/self-hosting.html</loc>
-    <lastmod>2024-10-14T22:08:33.742Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
+    <lastmod>2024-10-14T22:08:33.732Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/general_computer_science/recursion_optimizations.html</loc>
-    <lastmod>2024-10-14T22:08:33.744Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/general_computer_science/data_structures_primer.html</loc>
+    <lastmod>2024-10-14T22:08:33.758Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/python/ny_housing_market_analysis.html</loc>
-    <lastmod>2024-03-17T03:59:17.934Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/web_scraping/web_scraping.html</loc>
+    <lastmod>2024-10-14T22:08:33.753Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/python/numpy_quick_start_guide.html</loc>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/python/set_up_a_local_development_environment_for_ML.html</loc>
+    <lastmod>2024-10-14T22:08:33.730Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-pandas.html</loc>
     <lastmod>2024-10-14T22:08:33.731Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-numpy.html</loc>
-    <lastmod>2024-10-14T22:08:33.737Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/conways_game_of_life.html</loc>
+    <lastmod>2024-10-14T22:08:33.753Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/video_game_graphics.html</loc>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/ssl_the_internets_trust_protocol.html</loc>
     <lastmod>2024-10-14T22:08:33.742Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/contract_testing.html</loc>
-    <lastmod>2024-10-14T22:08:33.742Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/neuroscience_notes/grief.html</loc>
+    <lastmod>2024-10-17T04:26:06.707Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/about.html</loc>
-    <lastmod>2024-10-17T04:50:23.763Z</lastmod>
+    <loc>https://v-poghosyan.github.io/index.html</loc>
+    <lastmod>2024-10-14T23:07:45.111Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/posts/linear_algebra/linear_algebra_refresher_for_optimization.html</loc>
-    <lastmod>2024-10-14T22:08:33.765Z</lastmod>
+    <loc>https://v-poghosyan.github.io/posts/functional_programming/functional_programming.html</loc>
+    <lastmod>2024-10-14T22:08:33.831Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/duality-theory.html</loc>
@@ -81,43 +85,47 @@
     <lastmod>2024-10-14T22:08:33.758Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/posts/functional_programming/functional_programming.html</loc>
-    <lastmod>2024-10-14T22:08:33.831Z</lastmod>
+    <loc>https://v-poghosyan.github.io/posts/projects/water-me.html</loc>
+    <lastmod>2024-10-20T00:19:25.347Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/index.html</loc>
-    <lastmod>2024-10-14T23:07:45.111Z</lastmod>
+    <loc>https://v-poghosyan.github.io/posts/linear_algebra/linear_algebra_refresher_for_optimization.html</loc>
+    <lastmod>2024-10-14T22:08:33.765Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/neuroscience_notes/grief.html</loc>
-    <lastmod>2024-10-17T04:26:06.707Z</lastmod>
+    <loc>https://v-poghosyan.github.io/about.html</loc>
+    <lastmod>2024-10-17T04:50:23.763Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/ssl_the_internets_trust_protocol.html</loc>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/contract_testing.html</loc>
     <lastmod>2024-10-14T22:08:33.742Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/conways_game_of_life.html</loc>
-    <lastmod>2024-10-14T22:08:33.753Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/video_game_graphics.html</loc>
+    <lastmod>2024-10-14T22:08:33.742Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-pandas.html</loc>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-numpy.html</loc>
+    <lastmod>2024-10-14T22:08:33.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/python/numpy_quick_start_guide.html</loc>
     <lastmod>2024-10-14T22:08:33.731Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/python/set_up_a_local_development_environment_for_ML.html</loc>
-    <lastmod>2024-10-14T22:08:33.730Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/python/ny_housing_market_analysis.html</loc>
+    <lastmod>2024-03-17T03:59:17.934Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/web_scraping/web_scraping.html</loc>
-    <lastmod>2024-10-14T22:08:33.753Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/general_computer_science/recursion_optimizations.html</loc>
+    <lastmod>2024-10-14T22:08:33.744Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/general_computer_science/data_structures_primer.html</loc>
-    <lastmod>2024-10-14T22:08:33.758Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/networking/self-hosting.html</loc>
+    <lastmod>2024-10-14T22:08:33.742Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
-    <lastmod>2024-10-14T22:08:33.732Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
+    <lastmod>2024-10-14T22:08:33.738Z</lastmod>
   </url>
 </urlset>
