@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -158,8 +192,16 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul>
   <li><a href="#manim---an-introduction" id="toc-manim---an-introduction" class="nav-link active" data-scroll-target="#manim---an-introduction">Manim - An introduction</a>
   <ul class="collapse">
-  <li><a href="#local-ide-setup" id="toc-local-ide-setup" class="nav-link" data-scroll-target="#local-ide-setup">Local IDE setup</a></li>
-  <li><a href="#scene-object" id="toc-scene-object" class="nav-link" data-scroll-target="#scene-object">Scene object</a></li>
+  <li><a href="#local-development-environment-setup" id="toc-local-development-environment-setup" class="nav-link" data-scroll-target="#local-development-environment-setup">Local development environment setup</a>
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
+  <li><a href="#the-grant-sanderson-setup" id="toc-the-grant-sanderson-setup" class="nav-link" data-scroll-target="#the-grant-sanderson-setup">The Grant Sanderson setup</a></li>
+  </ul></li>
+  <li><a href="#scene-object" id="toc-scene-object" class="nav-link" data-scroll-target="#scene-object">Scene object</a>
+  <ul class="collapse">
+  <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to Circle Transformation</a></li>
+  </ul></li>
   <li><a href="#drawing-things-to-the-scene" id="toc-drawing-things-to-the-scene" class="nav-link" data-scroll-target="#drawing-things-to-the-scene">Drawing things to the scene</a></li>
   </ul></li>
   </ul>
@@ -174,11 +216,111 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 
 <section id="manim---an-introduction" class="level1">
 <h1>Manim - An introduction</h1>
-<section id="local-ide-setup" class="level2">
-<h2 class="anchored" data-anchor-id="local-ide-setup">Local IDE setup</h2>
+<section id="local-development-environment-setup" class="level2">
+<h2 class="anchored" data-anchor-id="local-development-environment-setup">Local development environment setup</h2>
+<p>Manim is a custom Python library for mathematical visualizations. It has two versions, the first version is maintained by Grant Sanderson himself (the acclaimed Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). And another one, a fork of the original, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> which enjoys more contributions and has better documentation and support (in terms of attentiveness to PRs and such). For this series, I will use the community edition to help maintain this document’s relevance and, possibly, contribute to the open-source community project myself.</p>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation">Installation</h3>
+<section id="optional---create-an-isolated-python-environment" class="level4">
+<h4 class="anchored" data-anchor-id="optional---create-an-isolated-python-environment">Optional - Create an isolated Python environment</h4>
+<p><a href="https://docs.conda.io/projects/conda/en/latest/index.html">Conda</a> is an open-source package management and environment management system that is primarily used for Python, but it can also handle other programming languages like R. It’s designed to make it easy to install, run, and manage libraries and software dependencies in isolated environments, ensuring that different projects don’t interfere with each other. Alternatives to conda include pip (Python Package Installer), virtualenv (<code>venv</code>), and their merger Pipenv.</p>
+<p>First, activate an environment (with your choice of environment and/or package manager from above). I will be using conda to activate a new dedicated environment as <code>manim-playground</code> using:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">conda</span> update conda <span class="co"># To, first, update your conda version. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>You need to deactivate any active conda environment before running this command.</p>
+</div>
+</div>
+</div>
+<p>Then:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a conda environment in <code>~/anaconda3/envs/manim-playground</code>. Activate it with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">conda</span> activate manim-playground</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To deactivate the environment at any point, use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="manim-installation" class="level4">
+<h4 class="anchored" data-anchor-id="manim-installation">Manim installation</h4>
+<p>Here are the <a href="https://docs.manim.community/en/stable/installation/conda.html">conda installation steps for Manim</a>.</p>
+<p>To install Manim we simply do:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="jupyter-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h3>
+<p>To import Manim:</p>
+<div id="cell-2" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>This may trigger your IDE of choice, which is VS Code in my case, to download the ipykernel into the conda environment. This should be taken care of automatically. If not, installing Python into the environment should be straightforward. To avoid this in the future, instead of creating a blank conda environment we can clone from the <code>base</code> environment by:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground <span class="at">--clone</span> base   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>To see any output inside Jupyter Notebooks, we should also supply the <strong>magic command</strong> to invoke Manim (the animation engine). This magic command is its own installation – <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>. Note that only pip3 is available as a package manager for jupyter-manim but that’s ok becuase pip3 respects conda environments. When we run <code>pip3 install &lt;package&gt;</code>, pip installs the package and its dependencies in the <code>site-packages</code> directory of that specific, active conda environment, just as it would in any standard Python environment. So issue:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">pip3</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
+</section>
+<section id="the-grant-sanderson-setup" class="level3">
+<h3 class="anchored" data-anchor-id="the-grant-sanderson-setup">The Grant Sanderson setup</h3>
+<p>Grant himself defines a custom script that hooks into a local Python file defining the entire scene, and parses the script looking for certain leading comments. It then runs the script only up to that comment, so that the scene pauses at the last step, at the part of the code he’s still working on. He then uses an IDE shortcut to execute just that single code block (clearly demarcated with comments) in a Python interpreter, which renders the relevant portion of the scene to the output window. In this way, he can incrementally test parts of the scene (mimicking a Jupyter notebook setup)</p>
+<p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YoutUbe tutorial</a>.</p>
+</section>
 </section>
 <section id="scene-object" class="level2">
 <h2 class="anchored" data-anchor-id="scene-object">Scene object</h2>
+<p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
+<section id="square-to-circle-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
+<div id="cell-6" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">%%</span>manim <span class="op">-</span>ql <span class="op">-</span>v WARNING SquareToCircle</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb11-5"><a href="#cb11-5"></a>        <span class="co"># Obbligatory Hello World</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>        message <span class="op">=</span> Text(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7"></a></span>
+<span id="cb11-8"><a href="#cb11-8"></a>        <span class="co"># Assing simple geometry</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="va">self</span>.add(circle)</span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="va">self</span>.add(square)</span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a>        <span class="co"># Animating text</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>        <span class="va">self</span>.play(</span>
+<span id="cb11-16"><a href="#cb11-16"></a>            Write(message, run_time<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-17"><a href="#cb11-17"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>UsageError: Line magic function `%%manim` not found.</code></pre>
+</div>
+</div>
+<p>As we can see from above: everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method. In this <code>constructor</code> metho we define every object in ourscene, every transformation, and, in-short, run the entire sequence of actions in our scene.</p>
+</section>
 </section>
 <section id="drawing-things-to-the-scene" class="level2">
 <h2 class="anchored" data-anchor-id="drawing-things-to-the-scene">Drawing things to the scene</h2>
