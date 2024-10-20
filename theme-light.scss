@@ -313,17 +313,22 @@ a.pagination-link {
 // Custom Keyboard Shortcuts
 
 kbd {
+    color: #191516 !important;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 0.1em 0.5em;
+    padding: 0.5em 0.4em;
     margin: 0 0.2em;
-    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
-    background-color: #f7f7f7;
+    box-shadow: 0 1px 0px rgba(255, 254, 180, 0.6), 0 0 0 2px #dad0b1 inset;
+    background-color: #f0e1c6;
 }
 
 kbd.inline {
-    padding: 0.1em 0.2em;
+    padding: 0.06em 0.2em;
+}
+
+kbd.large {
+    padding: 0.5em 2em;
 }
 
 // Table styling
