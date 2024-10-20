@@ -207,6 +207,10 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </ul></li>
   </ul></li>
   <li><a href="#installing-quarto-for-blogging-with-jupyter-notebooks-optional" id="toc-installing-quarto-for-blogging-with-jupyter-notebooks-optional" class="nav-link" data-scroll-target="#installing-quarto-for-blogging-with-jupyter-notebooks-optional">Installing Quarto for Blogging with Jupyter Notebooks (Optional)</a></li>
+  <li><a href="#installing-manim-with-conda-incomplete" id="toc-installing-manim-with-conda-incomplete" class="nav-link" data-scroll-target="#installing-manim-with-conda-incomplete">Installing Manim with Conda (Incomplete)</a>
+  <ul class="collapse">
+  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -350,7 +354,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td><code>conda list</code></td>
-<td>Shows all ther packages installed in the currently active environment</td>
+<td>Shows all the packages installed in the currently active environment</td>
 </tr>
 <tr class="odd">
 <td><code>conda update --all</code></td>
@@ -369,8 +373,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <td>Deactivates the currently active environment</td>
 </tr>
 <tr class="odd">
-<td><code>conda create --name &lt;myenv&gt;</code></td>
-<td>Create a new empty environment</td>
+<td><code>conda create --name &lt;myenv&gt; [python=3.7.0 [ipython]]</code></td>
+<td>Create a new empty environment (or an environment with a <code>python</code> version and <code>ipython</code>)</td>
 </tr>
 <tr class="even">
 <td><code>conda create --name &lt;myenv&gt; --clone base</code></td>
@@ -405,9 +409,111 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="installing-quarto-for-blogging-with-jupyter-notebooks-optional" class="level1">
 <h1>Installing Quarto for Blogging with Jupyter Notebooks (Optional)</h1>
 <p>This blog, as mentioned in its description, uses <a href="https://quarto.org/">Quarto</a> to create its static pages from Jupyter Notebooks. We can install Quarto from <a href="https://anaconda.org/conda-forge/quarto">Conda Forge</a> into our environment, but the support for the Conda distribution of Quarto seems to be lacking at the moment. Instead, we can install the Quarto CLI using the provided <a href="https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-win.msi">installer</a>.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Quarto is now on brew, install it using <a href="https://formulae.brew.sh/cask/quarto">this command</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> quarto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>Since Quarto freezes the output of the code blocks in Jupyter Noteboooks, we can run our notebooks locally in the <code>base</code> conda environment which has all the necessary scientific packages installed, then just use the globally installed Quarto CLI to preview, or publish our blog.</p>
+</section>
+<section id="installing-manim-with-conda-incomplete" class="level1">
+<h1>Installing Manim with Conda (Incomplete)</h1>
+<p><a href="https://docs.conda.io/projects/conda/en/latest/index.html">Conda</a> is an open-source package management and environment management system that is primarily used for Python, but it can also handle other programming languages like R. It’s designed to make it easy to install, run, and manage libraries and software dependencies in isolated environments, ensuring that different projects don’t interfere with each other. Alternatives to conda include pip (Python Package Installer), virtualenv (<code>venv</code>), and their merger Pipenv.</p>
+<p>First, activate an environment (with your choice of environment and/or package manager from above). I will be using conda to activate a new dedicated environment as <code>manim-playground</code> using:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">conda</span> update conda <span class="co"># To, first, update your conda version. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>You need to deactivate any active conda environment before running this command.</p>
+</div>
+</div>
+</div>
+<p>Then create a mew invironment with a version of python that works with <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> (more on this later):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground python=3.7.0 ipython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a conda environment in <code>~/anaconda3/envs/manim-playground</code>. Activate it with:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">conda</span> activate manim-playground</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To deactivate the environment at any point, use:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="manim-installation" class="level4">
+<h4 class="anchored" data-anchor-id="manim-installation">Manim installation</h4>
+<p>Here are the <a href="https://docs.manim.community/en/stable/installation/conda.html">conda installation steps for Manim</a>.</p>
+<p>To install Manim we simply do:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="jupyter-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h3>
+<p>To import Manim:</p>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>This may trigger your IDE of choice, which is VS Code in my case, to download the ipykernel into the conda environment. This should be taken care of automatically. If not, installing Python into the environment should be straightforward. To avoid this in the future, instead of creating a blank conda environment we can clone from the <code>base</code> environment by:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground <span class="at">--clone</span> base   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>To see any output inside Jupyter Notebooks, we should also supply the <strong>magic command</strong> to invoke Manim (the animation engine). This magic command is its own installation – <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>. Note that only pip3 is available as a package manager for jupyter-manim but that’s ok because pip respects conda environments. When we run <code>pip3 install &lt;package&gt;</code>, pip installs the package and its dependencies in the <code>site-packages</code> directory of that specific, active conda environment, just as it would in any standard Python environment. So issue:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">pip</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>pip3</code> instead of pip invokes the base version of Python and fails with <code>"error: externally-managed-environment"</code>. To check version of pip run the following within the conda environment of choice:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">which</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output of which command from the manip-playground environment is:</p>
+<pre><code>~/anaconda3/bin/pip</code></pre>
+</div>
+</div>
+</div>
+<p>Now we can import <code>jupyter_manim</code> and provide the magic command to our cells.</p>
+<p>The magic command is:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
+<p>To display <code>manim</code> help options use:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
