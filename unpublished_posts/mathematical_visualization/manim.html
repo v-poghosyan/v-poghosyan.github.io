@@ -222,19 +222,65 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="installation">Installation</h3>
 <section id="optional---create-an-isolated-python-environment" class="level4">
 <h4 class="anchored" data-anchor-id="optional---create-an-isolated-python-environment">Optional - Create an isolated Python environment</h4>
-<p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects.</p>
-<p>If you have multiple Python versions installed, do <code>which pip</code> or <code>which pip3</code> (a package downloader that comes with Python) to find the right version of <code>pip</code> to use. In my case, <code>pip</code> corresponds to <code>~/anaconda3/bin/pip</code> which corresponds to the Python installation from Conda (another environment and package manager for Python like <code>venv</code> that also supports R, C++, etc.). Note that you have to be in an active Conda environment to see a meaningful output for <code>which pip</code> if there’s no globally installed Python version on your machine. The other one, <code>pip3</code>, corresponds to <code>/opt/homebrew/bin/pip3</code> which came with the <code>python3</code> installation from Homebrew. I won’t be using Conda environments today due to lack of support for some Manim community libraries/plugins.</p>
-<p>For more on Conda see this <a href="../../unpublished_posts/python/set_up_a_local_development_environment_for_ML.html">post</a>.</p>
-<section id="step-1---install-virtualenv" class="level5">
-<h5 class="anchored" data-anchor-id="step-1---install-virtualenv">Step 1 - Install <code>virtualenv</code></h5>
-<p>Issue the following command in your terminal:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install virtualenv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects. Note that <code>venv</code> is quite old, and the new way of managing Python environments and packages is <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> (a merger of <code>pip</code> and <code>venv</code>). More on that later… For this project we’ll stick with <code>venv</code> because I like having physical folders that contain the various environments used across my notes on this site.</p>
+<section id="a-note-on-using-multiple-python-virtual-environment-managers" class="level5">
+<h5 class="anchored" data-anchor-id="a-note-on-using-multiple-python-virtual-environment-managers">A note on using multiple Python virtual environment managers</h5>
+<p>If you have multiple Python versions installed, do <code>which pip</code> or <code>which pip3</code> (or <code>which python</code>/<code>which python3</code>). This is a package manager that comes with a Python installation.</p>
+<p>In my case, <code>pip</code> corresponds to <code>~/anaconda3/bin/pip</code> (which corresponds to the Python installation from Conda). Conda is yet another environment and package manager for Python, like <code>venv</code>, but it also supports R, C++, and others. You have to be in an active Conda environment to see a meaningful output for <code>which pip</code> (assuming there’s no globally installed Python version on your machine).</p>
+<p>The other one, <code>pip3</code>, corresponds to <code>/opt/homebrew/bin/pip3</code> which came with the <code>python3</code> installation from Homebrew. I won’t be using Conda environments today due to their lack of support for some Manim community libraries/plugins.</p>
+<p>For more on Conda see this <a href="../../unpublished_posts/python/set_up_a_local_development_environment_for_ML.html">legacy post</a> (legacy posts are unpublished posts that serve as repositories of unorganized thoughts and snippets).</p>
+</section>
+<section id="step-1---create-a-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-1---create-a-virtual-environment">Step 1 - Create a virtual environment</h5>
+<p>First, create a new virtual environment. Issue the following command in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a folder <code>/manim-sandbox</code> in the project’s root directory.</p>
+</section>
+<section id="step-2---activatedeactivate-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-2---activatedeactivate-virtual-environment">Step 2 - Activate/deactivate virtual environment</h5>
+<p>To activate, issue command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> manim-sandbox/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which runs the <code>activate</code> script of the virtual environment.</p>
+<p>To deactivate, simply do:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-3---install-packages-into-the-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-3---install-packages-into-the-environment">Step 3 - Install packages into the environment</h5>
+<p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
+<p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
+<pre><code>Package Version
+------- -------
+pip     24.0</code></pre>
+<p>Let’s upgrade pip for good measure. Issue:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-4---exporting-requirements" class="level5">
+<h5 class="anchored" data-anchor-id="step-4---exporting-requirements">Step 4 - Exporting requirements</h5>
+<p>Rather than committing the entire environment to the repository of a project, we commit a <code>requirements.txt</code> containing the output of <code>pip list</code> generated by:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To get the packages inside this file in a new environment, do:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="installing-prerequisites" class="level4">
+<h4 class="anchored" data-anchor-id="installing-prerequisites">Installing Prerequisites</h4>
+<p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some additional dependencies for Apple Silicon machines. Run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="installing-manim-and-jupyter-manim" class="level4">
+<h4 class="anchored" data-anchor-id="installing-manim-and-jupyter-manim">Installing Manim and Jupyter-Manim</h4>
+<p>Activate the virtual environment <code>manim-sandbox</code> and do:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For use in Jupyter Notebooks, also install <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The magic command is:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
 <p>To display <code>manim</code> help options use:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="the-grant-sanderson-setup" class="level3">
@@ -248,26 +294,26 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
-<div id="cell-4" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim SquareToCircle</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Obbligatory Hello World</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> Text(<span class="st">"Hello, World!"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assing simple geometry</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(circle)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(square)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            Write(message, run_time<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-7" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim SquareToCircle</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Obbligatory Hello World</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> Text(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assing simple geometry</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(circle)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(square)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>            Write(message, run_time<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/vahrampoghosyan/anaconda3/envs/manim-playground/lib/python3.10/site-packages/jupyter_manim/__init__.py:140: UserWarning: Pickling failed: Could not find IPython frame
   warn('Pickling failed: ' + str(e))
