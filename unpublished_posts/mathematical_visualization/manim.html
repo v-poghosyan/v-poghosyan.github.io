@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -113,9 +113,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -200,11 +197,13 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#the-grant-sanderson-setup" id="toc-the-grant-sanderson-setup" class="nav-link" data-scroll-target="#the-grant-sanderson-setup">The Grant Sanderson setup</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#drawing-manim-scenes" id="toc-drawing-manim-scenes" class="nav-link" data-scroll-target="#drawing-manim-scenes">Drawing manim scenes</a>
+  <ul class="collapse">
   <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a>
   <ul class="collapse">
   <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to Circle Transformation</a></li>
   </ul></li>
-  <li><a href="#drawing-things-to-the-scene" id="toc-drawing-things-to-the-scene" class="nav-link" data-scroll-target="#drawing-things-to-the-scene">Drawing things to the scene</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -302,66 +301,51 @@ Note
 </div>
 </div>
 <p>However, I chose to render my manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a requirements.txt file with all the library dependencies for my manim projects.</p>
+</section>
+<section id="rendering-a-manim-scene" class="level4">
+<h4 class="anchored" data-anchor-id="rendering-a-manim-scene">Rendering a manim scene</h4>
 <p>To run my manim scenes, I instead use the <code>manim</code> command from my terminal at the root <code>/manim-projects</code> directory, like so:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>With that, let’s create a manim scene.</p>
 </section>
 </section>
 <section id="the-grant-sanderson-setup" class="level3">
 <h3 class="anchored" data-anchor-id="the-grant-sanderson-setup">The Grant Sanderson setup</h3>
 <p>Grant himself defines a custom script that hooks into a local Python file defining the entire scene, and parses the script looking for certain leading comments. It then runs the script only up to that comment, so that the scene pauses at the last step, at the part of the code he’s still working on. He then uses an IDE shortcut to execute just that single code block (clearly demarcated with comments) in a Python interpreter, which renders the relevant portion of the scene to the output window. In this way, he can incrementally test parts of the scene (mimicking a Jupyter notebook setup)</p>
-<p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YoutUbe tutorial</a>.</p>
-<p>Now let’s take a look at some actual manim scenes.</p>
+<p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YouTube tutorial</a>.</p>
+<p>Now let’s draw some actual manim scenes.</p>
 </section>
 </section>
+</section>
+<section id="drawing-manim-scenes" class="level1">
+<h1>Drawing manim scenes</h1>
 <section id="the-scene-object" class="level2">
 <h2 class="anchored" data-anchor-id="the-scene-object">The <code>Scene</code> object</h2>
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
-<div id="cell-3" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim SquareToCircle</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.scene.scene <span class="im">import</span> Scene</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.mobject.geometry <span class="im">import</span> Circle</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.mobject.geometry <span class="im">import</span> Square</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.animation.creation <span class="im">import</span> ShowCreation</span>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:140: UserWarning: Pickling failed: Could not find IPython frame
-  warn('Pickling failed: ' + str(e))
-/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:247: UserWarning: Assembling imports failed: Could not find IPython frame
-  warn('Assembling imports failed: ' + str(e))</code></pre>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<p>As we can see from above:</p>
+<ol type="1">
+<li>Everything in manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method.</li>
+<li>In this <code>constructor</code> method, we define every object in our scene, every transformation, and run the entire sequence of actions. Everything happens inside the constructor.</li>
+</ol>
 
-    <video width="854" height="480" autoplay="autoplay" controls="">
-        <source src="media/videos/tmpwj19__i_/1440p60/SquareToCircle.mp4" type="video/mp4">
-    </video>
-    
-</div>
-</div>
-<p>As we can see from above: everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method. In this <code>constructor</code> metho we define every object in ourscene, every transformation, and, in-short, run the entire sequence of actions in our scene.</p>
+
 </section>
-</section>
-<section id="drawing-things-to-the-scene" class="level2">
-<h2 class="anchored" data-anchor-id="drawing-things-to-the-scene">Drawing things to the scene</h2>
-
-
 </section>
 </section>
 
