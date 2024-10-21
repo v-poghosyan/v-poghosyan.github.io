@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -113,6 +113,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -153,7 +156,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Manim - An introduction</h1>
+      <div class="quarto-title-block"><div><h1 class="title">Manim - An introduction</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/v-poghosyan/manim-projects"><i class="bi"></i> Code</button></div></div>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Manim</div>
                 <div class="quarto-category">Mathematical Modelling</div>
@@ -197,7 +200,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#the-grant-sanderson-setup" id="toc-the-grant-sanderson-setup" class="nav-link" data-scroll-target="#the-grant-sanderson-setup">The Grant Sanderson setup</a></li>
   </ul></li>
-  <li><a href="#scene-object" id="toc-scene-object" class="nav-link" data-scroll-target="#scene-object">Scene object</a>
+  <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a>
   <ul class="collapse">
   <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to Circle Transformation</a></li>
   </ul></li>
@@ -220,8 +223,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>Manim is a custom Python library for mathematical visualizations. It has two versions, the first version is maintained by Grant Sanderson himself (the acclaimed Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). And another one, a fork of the original, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> which enjoys more contributions and has better documentation and support (in terms of attentiveness to PRs and such). For this series, I will use the community edition to help maintain this document’s relevance and, possibly, contribute to the open-source community project myself.</p>
 <section id="installation" class="level3">
 <h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<section id="optional---create-an-isolated-python-environment" class="level4">
-<h4 class="anchored" data-anchor-id="optional---create-an-isolated-python-environment">Optional - Create an isolated Python environment</h4>
+<section id="optional-create-an-isolated-python-environment" class="level4">
+<h4 class="anchored" data-anchor-id="optional-create-an-isolated-python-environment">(Optional) Create an isolated Python environment</h4>
 <p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects. Note that <code>venv</code> is quite old, and the new way of managing Python environments and packages is <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> (a merger of <code>pip</code> and <code>venv</code>). More on that later… For this project we’ll stick with <code>venv</code> because I like having physical folders that contain the various environments used across my notes on this site.</p>
 <section id="a-note-on-using-multiple-python-virtual-environment-managers" class="level5">
 <h5 class="anchored" data-anchor-id="a-note-on-using-multiple-python-virtual-environment-managers">A note on using multiple Python virtual environment managers</h5>
@@ -230,22 +233,22 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>The other one, <code>pip3</code>, corresponds to <code>/opt/homebrew/bin/pip3</code> which came with the <code>python3</code> installation from Homebrew. I won’t be using Conda environments today due to their lack of support for some Manim community libraries/plugins.</p>
 <p>For more on Conda see this <a href="../../unpublished_posts/python/set_up_a_local_development_environment_for_ML.html">legacy post</a> (legacy posts are unpublished posts that serve as repositories of unorganized thoughts and snippets).</p>
 </section>
-<section id="step-1---create-a-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-1---create-a-virtual-environment">Step 1 - Create a virtual environment</h5>
+<section id="step-1-create-a-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-1-create-a-virtual-environment">(Step 1) Create a virtual environment</h5>
 <p>First, create a new virtual environment. Issue the following command in your terminal:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will create a folder <code>/manim-sandbox</code> in the project’s root directory.</p>
 </section>
-<section id="step-2---activatedeactivate-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-2---activatedeactivate-virtual-environment">Step 2 - Activate/deactivate virtual environment</h5>
+<section id="step-2-activatedeactivate-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-2-activatedeactivate-virtual-environment">(Step 2) Activate/deactivate virtual environment</h5>
 <p>To activate, issue command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> manim-sandbox/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which runs the <code>activate</code> script of the virtual environment.</p>
 <p>To deactivate, simply do:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-3---install-packages-into-the-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-3---install-packages-into-the-environment">Step 3 - Install packages into the environment</h5>
+<section id="step-3-install-packages-into-the-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-3-install-packages-into-the-environment">(Step 3) Install packages into the environment</h5>
 <p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
 <p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
 <pre><code>Package Version
@@ -254,8 +257,8 @@ pip     24.0</code></pre>
 <p>Let’s upgrade pip for good measure. Issue:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-4---exporting-requirements" class="level5">
-<h5 class="anchored" data-anchor-id="step-4---exporting-requirements">Step 4 - Exporting requirements</h5>
+<section id="step-4-exporting-requirements" class="level5">
+<h5 class="anchored" data-anchor-id="step-4-exporting-requirements">(Step 4) Exporting requirements</h5>
 <p>Rather than committing the entire environment to the repository of a project, we commit a <code>requirements.txt</code> containing the output of <code>pip list</code> generated by:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To get the packages inside this file in a new environment, do:</p>
@@ -264,127 +267,92 @@ pip     24.0</code></pre>
 </section>
 <section id="installing-prerequisites" class="level4">
 <h4 class="anchored" data-anchor-id="installing-prerequisites">Installing Prerequisites</h4>
-<p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some additional dependencies for Apple Silicon machines. Run:</p>
+<p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support. Run:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Form LaTeX support in Manim</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> mactex-no-gui</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="installing-manim-and-jupyter-manim" class="level4">
-<h4 class="anchored" data-anchor-id="installing-manim-and-jupyter-manim">Installing Manim and Jupyter-Manim</h4>
+<section id="installing-manim-and-optionally-jupyter-manim" class="level4">
+<h4 class="anchored" data-anchor-id="installing-manim-and-optionally-jupyter-manim">Installing manim and (optionally) jupyter-manim</h4>
 <p>Activate the virtual environment <code>manim-sandbox</code> and do:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For use in Jupyter Notebooks, also install <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The magic command is:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
-<p>To display <code>manim</code> help options use:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manimlib <span class="co"># or 'manim' for the original non-community version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> that enables</p>
+<p>the <strong>magic command</strong>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is Jupyter’s equivalent of that).</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Magic commands behave exactly like command line commands with their arguments. For example, to display <code>manim</code> help options, you can use:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>However, I chose to render my manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a requirements.txt file with all the library dependencies for my manim projects.</p>
+<p>To run my manim scenes, I instead use the <code>manim</code> command from my terminal at the root <code>/manim-projects</code> directory, like so:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With that, let’s create a manim scene.</p>
 </section>
 </section>
 <section id="the-grant-sanderson-setup" class="level3">
 <h3 class="anchored" data-anchor-id="the-grant-sanderson-setup">The Grant Sanderson setup</h3>
 <p>Grant himself defines a custom script that hooks into a local Python file defining the entire scene, and parses the script looking for certain leading comments. It then runs the script only up to that comment, so that the scene pauses at the last step, at the part of the code he’s still working on. He then uses an IDE shortcut to execute just that single code block (clearly demarcated with comments) in a Python interpreter, which renders the relevant portion of the scene to the output window. In this way, he can incrementally test parts of the scene (mimicking a Jupyter notebook setup)</p>
 <p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YoutUbe tutorial</a>.</p>
+<p>Now let’s take a look at some actual manim scenes.</p>
 </section>
 </section>
-<section id="scene-object" class="level2">
-<h2 class="anchored" data-anchor-id="scene-object">Scene object</h2>
+<section id="the-scene-object" class="level2">
+<h2 class="anchored" data-anchor-id="the-scene-object">The <code>Scene</code> object</h2>
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
-<div id="cell-7" class="cell" data-execution_count="8">
+<div id="cell-3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim SquareToCircle</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Obbligatory Hello World</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> Text(<span class="st">"Hello, World!"</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assing simple geometry</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(circle)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(square)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>            Write(message, run_time<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.scene.scene <span class="im">import</span> Scene</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.mobject.geometry <span class="im">import</span> Circle</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.mobject.geometry <span class="im">import</span> Square</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.animation.creation <span class="im">import</span> ShowCreation</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/vahrampoghosyan/anaconda3/envs/manim-playground/lib/python3.10/site-packages/jupyter_manim/__init__.py:140: UserWarning: Pickling failed: Could not find IPython frame
+<pre><code>/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:140: UserWarning: Pickling failed: Could not find IPython frame
   warn('Pickling failed: ' + str(e))
-/Users/vahrampoghosyan/anaconda3/envs/manim-playground/lib/python3.10/site-packages/jupyter_manim/__init__.py:247: UserWarning: Assembling imports failed: Could not find IPython frame
+/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:247: UserWarning: Assembling imports failed: Could not find IPython frame
   warn('Assembling imports failed: ' + str(e))</code></pre>
 </div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">Exception</span>                                 Traceback (most recent call last)
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/jupyter_manim/__init__.py:127</span>, in <span class="ansi-cyan-fg">ManimMagics.export_globals</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg ansi-bold">    126</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> frame:
-<span class="ansi-green-fg">--&gt; 127</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">Exception</span>(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">Could not find IPython frame</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">    129</span> globals_dict <span style="color:rgb(98,98,98)">=</span> frame[<span style="color:rgb(98,98,98)">0</span>]<span style="color:rgb(98,98,98)">.</span>f_globals
+<div class="cell-output cell-output-display" data-execution_count="16">
 
-<span class="ansi-red-fg">Exception</span>: Could not find IPython frame
-
-During handling of the above exception, another exception occurred:
-
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[8], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">manim</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">SquareToCircle</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">#| code-fold: false</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">class SquareToCircle(Scene):</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">    def construct(self):</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        # Obbligatory Hello World</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        message = Text(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">Hello, World!</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        # Assing simple geometry</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        circle = Circle()</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        square = Square()</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        self.add(circle)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        self.add(square)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        # Animating text</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        self.play(</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">            Write(message, run_time=3)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        )</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
-
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2541</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg">(self, magic_name, line, cell)</span>
-<span class="ansi-green-fg ansi-bold">   2539</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
-<span class="ansi-green-fg ansi-bold">   2540</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
-<span class="ansi-green-fg">-&gt; 2541</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">   2543</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
-<span class="ansi-green-fg ansi-bold">   2544</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
-<span class="ansi-green-fg ansi-bold">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
-<span class="ansi-green-fg ansi-bold">   2546</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
-
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/jupyter_manim/__init__.py:264</span>, in <span class="ansi-cyan-fg">ManimMagics.manim</span><span class="ansi-blue-fg">(self, line, cell)</span>
-<span class="ansi-green-fg ansi-bold">    261</span>             stderr <span style="color:rgb(98,98,98)">=</span> StringIO()
-<span class="ansi-green-fg ansi-bold">    262</span>             enter(redirect_stderr(stderr))
-<span class="ansi-green-fg">--&gt; 264</span>         <span class="ansi-yellow-bg">manimlib</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">main</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    265</span> <span style="font-weight:bold;color:rgb(0,135,0)">finally</span>:
-<span class="ansi-green-fg ansi-bold">    266</span>     os<span style="color:rgb(98,98,98)">.</span>remove(f<span style="color:rgb(98,98,98)">.</span>name)
-
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/manimlib/__init__.py:9</span>, in <span class="ansi-cyan-fg">main</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg ansi-bold">      7</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">main</span>():
-<span class="ansi-green-fg ansi-bold">      8</span>     args <span style="color:rgb(98,98,98)">=</span> manimlib<span style="color:rgb(98,98,98)">.</span>config<span style="color:rgb(98,98,98)">.</span>parse_cli()
-<span class="ansi-green-fg">----&gt; 9</span>     config <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">manimlib</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get_configuration</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     10</span>     manimlib<span style="color:rgb(98,98,98)">.</span>constants<span style="color:rgb(98,98,98)">.</span>initialize_directories(config)
-<span class="ansi-green-fg ansi-bold">     11</span>     manimlib<span style="color:rgb(98,98,98)">.</span>extract_scene<span style="color:rgb(98,98,98)">.</span>main(config)
-
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/manimlib/config.py:155</span>, in <span class="ansi-cyan-fg">get_configuration</span><span class="ansi-blue-fg">(args)</span>
-<span class="ansi-green-fg ansi-bold">    154</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">get_configuration</span>(args):
-<span class="ansi-green-fg">--&gt; 155</span>     module <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">get_module</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">file</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    156</span>     file_writer_config <span style="color:rgb(98,98,98)">=</span> {
-<span class="ansi-green-fg ansi-bold">    157</span>         <span style="font-style:italic;color:rgb(95,135,135)"># By default, write to file</span>
-<span class="ansi-green-fg ansi-bold">    158</span>         <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">write_to_movie</span><span style="color:rgb(175,0,0)">"</span>: args<span style="color:rgb(98,98,98)">.</span>write_to_movie <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> args<span style="color:rgb(98,98,98)">.</span>save_last_frame,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-fg ansi-bold">    166</span>         <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">input_file_path</span><span style="color:rgb(175,0,0)">"</span>: args<span style="color:rgb(98,98,98)">.</span>file,
-<span class="ansi-green-fg ansi-bold">    167</span>     }
-<span class="ansi-green-fg ansi-bold">    168</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(module, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">OUTPUT_DIRECTORY</span><span style="color:rgb(175,0,0)">"</span>):
-
-File <span class="ansi-green-fg">~/anaconda3/envs/manim-playground/lib/python3.10/site-packages/manimlib/config.py:150</span>, in <span class="ansi-cyan-fg">get_module</span><span class="ansi-blue-fg">(file_name)</span>
-<span class="ansi-green-fg ansi-bold">    148</span> spec <span style="color:rgb(98,98,98)">=</span> importlib<span style="color:rgb(98,98,98)">.</span>util<span style="color:rgb(98,98,98)">.</span>spec_from_file_location(module_name, file_name)
-<span class="ansi-green-fg ansi-bold">    149</span> module <span style="color:rgb(98,98,98)">=</span> importlib<span style="color:rgb(98,98,98)">.</span>util<span style="color:rgb(98,98,98)">.</span>module_from_spec(spec)
-<span class="ansi-green-fg">--&gt; 150</span> <span class="ansi-yellow-bg">spec</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">loader</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">exec_module</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">module</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    151</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> module
-
-File <span class="ansi-green-fg">&lt;frozen importlib._bootstrap_external&gt;:883</span>, in <span class="ansi-cyan-fg">exec_module</span><span class="ansi-blue-fg">(self, module)</span>
-
-File <span class="ansi-green-fg">&lt;frozen importlib._bootstrap&gt;:241</span>, in <span class="ansi-cyan-fg">_call_with_frames_removed</span><span class="ansi-blue-fg">(f, *args, **kwds)</span>
-
-File <span class="ansi-green-fg">/var/folders/1_/2hldhtgx34549lmhntnvw3v80000gn/T/tmpposs8n_s.py:3</span>
-
-<span class="ansi-red-fg">NameError</span>: name 'Scene' is not defined</pre>
-</div>
+    <video width="854" height="480" autoplay="autoplay" controls="">
+        <source src="media/videos/tmpwj19__i_/1440p60/SquareToCircle.mp4" type="video/mp4">
+    </video>
+    
 </div>
 </div>
 <p>As we can see from above: everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method. In this <code>constructor</code> metho we define every object in ourscene, every transformation, and, in-short, run the entire sequence of actions in our scene.</p>
@@ -631,6 +599,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
