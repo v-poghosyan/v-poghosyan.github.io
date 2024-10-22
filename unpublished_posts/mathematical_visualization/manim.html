@@ -301,6 +301,7 @@ Note
 </div>
 </div>
 <p>However, I chose to render my manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a requirements.txt file with all the library dependencies for my manim projects.</p>
+<p>Only occasionally, throught these notes, will I use the jupyter-manim’s cell magic <code>%%manim</code> to render something in these notes. When I do, the result will be published inside the <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory.</p>
 </section>
 <section id="rendering-a-manim-scene" class="level4">
 <h4 class="anchored" data-anchor-id="rendering-a-manim-scene">Rendering a manim scene</h4>
@@ -323,20 +324,34 @@ Note
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
-<div id="cell-3" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s use <code>jupyter-manim</code> for the first few examples.</p>
+<div id="cell-4" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm SquareToCircle</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here I have manually referenced the video created by manim in the aforementioned <code>/media</code> directory.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="./media/videos/tmpytrklf95/720p30/SquareToCircle.mp4" class="img-fluid" controls=""><a href="./media/videos/tmpytrklf95/720p30/SquareToCircle.mp4">Video</a></video></p>
+<figcaption>Square to Circle Manim Animation</figcaption>
+</figure>
 </div>
 <p>As we can see from above:</p>
 <ol type="1">
