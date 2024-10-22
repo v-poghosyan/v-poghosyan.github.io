@@ -229,7 +229,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="a-note-on-using-multiple-python-virtual-environment-managers">A note on using multiple Python virtual environment managers</h5>
 <p>If you have multiple Python versions installed, do <code>which pip</code> or <code>which pip3</code> (or <code>which python</code>/<code>which python3</code>). This is a package manager that comes with a Python installation.</p>
 <p>In my case, <code>pip</code> corresponds to <code>~/anaconda3/bin/pip</code> (which corresponds to the Python installation from Conda). Conda is yet another environment and package manager for Python, like <code>venv</code>, but it also supports R, C++, and others. You have to be in an active Conda environment to see a meaningful output for <code>which pip</code> (assuming there’s no globally installed Python version on your machine).</p>
-<p>The other one, <code>pip3</code>, corresponds to <code>/opt/homebrew/bin/pip3</code> which came with the <code>python3</code> installation from Homebrew. I won’t be using Conda environments today due to their lack of support for some Manim community libraries/plugins.</p>
+<p>The other one, <code>pip3</code>, corresponds to <code>/opt/homebrew/bin/pip3</code> which came with the <code>python3</code> installation from Homebrew (for more, see this <a href="../../unpublished_posts/local_development_setup/brew.html">post</a>). I won’t be using Conda environments due to their lack of support for some Manim community libraries/plugins.</p>
 <p>For more on Conda see this <a href="../../unpublished_posts/python/set_up_a_local_development_environment_for_ML.html">legacy post</a> (legacy posts are unpublished posts that serve as repositories of unorganized thoughts and snippets).</p>
 </section>
 <section id="step-1-create-a-virtual-environment" class="level5">
@@ -250,6 +250,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h5 class="anchored" data-anchor-id="step-3-install-packages-into-the-environment">(Step 3) Install packages into the environment</h5>
 <p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
 <p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
+<p><strong>Output:</strong></p>
 <pre><code>Package Version
 ------- -------
 pip     24.0</code></pre>
@@ -342,13 +343,13 @@ Note
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating geometry</span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here I have manually referenced the video created by Manim in the aforementioned <code>/media</code> directory within the post category directory <code>mathematical_visualization</code>.</p>
+<p>Here I have manually referenced the video created by Manim in the aforementioned <code>/media</code> directory within the post category directory (<code>/mathematical_visualization</code>).</p>
 <div id="fig-square-to-circle-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-square-to-circle-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
