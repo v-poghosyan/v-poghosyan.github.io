@@ -279,9 +279,8 @@ pip     24.0</code></pre>
 <section id="installing-manim-and-optionally-jupyter-manim" class="level4">
 <h4 class="anchored" data-anchor-id="installing-manim-and-optionally-jupyter-manim">Installing Manim and (optionally) Jupyter-Manim</h4>
 <p>Activate the virtual environment <code>manim-sandbox</code> and do:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manimlib <span class="co"># or 'manim' for the original non-community version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> that enables</p>
-<p>the <strong>magic command</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manimlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is Jupyter’s equivalent of that).</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
