@@ -198,7 +198,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <li><a href="#the-grant-sanderson-setup" id="toc-the-grant-sanderson-setup" class="nav-link" data-scroll-target="#the-grant-sanderson-setup">The Grant Sanderson setup</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#drawing-manim-scenes" id="toc-drawing-manim-scenes" class="nav-link" data-scroll-target="#drawing-manim-scenes">Drawing manim scenes</a>
+  <li><a href="#drawing-manim-scenes" id="toc-drawing-manim-scenes" class="nav-link" data-scroll-target="#drawing-manim-scenes">Drawing Manim scenes</a>
   <ul class="collapse">
   <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a>
   <ul class="collapse">
@@ -276,7 +276,7 @@ pip     24.0</code></pre>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="installing-manim-and-optionally-jupyter-manim" class="level4">
-<h4 class="anchored" data-anchor-id="installing-manim-and-optionally-jupyter-manim">Installing manim and (optionally) jupyter-manim</h4>
+<h4 class="anchored" data-anchor-id="installing-manim-and-optionally-jupyter-manim">Installing Manim and (optionally) Jupyter-Manim</h4>
 <p>Activate the virtual environment <code>manim-sandbox</code> and do:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manimlib <span class="co"># or 'manim' for the original non-community version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> that enables</p>
@@ -300,63 +300,74 @@ Note
 </div>
 </div>
 </div>
-<p>However, I chose to render my manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a requirements.txt file with all the library dependencies for my manim projects.</p>
-<p>Only occasionally, throught these notes, will I use the jupyter-manim’s cell magic <code>%%manim</code> to render something in these notes. When I do, the result will be published inside the <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory.</p>
+<p>However, I chose to render my Manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a <code>requirements.txt</code> file with all the library dependencies for my Manim projects.</p>
+<p>Only occasionally, throughout these notes, will I use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render something directly in these notes (in the interest of time). When I do so, the result will be rendered inside the <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory. To use Manim inside this digital garden itself (i.e.&nbsp;this very v-poghosyan.github.io website) I will also include a <code>requirements.txt</code> encapsulating a Manim sandbox for the Manim snippets in these posts.</p>
 </section>
 <section id="rendering-a-manim-scene" class="level4">
 <h4 class="anchored" data-anchor-id="rendering-a-manim-scene">Rendering a manim scene</h4>
-<p>To run my manim scenes, I instead use the <code>manim</code> command from my terminal at the root <code>/manim-projects</code> directory, like so:</p>
+<p>In summary, to render my Manim scenes, I use the <code>manim</code> command from my terminal at the root <code>/manim-projects</code> directory, like so:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively, if my Manim script is inside these Jupyter notes, I use the cell magic:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">%%manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="the-grant-sanderson-setup" class="level3">
 <h3 class="anchored" data-anchor-id="the-grant-sanderson-setup">The Grant Sanderson setup</h3>
 <p>Grant himself defines a custom script that hooks into a local Python file defining the entire scene, and parses the script looking for certain leading comments. It then runs the script only up to that comment, so that the scene pauses at the last step, at the part of the code he’s still working on. He then uses an IDE shortcut to execute just that single code block (clearly demarcated with comments) in a Python interpreter, which renders the relevant portion of the scene to the output window. In this way, he can incrementally test parts of the scene (mimicking a Jupyter notebook setup)</p>
 <p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YouTube tutorial</a>.</p>
-<p>Now let’s draw some actual manim scenes.</p>
+<p>Now let’s draw some actual Manim scenes.</p>
 </section>
 </section>
 </section>
 <section id="drawing-manim-scenes" class="level1">
-<h1>Drawing manim scenes</h1>
+<h1>Drawing Manim scenes</h1>
 <section id="the-scene-object" class="level2">
 <h2 class="anchored" data-anchor-id="the-scene-object">The <code>Scene</code> object</h2>
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
 <p>Let’s use <code>jupyter-manim</code> for the first few examples.</p>
-<div id="cell-4" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-5" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm SquareToCircle</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-6" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm SquareToCircle</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating text</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here I have manually referenced the video created by manim in the aforementioned <code>/media</code> directory.</p>
+<p>Here I have manually referenced the video created by Manim in the aforementioned <code>/media</code> directory within the post category directory <code>mathematical_visualization</code>.</p>
+<div id="fig-square-to-circle-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-square-to-circle-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><video src="./media/videos/tmpytrklf95/720p30/SquareToCircle.mp4" class="img-fluid" controls=""><a href="./media/videos/tmpytrklf95/720p30/SquareToCircle.mp4">Video</a></video></p>
 <figcaption>Square to Circle Manim Animation</figcaption>
 </figure>
 </div>
-<p>As we can see from above:</p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-square-to-circle-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>As we can see from the Manim code above:</p>
 <ol type="1">
-<li>Everything in manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method.</li>
-<li>In this <code>constructor</code> method, we define every object in our scene, every transformation, and run the entire sequence of actions. Everything happens inside the constructor.</li>
+<li>Everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method.</li>
+<li>In this <code>constructor</code> method, we define every object that’s in our scene, every transformation, and every other sequence of actions. Everything interesting, in short, happens inside the <code>constructor</code>.</li>
 </ol>
 
 
