@@ -241,7 +241,7 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Note that you have to be in an active Conda environment to see any sort of meaningful output for <code>which pip</code> (assuming, of course, there’s no globally installed Python version on your machine that’s aliased to <code>pip</code>/<code>python</code>). If there is such an aliasing, the <a href="https://www.ibm.com/docs/pl/aix/7.2?topic=u-unalias-command">unalias</a> command can help.</p>
+<p>Note that you have to be in an active Conda environment to see any sort of meaningful output for <code>which pip</code>. Assuming, of course, there’s no globally installed Python version on your machine that’s aliased to <code>pip</code>/<code>python</code>. If there is such an aliasing, the <a href="https://www.ibm.com/docs/en/aix/7.2?topic=u-unalias-command">unalias</a> command can help.</p>
 </div>
 </div>
 </div>
@@ -263,10 +263,10 @@ Note
 <p>Ultimately, having a mess like this is bad. If you find yourself encountering any issues (such as libraries that should be there not being there, or failures with cryptic error messages from these familiar libraries…) clean up your Python installations by uninstalling Homebrew and Conda. For Homebrew:</p>
 <ul>
 <li>Check this <a href="https://github.com/homebrew/install#uninstall-homebrew">README</a> for a <code>CURL</code> to run a provided uninstaller.</li>
-<li>On Apple Silicon, edit shell configuration file <code>~/.zprofile</code> (using <code>vim</code>) which sets the <code>$PATH</code> variable to give priority to Homebrew packages inside <code>/opt/homebrew</code>.</li>
+<li>On Apple Silicon, edit shell configuration file <code>~/.zprofile</code> (using <code>vim</code>) which sets the <code>$PATH</code> variable to give priority to Homebrew packages inside <code>/opt/homebrew</code> (for the various different shell configuration files see this <a href="../../unpublished_posts/local_development_setup/shell_configs.html">post</a>).</li>
 <li>Also remove the residual files the uninstaller leaves behind by <code>sudo rm -rf /opt/homebrew/</code></li>
 </ul>
-<p>Similar instructions exist for uninstalling <a href="https://docs.anaconda.com/anaconda/install/uninstall/">Conda</a>. At the end of this, <code>which python</code> should fail to output anything and <code>which python3</code> will correspond to <code>/usr/bin/python3</code> (where it’s installed through <code>apt</code>/<code>yum</code> or shipped with the OS). Now you may install <a href="https://brew.sh/">Brew</a> again, this time stick with <a href="https://formulae.brew.sh/formula/python@3.9">Python 3.9</a>. Then stick to using <code>pip3.9 install &lt;PackageName&gt;</code> all the time, or make sure the <code>python3</code> in the terminal configuration is correctly linked to the version installed with Homebrew.</p>
+<p>Similar instructions exist for uninstalling <a href="https://docs.anaconda.com/anaconda/install/uninstall/">Conda</a>. At the end of this, <code>which python</code> should fail to output anything and <code>which python3</code> will correspond to <code>/usr/bin/python3</code> (where it’s installed through <code>apt</code>/<code>yum</code> or shipped with the OS). Now you may install <a href="https://brew.sh/">Brew</a> again, this time stick with <a href="https://formulae.brew.sh/formula/python@3.9">Python 3.9</a>. Then stick to using <code>pip3.9 install &lt;PackageName&gt;</code> all the time, or make sure the <code>python3</code> in the terminal configuration is correctly linked to the version installed with Homebrew. You can do so by <code>unalias pip</code> and <code>alias pip=pip3.9</code>.</p>
 </div>
 </div>
 </div>
