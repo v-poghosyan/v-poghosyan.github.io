@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2024-10-20">
+<meta name="dcterms.date" content="2023-10-28">
 
-<title>Shell Configurations – v-poghosyan</title>
+<title>Set Up a Local Development Environment for Machine Learning – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -153,11 +153,14 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Shell Configurations</h1>
+      <h1 class="title">Set Up a Local Development Environment for Machine Learning</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Shell</div>
-                <div class="quarto-category">Shell Configurations</div>
-                <div class="quarto-category">Local Dev Setup</div>
+                <div class="quarto-category">Local Dev Setup (Win)</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Python Environment Managers</div>
+                <div class="quarto-category">Conda</div>
+                <div class="quarto-category">Quarto</div>
+                <div class="quarto-category">Machine Learning</div>
               </div>
                   </div>
   </div>
@@ -175,7 +178,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 20, 2024</p>
+        <p class="date">October 28, 2023</p>
       </div>
     </div>
     
@@ -191,55 +194,24 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#shell-configuration" id="toc-shell-configuration" class="nav-link active" data-scroll-target="#shell-configuration">Shell Configuration</a>
-  <ul>
-  <li><a href="#interactive-login-shells-vs-non-login-shells" id="toc-interactive-login-shells-vs-non-login-shells" class="nav-link" data-scroll-target="#interactive-login-shells-vs-non-login-shells">Interactive Login Shells vs Non-Login Shells</a></li>
-  <li><a href="#bash-vs-zsh-configuration-files" id="toc-bash-vs-zsh-configuration-files" class="nav-link" data-scroll-target="#bash-vs-zsh-configuration-files">Bash vs Zsh Configuration Files</a>
-  <ul>
-  <li><a href="#bashrc-vs-.bash_profile" id="toc-bashrc-vs-.bash_profile" class="nav-link" data-scroll-target="#bashrc-vs-.bash_profile"><code>.bashrc</code> vs <code>.bash_profile</code></a>
+  <li><a href="#python-and-conda-installation" id="toc-python-and-conda-installation" class="nav-link active" data-scroll-target="#python-and-conda-installation">Python and Conda Installation</a>
   <ul class="collapse">
-  <li><a href="#bashrc" id="toc-bashrc" class="nav-link" data-scroll-target="#bashrc"><code>.bashrc</code></a>
+  <li><a href="#installing-python---system-level" id="toc-installing-python---system-level" class="nav-link" data-scroll-target="#installing-python---system-level">Installing Python - System Level</a></li>
+  <li><a href="#why-use-conda" id="toc-why-use-conda" class="nav-link" data-scroll-target="#why-use-conda">Why use Conda</a>
   <ul class="collapse">
-  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#typical-contents" id="toc-typical-contents" class="nav-link" data-scroll-target="#typical-contents">Typical contents</a></li>
+  <li><a href="#installing-anaconda-navigator-or-miniconda" id="toc-installing-anaconda-navigator-or-miniconda" class="nav-link" data-scroll-target="#installing-anaconda-navigator-or-miniconda">Installing Anaconda Navigator (or Miniconda)</a></li>
   </ul></li>
-  <li><a href="#bash_profile" id="toc-bash_profile" class="nav-link" data-scroll-target="#bash_profile"><code>.bash_profile</code></a>
+  <li><a href="#choosing-the-right-python-kernel-in-vscode" id="toc-choosing-the-right-python-kernel-in-vscode" class="nav-link" data-scroll-target="#choosing-the-right-python-kernel-in-vscode">Choosing the Right Python Kernel in VSCode</a></li>
+  <li><a href="#initializing-conda-in-the-shell" id="toc-initializing-conda-in-the-shell" class="nav-link" data-scroll-target="#initializing-conda-in-the-shell">Initializing Conda in the Shell</a></li>
+  <li><a href="#conda-commands" id="toc-conda-commands" class="nav-link" data-scroll-target="#conda-commands">Conda Commands</a>
   <ul class="collapse">
-  <li><a href="#purpose-1" id="toc-purpose-1" class="nav-link" data-scroll-target="#purpose-1">Purpose</a></li>
-  <li><a href="#typical-contents-1" id="toc-typical-contents-1" class="nav-link" data-scroll-target="#typical-contents-1">Typical contents</a></li>
+  <li><a href="#comparing-conda-environments" id="toc-comparing-conda-environments" class="nav-link" data-scroll-target="#comparing-conda-environments">Comparing Conda Environments</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#zshrc-vs-.zprofile" id="toc-zshrc-vs-.zprofile" class="nav-link" data-scroll-target="#zshrc-vs-.zprofile"><code>.zshrc</code> vs <code>.zprofile</code></a></li>
-  <li><a href="#bash_history-vs-.zsh_history" id="toc-bash_history-vs-.zsh_history" class="nav-link" data-scroll-target="#bash_history-vs-.zsh_history"><code>.bash_history</code> vs <code>.zsh_history</code></a>
+  <li><a href="#installing-quarto-for-blogging-with-jupyter-notebooks-optional" id="toc-installing-quarto-for-blogging-with-jupyter-notebooks-optional" class="nav-link" data-scroll-target="#installing-quarto-for-blogging-with-jupyter-notebooks-optional">Installing Quarto for Blogging with Jupyter Notebooks (Optional)</a></li>
+  <li><a href="#installing-manim-with-conda-incomplete" id="toc-installing-manim-with-conda-incomplete" class="nav-link" data-scroll-target="#installing-manim-with-conda-incomplete">Installing Manim with Conda (Incomplete)</a>
   <ul class="collapse">
-  <li><a href="#bash_history" id="toc-bash_history" class="nav-link" data-scroll-target="#bash_history"><code>.bash_history</code></a></li>
-  <li><a href="#zsh_history" id="toc-zsh_history" class="nav-link" data-scroll-target="#zsh_history"><code>.zsh_history</code></a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#login-and-non-login-shell-execution-flow" id="toc-login-and-non-login-shell-execution-flow" class="nav-link" data-scroll-target="#login-and-non-login-shell-execution-flow">Login and Non-Login Shell Execution Flow</a>
-  <ul>
-  <li><a href="#for-bash" id="toc-for-bash" class="nav-link" data-scroll-target="#for-bash">For Bash</a></li>
-  <li><a href="#for-zsh" id="toc-for-zsh" class="nav-link" data-scroll-target="#for-zsh">For Zsh</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul>
-  <li><a href="#centralize-configurations" id="toc-centralize-configurations" class="nav-link" data-scroll-target="#centralize-configurations">Centralize Configurations</a></li>
-  <li><a href="#environment-variables" id="toc-environment-variables" class="nav-link" data-scroll-target="#environment-variables">Environment Variables</a></li>
-  <li><a href="#aliases-and-custom-functions" id="toc-aliases-and-custom-functions" class="nav-link" data-scroll-target="#aliases-and-custom-functions">Aliases and Custom Functions</a></li>
-  </ul></li>
-  <li><a href="#practical-examples" id="toc-practical-examples" class="nav-link" data-scroll-target="#practical-examples">Practical Examples</a>
-  <ul>
-  <li><a href="#bash_profile-example" id="toc-bash_profile-example" class="nav-link" data-scroll-target="#bash_profile-example"><code>.bash_profile</code> Example</a></li>
-  <li><a href="#bashrc-example" id="toc-bashrc-example" class="nav-link" data-scroll-target="#bashrc-example"><code>.bashrc</code> Example</a></li>
-  <li><a href="#zshrc-example" id="toc-zshrc-example" class="nav-link" data-scroll-target="#zshrc-example"><code>.zshrc</code> Example</a></li>
-  </ul></li>
-  <li><a href="#additional-notes" id="toc-additional-notes" class="nav-link" data-scroll-target="#additional-notes">Additional Notes</a>
-  <ul>
-  <li><a href="#shell-history" id="toc-shell-history" class="nav-link" data-scroll-target="#shell-history">Shell History</a></li>
-  <li><a href="#sourcing-configurations-from-other-files" id="toc-sourcing-configurations-from-other-files" class="nav-link" data-scroll-target="#sourcing-configurations-from-other-files">Sourcing Configurations from Other Files</a></li>
-  <li><a href="#portability" id="toc-portability" class="nav-link" data-scroll-target="#portability">Portability</a></li>
-  </ul></li>
-  <li><a href="#comparison-in-summary" id="toc-comparison-in-summary" class="nav-link" data-scroll-target="#comparison-in-summary">Comparison in Summary</a></li>
+  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -251,197 +223,296 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 
 
 
-<section id="shell-configuration" class="level1">
-<h1>Shell Configuration</h1>
-<p>In Unix-like operating systems, <strong>shells</strong> like <strong>Bash</strong> and <strong>Zsh</strong> use <strong>configuration files</strong> to set up the user’s environment. These files control everything from environment variables, command aliases, shell options, custom functions, and more… Understanding the differences between these files helps in customizing and managing your shell environment effectively.</p>
-<p>But first, we need to distinguish between <strong>interactive login shells</strong> and <strong>interactive non-login shells</strong>.</p>
-<section id="interactive-login-shells-vs-non-login-shells" class="level2">
-<h2 class="anchored" data-anchor-id="interactive-login-shells-vs-non-login-shells">Interactive Login Shells vs Non-Login Shells</h2>
-<p>A <strong>login shell</strong> is a shell session that starts when you log into your system, either directly or remotely. It’s called a “login shell” because it is associated with an initial user login.</p>
-<p><strong>Examples of login shells:</strong></p>
-<ul>
-<li>Logging in via console (i.e.&nbsp;keyboard &amp; mouse) or SSH into a physical or a virtual machine (or any kind of remote server)</li>
-<li>Executing <code>bash --login</code> or <code>zsh --login</code> to start a shell as a login shell.</li>
-</ul>
-<p><strong>Purpose and common settings in login shells:</strong> - <strong>Environment variables:</strong> Often, login shells set environment variables like <code>PATH</code>, <code>EDITOR</code>, and others that should be configured only once per session - <strong>Startup Commands:</strong> Commands that need to run only once per session (commonly used for setting up session-specific services)</p>
-<p>Non-login shells, then, are shells that aren’t login shells. Now that we have a better understanding of the different kinds of shells, let’s proceed with the comparison of the shell configuration files.</p>
+<p>In this post we’ll be going over how to set up our local development environment for making machine learning applications and blogging about the process. This is my attempt at installing the required software packages on a Windows machine. I’ll do my best to keep things general but some of the steps will be Windows specific.</p>
+<section id="python-and-conda-installation" class="level1">
+<h1>Python and Conda Installation</h1>
+<p>Most systems these days come with Python pre-installed, however here are the steps to install Python from scratch.</p>
+<section id="installing-python---system-level" class="level2">
+<h2 class="anchored" data-anchor-id="installing-python---system-level">Installing Python - System Level</h2>
+<p>First, we download and install the latest version of Python for our OS from the <a href="https://www.python.org/downloads/">official website</a>.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="💡 Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+💡 Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Make sure to tick the “add to PATH” box during the installation so that the path of the Python executible is added to our system’s <code>PATH</code> environment variable. The path in question, by default, is <code>~\AppData\Local\Programs\Python\Python311\python.exe</code></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="🔧 Troubleshooting">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🔧 Troubleshooting
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If the command <code>python</code> is unrecognized on Windows after installation, try <code>py</code>. We should be able to issue the command <code>py</code> to invoke the Python interpreter. Running <code>py --version</code> should return the version number (e.g.&nbsp;<code>Python 3.11.5</code>)</p>
+</div>
+</div>
+</div>
 </section>
-<section id="bash-vs-zsh-configuration-files" class="level2">
-<h2 class="anchored" data-anchor-id="bash-vs-zsh-configuration-files">Bash vs Zsh Configuration Files</h2>
-<p>Below is a detailed comparison of these shell configuration files.</p>
-<hr>
-<section id="bashrc-vs-.bash_profile" class="level3">
-<h3 class="anchored" data-anchor-id="bashrc-vs-.bash_profile"><code>.bashrc</code> vs <code>.bash_profile</code></h3>
-<section id="bashrc" class="level4">
-<h4 class="anchored" data-anchor-id="bashrc"><code>.bashrc</code></h4>
-<section id="purpose" class="level5">
-<h5 class="anchored" data-anchor-id="purpose">Purpose</h5>
-<p>Configuration file for <strong>interactive non-login</strong> Bash shells</p>
-</section>
-<section id="typical-contents" class="level5">
-<h5 class="anchored" data-anchor-id="typical-contents">Typical contents</h5>
-<ul>
-<li>Aliases (e.g., <code>alias ll='ls -alF'</code>)</li>
-<li>Shell options (e.g., <code>shopt -s histappend</code>)</li>
-<li>Functions and prompt customization.</li>
-</ul>
-</section>
-</section>
-<section id="bash_profile" class="level4">
-<h4 class="anchored" data-anchor-id="bash_profile"><code>.bash_profile</code></h4>
-<section id="purpose-1" class="level5">
-<h5 class="anchored" data-anchor-id="purpose-1">Purpose</h5>
-<p>Configuration file for <strong>interactive login</strong> Bash shells</p>
-</section>
-<section id="typical-contents-1" class="level5">
-<h5 class="anchored" data-anchor-id="typical-contents-1">Typical contents</h5>
-<ul>
-<li>Environment variables (e.g., <code>export PATH=...</code>)</li>
-<li>Commands that should run only once at login.</li>
-<li>Often includes sourcing <code>.bashrc</code> to ensure non-login shell configurations are available.
-<ul>
-<li><p>To source <code>.bashrc</code>, use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> ~/.bashrc <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">.</span> ~/.bashrc</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="zshrc-vs-.zprofile" class="level3">
-<h3 class="anchored" data-anchor-id="zshrc-vs-.zprofile"><code>.zshrc</code> vs <code>.zprofile</code></h3>
-<p>These files are the analogs of <code>.bashrc</code> and <code>.bash_profile</code> and the distinction between then is also analogous, One’s for non-login shells and the other’s for login shells. One key difference is that unlike <code>.bashrc</code>, <code>.zshrc</code> is is <em>also</em> sourced in login shells by default (eliminating the need to source it from <code>.zprofile</code>).</p>
-</section>
-<section id="bash_history-vs-.zsh_history" class="level3">
-<h3 class="anchored" data-anchor-id="bash_history-vs-.zsh_history"><code>.bash_history</code> vs <code>.zsh_history</code></h3>
-<p>These files store the command history for Bash or Zsh shells, respectively.</p>
-<section id="bash_history" class="level4">
-<h4 class="anchored" data-anchor-id="bash_history"><code>.bash_history</code></h4>
-<ul>
-<li>Used by the history command (<code>history</code>)</li>
-<li>Configurable via shell variables like <code>HISTSIZE</code>, <code>HISTFILESIZE</code>, and <code>HISTCONTROL</code></li>
-</ul>
-</section>
-<section id="zsh_history" class="level4">
-<h4 class="anchored" data-anchor-id="zsh_history"><code>.zsh_history</code></h4>
-<p>Functionality - Used by the history command (<code>history</code>). - Configurable via options like <code>HISTSIZE</code>, <code>SAVEHIST</code>, and <code>HISTFILE</code>.</p>
-</section>
-</section>
-</section>
-<section id="login-and-non-login-shell-execution-flow" class="level2">
-<h2 class="anchored" data-anchor-id="login-and-non-login-shell-execution-flow">Login and Non-Login Shell Execution Flow</h2>
-<section id="for-bash" class="level3">
-<h3 class="anchored" data-anchor-id="for-bash">For Bash</h3>
-<p><strong>Login Shell:</strong> - Reads <code>/etc/profile</code> (system-wide configurations). - Reads the first found file among <code>~/.bash_profile</code>, <code>~/.bash_login</code>, or <code>~/.profile</code>. <strong>Non-login Interactive Shell:</strong> - Reads <code>~/.bashrc</code>.</p>
-</section>
-<section id="for-zsh" class="level3">
-<h3 class="anchored" data-anchor-id="for-zsh">For Zsh</h3>
-<p><strong>Login Shell:</strong> - Reads <code>/etc/zprofile</code> (system-wide configurations). - Reads <code>~/.zprofile</code>. - Then proceeds to read <code>~/.zshrc</code> (unlike Bash, Zsh reads <code>.zshrc</code> for login shells by default). <strong>Interactive Shell:</strong> - Reads <code>~/.zshrc</code>.</p>
+<section id="why-use-conda" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-conda">Why use Conda</h2>
+<p>While <code>pip</code> is Python’s built-in package manager and <code>venv</code> is its built-in virtual environment manager, we use Conda because it attempts to do more than what <code>pip</code> and <code>venv</code> try to accomplish do individually by extending support to library dependencies not written in Python.</p>
+<p>Occasionally, when a Conda distribution is not available, but an <a href="https://pypi.org/">PyPI</a> distribution exists, it makes sense to combine use of <code>conda</code> and <code>pip</code>. This is done by:</p>
+<ol type="1">
+<li>Installing <code>pip</code> within a Conda environment: <code>conda install pip</code></li>
+<li>Installing the required package from inside the active Conda environment: <code>pip install &lt;package_name&gt;</code></li>
+</ol>
+<p>This way, the packages do <em>not</em> go to the system-level Python’s packages directory <code>C:\Users\&lt;username&gt;\AppData\Local\Python\&lt;version&gt;\</code> (or <code>Roaming</code> instead of <code>Local</code>, if Python was installed only for a specific user on Windows). Instead, <code>pip</code> installs them in the Conda environment’s <code>C:\ProgramData\anaconda3\Lib\site-packages</code> (or similar) package directory. We can check each package, along with its installation destination by running <code>pip list -v</code>.</p>
+<section id="installing-anaconda-navigator-or-miniconda" class="level3">
+<h3 class="anchored" data-anchor-id="installing-anaconda-navigator-or-miniconda">Installing Anaconda Navigator (or Miniconda)</h3>
+<p>Next, download and install <a href="https://www.anaconda.com/download">Anaconda Navigator</a> (or Miniconda, which installs the Conda scientific package and Python environment manager without additional software and without the GUI navigator). This installation includes tools like Jupyter Notebooks, Spyder, PyCharm, and other scientific packages and IDEs.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="📖 Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📖 Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Anaconda’s built in Python distribution:</strong> Anaconda comes with its own latest Python version distribution (by default installed into path <code>c:\ProgramData\anaconda3\python.exe</code>). The installer will prompt us to select an option which enables third-party editors, such as VSCode, to recognize this Python distribution.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="📖 Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📖 Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Different Python distributions can live on the same machine:</strong> Running <code>python --version</code> in the Anaconda Prompt returns <code>Python 3.11.4</code> as of the time of writing this, which is the version of Python that Conda installed in its <code>base</code> environment. Crucially, running <code>py --version</code>, even in the Anaconda Prompt, still returns <code>Python 3.11.5</code>, which is the system’s version of Python.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="centralize-configurations" class="level3">
-<h3 class="anchored" data-anchor-id="centralize-configurations">Centralize Configurations</h3>
-<ul>
-<li>For Bash, source <code>.bashrc</code> from <code>.bash_profile</code> to ensure configurations are consistent across login and non-login shells.</li>
-<li>For Zsh, since <code>.zshrc</code> is read by both login and interactive shells, you can place most configurations there.</li>
-</ul>
+<section id="choosing-the-right-python-kernel-in-vscode" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-the-right-python-kernel-in-vscode">Choosing the Right Python Kernel in VSCode</h2>
+<p>In VSCode, we can open the <strong>Command Palette</strong> and run the command <strong>Notebook: Select Notebook Kernel</strong>. At first, this will prompt us to install the Jupyter and Python VSCode extensions. Once that’s done, we can rerun the command and select the Python kernel in the desired Conda environment (by default <code>base</code>).</p>
 </section>
-<section id="environment-variables" class="level3">
-<h3 class="anchored" data-anchor-id="environment-variables">Environment Variables</h3>
-<p>Set in <code>.bash_profile</code> or <code>.zprofile</code> for variables that should be set once per session.</p>
+<section id="initializing-conda-in-the-shell" class="level2">
+<h2 class="anchored" data-anchor-id="initializing-conda-in-the-shell">Initializing Conda in the Shell</h2>
+<p>Before we can use the full capabilities of Conda in the terminal, we need to initialize it by running the command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>conda init &lt;bash|powershell|tsh|...&gt; # Depending on the shell we're using</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Restart your terminal for changes to take hold.</p>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="🔧 Troubleshooting">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🔧 Troubleshooting
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For Windows users, Powershell may throw the following error in trying to load the user profile: <code>execution of scripts is disabled on this system</code>. This is Powershell’s security measure against command hijacking, its way of enforcing control of execution and establishing identity. If this is the case, run <code>cmd.exe</code> as Administrator and execute command <code>powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code>. We should now see the active environment in parentheses (e.g.&nbsp;<code>base</code>) to the left of the input in Powershell.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="aliases-and-custom-functions" class="level3">
-<h3 class="anchored" data-anchor-id="aliases-and-custom-functions">Aliases and Custom Functions</h3>
-<p>Place in <code>.bashrc</code> or <code>.zshrc</code> as they are needed for interactive use.</p>
-<hr>
+<section id="conda-commands" class="level2">
+<h2 class="anchored" data-anchor-id="conda-commands">Conda Commands</h2>
+<p>Some common Conda commands are:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>conda env list</code></td>
+<td>Shows all the Conda environments (the active environment is marked with *)</td>
+</tr>
+<tr class="even">
+<td><code>conda list</code></td>
+<td>Shows all the packages installed in the currently active environment</td>
+</tr>
+<tr class="odd">
+<td><code>conda update --all</code></td>
+<td>Updates all packages in the active environment (frequently resolves <code>environment is inconsistent</code> errors)</td>
+</tr>
+<tr class="even">
+<td><code>conda info</code></td>
+<td>Shows, among other things, the directory where the environment is stored</td>
+</tr>
+<tr class="odd">
+<td><code>conda activate &lt;myenv&gt;</code></td>
+<td>Activate environment <code>&lt;myenv&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>conda deactivate</code></td>
+<td>Deactivates the currently active environment</td>
+</tr>
+<tr class="odd">
+<td><code>conda create --name &lt;myenv&gt; [python=3.7.0 [ipython]]</code></td>
+<td>Create a new empty environment (or an environment with a <code>python</code> version and <code>ipython</code>)</td>
+</tr>
+<tr class="even">
+<td><code>conda create --name &lt;myenv&gt; --clone base</code></td>
+<td>Clone the base environment</td>
+</tr>
+<tr class="odd">
+<td><code>conda env export -f &lt;path/to/envfile.yml&gt;</code></td>
+<td>Export the package list of the active environment (e.g.&nbsp;<code>conda env export -f  /Users/&lt;username&gt;/Documents/MyFiles/personal-blog.yml</code>)</td>
+</tr>
+<tr class="even">
+<td><code>conda compare &lt;path/to/envfile.yml&gt;</code></td>
+<td>Compare the active environment to the exported file of another environment</td>
+</tr>
+<tr class="odd">
+<td><code>conda remove --name &lt;myenv&gt; --all</code></td>
+<td>Deletes the environment</td>
+</tr>
+</tbody>
+</table>
+<section id="comparing-conda-environments" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-conda-environments">Comparing Conda Environments</h3>
+<p>Often we need to compare the packages between two environments. Here’s the workflow to do that:</p>
+<ol type="1">
+<li><p>Activate one of the environments using <code>activate</code></p></li>
+<li><p>Export its package list using <code>export</code> as a <code>.yml</code> file to a destination of our choice</p></li>
+<li><p>Activate the second environment</p></li>
+<li><p>Execute the <code>compare</code> command, providing the path to the <code>.yml</code> file created in the previous step</p></li>
+</ol>
 </section>
 </section>
-<section id="practical-examples" class="level2">
-<h2 class="anchored" data-anchor-id="practical-examples">Practical Examples</h2>
-<section id="bash_profile-example" class="level3">
-<h3 class="anchored" data-anchor-id="bash_profile-example"><code>.bash_profile</code> Example</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .bash_profile</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set environment variables</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">EDITOR</span><span class="op">=</span><span class="st">"vim"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Source .bashrc if it exists</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> ~/.bashrc <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">.</span> ~/.bashrc</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="bashrc-example" class="level3">
-<h3 class="anchored" data-anchor-id="bashrc-example"><code>.bashrc</code> Example</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .bashrc</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Aliases</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> ll=<span class="st">'ls -alF'</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> gs=<span class="st">'git status'</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt customization</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">PS1</span><span class="op">=</span><span class="st">'[\u@\h \W]\$ '</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Shell options</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">shopt</span> <span class="at">-s</span> histappend</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="installing-quarto-for-blogging-with-jupyter-notebooks-optional" class="level1">
+<h1>Installing Quarto for Blogging with Jupyter Notebooks (Optional)</h1>
+<p>This blog, as mentioned in its description, uses <a href="https://quarto.org/">Quarto</a> to create its static pages from Jupyter Notebooks. We can install Quarto from <a href="https://anaconda.org/conda-forge/quarto">Conda Forge</a> into our environment, but the support for the Conda distribution of Quarto seems to be lacking at the moment. Instead, we can install the Quarto CLI using the provided <a href="https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-win.msi">installer</a>.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Quarto is now on brew, install it using <a href="https://formulae.brew.sh/cask/quarto">this command</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> quarto</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Since Quarto freezes the output of the code blocks in Jupyter Noteboooks, we can run our notebooks locally in the <code>base</code> conda environment which has all the necessary scientific packages installed, then just use the globally installed Quarto CLI to preview, or publish our blog.</p>
 </section>
-<section id="zshrc-example" class="level3">
-<h3 class="anchored" data-anchor-id="zshrc-example"><code>.zshrc</code> Example</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .zshrc</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Oh My Zsh</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ZSH</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.oh-my-zsh"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">ZSH_THEME</span><span class="op">=</span><span class="st">"agnoster"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="va">plugins</span><span class="op">=</span><span class="va">(</span>git docker kubectl<span class="va">)</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="va">$ZSH</span>/oh-my-zsh.sh</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Aliases</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> k=<span class="st">'kubectl'</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> d=<span class="st">'docker'</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt customization</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="va">PROMPT</span><span class="op">=</span><span class="st">'%n@%m %1~ %# '</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># History settings</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="va">HISTSIZE</span><span class="op">=</span>10000</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="va">SAVEHIST</span><span class="op">=</span>10000</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="va">HISTFILE</span><span class="op">=</span>~/.zsh_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="installing-manim-with-conda-incomplete" class="level1">
+<h1>Installing Manim with Conda (Incomplete)</h1>
+<p><a href="https://docs.conda.io/projects/conda/en/latest/index.html">Conda</a> is an open-source package management and environment management system that is primarily used for Python, but it can also handle other programming languages like R. It’s designed to make it easy to install, run, and manage libraries and software dependencies in isolated environments, ensuring that different projects don’t interfere with each other. Alternatives to conda include pip (Python Package Installer), virtualenv (<code>venv</code>), and their merger Pipenv.</p>
+<p>First, activate an environment (with your choice of environment and/or package manager from above). I will be using conda to activate a new dedicated environment as <code>manim-playground</code> using:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">conda</span> update conda <span class="co"># To, first, update your conda version. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>You need to deactivate any active conda environment before running this command.</p>
+</div>
+</div>
+</div>
+<p>Then create a mew invironment with a version of python that works with <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> (more on this later):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground python=3.7.0 ipython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a conda environment in <code>~/anaconda3/envs/manim-playground</code>. Activate it with:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">conda</span> activate manim-playground</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To deactivate the environment at any point, use:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="manim-installation" class="level4">
+<h4 class="anchored" data-anchor-id="manim-installation">Manim installation</h4>
+<p>Here are the <a href="https://docs.manim.community/en/stable/installation/conda.html">conda installation steps for Manim</a>.</p>
+<p>To install Manim we simply do:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-</section>
-<section id="additional-notes" class="level2">
-<h2 class="anchored" data-anchor-id="additional-notes">Additional Notes</h2>
-<section id="shell-history" class="level3">
-<h3 class="anchored" data-anchor-id="shell-history">Shell History</h3>
-<p>Both Bash and Zsh allow you to configure how commands are saved to history files. You can prevent certain commands from being saved or set up shared history between sessions.</p>
-</section>
-<section id="sourcing-configurations-from-other-files" class="level3">
-<h3 class="anchored" data-anchor-id="sourcing-configurations-from-other-files">Sourcing Configurations from Other Files</h3>
-<p>Use the <code>source</code> or <code>.</code> command to include configurations from other files. This helps in modularizing your shell configurations.</p>
-</section>
-<section id="portability" class="level3">
-<h3 class="anchored" data-anchor-id="portability">Portability</h3>
-<p>Be cautious when using shell-specific features if you switch between shells (like between Bash and Zsh). You can use <code>.profile</code> for environment variables to maintain compatibility across different shells if needed.</p>
-</section>
-</section>
-<section id="comparison-in-summary" class="level2">
-<h2 class="anchored" data-anchor-id="comparison-in-summary">Comparison in Summary</h2>
-<ul>
-<li><strong>Bash</strong>:
-<ul>
-<li><code>.bash_profile</code>: For login shells; set environment variables and startup programs.</li>
-<li><code>.bashrc</code>: For interactive non-login shells; set aliases, functions, and shell options.</li>
-<li><code>.bash_history</code>: Stores command history.</li>
-</ul></li>
-<li><strong>Zsh</strong>:
-<ul>
-<li><code>.zprofile</code>: For login shells; serves the same function as <code>.bash_profile</code>.</li>
-<li><code>.zshrc</code>: For all interactive shells; configure shell environment.</li>
-<li><code>.zsh_history</code>: Stores command history.</li>
-</ul></li>
-</ul>
+<section id="jupyter-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h3>
+<p>To import Manim:</p>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>This may trigger your IDE of choice, which is VS Code in my case, to download the ipykernel into the conda environment. This should be taken care of automatically. If not, installing Python into the environment should be straightforward. To avoid this in the future, instead of creating a blank conda environment we can clone from the <code>base</code> environment by:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">conda</span> create <span class="at">--name</span> manim-playground <span class="at">--clone</span> base   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>To see any output inside Jupyter Notebooks, we should also supply the <strong>magic command</strong> to invoke Manim (the animation engine). This magic command is its own installation – <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>. Note that only pip3 is available as a package manager for jupyter-manim but that’s ok because pip respects conda environments. When we run <code>pip3 install &lt;package&gt;</code>, pip installs the package and its dependencies in the <code>site-packages</code> directory of that specific, active conda environment, just as it would in any standard Python environment. So issue:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">pip</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>pip3</code> instead of pip invokes the base version of Python and fails with <code>"error: externally-managed-environment"</code>. To check version of pip run the following within the conda environment of choice:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">which</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output of which command from the manip-playground environment is:</p>
+<pre><code>~/anaconda3/bin/pip</code></pre>
+</div>
+</div>
+</div>
+<p>Now we can import <code>jupyter_manim</code> and provide the magic command to our cells.</p>
+<p>The magic command is:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This must be provided at the top of each cell. This is similar to issuing the <code>manim</code> command in a terminal.</p>
+<p>To display <code>manim</code> help options use:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -1039,7 +1110,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 
