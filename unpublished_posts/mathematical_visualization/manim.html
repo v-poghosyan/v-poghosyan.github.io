@@ -203,7 +203,10 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a>
   <ul class="collapse">
-  <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to Circle Transformation</a></li>
+  <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to circle transformation</a></li>
+  <li><a href="#rendering-text" id="toc-rendering-text" class="nav-link" data-scroll-target="#rendering-text">Rendering text</a></li>
+  <li><a href="#text-to-square-to-circle-transformation" id="toc-text-to-square-to-circle-transformation" class="nav-link" data-scroll-target="#text-to-square-to-circle-transformation">Text to square to circle transformation</a></li>
+  <li><a href="#axes-and-other-math-y-stuff" id="toc-axes-and-other-math-y-stuff" class="nav-link" data-scroll-target="#axes-and-other-math-y-stuff">Axes and other math-y stuff</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -220,7 +223,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h1>Manim - An introduction</h1>
 <section id="local-development-environment-setup" class="level2">
 <h2 class="anchored" data-anchor-id="local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</h2>
-<p><a href="https://www.manim.community/">Manim</a> is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
+<p><a href="https://www.manim.community/">Manim</a> (<a href="https://docs.manim.community/en/stable/index.html">docs</a>) is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
 <section id="python-virtual-environments" class="level3">
 <h3 class="anchored" data-anchor-id="python-virtual-environments">Python virtual environments</h3>
 <p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects. Note that <code>venv</code> is quite old, and the new way of managing Python environments and packages is <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> (a merger of <code>pip</code> and <code>venv</code>). More on that later… For this project we’ll stick with <code>venv</code> because I like having physical folders that contain the various environments used across my notes on this site.</p>
@@ -440,7 +443,7 @@ Note
 <h2 class="anchored" data-anchor-id="the-scene-object">The <code>Scene</code> object</h2>
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
 <section id="square-to-circle-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
+<h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to circle transformation</h3>
 <p>Let’s use <code>jupyter-manim</code> for the first few examples.</p>
 <div id="cell-4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -482,6 +485,9 @@ Figure&nbsp;1
 <li>Everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method.</li>
 <li>In this <code>constructor</code> method, we define every object that’s in our scene, every transformation, and every other sequence of actions. Everything interesting, in short, happens inside the <code>constructor</code>.</li>
 </ol>
+</section>
+<section id="rendering-text" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-text">Rendering text</h3>
 <p>Let’s do some stuff with <code>Text</code>.</p>
 <div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm HelloWorld</span>
@@ -512,9 +518,35 @@ Figure&nbsp;2
 </figcaption>
 </figure>
 </div>
-<p>A core design phiosophy of Manim is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes. Let’s see an example of this now.</p>
+<p>You’ll notice that the text has <strong>property</strong> <code>font_size</code> which we set to <code>42</code>. There are more of these properies that Mobjects have, here are several (more will be introduced later):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>font_size</code></td>
+<td>The size of the text (e.g.&nbsp;<code>42</code>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (e.g.&nbsp;<code>BLUE</code>, <code>GREEN</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>fill_opacity</code></td>
+<td>The font of the text (e.g.&nbsp;<code>0.8</code>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="text-to-square-to-circle-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="text-to-square-to-circle-transformation">Text to square to circle transformation</h3>
+<p>A core design philosophy of Manim is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes. Let’s see an example of this now.</p>
 <p>We will transform the text “Hello World!” into a circle, which will then morph into a square. To see how to index into the <code>Text</code> object, we’ll only transform an individual character of the text into the Manim object (or <strong>Mobject</strong>, in short).</p>
-<div id="cell-12" class="cell">
+<div id="cell-13" class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm HelloWorldToSquareToCircle</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
@@ -554,8 +586,80 @@ Figure&nbsp;3
 </figcaption>
 </figure>
 </div>
+<p>Note that we can also render objects by using <code>add</code> (see <a href="https://docs.manim.community/en/stable/reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.add">docs</a>), as opposed to <code>play</code> (see <a href="https://docs.manim.community/en/stable/reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.play">docs</a>). The difference is that play is animated, while add is not.</p>
+</section>
+<section id="axes-and-other-math-y-stuff" class="level3">
+<h3 class="anchored" data-anchor-id="axes-and-other-math-y-stuff">Axes and other math-y stuff</h3>
+<p>What’s the point of using a mathematical animation library if we can’t animate math? Let’s see how to animate some math-y stuff with Manim.</p>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm MathDemo</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MathDemo(Scene):</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(ax)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(poly)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But because we’re using the <code>add</code> method of <code>Scene</code> instead of <code>play</code>, we’re not producing animations. We’ll fix that shortly, but first let’s look at the general mechanism of Manim’s animation system.</p>
+<section id="animation-system-in-manim" class="level4">
+<h4 class="anchored" data-anchor-id="animation-system-in-manim">Animation system in Manim</h4>
+<p>while <code>Scene.add</code> adds Mobjects immediately to the scene, and <code>Scane.wait</code> adds a pause, <code>Scene.play</code> plays animations (or <strong>Manimations</strong>…).</p>
+<p>Animations can:</p>
+<ul>
+<li>add Mobjects (e.g.&nbsp;<code>Create</code>, <code>FadeIn</code>, …)</li>
+<li>change Mobjects (e.g.&nbsp;<code>Transform</code>)</li>
+<li>emphasize Mobjects (e.g.&nbsp;<code>Indicate</code>, <code>Circumscribe</code>, …)</li>
+<li>remove Mobjects (e.g.&nbsp;<code>Uncreate</code>, <code>FadeOut</code>, …)</li>
+</ul>
+<p>Now let’s go back to our math-y example and animate it!</p>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm MathDemo</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MathDemo(Scene):</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), color<span class="op">=</span>BLACK)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Create(ax), Create(poly), run_time<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeIn(area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-hello-world-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hello-world-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="./media/videos/mathematical_visualization/720p30/MathDemo.mp4" class="img-fluid" controls=""><a href="./media/videos/mathematical_visualization/720p30/MathDemo.mp4">Video</a></video></p>
+<figcaption>Math Demo Manim Animation</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hello-world-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4
+</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 </section>
 </section>

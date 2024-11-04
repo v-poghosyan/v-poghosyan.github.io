@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/manim.html</loc>
-    <lastmod>2024-11-04T21:58:45.409Z</lastmod>
+    <lastmod>2024-11-04T23:28:44.776Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
@@ -50,11 +50,11 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/manim/renderer/shaders/include/NOTE.html</loc>
-    <lastmod>2024-11-04T05:13:52.348Z</lastmod>
+    <lastmod>2024-11-04T22:58:17.552Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/nx_pylab.html</loc>
-    <lastmod>2024-11-04T05:13:49.582Z</lastmod>
+    <lastmod>2024-11-04T22:46:27.712Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/linear_algebra/linear_algebra_refresher_for_optimization.html</loc>
@@ -113,8 +113,8 @@
     <lastmod>2024-11-04T04:47:07.110Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/tests/test_latex.html</loc>
-    <lastmod>2024-11-04T05:13:49.582Z</lastmod>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/idna-3.10.dist-info/LICENSE.html</loc>
+    <lastmod>2024-11-04T22:46:28.402Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/manimlib/once_useful_constructs/NOTE.html</loc>
@@ -126,7 +126,7 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/mapbox_earcut-1.0.2.dist-info/LICENSE.html</loc>
-    <lastmod>2024-11-04T05:13:52.152Z</lastmod>
+    <lastmod>2024-11-04T22:58:17.472Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/about.html</loc>
