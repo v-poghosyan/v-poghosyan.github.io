@@ -219,7 +219,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h1>Manim - An introduction</h1>
 <section id="local-development-environment-setup" class="level2">
 <h2 class="anchored" data-anchor-id="local-development-environment-setup">Local development environment setup</h2>
-<p><a href="https://www.manim.community/">Manim</a> is a custom Python library for mathematical animation. It has two versions, the first version is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). And another version, a fork of the original, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> which enjoys more open source contributions, and has better documentation and support (in terms of attentiveness to PRs, and such). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
+<p><a href="https://www.manim.community/">Manim</a> is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
 <section id="installation" class="level3">
 <h3 class="anchored" data-anchor-id="installation">Installation</h3>
 <section id="optional-create-an-isolated-python-environment" class="level4">
@@ -271,10 +271,17 @@ Note
 </div>
 </div>
 </section>
-<section id="step-1-create-a-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-1-create-a-virtual-environment">(Step 1) Create a virtual environment</h5>
-<p>First, create a new virtual environment. Issue the following command in your terminal:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--system-site-package</span> manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-1-install-global-prerequisites" class="level5">
+<h5 class="anchored" data-anchor-id="step-1-install-global-prerequisites">(Step 1) Install global prerequisites</h5>
+<p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support.</p>
+<p><strong>Brew</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Form LaTeX support in Manim</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> mactex-no-gui</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -287,58 +294,15 @@ Note
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>The –system-site-package flag ensures the environment will inherit from the global packages installed by Homebrew later on, and therefore get <code>pycairo</code> and other dependencies from the Brew installation.</p>
+<p>A combination of <code>brew info &lt;PackageName&gt;</code> and <code>which &lt;PackageName&gt;</code> can tell us where each package got installed (either in <code>/opt/homebrew/bin</code> or <code>/opt/homebrew/Cellar</code>).</p>
 </div>
 </div>
 </div>
-<p>This will create a folder <code>/manim-sandbox</code> in the project’s root directory.</p>
 </section>
-<section id="step-2-activatedeactivate-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-2-activatedeactivate-virtual-environment">(Step 2) Activate/deactivate virtual environment</h5>
-<p>To activate, issue command:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> manim-sandbox/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Which runs the <code>activate</code> script of the virtual environment.</p>
-<p>To deactivate, simply do:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="step-3-install-packages-into-the-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-3-install-packages-into-the-environment">(Step 3) Install packages into the environment</h5>
-<p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
-<p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
-<p><strong>Output:</strong></p>
-<pre><code>Package Version
-------- -------
-pip     24.0</code></pre>
-<p>Let’s upgrade pip for good measure. Issue:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="step-4-exporting-requirements" class="level5">
-<h5 class="anchored" data-anchor-id="step-4-exporting-requirements">(Step 4) Exporting requirements</h5>
-<p>Rather than committing the entire environment to the repository of a project, we commit a <code>requirements.txt</code> containing the output of <code>pip list</code> generated by:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To get the packages inside this file in a new environment, do:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="installing-prerequisites" class="level4">
-<h4 class="anchored" data-anchor-id="installing-prerequisites">Installing Prerequisites</h4>
-<p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support. Use either <code>brew</code> or <code>pip</code> directly inside the virtual environment <code>manim-sandbox</code>:</p>
-<p><strong>Brew</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Form LaTeX support in Manim</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> mactex-no-gui</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Pip</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pycairo ffmpeg</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Form LaTeX support in Manim</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install mactex-no-gui</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra dependencies for Apple Silicon</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pango pkg-config scipy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-2-create-a-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-2-create-a-virtual-environment">(Step 2) Create a virtual environment</h5>
+<p>First, create a new virtual environment. Issue the following command in your terminal:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--system-site-package</span> manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -351,15 +315,34 @@ Note
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>A combination of <code>brew info &lt;PackageName&gt;</code> and <code>which &lt;PackageName&gt;</code> can tell us where each package got installed (either in <code>/opt/homebrew/bin</code> or <code>/opt/homebrew/Cellar</code>).</p>
+<p>The <code>--system-site-package</code> flag ensures the environment will inherit from the global packages installed by Homebrew later on, and therefore get <code>pycairo</code> and other dependencies from the Brew installation.</p>
 </div>
 </div>
 </div>
+<p>This will create a folder <code>/manim-sandbox</code> in the project’s root directory.</p>
 </section>
-<section id="installing-manim-and-optionally-jupyter-manim" class="level4">
-<h4 class="anchored" data-anchor-id="installing-manim-and-optionally-jupyter-manim">Installing Manim and (optionally) Jupyter-Manim</h4>
-<p>Activate the virtual environment <code>manim-sandbox</code> and do:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manimlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-3-activatedeactivate-virtual-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-3-activatedeactivate-virtual-environment">(Step 3) Activate/deactivate virtual environment</h5>
+<p>To activate, issue command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> manim-sandbox/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which runs the <code>activate</code> script of the virtual environment.</p>
+<p>To deactivate, simply do:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-4-install-packages-into-the-environment" class="level5">
+<h5 class="anchored" data-anchor-id="step-4-install-packages-into-the-environment">(Step 4) Install packages into the environment</h5>
+<p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
+<p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
+<p><strong>Output:</strong></p>
+<pre><code>Package Version
+------- -------
+pip     24.0</code></pre>
+<p>Let’s upgrade pip for good measure. Issue:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="install-manim" class="level6">
+<h6 class="anchored" data-anchor-id="install-manim">Install Manim</h6>
+<p>Now, install Manim.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -373,12 +356,15 @@ Note
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>This might hang up on getting some of the dependencies (like <code>opencv-python</code> for instance) with an error like <code>Building wheel for opencv-python</code>. If this happens, don’t just re-try. Check <a href="https://pypi.org/project/opencv-python/#history">version history on pypi.org</a> and try manually installing that particular dependency with something like:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install opencv-python==4.7.0.72</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install opencv-python==4.7.0.72</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="optional-install-jupyter-manim" class="level6">
+<h6 class="anchored" data-anchor-id="optional-install-jupyter-manim">(Optional) Install Jupyter-Manim</h6>
 <p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is Jupyter’s equivalent of that).</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
@@ -393,19 +379,21 @@ Note
 <div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Magic commands behave exactly like command line commands with their arguments. For example, to display <code>manim</code> help options, you can use:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p>However, I chose to render my Manim scenes from a dedicated repository <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (also linked in the title banner) containing a <code>requirements.txt</code> file with all the library dependencies for my Manim projects.</p>
-<p>Only occasionally, throughout these notes, will I use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render something directly in these notes (in the interest of time). When I do so, the result will be rendered inside the <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory. To use Manim inside this digital garden itself (i.e.&nbsp;this very v-poghosyan.github.io website) I will also include a <code>requirements.txt</code> encapsulating a Manim sandbox for the Manim snippets in these posts.</p>
+<p>Only occasionally, throughout these notes, will I use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render something directly in these notes (in the interest of time). When I do so, the result will be rendered inside the <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory. To use Manim inside this digital garden itself (i.e.&nbsp;this very v-poghosyan.github.io website) I will also include a <code>requirements.txt</code> encapsulating a Manim sandbox for the Manim snippets in these posts (more on exporting Python project requirements in the next section).</p>
 </section>
-<section id="rendering-a-manim-scene" class="level4">
-<h4 class="anchored" data-anchor-id="rendering-a-manim-scene">Rendering a manim scene</h4>
-<p>In summary, to render my Manim scenes, I use the <code>manim</code> command from my terminal at the root <code>/manim-projects</code> directory, like so:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Alternatively, if my Manim script is inside these Jupyter notes, I use the cell magic:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">%%manim</span> <span class="at">-qm</span> <span class="op">&lt;</span>SceneName<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-5-exporting-requirements" class="level5">
+<h5 class="anchored" data-anchor-id="step-5-exporting-requirements">(Step 5) Exporting requirements</h5>
+<p>Rather than committing the entire environment to the repository of a project, we commit a <code>requirements.txt</code> containing the output of <code>pip list</code> generated by:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To get the packages inside this file in a new environment, do:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 </section>
 <section id="the-setup-used-by-grant-sanderson" class="level3">
@@ -425,73 +413,23 @@ Note
 <h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to Circle Transformation</h3>
 <p>Let’s use <code>jupyter-manim</code> for the first few examples.</p>
 <div id="cell-4" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">jupyter_manim</span>
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/jupyter_manim/__init__.py:15</span>
-<span class="ansi-green-fg ansi-bold">     12</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">warnings</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> warn
-<span class="ansi-green-fg ansi-bold">     13</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">base64</span>
-<span class="ansi-green-fg">---&gt; 15</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span>
-<span class="ansi-green-fg ansi-bold">     16</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">IPython</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> get_ipython
-<span class="ansi-green-fg ansi-bold">     17</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">IPython</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">core</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">magic</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Magics, magics_class, cell_magic
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/manimlib/__init__.py:4</span>
-<span class="ansi-green-fg ansi-bold">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">config</span>
-<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">constants</span>
-<span class="ansi-green-fg">----&gt; 4</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">extract_scene</span>
-<span class="ansi-green-fg ansi-bold">      7</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">main</span>():
-<span class="ansi-green-fg ansi-bold">      8</span>     args <span style="color:rgb(98,98,98)">=</span> manimlib<span style="color:rgb(98,98,98)">.</span>config<span style="color:rgb(98,98,98)">.</span>parse_cli()
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/manimlib/extract_scene.py:9</span>
-<span class="ansi-green-fg ansi-bold">      6</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">sys</span>
-<span class="ansi-green-fg ansi-bold">      7</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">traceback</span>
-<span class="ansi-green-fg">----&gt; 9</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">scene</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">scene</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Scene
-<span class="ansi-green-fg ansi-bold">     10</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">utils</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">sounds</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> play_error_sound
-<span class="ansi-green-fg ansi-bold">     11</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">utils</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">sounds</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> play_finish_sound
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/manimlib/scene/scene.py:11</span>
-<span class="ansi-green-fg ansi-bold">      9</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">animation</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">animation</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Animation
-<span class="ansi-green-fg ansi-bold">     10</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">animation</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">transform</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> MoveToTarget, ApplyMethod
-<span class="ansi-green-fg">---&gt; 11</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">camera</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">camera</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Camera
-<span class="ansi-green-fg ansi-bold">     12</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">constants</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="color:rgb(98,98,98)">*</span>
-<span class="ansi-green-fg ansi-bold">     13</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">container</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">container</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Container
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/manimlib/camera/camera.py:9</span>
-<span class="ansi-green-fg ansi-bold">      7</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">PIL</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Image
-<span class="ansi-green-fg ansi-bold">      8</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">scipy</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">spatial</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">distance</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> pdist
-<span class="ansi-green-fg">----&gt; 9</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">cairo</span>
-<span class="ansi-green-fg ansi-bold">     10</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">numpy</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> <span style="font-weight:bold;color:rgb(0,0,255)">np</span>
-<span class="ansi-green-fg ansi-bold">     12</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">manimlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">constants</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="color:rgb(98,98,98)">*</span>
-
-File <span class="ansi-green-fg">~/anaconda3/lib/python3.11/site-packages/cairo/__init__.py:1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">_cairo</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="color:rgb(98,98,98)">*</span>  <span style="font-style:italic;color:rgb(95,135,135)"># noqa: F401,F403</span>
-<span class="ansi-green-fg ansi-bold">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">get_include</span>():
-<span class="ansi-green-fg ansi-bold">      5</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic;color:rgb(175,0,0)">"""Returns a path to the directory containing the C header files"""</span>
-
-<span class="ansi-red-fg">ImportError</span>: dlopen(/Users/vahrampoghosyan/anaconda3/lib/python3.11/site-packages/cairo/_cairo.cpython-311-darwin.so, 0x0002): symbol not found in flat namespace '_cairo_append_path'</pre>
-</div>
-</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm SquareToCircle</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating geometry</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SquareToCircle(Scene):</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple geometry</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        circle <span class="op">=</span> Circle()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        square <span class="op">=</span> Square()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Animating geometry</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(ShowCreation(square))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(square,circle))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(square))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here I have manually referenced the video created by Manim in the aforementioned <code>/media</code> directory within the post category directory (<code>/mathematical_visualization</code>).</p>
 <div id="fig-square-to-circle-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -515,63 +453,21 @@ Figure&nbsp;1
 <li>In this <code>constructor</code> method, we define every object that’s in our scene, every transformation, and every other sequence of actions. Everything interesting, in short, happens inside the <code>constructor</code>.</li>
 </ol>
 <p>Let’s do some stuff with <code>Text</code>.</p>
-<div id="cell-8" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm SquareToCircle</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HelloWorld(Scene):</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple text</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> Text(<span class="st">"Hello World!"</span>, font_size<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rendering text</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(text, run_time<span class="op">=</span><span class="dv">3</span>))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:140: UserWarning: Pickling failed: Could not find IPython frame
-/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:247: UserWarning: Assembling imports failed: Could not find IPython frame</code></pre>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manimlib.imports <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HelloWorld(Scene):</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding simple text</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> Text(<span class="st">"Hello World!"</span>, font_size<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rendering text</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(text, run_time<span class="op">=</span><span class="dv">3</span>))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">Exception</span>                                 Traceback (most recent call last)
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:127</span>, in <span class="ansi-cyan-fg">export_globals</span><span class="ansi-blue-fg">(self)</span>
-
-<span class="ansi-red-fg">Exception</span>: Could not find IPython frame
-
-During handling of the above exception, another exception occurred:
-
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[21], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">manim</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">-qm SquareToCircle</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">class HelloWorld(Scene):</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">    def construct(self):</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        # Adding simple text</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        text = Text(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">Hello World!</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">, font_size=42)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        # Rendering text</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        self.play(Write(text, run_time=3))</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">        </span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
-
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/IPython/core/interactiveshell.py:2541</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg">(self, magic_name, line, cell)</span>
-<span class="ansi-green-fg ansi-bold">   2539</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
-<span class="ansi-green-fg ansi-bold">   2540</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
-<span class="ansi-green-fg">-&gt; 2541</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">   2543</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
-<span class="ansi-green-fg ansi-bold">   2544</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
-<span class="ansi-green-fg ansi-bold">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
-<span class="ansi-green-fg ansi-bold">   2546</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
-
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/jupyter_manim/__init__.py:264</span>, in <span class="ansi-cyan-fg">manim</span><span class="ansi-blue-fg">(self, line, cell)</span>
-
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/manimlib/__init__.py:9</span>, in <span class="ansi-cyan-fg">main</span><span class="ansi-blue-fg">()</span>
-
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/manimlib/config.py:155</span>, in <span class="ansi-cyan-fg">get_configuration</span><span class="ansi-blue-fg">(args)</span>
-
-File <span class="ansi-green-fg">~/Documents/github/v-poghosyan.github.io/manim-sandbox/lib/python3.12/site-packages/manimlib/config.py:150</span>, in <span class="ansi-cyan-fg">get_module</span><span class="ansi-blue-fg">(file_name)</span>
-
-File <span class="ansi-green-fg">&lt;frozen importlib._bootstrap_external&gt;:995</span>, in <span class="ansi-cyan-fg">exec_module</span><span class="ansi-blue-fg">(self, module)</span>
-
-File <span class="ansi-green-fg">&lt;frozen importlib._bootstrap&gt;:488</span>, in <span class="ansi-cyan-fg">_call_with_frames_removed</span><span class="ansi-blue-fg">(f, *args, **kwds)</span>
-
-File <span class="ansi-green-fg">/var/folders/1_/2hldhtgx34549lmhntnvw3v80000gn/T/tmpznc42i8z.py:2</span>
-
-<span class="ansi-red-fg">NameError</span>: name 'Scene' is not defined</pre>
-</div>
-</div>
-</div>
-<p>Some common <code>Text</code> methods are:</p>
+<p>Some common <code>Text</code> methods are: ::: {#fig-square-to-circle-manim} <video src="./media/videos/tmpa154z3y6/720p30/HelloWorld.mp4" class="img-fluid" controls=""><a href="./media/videos/tmpa154z3y6/720p30/HelloWorld.mp4">Hello World Manim Animation</a></video> :::</p>
 
 
 </section>
