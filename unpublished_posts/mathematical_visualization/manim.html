@@ -260,7 +260,7 @@ Note
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Ultimately, having a mess like this is bad. If you find yourself encountering any issues (such as libraries that should be there not being there, or failures with cryptic error messages from these familiar libraries…) clean up your Python installations by uninstalling Homebrew and Conda. For Homebrew:</p>
+<p>Ultimately, having a mess of a Python environment like what we saw above is bad. Very bad. If you find yourself encountering any issues (such as certain libraries that should be installed not being recognized inside the cells, or failures being thrown that have cryptic error messages indicating the problem lies in one of these libraries) clean up your Python environment(s) by uninstalling Homebrew and Conda. For Homebrew:</p>
 <ul>
 <li>Check this <a href="https://github.com/homebrew/install#uninstall-homebrew">README</a> for a <code>CURL</code> to run a provided uninstaller.</li>
 <li>On Apple Silicon, edit shell configuration file <code>~/.zprofile</code> (using <code>vim</code>) which sets the <code>$PATH</code> variable to give priority to Homebrew packages inside <code>/opt/homebrew</code> (for the various different shell configuration files see this <a href="../../unpublished_posts/local_development_setup/shell_configs.html">post</a>).</li>
@@ -340,7 +340,7 @@ Note
 <h4 class="anchored" data-anchor-id="step-2-create-a-virtual-environment">(Step 2) Create a virtual environment</h4>
 <p>First, create a new virtual environment. Issue the following command in your terminal:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--system-site-package</span> manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -378,7 +378,7 @@ pip     24.0</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, install Manim.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -390,7 +390,7 @@ Note
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>This might hang up on getting some of the dependencies (like <code>opencv-python</code> for instance) with an error like <code>Building wheel for opencv-python</code>. If this happens, don’t just re-try. Check <a href="https://pypi.org/project/opencv-python/#history">version history on pypi.org</a> and try manually installing that particular dependency with something like:</p>
+<p>This might hang up on getting <em>some</em> of the dependencies (such as, maybe, <code>opencv-python</code>) with an error that looks like <code>Building wheel for opencv-python...</code>. If you see this, don’t just re-try. First, check the version history of the package <a href="https://pypi.org/project/opencv-python/#history">on pypi.org</a> and then try manually installing that particular dependency with something like:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install opencv-python==4.7.0.72</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -398,7 +398,7 @@ Note
 <p>Optionally, let’s also install <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a> in Jupyter notebooks:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is just Jupyter’s equivalent of that).</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
