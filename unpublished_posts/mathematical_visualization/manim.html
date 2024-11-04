@@ -194,8 +194,9 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#local-development-environment-setup" id="toc-local-development-environment-setup" class="nav-link" data-scroll-target="#local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</a>
   <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#the-setup-used-by-grant-sanderson" id="toc-the-setup-used-by-grant-sanderson" class="nav-link" data-scroll-target="#the-setup-used-by-grant-sanderson">The setup used by Grant Sanderson</a></li>
+  <li><a href="#python-virtual-environments" id="toc-python-virtual-environments" class="nav-link" data-scroll-target="#python-virtual-environments">Python virtual environments</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><i class="bi bi-book"></i> Installation</a></li>
+  <li><a href="#alternate-local-development-setup" id="toc-alternate-local-development-setup" class="nav-link" data-scroll-target="#alternate-local-development-setup">Alternate local development setup</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#drawing-manim-scenes" id="toc-drawing-manim-scenes" class="nav-link" data-scroll-target="#drawing-manim-scenes">Drawing Manim scenes</a>
@@ -221,13 +222,11 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="local-development-environment-setup" class="level2">
 <h2 class="anchored" data-anchor-id="local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</h2>
 <p><a href="https://www.manim.community/">Manim</a> is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<section id="optional-create-an-isolated-python-environment" class="level4">
-<h4 class="anchored" data-anchor-id="optional-create-an-isolated-python-environment">(Optional) Create an isolated Python environment</h4>
+<section id="python-virtual-environments" class="level3">
+<h3 class="anchored" data-anchor-id="python-virtual-environments">Python virtual environments</h3>
 <p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects. Note that <code>venv</code> is quite old, and the new way of managing Python environments and packages is <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> (a merger of <code>pip</code> and <code>venv</code>). More on that later… For this project we’ll stick with <code>venv</code> because I like having physical folders that contain the various environments used across my notes on this site.</p>
-<section id="a-note-on-using-multiple-virtual-environmentpackage-managers" class="level5">
-<h5 class="anchored" data-anchor-id="a-note-on-using-multiple-virtual-environmentpackage-managers">A note on using multiple virtual environment/package managers</h5>
+<section id="a-note-on-using-multiple-virtual-environmentpackage-managers" class="level4">
+<h4 class="anchored" data-anchor-id="a-note-on-using-multiple-virtual-environmentpackage-managers">A note on using multiple virtual environment/package managers</h4>
 <p>If you have multiple Python versions installed (through various different environment managers available for Python), do <code>which pip</code> or <code>which pip3</code> (or <code>which python</code>/<code>which python3</code>). The former, <code>pip</code>, is a package manager that comes pre-installed with a Python installation (it pulls from places like <a href="https://pypi.org/project/opencv-python/4.10.0.84/">pypi.org</a>), so it will always correspond with a version of Python.</p>
 <p>In my case, <code>pip</code> corresponds to <code>~/anaconda3/bin/pip</code> corresponding to the Python version that came from Conda.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
@@ -272,8 +271,11 @@ Note
 </div>
 </div>
 </section>
-<section id="step-1-install-global-prerequisites" class="level5">
-<h5 class="anchored" data-anchor-id="step-1-install-global-prerequisites">(Step 1) Install global prerequisites</h5>
+</section>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation"><i class="bi bi-book"></i> Installation</h3>
+<section id="step-1-install-global-prerequisites" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-install-global-prerequisites">(Step 1) Install global prerequisites</h4>
 <p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support.</p>
 <p><strong>Brew</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
@@ -300,8 +302,8 @@ Note
 </div>
 </div>
 </section>
-<section id="step-2-create-a-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-2-create-a-virtual-environment">(Step 2) Create a virtual environment</h5>
+<section id="step-2-create-a-virtual-environment" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-create-a-virtual-environment">(Step 2) Create a virtual environment</h4>
 <p>First, create a new virtual environment. Issue the following command in your terminal:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--system-site-package</span> manim-sandbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
@@ -322,16 +324,16 @@ Note
 </div>
 <p>This will create a folder <code>/manim-sandbox</code> in the project’s root directory.</p>
 </section>
-<section id="step-3-activatedeactivate-virtual-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-3-activatedeactivate-virtual-environment">(Step 3) Activate/deactivate virtual environment</h5>
+<section id="step-3-activatedeactivate-virtual-environment" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-activatedeactivate-virtual-environment">(Step 3) Activate/deactivate virtual environment</h4>
 <p>To activate, issue command:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> manim-sandbox/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which runs the <code>activate</code> script of the virtual environment.</p>
 <p>To deactivate, simply do:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-4-install-packages-into-the-environment" class="level5">
-<h5 class="anchored" data-anchor-id="step-4-install-packages-into-the-environment">(Step 4) Install packages into the environment</h5>
+<section id="step-4-install-packages-into-the-environment" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-install-packages-into-the-environment">(Step 4) Install packages into the environment</h4>
 <p>Inside an active virtual environment, issue <code>which pip</code>. The output now is: <code>~/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/pip</code> which corresponds to the version of Python installed inside the project’s environment folder <code>manim-sandbox</code>. This is just what we want. Note that if we do <code>which pip3</code> or <code>which python3</code> we will still get the versions that are contained within the virtual environment because <code>venv</code> creates virtual environments with multiple versions of <code>pip</code> and <code>python</code> already installed alongside one another (including <code>pip3</code>/<code>python3</code>).</p>
 <p>To check if we indeed have a clean slate of an environment, we can do <code>pip list</code> which should just show one package, <code>pip</code> itself.</p>
 <p><strong>Output:</strong></p>
@@ -340,8 +342,6 @@ Note
 pip     24.0</code></pre>
 <p>Let’s upgrade pip for good measure. Issue:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="install-manim" class="level6">
-<h6 class="anchored" data-anchor-id="install-manim"><i class="bi bi-book"></i> Install Manim</h6>
 <p>Now, install Manim.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
@@ -361,12 +361,9 @@ Note
 </div>
 </div>
 </div>
-</section>
-<section id="optional-install-jupyter-manim" class="level6">
-<h6 class="anchored" data-anchor-id="optional-install-jupyter-manim"><i class="bi bi-book"></i> (Optional) Install Jupyter-Manim</h6>
-<p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a>:</p>
+<p>Optionally, let’s also install <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a> in Jupyter notebooks:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is Jupyter’s equivalent of that).</p>
+<p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is just Jupyter’s equivalent of that).</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -386,23 +383,20 @@ Note
 </div>
 <p>To add this ability to Jupyter notebooks, install the following package:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter-manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>There’s also my, dedicated, repository called <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (linked in the title banner as well) which will contain my future Manim projects (and the environment to run them in, captured in a <code>requirements.txt</code> file).</p>
-<p>Throughout these notes, I will use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render Manim scenes directly inside these notes. When I do so, on my end, the result get rendered inside <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory.</p>
 </section>
-</section>
-<section id="step-5-exporting-requirements" class="level5">
-<h5 class="anchored" data-anchor-id="step-5-exporting-requirements">(Step 5) Exporting requirements</h5>
+<section id="step-5-exporting-requirements" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-exporting-requirements">(Step 5) Exporting requirements</h4>
 <p>Rather than committing the entire environment to the repository of a project, we commit a <code>requirements.txt</code> containing the output of <code>pip list</code> generated by:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To get the packages inside this file in a new environment, do:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-</section>
-<section id="the-setup-used-by-grant-sanderson" class="level3">
-<h3 class="anchored" data-anchor-id="the-setup-used-by-grant-sanderson">The setup used by Grant Sanderson</h3>
-<p>Grant himself defines a custom script that hooks into a local Python file defining the entire scene, and parses the script looking for certain leading comments. It then runs the script only up to that comment, so that the scene pauses at the last step, at the part of the code he’s still working on. He then uses an IDE shortcut to execute just that single code block (clearly demarcated with comments) in a Python interpreter, which renders the relevant portion of the scene to the output window. In this way, he can incrementally test parts of the scene (mimicking a Jupyter notebook setup)</p>
+<section id="alternate-local-development-setup" class="level3">
+<h3 class="anchored" data-anchor-id="alternate-local-development-setup">Alternate local development setup</h3>
+<p>Grant Sanderson himself defines a custom script that hooks into a local Python file defining the entire scene. The script continually parses the file looking for certain leading comments (usually before class or function definitions). It then renders the scene only up to that comment, so that the scene pauses at the part of the code he’s working on (so that the state of the scene is maintained until that point). He then uses an IDE shortcut to execute that single code block (which is clearly demarcated with a leading comment) inside a Python interpreter. The interpreter then renders the relevant portion of the scene to the output window. In this way, it’s possible to incrementally test parts of a scene (mimicking a Jupyter notebook setup).</p>
 <p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YouTube tutorial</a>.</p>
+<p>I have created a dedicated repository called <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (which is also linked in the title banner) which will contain my Manim projects and will mimic this setup. However, throughout these notes, I will use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render Manim scenes directly inside the repository containing these notes. When I do so, on my end, the result will get rendered inside <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory (and from there I can reference them inside these posts).</p>
 <p>Now let’s draw some actual Manim scenes.</p>
 </section>
 </section>
@@ -455,10 +449,10 @@ Figure&nbsp;1
 <li>Everything in Manim derives from the <code>Scene</code> class which offers a <code>constructor</code> method.</li>
 <li>In this <code>constructor</code> method, we define every object that’s in our scene, every transformation, and every other sequence of actions. Everything interesting, in short, happens inside the <code>constructor</code>.</li>
 </ol>
-<p>Let’s do some stuff with <code>Text</code>.</p>
 </section>
 <section id="hello-world" class="level3">
 <h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
+<p>Let’s do some stuff with <code>Text</code>.</p>
 <div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
