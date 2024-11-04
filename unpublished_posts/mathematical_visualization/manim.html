@@ -277,7 +277,41 @@ Note
 <section id="step-1-install-global-prerequisites" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-install-global-prerequisites">(Step 1) Install global prerequisites</h4>
 <p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support.</p>
-<p><strong>Brew</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Library</th>
+<th>Installation command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://formulae.brew.sh/formula/py3cairo">py3cairo</a></td>
+<td><code>brew install py3cairo</code></td>
+</tr>
+<tr class="even">
+<td><a href="https://formulae.brew.sh/formula/ffmpeg">ffmpeg</a></td>
+<td><code>brew install ffmpeg</code></td>
+</tr>
+<tr class="odd">
+<td><a href="https://formulae.brew.sh/cask/mactex-no-gui">mactex</a></td>
+<td><code>brew install --cask mactex-no-gui</code></td>
+</tr>
+<tr class="even">
+<td><a href="https://formulae.brew.sh/formula/pango">pango</a></td>
+<td><code>brew install pango</code></td>
+</tr>
+<tr class="odd">
+<td><a href="https://formulae.brew.sh/formula/pkg-config">pkg-config</a></td>
+<td><code>brew install pkg-config</code></td>
+</tr>
+<tr class="even">
+<td><a href="https://formulae.brew.sh/formula/scipy">scipy</a></td>
+<td><code>brew install scipy</code></td>
+</tr>
+</tbody>
+</table>
+<p>Execute:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install py3cairo ffmpeg</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Form LaTeX support in Manim</span></span>
@@ -468,32 +502,6 @@ Figure&nbsp;1
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some common <code>Text</code> methods are:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Method</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>pycairo</td>
-<td>brew install py3cairo</td>
-<td>pip install pycairo</td>
-</tr>
-<tr class="even">
-<td>ffmpeg</td>
-<td>brew install ffmpeg</td>
-<td>pip install ffmpeg</td>
-</tr>
-<tr class="odd">
-<td>LaTeX</td>
-<td>brew install –cask mactex-no-gui</td>
-<td>(not available via pip)</td>
-</tr>
-</tbody>
-</table>
 <div id="fig-hello-world-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hello-world-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
