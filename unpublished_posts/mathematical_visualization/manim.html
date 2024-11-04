@@ -192,7 +192,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul>
   <li><a href="#manim---an-introduction" id="toc-manim---an-introduction" class="nav-link active" data-scroll-target="#manim---an-introduction">Manim - An introduction</a>
   <ul class="collapse">
-  <li><a href="#local-development-environment-setup" id="toc-local-development-environment-setup" class="nav-link" data-scroll-target="#local-development-environment-setup">Local development environment setup</a>
+  <li><a href="#local-development-environment-setup" id="toc-local-development-environment-setup" class="nav-link" data-scroll-target="#local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</a>
   <ul class="collapse">
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#the-setup-used-by-grant-sanderson" id="toc-the-setup-used-by-grant-sanderson" class="nav-link" data-scroll-target="#the-setup-used-by-grant-sanderson">The setup used by Grant Sanderson</a></li>
@@ -219,7 +219,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="manim---an-introduction" class="level1">
 <h1>Manim - An introduction</h1>
 <section id="local-development-environment-setup" class="level2">
-<h2 class="anchored" data-anchor-id="local-development-environment-setup">Local development environment setup</h2>
+<h2 class="anchored" data-anchor-id="local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</h2>
 <p><a href="https://www.manim.community/">Manim</a> is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
 <section id="installation" class="level3">
 <h3 class="anchored" data-anchor-id="installation">Installation</h3>
@@ -341,7 +341,7 @@ pip     24.0</code></pre>
 <p>Let’s upgrade pip for good measure. Issue:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="install-manim" class="level6">
-<h6 class="anchored" data-anchor-id="install-manim">Install Manim</h6>
+<h6 class="anchored" data-anchor-id="install-manim"><i class="bi bi-book"></i> Install Manim</h6>
 <p>Now, install Manim.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
@@ -363,7 +363,7 @@ Note
 </div>
 </section>
 <section id="optional-install-jupyter-manim" class="level6">
-<h6 class="anchored" data-anchor-id="optional-install-jupyter-manim">(Optional) Install Jupyter-Manim</h6>
+<h6 class="anchored" data-anchor-id="optional-install-jupyter-manim"><i class="bi bi-book"></i> (Optional) Install Jupyter-Manim</h6>
 <p>For use in Jupyter Notebooks, there’s <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a> which enables the <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">magic command</a>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm <span class="op">&lt;</span>SceneName<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This must be provided at the top of each cell. It is similar to issuing the <code>manim</code> command in a terminal (<strong>cell magic</strong> is Jupyter’s equivalent of that).</p>
