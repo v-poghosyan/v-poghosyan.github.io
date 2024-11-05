@@ -194,8 +194,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#local-development-environment-setup" id="toc-local-development-environment-setup" class="nav-link" data-scroll-target="#local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</a>
   <ul class="collapse">
-  <li><a href="#python-virtual-environments" id="toc-python-virtual-environments" class="nav-link" data-scroll-target="#python-virtual-environments">Python virtual environments</a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><i class="bi bi-book"></i> Installation</a></li>
+  <li><a href="#python-virtual-environments" id="toc-python-virtual-environments" class="nav-link" data-scroll-target="#python-virtual-environments"><i class="bi bi-info-square"></i> Python virtual environments</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><i class="bi bi-gear-wide-connected"></i> Installation</a></li>
   </ul></li>
   <li><a href="#alternate-setup" id="toc-alternate-setup" class="nav-link" data-scroll-target="#alternate-setup"><i class="bi bi-laptop"></i> Alternate setup</a></li>
   </ul></li>
@@ -226,7 +226,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="local-development-environment-setup"><i class="bi bi-laptop"></i> Local development environment setup</h2>
 <p><a href="https://www.manim.community/">Manim</a> (<a href="https://docs.manim.community/en/stable/index.html">docs</a>) is a custom Python library for mathematical animation. It has two versions,. The first, and original, is maintained by Grant Sanderson himself (the creator of the library and the Stanford professor who goes by the username <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a> on YouTube). The forked version, called the <a href="https://github.com/v-poghosyan/manim">Manim community edition</a> enjoys more open source contributions and has the better documentation and support (attentiveness to PRs, etc.). For this series of posts on Manim, I will use the community edition to keep this document relevant.</p>
 <section id="python-virtual-environments" class="level3">
-<h3 class="anchored" data-anchor-id="python-virtual-environments">Python virtual environments</h3>
+<h3 class="anchored" data-anchor-id="python-virtual-environments"><i class="bi bi-info-square"></i> Python virtual environments</h3>
 <p>Using <code>virtualenv</code> (<code>venv</code>), let’s create an isolated Python environment to contain the Python version and the versions of library dependencies for our Manim projects. Note that <code>venv</code> is quite old, and the new way of managing Python environments and packages is <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> (a merger of <code>pip</code> and <code>venv</code>). More on that later… For this project we’ll stick with <code>venv</code> because I like having physical folders that contain the various environments used across my notes on this site.</p>
 <section id="a-note-on-using-multiple-virtual-environmentpackage-managers" class="level4">
 <h4 class="anchored" data-anchor-id="a-note-on-using-multiple-virtual-environmentpackage-managers">A note on using multiple virtual environment/package managers</h4>
@@ -276,7 +276,7 @@ Tip
 </section>
 </section>
 <section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation"><i class="bi bi-book"></i> Installation</h3>
+<h3 class="anchored" data-anchor-id="installation"><i class="bi bi-gear-wide-connected"></i> Installation</h3>
 <section id="step-1-install-global-prerequisites" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-install-global-prerequisites">(Step 1) Install global prerequisites</h4>
 <p>Manim depends on <code>py3cairo</code>, <code>ffmpeg</code> and some other dependencies for Apple Silicon machines and LaTeX support.</p>
