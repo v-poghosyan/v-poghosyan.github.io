@@ -201,13 +201,14 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#drawing-manim-scenes" id="toc-drawing-manim-scenes" class="nav-link" data-scroll-target="#drawing-manim-scenes">Drawing Manim scenes</a>
   <ul class="collapse">
-  <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a>
-  <ul class="collapse">
+  <li><a href="#the-scene-object" id="toc-the-scene-object" class="nav-link" data-scroll-target="#the-scene-object">The <code>Scene</code> object</a></li>
   <li><a href="#square-to-circle-transformation" id="toc-square-to-circle-transformation" class="nav-link" data-scroll-target="#square-to-circle-transformation">Square to circle transformation</a></li>
-  <li><a href="#rendering-text" id="toc-rendering-text" class="nav-link" data-scroll-target="#rendering-text">Rendering text</a></li>
+  <li><a href="#rendering-text" id="toc-rendering-text" class="nav-link" data-scroll-target="#rendering-text">Rendering text</a>
+  <ul class="collapse">
   <li><a href="#text-to-square-to-circle-transformation" id="toc-text-to-square-to-circle-transformation" class="nav-link" data-scroll-target="#text-to-square-to-circle-transformation">Text to square to circle transformation</a></li>
-  <li><a href="#axes-and-other-math-y-stuff" id="toc-axes-and-other-math-y-stuff" class="nav-link" data-scroll-target="#axes-and-other-math-y-stuff">Axes and other math-y stuff</a></li>
   </ul></li>
+  <li><a href="#different-ways-of-rendering-objects---add-play-wait" id="toc-different-ways-of-rendering-objects---add-play-wait" class="nav-link" data-scroll-target="#different-ways-of-rendering-objects---add-play-wait">Different ways of rendering objects - add, play, wait</a></li>
+  <li><a href="#axes-and-other-math-y-stuff" id="toc-axes-and-other-math-y-stuff" class="nav-link" data-scroll-target="#axes-and-other-math-y-stuff">Axes and other math-y stuff</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -442,9 +443,10 @@ Note
 <section id="the-scene-object" class="level2">
 <h2 class="anchored" data-anchor-id="the-scene-object">The <code>Scene</code> object</h2>
 <p>We can now draw out first <code>Scene</code>. A guiding principle behind Manim’s design is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes (we will see an example of this shortly).</p>
-<section id="square-to-circle-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="square-to-circle-transformation">Square to circle transformation</h3>
-<p>Let’s use <code>jupyter-manim</code> for the first few examples.</p>
+</section>
+<section id="square-to-circle-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="square-to-circle-transformation">Square to circle transformation</h2>
+<p>Importing <code>jupyter-manim</code> for the access to the <code>manim</code> cell magic within these notes.</p>
 <div id="cell-4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -486,8 +488,8 @@ Figure&nbsp;1
 <li>In this <code>constructor</code> method, we define every object that’s in our scene, every transformation, and every other sequence of actions. Everything interesting, in short, happens inside the <code>constructor</code>.</li>
 </ol>
 </section>
-<section id="rendering-text" class="level3">
-<h3 class="anchored" data-anchor-id="rendering-text">Rendering text</h3>
+<section id="rendering-text" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-text">Rendering text</h2>
 <p>Let’s do some stuff with <code>Text</code>.</p>
 <div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm HelloWorld</span>
@@ -501,7 +503,8 @@ Figure&nbsp;1
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rendering text</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(text, run_time<span class="op">=</span><span class="dv">3</span>))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(text))</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-hello-world-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -541,7 +544,6 @@ Figure&nbsp;2
 </tr>
 </tbody>
 </table>
-</section>
 <section id="text-to-square-to-circle-transformation" class="level3">
 <h3 class="anchored" data-anchor-id="text-to-square-to-circle-transformation">Text to square to circle transformation</h3>
 <p>A core design philosophy of Manim is that everything should be transformable into everything else. We can transform shapes into other shapes and even transform text elements into shapes. Let’s see an example of this now.</p>
@@ -571,6 +573,22 @@ Figure&nbsp;2
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Transform(text[<span class="dv">0</span>], circle))</span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeOut(text[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>There’s a quirk in the way Manim reads syntactically… One would hope to say <code>Transform(text[0], square)</code>, then <code>Transform(square, circle)</code>, and finally <code>FadeOut(circle)</code>. However, the square <em>is</em> the transformed <code>text[0]</code> Mobject, and the circle continues to be that very same Mobject, so we continue referring to it as that. Later on we’ll see how to organize our code to get around this problem.</p>
+</div>
+</div>
+</div>
 <div id="fig-hello-world-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hello-world-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -586,30 +604,33 @@ Figure&nbsp;3
 </figcaption>
 </figure>
 </div>
+</section>
+</section>
+<section id="different-ways-of-rendering-objects---add-play-wait" class="level2">
+<h2 class="anchored" data-anchor-id="different-ways-of-rendering-objects---add-play-wait">Different ways of rendering objects - add, play, wait</h2>
 <p>Note that we can also render objects by using <code>add</code> (see <a href="https://docs.manim.community/en/stable/reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.add">docs</a>), as opposed to <code>play</code> (see <a href="https://docs.manim.community/en/stable/reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.play">docs</a>). The difference is that play is animated, while add is not.</p>
 </section>
-<section id="axes-and-other-math-y-stuff" class="level3">
-<h3 class="anchored" data-anchor-id="axes-and-other-math-y-stuff">Axes and other math-y stuff</h3>
+<section id="axes-and-other-math-y-stuff" class="level2">
+<h2 class="anchored" data-anchor-id="axes-and-other-math-y-stuff">Axes and other math-y stuff</h2>
 <p>What’s the point of using a mathematical animation library if we can’t animate math? Let’s see how to animate some math-y stuff with Manim.</p>
-<div id="cell-17" class="cell">
+<div id="cell-19" class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm MathDemo</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MathDemo(Scene):</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(ax)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(poly)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(ax)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(poly)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add(area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>But because we’re using the <code>add</code> method of <code>Scene</code> instead of <code>play</code>, we’re not producing animations. We’ll fix that shortly, but first let’s look at the general mechanism of Manim’s animation system.</p>
 <section id="animation-system-in-manim" class="level4">
@@ -623,24 +644,23 @@ Figure&nbsp;3
 <li>remove Mobjects (e.g.&nbsp;<code>Uncreate</code>, <code>FadeOut</code>, …)</li>
 </ul>
 <p>Now let’s go back to our math-y example and animate it!</p>
-<div id="cell-20" class="cell">
+<div id="cell-22" class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm MathDemo</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MathDemo(Scene):</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), color<span class="op">=</span>BLACK)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Create(ax), Create(poly), run_time<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeIn(area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding axes</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> Axes(x_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), y_range<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>), color<span class="op">=</span>BLACK)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adding a quadratic polynomial with zeros at x=0, and x=2</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        poly <span class="op">=</span> ax.plot(<span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">*</span> (x<span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span>RED)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlighting the area under the graph on [0,2]</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        area <span class="op">=</span> ax.get_area(poly, x_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>), opacity<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Create(ax), Create(poly), run_time<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(FadeIn(area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-hello-world-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -659,7 +679,6 @@ Figure&nbsp;4
 </div>
 
 
-</section>
 </section>
 </section>
 </section>
