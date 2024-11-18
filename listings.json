@@ -2,20 +2,17 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/projects/water-me.html",
-      "/posts/game_development/unreal_engine_first_steps.html",
-      "/posts/machine_learning/builing-an-LLM.html",
+      "/posts/game_development/unreal_engine_cheat_sheet.html",
       "/posts/functional_programming/functional_programming.html",
-      "/posts/instructibles/retroarch_setup.html",
       "/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html",
-      "/posts/leetcode/connected_sinks_and_sources.html",
+      "/posts/leetcode/lc_connected_sinks_and_sources.html",
       "/posts/leetcode/lc11_container_with_most_water.html",
-      "/posts/optimization/linear-programs-and-lp-geometry.html",
-      "/posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html",
+      "/posts/optimization/linear_programs_and_lp_geometry.html",
+      "/posts/optimization/duality_theory.html",
+      "/posts/optimization/algorithms_for_unconstrained_optimization_gradient_descent.html",
       "/posts/optimization/introduction_to_optimization.html",
-      "/posts/optimization/robust-lps-modelling-discrete-failures.html",
-      "/posts/optimization/duality-theory.html",
-      "/posts/linear_algebra/linear_algebra_refresher_for_optimization.html"
+      "/posts/optimization/robust_lps_modelling_discrete_failures.html",
+      "/posts/linear_algebra/review_of_linear_algebra_for_optimization.html"
     ]
   }
 ]

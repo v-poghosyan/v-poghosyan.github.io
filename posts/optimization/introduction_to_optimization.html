@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2022-01-23">
 
-<title>Introduction to Optimization – v-poghosyan</title>
+<title>Notes: Introduction to Optimization – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Introduction to Optimization</h1>
+      <h1 class="title">Notes: Introduction to Optimization</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Optimization</div>
               </div>
@@ -188,6 +188,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#model-of-a-convex-optimization-problem" id="toc-model-of-a-convex-optimization-problem" class="nav-link" data-scroll-target="#model-of-a-convex-optimization-problem">Model of a Convex Optimization Problem</a></li>
   <li><a href="#why-convex-optimization" id="toc-why-convex-optimization" class="nav-link" data-scroll-target="#why-convex-optimization">Why Convex Optimization?</a></li>
+  <li><a href="#where-to-go-from-here" id="toc-where-to-go-from-here" class="nav-link" data-scroll-target="#where-to-go-from-here">Where to go from here</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -208,12 +209,16 @@ window.Quarto = {
 <p>This post is the first in a series of posts on optimization. In this series, we frame an optimization problem in the following form:</p>
 <p><span class="math display">\[\textrm{minimize}: f(x)\]</span> <span class="math display">\[\textrm{subject to}: x \in \mathcal{X}\]</span></p>
 <p>where the <em>objective function</em> <span class="math inline">\(f\)</span> is a <em>convex function</em>, and the <em>constraint set</em> <span class="math inline">\(\mathcal{X}\)</span> is a <em>convex set</em>.</p>
-<p>We will not go over the ways in which we can model a real-world problem as one in the given form. There are many creative ways of doing that, one of which you can read about in <a href="../../posts/optimization/robust-lps-modelling-discrete-failures.html">this post</a>.</p>
+<p>We will not go over the ways in which we can model a real-world problem as one in the given form. There are many creative ways of doing that, one of which you can read about in <a href="../optimization/robust-lps-modelling-discrete-failures.ipynb">this post</a>.</p>
 </section>
 <section id="why-convex-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="why-convex-optimization">Why Convex Optimization?</h2>
 <p>First, let’s define the <em>size</em> of an optimization problem as: The dimensionality of the parameter <span class="math inline">\(x\)</span>, added to the number of the problem constraints.</p>
 <p>Convex optimization problems are a class of <em>easy</em> optimization problems — problems whose time and/or space complexity grows slowly with respect to problem size. These problems are general enough to capture many scenarios of interest, even some that do not fall strictly into the convex category, but specific enough to be solvable through generic algorithms and numerical methods.</p>
+</section>
+<section id="where-to-go-from-here" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-go-from-here">Where to go from here</h2>
+<p>Feel free to read about check out my posts about some of the more advanced concepts in optimization like <a href="../../posts/optimization/linear_programs_and_lp_geometry.html">linear programs and their geometry</a>, <a href="../../posts/optimization/algorithms_for_unconstrained_optimization_gradient_descent.html">optimization algorithms</a>, or <a href="../../posts/optimization/duality_theory.html">duality theory</a>. For a fun problem solvable using linear programs, check out the post on <a href="./robust_lps_modelling_discrete_failures">modelling discrete failures in any given system</a>.</p>
 
 
 </section>

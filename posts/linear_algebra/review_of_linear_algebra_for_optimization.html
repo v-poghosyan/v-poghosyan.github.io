@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2022-01-23">
 
-<title>LC121 and LC53: Kadane’s Algorithm – v-poghosyan</title>
+<title>Notes: Review of Linear Algebra for Optimization – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -182,11 +148,9 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">LC121 and LC53: Kadane’s Algorithm</h1>
+      <h1 class="title">Notes: Review of Linear Algebra for Optimization</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Leetcode</div>
-                <div class="quarto-category">Algorithms</div>
-                <div class="quarto-category">Dyanmic Progamming</div>
+                <div class="quarto-category">Linear Algebra</div>
               </div>
                   </div>
   </div>
@@ -220,131 +184,219 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a>
+  <li><a href="#convexity" id="toc-convexity" class="nav-link active" data-scroll-target="#convexity">Convexity</a>
   <ul class="collapse">
-  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#non-brute-force-solution" id="toc-non-brute-force-solution" class="nav-link" data-scroll-target="#non-brute-force-solution">Non-Brute-Force Solution</a>
-  <ul class="collapse">
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#operations-that-preserve-convexity" id="toc-operations-that-preserve-convexity" class="nav-link" data-scroll-target="#operations-that-preserve-convexity">Operations that Preserve Convexity</a></li>
   </ul></li>
-  <li><a href="#proof-of-correctness" id="toc-proof-of-correctness" class="nav-link" data-scroll-target="#proof-of-correctness">Proof of Correctness</a>
+  <li><a href="#examples-of-convex-sets" id="toc-examples-of-convex-sets" class="nav-link" data-scroll-target="#examples-of-convex-sets">Examples of Convex Sets</a>
   <ul class="collapse">
-  <li><a href="#proof-of-invariance" id="toc-proof-of-invariance" class="nav-link" data-scroll-target="#proof-of-invariance">Proof of Invariance</a></li>
-  </ul></li>
-  <li><a href="#kadanes-algorithm---maximum-subarray" id="toc-kadanes-algorithm---maximum-subarray" class="nav-link" data-scroll-target="#kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</a></li>
+  <li><a href="#convex-hull-of-n-points" id="toc-convex-hull-of-n-points" class="nav-link" data-scroll-target="#convex-hull-of-n-points">Convex Hull of <span class="math inline">\(n\)</span> Points</a></li>
+  <li><a href="#convex-hull-of-a-set" id="toc-convex-hull-of-a-set" class="nav-link" data-scroll-target="#convex-hull-of-a-set">Convex Hull of a Set</a></li>
+  <li><a href="#affine-combination-of-n-points" id="toc-affine-combination-of-n-points" class="nav-link" data-scroll-target="#affine-combination-of-n-points">Affine Combination of <span class="math inline">\(n\)</span> Points</a></li>
+  <li><a href="#linear-combinations---hyperplanes-and-halfspaces" id="toc-linear-combinations---hyperplanes-and-halfspaces" class="nav-link" data-scroll-target="#linear-combinations---hyperplanes-and-halfspaces">Linear Combinations - Hyperplanes and Halfspaces</a></li>
+  <li><a href="#conic-combinations-of-n-points" id="toc-conic-combinations-of-n-points" class="nav-link" data-scroll-target="#conic-combinations-of-n-points">Conic Combinations of <span class="math inline">\(n\)</span> Points</a></li>
+  <li><a href="#ellipses" id="toc-ellipses" class="nav-link" data-scroll-target="#ellipses">Ellipses</a></li>
+  <li><a href="#norm-balls" id="toc-norm-balls" class="nav-link" data-scroll-target="#norm-balls">Norm Balls</a></li>
+  <li><a href="#polyhedra" id="toc-polyhedra" class="nav-link" data-scroll-target="#polyhedra">Polyhedra</a></li>
+  <li><a href="#the-set-of-all-positive-semidefinite-matrices" id="toc-the-set-of-all-positive-semidefinite-matrices" class="nav-link" data-scroll-target="#the-set-of-all-positive-semidefinite-matrices">The Set of All Positive Semidefinite Matrices</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
 
 
 
 
 
-<section id="problem-statement" class="level1">
-<h1>Problem Statement</h1>
-<p>We are given an array of <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day.</p>
-<p>We want to maximize our profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return <code>0</code>.</p>
-<p><strong>Example 1</strong></p>
-<pre><code>Input: prices = [7,1,5,3,6,4]
-Output: 5</code></pre>
-<p><strong>Explanation</strong></p>
-<p>Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell</p>
-<p><strong>Example 2:</strong></p>
-<pre><code>Input: prices = [7,6,4,3,1]
-Output: 0</code></pre>
-<p><strong>Explanation</strong></p>
-<p>In this case, no transactions are done and the max profit = 0.</p>
-<section id="brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="brute-force-solution">Brute-Force Solution</h2>
-<p>Consider each viable pair of days. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^2)\)</span> because, for each possible day <code>i</code> that we choose to buy the stock on, there are <span class="math inline">\(n-i\)</span> possible days that we can sell it on. Since there are <span class="math inline">\(n\)</span> choices for which day to buy, the number of total pairs has a leading term of <span class="math inline">\(n(n-1)\)</span>, so it’s quadratic in <span class="math inline">\(n\)</span>.</p>
-<p>We can also think of choosing a subset of size <span class="math inline">\(2\)</span> and discarding those which have a reverse order of days. This essentially means choosing a subset of size <span class="math inline">\(2\)</span> without order (since each pair is either in the correct order or not, and we only count the one that is), so <span class="math inline">\({O \left ({n \choose 2} \right )}\)</span> which is, of course, <span class="math inline">\(O(n^2)\)</span>.</p>
-</section>
-<section id="non-brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="non-brute-force-solution">Non-Brute-Force Solution</h2>
-<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using DP with tabulation similar to <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a> which solves the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray</a> problem. The similarities between these two problems are due to fact that both are concerned with some score over a <em>contiguous</em> array (contiguity being what gives rise to the optimal substructure). Whereas Kadane’s is concerned with the contiguous subarray with maximum sum, this algorithm is interested in the maximum profit (which is the difference between the last element of the optimal subarray and the first one). Like Kadane’s algorithm, we can prove its correctness using <em>loop invariants</em>. We will give the solution and prove the correctness. As for building intuition for why this solution works, we will focus on the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray problem</a> which is a more general application of this type of pattern.</p>
-<section id="code" class="level3">
-<h3 class="anchored" data-anchor-id="code">Code</h3>
-<div id="cell-4" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxProfit(prices):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    min_price <span class="op">=</span> <span class="bu">float</span>(<span class="st">"inf"</span>) <span class="co"># +infinity</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    max_profit <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prices)):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prices[i] <span class="op">&lt;</span> min_price:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            min_price <span class="op">=</span> prices[i]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> prices[i] <span class="op">-</span> min_price <span class="op">&gt;</span> max_profit:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            max_profit <span class="op">=</span> prices[i] <span class="op">-</span> min_price</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_profit</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>]</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maxProfit(prices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>5</code></pre>
+<p>Let’s start exploring mathematics for machine learning with a refresher on convexity in optimization and the linear algebra that’s commonly used in the subject.</p>
+<section id="convexity" class="level2">
+<h2 class="anchored" data-anchor-id="convexity">Convexity</h2>
+<p>Set convexity is defined as follows:</p>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> &nbsp; A set <span class="math inline">\(C \subseteq \mathbb{R^d}\)</span> is <strong>convex</strong> if, for all points <span class="math inline">\(x_1,x_2 \in C\)</span> and any <span class="math inline">\(\theta \in [0,1]\)</span>, the point <span class="math inline">\(\theta x_1 + (1-\theta) x_2\)</span> is also in <span class="math inline">\(C\)</span>.</p>
+</blockquote>
+<p>That is, a set is convex if the parametrized line segment between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, any two points (or, more generally, vectors) in the set is also entirely inside the set. <br></p>
+<div id="fig-convexity" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-convexity" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-convex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Convex
+</figcaption>
+</figure>
 </div>
 </div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-convexity" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-non-convex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-non-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/non_convex.light.png" class="img-fluid figure-img" data-ref-parent="fig-convexity">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Non-convex
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Set A is convex, set B is non-convex
+</figcaption>
+</figure>
+</div>
+<section id="operations-that-preserve-convexity" class="level3">
+<h3 class="anchored" data-anchor-id="operations-that-preserve-convexity">Operations that Preserve Convexity</h3>
+<p>Scaling, skewing, and rotation (which can be thought of as <em>linear transformations</em>) preserve convexity as does shifting (an <em>affine transformation</em>). Let the matrix <span class="math inline">\(A\)</span> define such a transformation, and <span class="math inline">\(b\)</span> be a shift vector. Then <span class="math inline">\(C' = \{Ax + b : x \in C \}\)</span> is convex provided that <span class="math inline">\(C\)</span> was convex.</p>
+<p>An <em>intersection</em> of convex sets is also convex. That is, <span class="math inline">\(C' = \{ x : x \in C_1 \cap x \in C_2 \}\)</span> is convex provided that <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> were convex to begin with. The proof follows directly from the definition of intersection.</p>
+<p>However, <em>unions</em> of convex sets need not be convex.</p>
 </section>
 </section>
-<section id="proof-of-correctness" class="level2">
-<h2 class="anchored" data-anchor-id="proof-of-correctness">Proof of Correctness</h2>
-<p>It’s easy to see that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code>. This is called a loop invariant. Showing something is a loop invariant is a lot like proving the <em>inductive step</em> in a proof by induction (for example, when trying to prove recursive algorithms).</p>
-<p>It can also be shown that <code>max_profit</code> is another loop invariant, and that it holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<section id="proof-of-invariance" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-invariance">Proof of Invariance</h3>
-<p>The loop does one of two things exclusively: either it updates <code>min_price</code> or it doesn’t.</p>
-<p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration of the loop, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar again (<strong>case 1</strong>). Hence, <code>max_profit</code> is a loop invariant.</p>
-<p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
+<section id="examples-of-convex-sets" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="examples-of-convex-sets">Examples of Convex Sets</h2>
+<p>The following are some common convex sets we will come across in practice. To discuss sets, we should build up from points. For the purposes of the discussion that follows, A <em>point</em> and a <em>vector</em> mean the same thing.</p>
+<section id="convex-hull-of-n-points" class="level3">
+<h3 class="anchored" data-anchor-id="convex-hull-of-n-points">Convex Hull of <span class="math inline">\(n\)</span> Points</h3>
+<p>A <em>convex combination</em> of points <span class="math inline">\(x_1, ..., x_n\)</span> is a point of the form <span class="math inline">\(x = \theta_1 x_1 + ... + \theta_n x_n\)</span> where <span class="math inline">\(\sum_{i = 1}^{n} \theta_i = 1\)</span> and <span class="math inline">\(\theta_i \geq 0 \ \ \forall i\)</span>.</p>
+<p>Let <span class="math inline">\(x_1,x_2,...,x_n\)</span> be <span class="math inline">\(n\)</span> points in space. Their <em>convex hull</em> is the set of all points which can be written as some convex combination of them. By varying parameters <span class="math inline">\(\theta_i\)</span> we generate the convex hull as the set of all convex combinations of these points.</p>
+<div id="fig-convex-hull" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull.light.png" class="img-fluid figure-img" width="300"></p>
+<figcaption>Convex hull</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The convex hull can be visualized as the closed polygon formed when a rubber band is stretched around the <span class="math inline">\(n\)</span> points (if we imagine those to be pegs sticking out of the screen).
+</figcaption>
+</figure>
+</div>
+<p>The convex hull of two points is the line segment joining them. That of three points is the triangle whose vertices they form (complete with its inner region). In general, for <span class="math inline">\(n\)</span> points, the concept generalizes to an <span class="math inline">\(n\)</span>-dimensional polygon.</p>
+<p>Formally, the convex hull is the set <span class="math inline">\(\{ \theta_1 x_1 + ... + \theta_n x_n : \theta_1 + ... + \theta_n = 1 \ \ \textrm{and} \ \ \theta_i \geq 0 \ \ \forall i \}\)</span></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Several algorithms exist for generating convex hulls efficiently. The most popular one is Jarvis’s algorithm which simulates a rope wrapping around the leftmost point of the point set. More on that <a href="https://jeffe.cs.illinois.edu/teaching/compgeom/notes/14-convexhull.pdf">here</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="convex-hull-of-a-set" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="convex-hull-of-a-set">Convex Hull of a Set</h3>
+<p>The convex hull of a set can be similarly defined as all the convex combinations of the elements in the set. However, since the set may contain infinite elements, there’s an equivalent definition in terms of supersets.</p>
+<p>Let <span class="math inline">\(C\)</span> be a non-convex set. The convex hull of <span class="math inline">\(C\)</span> is the intersection of all convex supersets of <span class="math inline">\(C\)</span>. That is, it’s the intersection of all convex sets containing <span class="math inline">\(C\)</span>. The result of such an intersection will be the unique <span class="math inline">\(^{(†)}\)</span> smallest convex superset of <span class="math inline">\(C\)</span>, its convex hull.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>(†) <strong>Proof of uniqueness:</strong> Let <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> be two convex hulls of <span class="math inline">\(C\)</span>. Let <span class="math inline">\(c_1 \in C_1\)</span> be a point. Since <span class="math inline">\(c_1 \in C_1\)</span>, <span class="math inline">\(c_1 \in\)</span> at least one of the convex supersets <span class="math inline">\(C^{i}\)</span>of <span class="math inline">\(C\)</span>. Hence, <span class="math inline">\(c_1 \in C_2\)</span> since <span class="math inline">\(C_2 = \bigcap^{i=1 \to n}C^{i}\)</span>. Similarly, it can be shown that any <span class="math inline">\(c_2 \in C_2\)</span> also belongs to <span class="math inline">\(C_1\)</span>. Hence, <span class="math inline">\(C_1 \subseteq C_2\)</span> and vice versa. This proves that <span class="math inline">\(C_1 = C_2\)</span> and completes the proof of uniqueness.</p>
+</div></div><div id="fig-convex-hull" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull_set.light.png" class="img-fluid figure-img" width="300"></p>
+<figcaption>Convex hull of a set</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convex-hull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Visualizing the convex hull of a non-convex set is similar to visualizing that of <span class="math inline">\(n\)</span> points — it’s simply the shape enclosed by a rubber band stretched around the non-convex set.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="affine-combination-of-n-points" class="level3">
+<h3 class="anchored" data-anchor-id="affine-combination-of-n-points">Affine Combination of <span class="math inline">\(n\)</span> Points</h3>
+<p>An <em>affine combination</em> of points <span class="math inline">\(x_1,...,x_n\)</span> is a point of the form <span class="math inline">\(x = \theta_1 x_1 + ... + \theta_n x_n\)</span> with <span class="math inline">\(\sum_{i=1}^{n}\theta_i = 1\)</span> but where the <span class="math inline">\(\theta_i\)</span>’s need not be non-negative.</p>
+<p>For a single point, the set of all affine combinations is the singleton set with the point itself. For two points, it’s the <em>line</em> that passes through them, and for three points it’s the <em>plane</em>. In general, it is the plane in <span class="math inline">\(n\)</span>-dimensions passing through the <span class="math inline">\(n\)</span> points.</p>
+</section>
+<section id="linear-combinations---hyperplanes-and-halfspaces" class="level3">
+<h3 class="anchored" data-anchor-id="linear-combinations---hyperplanes-and-halfspaces">Linear Combinations - Hyperplanes and Halfspaces</h3>
+<p>A <em>linear combination</em> of <span class="math inline">\(n\)</span> vectors, on the other hand, is all vectors of the form <span class="math inline">\(x = \theta_1 x_1 + ... + \theta_n x_n\)</span> with the <span class="math inline">\(\theta_i\)</span>’s totally unrestricted.</p>
+<p>The set of all linear combinations of <span class="math inline">\(n\)</span> points is called their <em>span</em>. Formally, it is the set <span class="math inline">\(\{ \theta_1 x_1 + ... + \theta_n x_n : \forall \theta_1,...,\theta_n \}\)</span>.</p>
+<p>The span of a single point is the line passing through it. For two vectors the span is the plane passing through them and, in general, the span of <span class="math inline">\(n\)</span> points is a plane in <span class="math inline">\((n+1)\)</span>-dimensions which contains these points.</p>
+<section id="hyperplanes" class="level4">
+<h4 class="anchored" data-anchor-id="hyperplanes">Hyperplanes</h4>
+<p>For fixed weights <span class="math inline">\(\theta_i = a_i \ \ \forall i\)</span>, a <em>hyperplane</em> is the set of all points <span class="math inline">\(x \in \mathbb{R^n}\)</span> whose linear combination equals a fixed constant <span class="math inline">\(b \in \mathbb{R}\)</span>.</p>
+<p>Formally, a hyperplane is the set <span class="math inline">\(\{ x : a_1 x_1 + ... a_n x_n = b\} = \{ x : a^T x = b\}\)</span></p>
+<p>There’s a geometric interpretation of the parameters <span class="math inline">\(a \in \mathbb{R^n}\)</span> and <span class="math inline">\(b \in \mathbb{R}\)</span>. Since the dot-product between perpendicular vectors is <span class="math inline">\(0\)</span>, <span class="math inline">\(\{ x :  a^T x = 0\}\)</span> is simply the set of all vectors perpendicular to <span class="math inline">\(a\)</span> (whose tail, as with all vectors in linear algebra, is considered to be fixed at the origin), making <span class="math inline">\(a\)</span> the <em>normal vector</em> to the hyperplane passing through the origin. To allow for parallel hyperplanes that are translated from the origin, the <em>offset</em> <span class="math inline">\(b \in \mathbb{R}\)</span> is introduced in the generalization <span class="math inline">\(\{ x : a^T x = b \}\)</span>. This is now the set of all vectors whose dot-product with <span class="math inline">\(a\)</span> is constant. These vectors are not quite perpendicular to <span class="math inline">\(a\)</span>, but they form a parallel hyperplane that’s been shifted from the origin by a distance of <span class="math inline">\(\frac{|b|}{\|a\|_2}\)</span>.</p>
+<p>Since the sum <span class="math inline">\(a_1 x_1 + ... a_n x_n = b\)</span> is fixed, the last coordinate, which we’ll call <span class="math inline">\(x_k\)</span> for some <span class="math inline">\(k \in [1,...,n]\)</span>, is fixed by the choice of the other <span class="math inline">\(n-1\)</span> coordinates. Therefore, a hyperplane in <span class="math inline">\(\mathbb{R^n}\)</span> spans <span class="math inline">\(n-1\)</span> dimensions instead of <span class="math inline">\(n\)</span>. <br></p>
+</section>
+<section id="halfspaces" class="level4">
+<h4 class="anchored" data-anchor-id="halfspaces">Halfspaces</h4>
+<p>A <em>halfspace</em> is either of the two sub-spaces a hyperplane partitions the whole space into. Since the dot-product between vectors which are roughly in the same direction is positive, and vice versa, the two halfspaces associated to a hyperplane <span class="math inline">\(\{ x : a^T x = b\}\)</span> are <span class="math inline">\(\{ x : a^T x \geq b\}\)</span> and <span class="math inline">\(\{ x : a^T x \leq b\}\)</span>.</p>
 </section>
 </section>
-<section id="kadanes-algorithm---maximum-subarray" class="level2">
-<h2 class="anchored" data-anchor-id="kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</h2>
-<p>At the heart of Kadane’s algorithm is an optimal substructure which lends itself to optimization using the principles of dynamic programming.</p>
-<p>Any subarray ends (or begins, but for now let’s stick with ends) at some index. We may also define a notion such as this: let there be a solution to the problem up to some index <code>i</code>. Le’t call that solution <code>global_max(i)</code>. This is, effectively, the final solution to the problem were the problem to have size <code>i</code> (i.e.&nbsp;if <code>nums</code> had size <code>i</code>).</p>
-<p>A relationship we may initially notice when looking at this problem is that:</p>
-<pre><code>local_max[i] = max(local_max[i-1] + nums[i], nums[i])</code></pre>
-<p>Where <code>local_max[i]</code> is the maximum of all subarrays ending at index <code>i</code> but, crucially, <em>not</em> the solution of the problem up to index <code>i</code> (that’s <code>global_max[i]</code>). It’s easy to get lost in this problem by conflating these two variables which track everything we need to implement a single-pass tabulated solution. They’re also, as it turns out, loop invariants.</p>
-<p>Feel free to tinker with the problem to notice this optimal substructure. It’s often helpful to illustrate the arrays…</p>
-<p>The final answer is the maximum over all the local maxima (obviously).</p>
-<p>Thinking in terms of solutions to sub-problems is, in essence, what dynamic programming is. It’s a way to cut down on the number of subarrays considered in the brute force approach by coming up with a computationally cheap rule that gives us the solution to the current problem based on the retrieved value of a previously solved sub-problem (whatever the relationship between the problem and its sub-problems may be). In the case of the Maximum Subarray problem the sub-problems are expressed in terms of <code>local_max[i]</code> and <code>global_max[i]</code>. If we know <code>local_max[i-1]</code>, <code>local_max[i]</code> is all but known through the above relationship and a similar relationship also exists for <code>global_max</code>.</p>
-<p>If we work through an example, the act itself will give us insight into the implementation of the single pass, iterative algorithm. Note that the recursive approach is already somewhat betrayed by the optimal substructure and, to further make it dynamic, we could implement memoization as a layer above it. Let’s take the first step, and then generalize.</p>
-<p>In the beginning, there’s just <code>nums[0]</code>. By virtue of being the only subarray that ends at index <code>0</code> it is its own <code>local_max[0]</code>. In situations like this we initialize <code>local_max</code> to <span class="math inline">\(-\infty\)</span> in order not to resort to handling special cases, like singleton arrays, in the loop.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max:</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s immediately clear that, since <code>local_max</code> is initialized to <span class="math inline">\(-\infty\)</span> (let’s call this <code>local_max[-1]</code> to stay consistent with array notation of the optimal substructure), <code>num &gt; local_max</code> is equivalent to:</p>
-<pre><code>nums[0] &gt; local_max[-1] + nums[0]</code></pre>
-<p>This is true in general for any <code>num[0]</code>. So the desired condition is actually:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>As it is, the loop invariant <code>local_max</code> will contain the local maximum at the last element of the <code>nums</code> array. We need to figure out what to do with the other loop invariant <code>global_max</code> which is supposed to be the solution to the problem of size <code>i</code>. Well, <code>global_max</code> is clearly just:</p>
-<pre><code>global_max[i] = max(global_max[i-1], local_max[i])</code></pre>
-<p>Which is the promised greedy-choice update for <code>global_max</code> – the loop invariant which will hold the final solution to the problem.</p>
-<p>We need to implement this relationship just as we implemented the previous one unless we just use the built in <code>max</code> function to essentially just update both loop invariants in sequence and be done with it. But let’s go with the more imperative version. Let’s take the first step.</p>
-<p>In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and <code>global_max[-1]</code> (as per our earlier abuse of notation) is <span class="math inline">\(-\infty\)</span> by choice.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> global_max <span class="op">&lt;</span> local_max:</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        global_max <span class="op">=</span> local_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We can reference <code>local_max</code> and assume its value to be as the promised invariant on line 9.</p>
-<p>Notice that <code>global_max</code> has two meanings, as does <code>local_max</code> in the implementation. It is used as the previous iterate <code>global_max[i-1]</code> (in the Boolean comparison) as well as the current (or next, depending on frame of reference) iterate <code>global_max[i]</code> (in the assignment operation).</p>
+<section id="conic-combinations-of-n-points" class="level3">
+<h3 class="anchored" data-anchor-id="conic-combinations-of-n-points">Conic Combinations of <span class="math inline">\(n\)</span> Points</h3>
+<p>A <em>conic combination</em> of <span class="math inline">\(x_1,...x_n\)</span> is a point <span class="math inline">\(x = \sum_{i=1}^{n} \theta_i x_i\)</span> where <span class="math inline">\(\theta_i \geq 0 \ \ \forall i\)</span>. Note that the absence of the restriction that <span class="math inline">\(\sum_{i=1}^{n} \theta_i = 1\)</span> is what distinguishes a conic combination from a convex combination.</p>
+</section>
+<section id="ellipses" class="level3">
+<h3 class="anchored" data-anchor-id="ellipses">Ellipses</h3>
+<p>Recall from Euclidean geometry that ellipses are conic sections. In general we define ellipses in <span class="math inline">\(n\)</span>-dimensions as the <a href="https://en.wikipedia.org/wiki/Level_set">sub-level sets</a> of <a href="https://en.wikipedia.org/wiki/Quadratic_form">quadratic forms</a>. That is <span class="math inline">\(\{ x : (x-c)^T M (x-c) \leq 1 \}\)</span> where <span class="math inline">\(M \succeq 0\)</span> defines the stretch along each principal axis, and <span class="math inline">\(c \in \mathbb{R^n}\)</span> is the center.</p>
+<p>An equivalent definition of an ellipse using the L2-norm is <span class="math inline">\(\{ x  : \|Ax - b\|_2 \leq 1 \}\)</span>. That is, for a given <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span> in the L2-norm definition, we can find an <span class="math inline">\(M\)</span> and <span class="math inline">\(c\)</span> in the sub-level set definition and vice versa.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>More generally, the ellipse is <span class="math inline">\(\{ x : (x-c)^T M (x-c) \leq r \}\)</span>. However, since the scaling factor <span class="math inline">\(r\)</span> is positive, it can simply be absorbed into <span class="math inline">\(Q\)</span> without affecting <span class="math inline">\(Q\)</span>’s positive semidefiniteness.</p>
+</div>
+</div>
+</div>
+<p>To quickly convince ourselves in the equivalence of these definitions, we take the simple case where <span class="math inline">\(b = 0\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \|Ax\|_2 &amp;= ((Ax)^T(Ax))^{1/2} \\
+  &amp;= (x^TA^TAx)^{1/2} \\
+  &amp;= (x^TU D U^Tx)^{1/2} \\
+  &amp;= x^TU D^{1/2} U^Tx \\
+  \end{aligned}
+\]</span></p>
+<p>Where the third equality is by the <a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Real_symmetric_matrices">spectral decomposition</a> of the real symmetric matrix <span class="math inline">\(A^TA\)</span>, in which <span class="math inline">\(D = diag(\lambda_1,...,\lambda_n)\)</span> is the diagnonal matrix of eigenvalues and the columns of <span class="math inline">\(U\)</span> are the corresponding eigenvectors. Taking <span class="math inline">\(M= UD^{1/2}U^T\)</span>, where <span class="math inline">\(D^{1/2}\)</span> is simply <span class="math inline">\(D^{1/2} = diag(\sqrt\lambda_1,...,\sqrt\lambda_n)\)</span>, we have the equivalent sub-level set definition of the ellipse.</p>
+</section>
+<section id="norm-balls" class="level3">
+<h3 class="anchored" data-anchor-id="norm-balls">Norm Balls</h3>
+<p>Related to ellipses are <em>Euclidean balls</em>, which are <em>norm balls</em> for the choice of the L2-norm. A Euclidean ball has the form <span class="math inline">\(\{ x : \|x\|_2 \leq r \}\)</span>, and is clearly convex as it’s a generalizations of the sphere in <span class="math inline">\(n\)</span>-dimensions.</p>
+<p>But also, a Euclidean ball is the special ellipse for the choice of <span class="math inline">\(M = rI\)</span>, and <span class="math inline">\(c = 0\)</span>.</p>
+<p>In general, norm balls <span class="math inline">\(\{ x : \|x\|_p \leq r\}\)</span> where <span class="math inline">\(\|x\|_p = (x_1^p + ... + x_n^p)^{1/p}\)</span> are convex for any choice of <span class="math inline">\(p \geq 1\)</span>.</p>
+</section>
+<section id="polyhedra" class="level3">
+<h3 class="anchored" data-anchor-id="polyhedra">Polyhedra</h3>
+<p>Where a halfspace is a set with one linear inequality constraint, a <em>polyhedron</em> is a set with many, but finite, such linear inequality constraints. These constraints can be packed into a matrix <span class="math inline">\(A \in \mathbb{R^{m \times n}}\)</span> by vector <span class="math inline">\(b \in \mathbb{R^m}\)</span> multiplication form, making the polyhedron into the set <span class="math inline">\(\{x : Ax \leq b\}\)</span>.</p>
+<p>Since polyhedra are simply intersections of halfspaces and hyperplanes, and the latter are both convex, polyhedra are also convex sets.</p>
+</section>
+<section id="the-set-of-all-positive-semidefinite-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="the-set-of-all-positive-semidefinite-matrices">The Set of All Positive Semidefinite Matrices</h3>
+<p>The set of all PSD matrices <span class="math inline">\(\{ Q : x^TQx \geq 0, \ \ \forall x \in \mathbb{R^m}\}\)</span> is convex. We can, of course, use the definition of convexity to show this. But, a more elucidative approach would be the following remark.</p>
+<p>Note that <span class="math inline">\(Q \mapsto x^TQx\)</span> is a <a href="https://en.wikipedia.org/wiki/Linear_form">linear functional</a> that maps the space of all PSD matrices to its field of scalars. This is analogous to how <span class="math inline">\(a \mapsto x^Ta\)</span> is a linear functional so, just as <span class="math inline">\(\{ a : x^Ta \geq 0 \}\)</span> is a halfspace in the space of vectors, <span class="math inline">\(H_x = \{ Q : x^TQx \geq 0 \}\)</span> for a given choice of <span class="math inline">\(x \in \mathbb{R^m}\)</span> is a halfspace in the space of PSD matrices. Halfspaces, as we already know, are convex and <span class="math inline">\(\{ Q : x^TQx \geq 0, \forall x \in \mathbb{R^m}\}\)</span> is nothing but an intersection of halfspaces for each choice of <span class="math inline">\(x\)</span>. That is, <span class="math inline">\(\{ Q :  x^TQx \geq 0, \forall x \in \mathbb{R^m}\} = \bigcap_x H_x\)</span>, concluding the proof of its convexity.</p>
+<p><img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/non_convex.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull.dark.png" height="0"> <img src="../../assets/linear_algebra/linear_algebra_refresher_for_optimization/convex_hull_set.dark.png" height="0"></p>
 
 
 </section>

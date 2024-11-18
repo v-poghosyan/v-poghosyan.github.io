@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2022-01-23">
+<meta name="dcterms.date" content="2023-01-13">
 
-<title>LC121 and LC53: Kadane’s Algorithm – v-poghosyan</title>
+<title>Unreal Engine: Cheat Sheet – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -114,35 +80,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -182,11 +119,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">LC121 and LC53: Kadane’s Algorithm</h1>
+      <h1 class="title">Unreal Engine: Cheat Sheet</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Leetcode</div>
-                <div class="quarto-category">Algorithms</div>
-                <div class="quarto-category">Dyanmic Progamming</div>
+                <div class="quarto-category">Game Development</div>
+                <div class="quarto-category">Ureal Engine</div>
               </div>
                   </div>
   </div>
@@ -204,7 +140,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 23, 2022</p>
+        <p class="date">January 13, 2023</p>
       </div>
     </div>
     
@@ -220,18 +156,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a>
+  <li><a href="#getting-started-installation-and-setup" id="toc-getting-started-installation-and-setup" class="nav-link active" data-scroll-target="#getting-started-installation-and-setup">Getting Started (Installation and Setup)</a>
   <ul class="collapse">
-  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#non-brute-force-solution" id="toc-non-brute-force-solution" class="nav-link" data-scroll-target="#non-brute-force-solution">Non-Brute-Force Solution</a>
+  <li><a href="#option-1-cloning-unrealengine-project-from-github" id="toc-option-1-cloning-unrealengine-project-from-github" class="nav-link" data-scroll-target="#option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</a></li>
+  <li><a href="#option-2-install-using-unreal-launcher" id="toc-option-2-install-using-unreal-launcher" class="nav-link" data-scroll-target="#option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</a></li>
+  <li><a href="#starting-a-project" id="toc-starting-a-project" class="nav-link" data-scroll-target="#starting-a-project">Starting a Project</a></li>
+  <li><a href="#unreal-cheat-sheet" id="toc-unreal-cheat-sheet" class="nav-link" data-scroll-target="#unreal-cheat-sheet">Unreal Cheat Sheet</a>
   <ul class="collapse">
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#key-bindings-and-shortcuts" id="toc-key-bindings-and-shortcuts" class="nav-link" data-scroll-target="#key-bindings-and-shortcuts">Key Bindings and Shortcuts</a></li>
+  <li><a href="#view-mode-options" id="toc-view-mode-options" class="nav-link" data-scroll-target="#view-mode-options">View Mode Options</a></li>
+  <li><a href="#translation-and-snap-tools" id="toc-translation-and-snap-tools" class="nav-link" data-scroll-target="#translation-and-snap-tools">Translation and Snap Tools</a></li>
+  <li><a href="#working-with-objects" id="toc-working-with-objects" class="nav-link" data-scroll-target="#working-with-objects">Working with Objects</a></li>
+  <li><a href="#ui-windows" id="toc-ui-windows" class="nav-link" data-scroll-target="#ui-windows">UI Windows</a></li>
+  <li><a href="#blueprint-programming" id="toc-blueprint-programming" class="nav-link" data-scroll-target="#blueprint-programming">Blueprint Programming</a></li>
   </ul></li>
-  <li><a href="#proof-of-correctness" id="toc-proof-of-correctness" class="nav-link" data-scroll-target="#proof-of-correctness">Proof of Correctness</a>
-  <ul class="collapse">
-  <li><a href="#proof-of-invariance" id="toc-proof-of-invariance" class="nav-link" data-scroll-target="#proof-of-invariance">Proof of Invariance</a></li>
-  </ul></li>
-  <li><a href="#kadanes-algorithm---maximum-subarray" id="toc-kadanes-algorithm---maximum-subarray" class="nav-link" data-scroll-target="#kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -243,110 +181,350 @@ window.Quarto = {
 
 
 
-<section id="problem-statement" class="level1">
-<h1>Problem Statement</h1>
-<p>We are given an array of <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day.</p>
-<p>We want to maximize our profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return <code>0</code>.</p>
-<p><strong>Example 1</strong></p>
-<pre><code>Input: prices = [7,1,5,3,6,4]
-Output: 5</code></pre>
-<p><strong>Explanation</strong></p>
-<p>Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell</p>
-<p><strong>Example 2:</strong></p>
-<pre><code>Input: prices = [7,6,4,3,1]
-Output: 0</code></pre>
-<p><strong>Explanation</strong></p>
-<p>In this case, no transactions are done and the max profit = 0.</p>
-<section id="brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="brute-force-solution">Brute-Force Solution</h2>
-<p>Consider each viable pair of days. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^2)\)</span> because, for each possible day <code>i</code> that we choose to buy the stock on, there are <span class="math inline">\(n-i\)</span> possible days that we can sell it on. Since there are <span class="math inline">\(n\)</span> choices for which day to buy, the number of total pairs has a leading term of <span class="math inline">\(n(n-1)\)</span>, so it’s quadratic in <span class="math inline">\(n\)</span>.</p>
-<p>We can also think of choosing a subset of size <span class="math inline">\(2\)</span> and discarding those which have a reverse order of days. This essentially means choosing a subset of size <span class="math inline">\(2\)</span> without order (since each pair is either in the correct order or not, and we only count the one that is), so <span class="math inline">\({O \left ({n \choose 2} \right )}\)</span> which is, of course, <span class="math inline">\(O(n^2)\)</span>.</p>
+<section id="getting-started-installation-and-setup" class="level1">
+<h1>Getting Started (Installation and Setup)</h1>
+<section id="option-1-cloning-unrealengine-project-from-github" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</h2>
+<p>The following steps are meant broadly as the specific instructions might change over time. You will need to download the latest version of <a href="https://developer.apple.com/xcode/">Xcode</a>.</p>
+<ol type="1">
+<li>Navigate to the Unreal Engine <a href="https://www.unrealengine.com/">website</a>.</li>
+<li>Register an account.</li>
+<li>Request access to the <a href="https://github.com/EpicGames">GitHub org</a></li>
+<li>Fork the <a href="https://github.com/EpicGames/UnrealEngine">UnrealEngine</a> repo and clone to local</li>
+<li>Follow the README to compile and run the Unreal Editor. The Editor uses a version of the Unreal Engine which can be downloaded by running a few installation scripts in the <code>UnrealEngine</code> project that download the engine and game files.</li>
+</ol>
 </section>
-<section id="non-brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="non-brute-force-solution">Non-Brute-Force Solution</h2>
-<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using DP with tabulation similar to <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a> which solves the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray</a> problem. The similarities between these two problems are due to fact that both are concerned with some score over a <em>contiguous</em> array (contiguity being what gives rise to the optimal substructure). Whereas Kadane’s is concerned with the contiguous subarray with maximum sum, this algorithm is interested in the maximum profit (which is the difference between the last element of the optimal subarray and the first one). Like Kadane’s algorithm, we can prove its correctness using <em>loop invariants</em>. We will give the solution and prove the correctness. As for building intuition for why this solution works, we will focus on the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray problem</a> which is a more general application of this type of pattern.</p>
-<section id="code" class="level3">
-<h3 class="anchored" data-anchor-id="code">Code</h3>
-<div id="cell-4" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxProfit(prices):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    min_price <span class="op">=</span> <span class="bu">float</span>(<span class="st">"inf"</span>) <span class="co"># +infinity</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    max_profit <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prices)):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prices[i] <span class="op">&lt;</span> min_price:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            min_price <span class="op">=</span> prices[i]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> prices[i] <span class="op">-</span> min_price <span class="op">&gt;</span> max_profit:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            max_profit <span class="op">=</span> prices[i] <span class="op">-</span> min_price</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_profit</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>]</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maxProfit(prices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>5</code></pre>
+<section id="option-2-install-using-unreal-launcher" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</h2>
+<p>We can also install Unreal Engine through the <a href="https://www.unrealengine.com/en-US/download">Unreal Launcher</a>.</p>
+</section>
+<section id="starting-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="starting-a-project">Starting a Project</h2>
+<p>Before starting a project, make sure to:</p>
+<ol type="1">
+<li>Load <strong>static content</strong></li>
+<li>Enable <strong>raytracing</strong></li>
+</ol>
+<p>Feel free to pick a template project from the project browser, such as a first-person or a third-person game. Once the new project opens a <code>.uproject</code> file is created in the default <code>~/Documents/Unreal Projects</code> directory. We can click this file directly to open the project to continue where we left it off in the future.</p>
+</section>
+<section id="unreal-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="unreal-cheat-sheet">Unreal Cheat Sheet</h2>
+<section id="key-bindings-and-shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="key-bindings-and-shortcuts">Key Bindings and Shortcuts</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RMB</td>
+<td>Rotate camera</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RMB + <kbd>W</kbd> or <kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd></td>
+<td>Movement front/left/back/right</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RMB + <kbd>E</kbd> or <kbd>Q</kbd></td>
+<td>Movement up or down</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Scroll Wheel Up/Down + RMB</td>
+<td>Adjust camera speed</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>LMB</td>
+<td>Select object in world</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Q</kbd></td>
+<td>Object selection mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>W</kbd></td>
+<td>Movement translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>E</kbd></td>
+<td>Rotation translation mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>R</kbd></td>
+<td>Scale translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Del</kbd></td>
+<td>Delete selected object</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>H</kbd></td>
+<td>Hide selected object</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd>D</kbd></td>
+<td>Duplicate selected object</td>
+<td>Another shortcut is holding <kbd class="inline">Opt</kbd> and dragging the selected object</td>
+</tr>
+<tr class="odd">
+<td>Hold <kbd>Shift</kbd> + LMB</td>
+<td>Select multiple objects</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>Ctrl</kbd> + LMB</td>
+<td>Deselect multiple objects from a multi-object selection</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>F</kbd></td>
+<td>Focus on selected object</td>
+<td>If we’re lost in our scene we can always select an object in the <strong>Outliner</strong> window and press <kbd class="inline">F</kbd> to re-focus on the object</td>
+</tr>
+<tr class="even">
+<td><kbd>G</kbd></td>
+<td>Game view mode</td>
+<td>Hides widgets, see the world as if in-game</td>
+</tr>
+<tr class="odd">
+<td><kbd>Cmd</kbd> + <kbd>F11</kbd></td>
+<td>Immersive mode</td>
+<td>Hides all windows and shows the world in full screen (note: we may also need to press <kbd class="inline">Fn</kbd>)</td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd class="large"> Space </kbd></td>
+<td>Open <strong>Content Drawer</strong></td>
+<td>The Content Drawer is what contains all of our in-game assets (3D/2D assets, code, etc.)</td>
+</tr>
+<tr class="odd">
+<td><kbd>Opt</kbd> + <kbd>P</kbd></td>
+<td>Play game</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Esc</kbd></td>
+<td>Exit game and go back to Edit mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>Shift</kbd> + <kbd>1</kbd> or <kbd>2</kbd>/<kbd>3</kbd>/…</td>
+<td>Change Unreal Editor mode</td>
+<td>The default is <strong>Selection Mode</strong>. Other modes include <strong>Landsaping Mode</strong>, <strong>Foliage Mode</strong>, etc. These bring up various tools to edit landscapes and make foliage (as their names suggest)</td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>L</kbd> + LMB</td>
+<td>Rotate sun</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="view-mode-options" class="level3">
+<h3 class="anchored" data-anchor-id="view-mode-options">View Mode Options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>View mode</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wireframe</td>
+<td>Shows only the wireframe mesh</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Unlit</td>
+<td>Shows the world disregarding lighting information</td>
+<td>Useful for visibility when editing in dark environments</td>
+</tr>
+<tr class="odd">
+<td>Light only</td>
+<td>The world with lighting alone (i.e.&nbsp;without material information)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="translation-and-snap-tools" class="level3">
+<h3 class="anchored" data-anchor-id="translation-and-snap-tools">Translation and Snap Tools</h3>
+<p>The translation modes and snap tools are available in the top-right corner of the viewport.</p>
+<div id="fig-unreal-translation-snap-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/translate_snap_modes.png" class="img-fluid figure-img" width="500">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Translation and snap tools
+</figcaption>
+</figure>
+</div>
+<p>From left to right, we have:</p>
+<ul>
+<li>Object selection mode</li>
+<li>Translation mode</li>
+<li>Rotation mode</li>
+<li>Scale mode</li>
+<li>Toggle for coordinate system (global vs local) relative to which the transform gizmo is shown</li>
+<li>Surface snapping options (controls how objects snap to existing surfaces)</li>
+<li>Translation snapping</li>
+<li>Rotation snapping</li>
+<li>Scale snapping</li>
+<li>Camera speed adjustment</li>
+<li>Minimize/maximize current viewport</li>
+</ul>
+<p>The default viewport includes a grid, this can be disabled in <strong>Show</strong> menu in the top-left corner of the viewport by un-checking <strong>Grid</strong>.</p>
+</section>
+<section id="working-with-objects" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-objects">Working with Objects</h3>
+<p>There are two ways to add objects to the scene. The first is through <strong>Add Object</strong> in the top-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/add_object.png" class="img-fluid"></p>
+<p>The second way is by using the <strong>Content Drawer</strong> in the bottom-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/content_drawer.png" class="img-fluid"> or use shortcut <kbd class="inline">Ctrl</kbd> + <kbd class="inline">‎ ‎ ‎ ‎ Space ‎ ‎ ‎ ‎</kbd></p>
+<p>The latter method is for adding custom game objects (blueprints as well as 2D/3D assets and more).</p>
+<p>We often need to see where a particular game asset is located in the Content Drawer. The shortcut to find any object inside the Content Drawer is <kbd class="inline">Ctrl</kbd> + <kbd class="inline">B</kbd> while having the object selected.</p>
+<p>All the assets that make up our game, such as custom 3D assets, custom blueprints (code), etc are stored within the <code>/Content</code> folder of the project.</p>
+</section>
+<section id="ui-windows" class="level3">
+<h3 class="anchored" data-anchor-id="ui-windows">UI Windows</h3>
+<section id="details" class="level4">
+<h4 class="anchored" data-anchor-id="details">Details</h4>
+<p>The <strong>Details</strong> window looks as follows.</p>
+<div id="fig-unreal-details" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/details.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Details window
+</figcaption>
+</figure>
+</div>
+<p>It contains all the details about a selected object such as:</p>
+<ul>
+<li>Transformation information (coordinates, angle of rotation, and scale)</li>
+<li>Material information</li>
+<li>Physics and many more…</li>
+</ul>
+</section>
+<section id="outliner" class="level4">
+<h4 class="anchored" data-anchor-id="outliner">Outliner</h4>
+<p>The <strong>Outliner</strong> window looks as follows.</p>
+<div id="fig-unreal-outliner" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/outliner.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Outliner window
+</figcaption>
+</figure>
+</div>
+<p>It contains all the objects that make up the scene, as well as options to show/hide, save, and pin objects:</p>
+</section>
+</section>
+<section id="blueprint-programming" class="level3">
+<h3 class="anchored" data-anchor-id="blueprint-programming">Blueprint Programming</h3>
+<p>Assuming we’ve selected the third person template, go into the Content Browser and go to <code>/Content/ThirdPerson/Blueprints</code> to access the blueprints of the third person character.</p>
+<div id="fig-unreal-third-person-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/blueprints.png" class="img-fluid figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Content Drawer - Third person blueprints
+</figcaption>
+</figure>
+</div>
+<p>Click on the humanoid. Feel free to dock the newly opened window (as a new tab) next to the open viewport in the Unreal Editor.</p>
+<p>A blueprint consists of three views:</p>
+<ol type="1">
+<li><strong>EventGraph</strong></li>
+<li><strong>Construction Script</strong></li>
+<li><strong>Viewport</strong></li>
+</ol>
+<section id="eventgraph" class="level4">
+<h4 class="anchored" data-anchor-id="eventgraph">EventGraph</h4>
+<p>Contains most of the blueprint’s logic.</p>
+<div id="fig-unreal-event-graph" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/event_graph.png" class="img-fluid figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Blueprints - Event graph
+</figcaption>
+</figure>
 </div>
 </section>
+<section id="construction-script" class="level4">
+<h4 class="anchored" data-anchor-id="construction-script">Construction Script</h4>
+<p>More on this later…</p>
 </section>
-<section id="proof-of-correctness" class="level2">
-<h2 class="anchored" data-anchor-id="proof-of-correctness">Proof of Correctness</h2>
-<p>It’s easy to see that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code>. This is called a loop invariant. Showing something is a loop invariant is a lot like proving the <em>inductive step</em> in a proof by induction (for example, when trying to prove recursive algorithms).</p>
-<p>It can also be shown that <code>max_profit</code> is another loop invariant, and that it holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<section id="proof-of-invariance" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-invariance">Proof of Invariance</h3>
-<p>The loop does one of two things exclusively: either it updates <code>min_price</code> or it doesn’t.</p>
-<p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration of the loop, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar again (<strong>case 1</strong>). Hence, <code>max_profit</code> is a loop invariant.</p>
-<p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
-</section>
-</section>
-<section id="kadanes-algorithm---maximum-subarray" class="level2">
-<h2 class="anchored" data-anchor-id="kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</h2>
-<p>At the heart of Kadane’s algorithm is an optimal substructure which lends itself to optimization using the principles of dynamic programming.</p>
-<p>Any subarray ends (or begins, but for now let’s stick with ends) at some index. We may also define a notion such as this: let there be a solution to the problem up to some index <code>i</code>. Le’t call that solution <code>global_max(i)</code>. This is, effectively, the final solution to the problem were the problem to have size <code>i</code> (i.e.&nbsp;if <code>nums</code> had size <code>i</code>).</p>
-<p>A relationship we may initially notice when looking at this problem is that:</p>
-<pre><code>local_max[i] = max(local_max[i-1] + nums[i], nums[i])</code></pre>
-<p>Where <code>local_max[i]</code> is the maximum of all subarrays ending at index <code>i</code> but, crucially, <em>not</em> the solution of the problem up to index <code>i</code> (that’s <code>global_max[i]</code>). It’s easy to get lost in this problem by conflating these two variables which track everything we need to implement a single-pass tabulated solution. They’re also, as it turns out, loop invariants.</p>
-<p>Feel free to tinker with the problem to notice this optimal substructure. It’s often helpful to illustrate the arrays…</p>
-<p>The final answer is the maximum over all the local maxima (obviously).</p>
-<p>Thinking in terms of solutions to sub-problems is, in essence, what dynamic programming is. It’s a way to cut down on the number of subarrays considered in the brute force approach by coming up with a computationally cheap rule that gives us the solution to the current problem based on the retrieved value of a previously solved sub-problem (whatever the relationship between the problem and its sub-problems may be). In the case of the Maximum Subarray problem the sub-problems are expressed in terms of <code>local_max[i]</code> and <code>global_max[i]</code>. If we know <code>local_max[i-1]</code>, <code>local_max[i]</code> is all but known through the above relationship and a similar relationship also exists for <code>global_max</code>.</p>
-<p>If we work through an example, the act itself will give us insight into the implementation of the single pass, iterative algorithm. Note that the recursive approach is already somewhat betrayed by the optimal substructure and, to further make it dynamic, we could implement memoization as a layer above it. Let’s take the first step, and then generalize.</p>
-<p>In the beginning, there’s just <code>nums[0]</code>. By virtue of being the only subarray that ends at index <code>0</code> it is its own <code>local_max[0]</code>. In situations like this we initialize <code>local_max</code> to <span class="math inline">\(-\infty\)</span> in order not to resort to handling special cases, like singleton arrays, in the loop.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max:</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s immediately clear that, since <code>local_max</code> is initialized to <span class="math inline">\(-\infty\)</span> (let’s call this <code>local_max[-1]</code> to stay consistent with array notation of the optimal substructure), <code>num &gt; local_max</code> is equivalent to:</p>
-<pre><code>nums[0] &gt; local_max[-1] + nums[0]</code></pre>
-<p>This is true in general for any <code>num[0]</code>. So the desired condition is actually:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>As it is, the loop invariant <code>local_max</code> will contain the local maximum at the last element of the <code>nums</code> array. We need to figure out what to do with the other loop invariant <code>global_max</code> which is supposed to be the solution to the problem of size <code>i</code>. Well, <code>global_max</code> is clearly just:</p>
-<pre><code>global_max[i] = max(global_max[i-1], local_max[i])</code></pre>
-<p>Which is the promised greedy-choice update for <code>global_max</code> – the loop invariant which will hold the final solution to the problem.</p>
-<p>We need to implement this relationship just as we implemented the previous one unless we just use the built in <code>max</code> function to essentially just update both loop invariants in sequence and be done with it. But let’s go with the more imperative version. Let’s take the first step.</p>
-<p>In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and <code>global_max[-1]</code> (as per our earlier abuse of notation) is <span class="math inline">\(-\infty\)</span> by choice.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> global_max <span class="op">&lt;</span> local_max:</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        global_max <span class="op">=</span> local_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We can reference <code>local_max</code> and assume its value to be as the promised invariant on line 9.</p>
-<p>Notice that <code>global_max</code> has two meanings, as does <code>local_max</code> in the implementation. It is used as the previous iterate <code>global_max[i-1]</code> (in the Boolean comparison) as well as the current (or next, depending on frame of reference) iterate <code>global_max[i]</code> (in the assignment operation).</p>
+<section id="viewport" class="level4">
+<h4 class="anchored" data-anchor-id="viewport">Viewport</h4>
+<div id="fig-unreal-viewport" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/viewport.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Blueprints - Viewport
+</figcaption>
+</figure>
+</div>
+<p>This view shows everything within the selected blueprint as an object. Objects in a blueprint are called <strong>components</strong>. The <strong>Components</strong> window is the equivalent of the Outliner window but for blueprints. Rather than showing every object in the world, it shows every component in the blueprint.</p>
+<div id="fig-unreal-components" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/components.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Blueprints - Components window
+</figcaption>
+</figure>
+</div>
+<p>The <strong>My Blueprint</strong> window contains all the nodes and variables contained in the blueprint. We can click on the EventGraph in the <strong>Graphs</strong> tab of this window to go into the EventGraph view directly.</p>
+<div id="fig-unreal-my-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/my_blueprint.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Blueprints - My Blueprint window
+</figcaption>
+</figure>
+</div>
 
 
+</section>
+</section>
 </section>
 </section>
 
