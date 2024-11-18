@@ -190,6 +190,7 @@ window.Quarto = {
                 <div class="quarto-category">Leetcode</div>
                 <div class="quarto-category">Algorithms</div>
                 <div class="quarto-category">Data Structures</div>
+                <div class="quarto-category">DFS</div>
               </div>
                   </div>
   </div>
@@ -223,12 +224,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#connected-sinks-and-sources" id="toc-connected-sinks-and-sources" class="nav-link active" data-scroll-target="#connected-sinks-and-sources">Connected Sinks and Sources</a>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem statement</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a>
   <ul class="collapse">
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
-  <li><a href="#black-boxing-the-solution" id="toc-black-boxing-the-solution" class="nav-link" data-scroll-target="#black-boxing-the-solution">Black-Boxing The Solution</a></li>
-  <li><a href="#path-finding-dfs" id="toc-path-finding-dfs" class="nav-link" data-scroll-target="#path-finding-dfs">Path Finding (DFS)</a></li>
+  <li><a href="#parsing-the-input" id="toc-parsing-the-input" class="nav-link" data-scroll-target="#parsing-the-input">Parsing the input</a></li>
+  <li><a href="#defining-an-item-object" id="toc-defining-an-item-object" class="nav-link" data-scroll-target="#defining-an-item-object">Defining an <code>Item</code> object</a></li>
   </ul></li>
+  <li><a href="#path-finding-dfs" id="toc-path-finding-dfs" class="nav-link" data-scroll-target="#path-finding-dfs">Path finding (DFS)</a>
+  <ul class="collapse">
+  <li><a href="#expanding-the-input-into-a-2d-matrix" id="toc-expanding-the-input-into-a-2d-matrix" class="nav-link" data-scroll-target="#expanding-the-input-into-a-2d-matrix">Expanding the input into a 2D matrix</a></li>
+  </ul></li>
+  <li><a href="#verifying-solution" id="toc-verifying-solution" class="nav-link" data-scroll-target="#verifying-solution">Verifying solution</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -239,11 +246,9 @@ window.Quarto = {
 
 
 
-<section id="connected-sinks-and-sources" class="level1">
-<h1>Connected Sinks and Sources</h1>
 <section id="problem-statement" class="level2">
-<h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
-<p>We are given a pipe system represented by a 2D rectangular grid of cells. There are three different types of items located in the cells within the grid, with each having either no Items or 1 Item:</p>
+<h2 class="anchored" data-anchor-id="problem-statement">Problem statement</h2>
+<p>We are given a pipe system represented by a 2D rectangular grid of cells. There are three different types of items located in the cells within the grid, with each having either no items or 1 item:</p>
 <ul>
 <li><strong>Source:</strong> There is 1 source in the system. It is represented by the asterisk character <code>*</code>.</li>
 <li><strong>Sinks:</strong> There are an arbitrary number of sinks in the system. They are each represented by a different uppercase letter (<code>A</code>, <code>B</code>, <code>C</code>, etc.).</li>
@@ -254,15 +259,17 @@ window.Quarto = {
 <li>Each pipe has openings on 2 or 3 sides of its cell.</li>
 <li>Two adjacent cells are connected if both have a pipe opening at their shared edge.</li>
 <li>We should treat the source and sinks as having pipe openings at all of their edges. For example, the two cells <code>A╦</code> are connected through their shared edge, but the two cells <code>B╔</code> are not.</li>
-<li>A sink may be connected to the source through another sink. For example, in the simple pipe system <code>*A═B=C</code>, all three sinks are connected to the source.</li>
+<li>A sink may be connected to the source through another sink. For example, in the simple pipe system <code>*A═B═C</code>, all three sinks are connected to the source.</li>
 </ul>
 <p>Our objective is to write a function that determines which sinks are connected to the source in a given pipe system.</p>
-<p>As an example, consider the following pipe system:</p>
+<p>As an example, consider the following pipe system.</p>
+<p><strong>Formatted input</strong></p>
 <pre><code>*╗ ╦═A
  ╠═╝
  C ╚═B</code></pre>
 <p>In this pipe system, the source <code>*</code> is connected to sinks <code>A</code> and <code>C</code> but not <code>B</code>.</p>
-<p>Such a system is specified by an input text file in the following format.</p>
+<p>A system is specified by an input text file in the following un-formated way.</p>
+<p><strong>Unformatted input</strong></p>
 <pre><code>*02
 C10
 ╠11
@@ -275,58 +282,17 @@ C10
 ═42
 B50
 A52</code></pre>
-<p>Note that each item is followed by its coordinate (the origin of the coordinate system is taken to be the lower left corner (<code>0</code>,<code>0</code>) corresponding to an empty space in this system).</p>
+<p>Note that each item is followed by its coordinate in the grid (the origin of the coordinate system is taken to be the lower left corner (<code>0</code>,<code>0</code>) corresponding to an empty space in this system).</p>
 </section>
-<section id="black-boxing-the-solution" class="level2">
-<h2 class="anchored" data-anchor-id="black-boxing-the-solution">Black-Boxing The Solution</h2>
-<p>Let’s define the inputs and outputs of this program.</p>
-<ul>
-<li><strong>Input:</strong> File path as a string</li>
-<li><strong>Output:</strong> The sinks connected to the source as a string</li>
-</ul>
-<p>For example, for the given pipe system in the example, the solution should be <code>AC</code>.</p>
-<p>Let’s define a black box:</p>
+<section id="solution" class="level2">
+<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<section id="parsing-the-input" class="level3">
+<h3 class="anchored" data-anchor-id="parsing-the-input">Parsing the input</h3>
+<p>Let’s define a function <code>load_file</code> that loads the input file and returns the contents as a list of strings.</p>
 <div id="cell-3" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_connected_sinks(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span>:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns sinks connected to the source.</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - filePath (str): Path to the input file which describes the pipe system.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - str: A string containing the connected sinks,</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>In the black box above, we use the union operator <code>|</code> to allow the function to return <code>None</code> (so that we don’t have to worry about the implementation and return value for this black box implementation).</p>
-<p>Now that we have <code>get_connected_sinks</code> which takes the input file path as <code>filePath</code>, we can start thinking about what this function should do. Here’s a broad breakdown of the function.</p>
-<ol type="1">
-<li>Load the text file</li>
-<li>Parse the input</li>
-<li>Using parsed input, determine which sinks are connected to the source and return the answer</li>
-</ol>
-<p>Not that step 3 is already black-boxed by <code>get_connected_sinks</code>.</p>
-<p>Let’s create sub-functions for each of the remaining tasks:</p>
-<ol type="1">
-<li><code>load_file</code>: should read the file (as a string or a related representation) into the program</li>
-<li><code>parse_input</code>: should return a programmatic representation of the pipe system</li>
-</ol>
-<p>We can write <code>load_file</code> without much deliberation, as it’ll just be a simple wrapper for <a href="https://docs.python.org/3/tutorial/inputoutput.html#methods-of-file-objects">file.readLines</a> which returns an array of strings, each containing one line from the file.</p>
-<div id="cell-5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_file(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Loads the input file and returns the contents as a list of strings.</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - filePath (str): Path to the input file which describes the pipe system.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - list: A list of strings containing the contents of the input file.</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filePath, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">file</span>.readlines()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_file(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filePath, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">file</span>.readlines()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -340,25 +306,330 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>We use the keyword <code>with</code> rather than <code>try</code>-<code>finally</code> to leverage built in file IO safety features.</p>
+<p>We use the keyword <code>with</code> rather than <code>try</code>-<code>finally</code> to leverage built in Python file IO safety features.</p>
 </div>
 </div>
 </div>
-<p>Let’s save the output of <code>load_file</code> as the <code>input</code> we’ll provide to <code>parse_input</code>. Running <code>load_file</code> for the example file above gives:</p>
+<p>Let’s save the output of <code>load_file</code> as the <code>input</code> we’ll provide to <code>parse_input</code> (a function we’ll define later). Running <code>load_file</code> for the example file above obtains:</p>
+<div id="cell-5" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example1.txt"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">input</span>[:<span class="dv">5</span>]) <span class="co"># Printing only the five leading entries of the input for brevity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['*02\n', 'C10\n', '╠11\n', '╗12\n', '═21\n']</code></pre>
+</div>
+</div>
+<p>As we can see the lines include the newline character, We can further clean up <code>input</code> by using <code>map</code> and <a href="https://docs.python.org/3/library/stdtypes.html#str.rstrip">rstrip</a> which strips the right-end of each line of any undesired characters. We can modify the definition of <code>load_file</code> to return the cleaned up input.</p>
 <div id="cell-7" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example.txt"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">input</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_file(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filePath, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [line.rstrip(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s run this re-defined <code>load_file</code> for the example file again to see the difference.</p>
+<div id="cell-9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example1.txt"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">input</span>[:<span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>['*02\n', 'C10\n', '╠11\n', '╗12\n', '═21\n', '╚30\n', '╝31\n', '╦32\n', '═40\n', '═42\n', 'B50\n', 'A52']</code></pre>
+<pre><code>['*02', 'C10', '╠11', '╗12', '═21']</code></pre>
 </div>
 </div>
-<p>As we can see the lines include the newline character, let’s clean up <code>input</code> by using <code>map</code> and <a href="https://docs.python.org/3/library/stdtypes.html#str.rstrip">rstrip</a>.</p>
-<div id="cell-9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: x.rstrip(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>), <span class="bu">input</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">input</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="defining-an-item-object" class="level3">
+<h3 class="anchored" data-anchor-id="defining-an-item-object">Defining an <code>Item</code> object</h3>
+<p>But we’re still dealing with simple string representations… That means it’s not immediately clear how to obtain the <strong>open edges</strong> of, say, the <code>╚</code> character programmatically. Let’s parse this list down into a data structure we will call <code>Item</code>.</p>
+<p><code>Item</code> will have Boolean instance variables:</p>
+<ul>
+<li><code>left</code></li>
+<li><code>right</code></li>
+<li><code>top</code></li>
+<li><code>bottom</code></li>
+</ul>
+<p>Which will indicate whether the corresponding edge is open or closed (<code>True</code> or <code>False</code> respectively).</p>
+<p>It will also have instance variables <code>x</code> and <code>y</code> for the item’s coordinates. An additional <code>type</code> instance variable with possible values in <span class="math inline">\(\{\)</span><code>Source</code>,<code>Pipe</code>,<code>Sink</code><span class="math inline">\(\}\)</span>. This may be helpful for checking edge conditions later on.</p>
+<p>Here’s the implementation of the <code>Item</code> class. Since it’s quite long and trivial, I’ve collapsed the definition. Feel free to expand and examine…</p>
+<div id="cell-11" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Item:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">type</span>: <span class="bu">str</span> <span class="op">=</span> <span class="st">"Source"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">ascii</span>: <span class="bu">str</span> <span class="op">=</span> <span class="st">"*"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            coords: <span class="bu">tuple</span>[<span class="bu">int</span>, <span class="bu">int</span>] <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            left: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            right: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            top: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            bottom: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        ):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">type</span> <span class="op">=</span> <span class="bu">type</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">ascii</span> <span class="op">=</span> <span class="bu">ascii</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.coords <span class="op">=</span> coords</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> left</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> right</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.top <span class="op">=</span> top</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.bottom <span class="op">=</span> bottom</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>): <span class="co"># This is a custom representation method for the Item class</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Prepare all fields</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        fields <span class="op">=</span> [</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"type: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">type</span><span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"ascii: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">ascii</span><span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"coordinates: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>coords<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"edges:"</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  left: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>left<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  right: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>right<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  top: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>top<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  bottom: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>bottom<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Find the longest line</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        max_length <span class="op">=</span> <span class="bu">max</span>(<span class="bu">len</span>(line) <span class="cf">for</span> line <span class="kw">in</span> fields)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add extra space for the class name</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="ss">f" </span><span class="sc">{</span><span class="bu">type</span>(<span class="va">self</span>)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        max_length <span class="op">=</span> <span class="bu">max</span>(max_length, <span class="bu">len</span>(title))</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create the box</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        bottom <span class="op">=</span> <span class="st">"+"</span> <span class="op">+</span> <span class="st">"-"</span> <span class="op">*</span> (max_length <span class="op">+</span> <span class="dv">2</span>) <span class="op">+</span> <span class="st">"+"</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        title_line <span class="op">=</span> <span class="ss">f"+</span><span class="sc">{</span>title<span class="sc">:</span><span class="op">-^</span>{max_length <span class="op">+</span> <span class="dv">2</span>}<span class="sc">}</span><span class="ss">+"</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Build the output</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> [title_line]</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add each field with padding</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> fields:</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>            padding <span class="op">=</span> <span class="st">" "</span> <span class="op">*</span> (max_length <span class="op">-</span> <span class="bu">len</span>(field))</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>            lines.append(<span class="ss">f"| </span><span class="sc">{</span>field<span class="sc">}{</span>padding<span class="sc">}</span><span class="ss"> |"</span>)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        lines.append(bottom)</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(lines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Unfortunately, there’s no way to get around the hard-coding of the ASCII characters into <code>Item</code>-s. Here’s an implementation of <code>map_to_items</code>. It’s quite long and trivial, but feel free to expand and examine the implementation…</p>
+<div id="cell-13" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> map_to_items(<span class="bu">input</span>: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[Item]: <span class="co"># Converts the text input to a list of Item objects</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_item(line: <span class="bu">str</span>) <span class="op">-&gt;</span> Item: <span class="co"># Converts a single line in the input to an Item</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        objectToReturn <span class="op">=</span> Item() <span class="co"># Initialize an empty object</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> line <span class="co"># We will also print the unconverted ASCII representation of the object for debugging purposes</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        objectToReturn.coords <span class="op">=</span> <span class="bu">tuple</span>([<span class="bu">int</span>(coord) <span class="cf">for</span> coord <span class="kw">in</span> line[<span class="dv">1</span>:]]) <span class="co"># Extract the coordinates as a tuple of integers</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        objectToReturn.left <span class="op">=</span> <span class="va">True</span> <span class="co"># Initialize all edges to open</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        objectToReturn.right <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        objectToReturn.top <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        objectToReturn.bottom <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">match</span> line[<span class="dv">0</span>]: <span class="co"># Match the first character of the line to determine the type of object</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"*"</span>:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"*"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                <span class="co"># The default object is a source, '*', at (0,0), so nothing else needs to be changed in this case...</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"═"</span>:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Note: edges are ordered [top, right, bottom, left]</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"═"</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                objectToReturn.top <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                objectToReturn.bottom <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"║"</span>:</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"║"</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                objectToReturn.left <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                objectToReturn.right <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╔"</span>:</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╔"</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                objectToReturn.top <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                objectToReturn.left <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╗"</span>:</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╗"</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>                objectToReturn.top <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>                objectToReturn.right <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╚"</span>:</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╚"</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                objectToReturn.left <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                objectToReturn.bottom <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╝"</span>:</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╝"</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                objectToReturn.right <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                objectToReturn.bottom <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╠"</span>:</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╠"</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>                objectToReturn.left <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╣"</span>:</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╣"</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>                objectToReturn.right <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╦"</span>:</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╦"</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>                objectToReturn.top <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╩"</span>:</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> <span class="st">"╩"</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Pipe"</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>                objectToReturn.bottom <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> other: <span class="co"># The case of a sink...</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> other.isalpha(): <span class="co"># Check if the first character is a letter at all...</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"The first character of a sink must be a letter."</span>)</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">ascii</span> <span class="op">=</span> other</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Sink"</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> objectToReturn</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(<span class="bu">map</span>(to_item, <span class="bu">input</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s run <code>input</code> through <code>map_to_items</code> to obtain the programmatic representation of the items in our pipe system. We show only the first five from the output in the interest of brevity.</p>
+<div id="cell-15" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>parsed_input <span class="op">=</span> map_to_items(<span class="bu">input</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> obj <span class="kw">in</span> parsed_input[:<span class="dv">3</span>]:</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>['*02', 'C10', '╠11', '╗12', '═21', '╚30', '╝31', '╦32', '═40', '═42', 'B50', 'A52']</code></pre>
+<pre><code>+------- Item --------+
+| type: Source        |
+| ascii: *            |
+| coordinates: (0, 2) |
+| edges:              |
+|   left: True        |
+|   right: True       |
+|   top: True         |
+|   bottom: True      |
++---------------------+
++------- Item --------+
+| type: Sink          |
+| ascii: C            |
+| coordinates: (1, 0) |
+| edges:              |
+|   left: True        |
+|   right: True       |
+|   top: True         |
+|   bottom: True      |
++---------------------+
++------- Item --------+
+| type: Pipe          |
+| ascii: ╠            |
+| coordinates: (1, 1) |
+| edges:              |
+|   left: False       |
+|   right: True       |
+|   top: True         |
+|   bottom: True      |
++---------------------+</code></pre>
 </div>
+</div>
+</section>
+</section>
+<section id="path-finding-dfs" class="level2">
+<h2 class="anchored" data-anchor-id="path-finding-dfs">Path finding (DFS)</h2>
+<p>This is a path finding problem, so we’re likely going to use either BFS or DFS. Since it’s easier to represent the given data as a 2D array, instead of converting it into a graph representation, we will implement DFS on the 2D array itself.</p>
+<p>Here’s the graph representation of the pipe system above, for equivalency’s sake (although we won’t be using graphs).</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">   graph TD;
+      A["* (0,2)"] --&gt; B["╗ (1,2)   "];
+      B--&gt;C["╠ (1,1)"];
+      C--&gt;D["C (1,0)"];
+      C--&gt;E["═ (2,1)"];
+      E--&gt;F["╝ (3,1)"];
+      F--&gt;G["╦ (3,2)"];
+      G--&gt;H["═ (4,2)"];
+      H--&gt;K["A (5,0)"];
+      L["╚ (3,0)"]--&gt;M["═ (4,0)"];
+      M--&gt;N["B (5,0)"];
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><br><br></p>
+<p>As we can see, we have two disjoint acyclic graphs representing the example pipe system above (ignore the edge directions (<a href="https://mermaid.js.org/intro/">Mermaid</a> doesn’t provide a way to make undirected graphs – to my knowledge). The graph is undirected because connectedness is a symmetric relationship: i.e.&nbsp;if an item is connected to another, like the two items in the pipe system <code>═╦</code>, then the other item is also connected to the first.</p>
+<p>In general, because BFS traverses a graph one level at a time, we tend to use BFS when looking for the shortest path between two nodes. The first time BFS lands on the target node constitutes the shortest path to that node (or one of the multiple such paths if there’s a tie between several paths). DFS is better suited for finding <em>any</em> valid path between the source <code>*</code> and a sink, and not necessarily the shortest such path, we can use DFS for this problem.</p>
+<section id="expanding-the-input-into-a-2d-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="expanding-the-input-into-a-2d-matrix">Expanding the input into a 2D matrix</h3>
+<p>BFS can be implemented on a 2D array just as it can on a graph. Graphs are nothing more, really, than <a href="https://en.wikipedia.org/wiki/Adjacency_list">adjacency lists</a>. But first, we need to expand the input into such a 2D matrix of <code>Items</code>. To maintain align the directions of the neighbors of a given item to the formatted input, we need to expand the input in a particular way. We want <code>grid[0][2]</code> to refer to the source <code>* (0,2)</code>.</p>
+<p>That means the <code>grid</code> should be something like:</p>
+<pre><code>[[None, None, *],[C,╠,╗], ...]</code></pre>
+<p>Then the 1st argument to <code>grid</code> will point to the 1st subarray, and the 2nd argument will point to the sink itself. In other words, the first argument refers to the columns of the formatted input, and the second to the rows. The empty space above <code>* (0, 2)</code>, in the formatted input, will then be referenced by <code>grid[0][3]</code>.</p>
+<div id="cell-17" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expand_parsed_input(<span class="bu">input</span>: <span class="bu">list</span>[Item]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Item]]:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the maximum x and y coordinates occuring the given input</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    max_rows  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    max_cols <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">input</span>:</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item.coords[<span class="dv">0</span>] <span class="op">&gt;</span> max_cols:</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            max_cols <span class="op">=</span> item.coords[<span class="dv">0</span>]</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item.coords[<span class="dv">1</span>] <span class="op">&gt;</span> max_rows:</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            max_rows <span class="op">=</span> item.coords[<span class="dv">1</span>]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize the 2D matrix with 'None' types</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">=</span> [[<span class="va">None</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_rows <span class="op">+</span> <span class="dv">1</span>)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_cols <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Populate the 2D matrix with the 'Item'-s</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">input</span>:</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        grid[item.coords[<span class="dv">0</span>]][item.coords[<span class="dv">1</span>]] <span class="op">=</span> item</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grid</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>expanded_input <span class="op">=</span> expand_parsed_input(parsed_input)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The output of <code>expand_input</code> contains <code>Item</code> types and <code>None</code> types (for empty cells).</p>
+<p>Before we implement DFS, let’s define a few helper functions that check if two <code>Item</code>-s are connected by the relevant edge.</p>
+<div id="cell-19" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_top(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.top <span class="kw">and</span> item2.bottom</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_bottom(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.bottom <span class="kw">and</span> item2.top</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_left(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.left <span class="kw">and</span> item2.right</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_right(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.right <span class="kw">and</span> item2.left</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We’re going to need these helper functions to check if two <code>Item</code>-s are connected by an edge before we add them to the DFS stack (to visit).</p>
+<p>Finally, let’s implement iterative DFS using a stack.</p>
+<div id="cell-21" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterative version using a stack</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dfs_iterative(grid, start_x, start_y):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtain the dimensions of the grid</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: grid = [[None, None, *],[C,╠,╗], ...] </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1st index spans the subarrays </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2nd index spans the items themselves </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    dim_cols, dim_rows <span class="op">=</span> <span class="bu">len</span>(grid), <span class="bu">len</span>(grid[<span class="dv">0</span>])</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize the visited set</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize the stack with the starting position</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    stack <span class="op">=</span> [(start_x, start_y)]</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> stack:</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> stack.pop()</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (x, y) <span class="kw">in</span> visited:</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> grid[x][y].<span class="bu">type</span> <span class="op">==</span> <span class="st">"Sink"</span>:</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Found connected sink: </span><span class="sc">{</span>grid[x][y]<span class="sc">.</span><span class="bu">ascii</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        visited.add((x, y))</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(f"Visiting: {grid[x][y].ascii} ({x}, {y})") &lt;-- Enable for debugging</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add only the eligible neighbors to the stack </span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Eligible neighbors are those that:</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 1. Are not outside the grid </span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 2. Are not 'None' </span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 3. Are connected to the current item by a corresponding edge</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check the top neighbor</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> y <span class="op">+</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;=</span> dim_rows <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> grid[x][y <span class="op">+</span> <span class="dv">1</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> connected_at_top(grid[x][y], grid[x][y <span class="op">+</span> <span class="dv">1</span>]):</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>                stack.append((x, y <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check the bottom neighbor</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> y <span class="op">-</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;=</span> dim_rows <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> grid[x][y <span class="op">-</span> <span class="dv">1</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: </span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> connected_at_bottom(grid[x][y], grid[x][y <span class="op">-</span> <span class="dv">1</span>]):</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>                stack.append((x, y <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check the right neighbor</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;=</span> dim_cols <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> grid[x <span class="op">+</span> <span class="dv">1</span>][y] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> connected_at_right(grid[x][y], grid[x <span class="op">+</span> <span class="dv">1</span>][y]):</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>                stack.append((x <span class="op">+</span> <span class="dv">1</span>, y))</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check the left neighbor</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">-</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> x <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;=</span>  dim_cols <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> grid[x <span class="op">-</span> <span class="dv">1</span>][y] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> connected_at_left(grid[x][y], grid[x <span class="op">-</span> <span class="dv">1</span>][y]):</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>                stack.append((x <span class="op">-</span> <span class="dv">1</span>, y))</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
@@ -372,175 +643,57 @@ Note
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Note that we need to use <code>list</code> with <code>map</code> because Python 3’s <code>map</code> works by <em>lazy</em> as opposed to <em>strict</em> evaluation (which means that the Python interpreter only evaluates values one at a time, as opposed to all at once which is the case when evaluating a simple expression like, say, <code>sum=1+2</code>)</p>
+<p>When doing iterative graph traversal with a heap or a stack, it’s always a good idea to print the associated data structure (namely the heap or the stack) at the beginning of each iteration as a debugging tactic.</p>
 </div>
 </div>
 </div>
-<p>But we’re still dealing with simple string representations. That means it’s not immediately clear how to obtain the <strong>open edges</strong> of, say, the <code>╚</code> character programmatically (much less). Let’s parse this list down into a data structure we will call <code>Item</code>.</p>
-<p><code>Item</code> will have Boolean instance variables:</p>
-<ul>
-<li><code>left</code></li>
-<li><code>right</code></li>
-<li><code>top</code></li>
-<li><code>down</code></li>
-</ul>
-<p>Which will indicate whether the corresponding edge is open or closed (<code>True</code> or <code>False</code> respectively).</p>
-<p>It will also have instance variables <code>x</code> and <code>y</code> for the item’s coordinates. An additional <code>type</code> instance variable with possible values in <span class="math inline">\(\{\)</span><code>Source</code>,<code>Pipe</code>,<code>Sink</code><span class="math inline">\(\}\)</span> may be helpful for checking terminal conditions.</p>
-<div id="cell-12" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Item:</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>, <span class="bu">type</span>: <span class="bu">str</span> <span class="op">=</span> <span class="st">"Pipe"</span>, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            edges: <span class="bu">list</span>[<span class="bu">bool</span>] <span class="op">=</span> [<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>], </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            coords: <span class="bu">list</span>[<span class="bu">int</span>] <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>]</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        ):</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">type</span> <span class="op">=</span> <span class="bu">type</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.edges <span class="op">=</span> edges</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.coords <span class="op">=</span> coords</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>): <span class="co"># String representation of object for logging</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="ss">f"-----</span><span class="sc">{</span><span class="bu">type</span>(<span class="va">self</span>)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">-----</span><span class="ch">\n</span><span class="ss">"</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"  type: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">type</span><span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"  edges: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>edges<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"  coordinates: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>coords<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Unfortunately, there’s no way to get around the hard-coding of the ASCII pipe to <code>Item</code> mappings without adding unmerited complexity to the problem.</p>
-<p>Here’s an implementation of <code>mapToItems</code> with the hard-coding mentioned above. Feel free to expand and examine the implementation (at your own peril).</p>
-<div id="cell-14" class="cell" data-execution_count="29">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> map_to_items(<span class="bu">input</span>: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[Item]: <span class="co"># Converts the input to a list of Items</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_item(line: <span class="bu">str</span>) <span class="op">-&gt;</span> Item: <span class="co"># Converts a single line in the input to an Item</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        objectToReturn <span class="op">=</span> Item()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        objectToReturn.coords <span class="op">=</span> line[<span class="dv">1</span>:] <span class="co"># The coordinates are the rest of the line</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        objectToReturn.edges <span class="op">=</span> [<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>]</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">match</span> line[<span class="dv">0</span>]: <span class="co"># Match the first character of the line to determine the type of object</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"*"</span>:</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                <span class="co"># The default object is a Pipe at coordinates (0,0), so nothing else needs tp be done...</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Source"</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"═"</span>:</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Note: edges are ordered [top, right, down, left]</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">0</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">2</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"║"</span>:</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">3</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╔"</span>:</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">0</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">3</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╗"</span>:</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">0</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╚"</span>:</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">2</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">3</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╝"</span>:</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">2</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╠"</span>:</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">3</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╣"</span>:</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╦"</span>:</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">0</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="st">"╩"</span>:</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>                objectToReturn.edges[<span class="dv">2</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> other: <span class="co"># The case of a Sink</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> other.isalpha(): <span class="co"># Check if the first character is a letter at all...</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"The first character of a Sink must be a letter."</span>)</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                objectToReturn.<span class="bu">type</span> <span class="op">=</span> <span class="st">"Sink"</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> objectToReturn</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(<span class="bu">map</span>(to_item, <span class="bu">input</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Let’s run input through <code>mapToItems</code> to obtain our programmatic representation of the pipe system. We show only the first five from the output in the interest of brevity.</p>
-<div id="cell-16" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>parsed_input <span class="op">=</span> map_to_items(<span class="bu">input</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> obj <span class="kw">in</span> parsed_input[:<span class="dv">5</span>]:</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, let’s run the DFS on the expanded input, supplying the coordinates of the source <code>*</code> as the starting point.</p>
+<div id="cell-23" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dfs_iterative(expanded_input, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-----Item-----
-  type: Source
-  edges: [True, True, True, True]
-  coordinates: 02
-
------Item-----
-  type: Sink
-  edges: [True, True, True, True]
-  coordinates: 10
-
------Item-----
-  type: Pipe
-  edges: [True, True, True, False]
-  coordinates: 11
-
------Item-----
-  type: Pipe
-  edges: [False, False, True, True]
-  coordinates: 12
-
------Item-----
-  type: Pipe
-  edges: [False, True, False, True]
-  coordinates: 21
-</code></pre>
+<pre><code>Found connected sink: A
+Found connected sink: C</code></pre>
+</div>
+</div>
+<p>There we have it!</p>
+</section>
+</section>
+<section id="verifying-solution" class="level2">
+<h2 class="anchored" data-anchor-id="verifying-solution">Verifying solution</h2>
+<p>Now let’s try it on a slightly altered input. This time, we have redirected the pipes so that only <code>B</code> and <code>C</code> are connected to the source.</p>
+<p><strong>Formatted input</strong></p>
+<pre><code>*╗ ╦═A
+ ╠═╦
+ C ╚═B</code></pre>
+<p><strong>Unformatted input</strong></p>
+<pre><code>*02
+C10
+╠11
+╗12
+═21
+╚30
+╦31
+╦32
+═40
+═42
+B50
+A52</code></pre>
+<div id="cell-25" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example2.txt"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>parsed_input <span class="op">=</span> map_to_items(<span class="bu">input</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>expanded_input <span class="op">=</span> expand_parsed_input(parsed_input)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>dfs_iterative(expanded_input, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found connected sink: B
+Found connected sink: C</code></pre>
 </div>
 </div>
 </section>
-<section id="path-finding-dfs" class="level2">
-<h2 class="anchored" data-anchor-id="path-finding-dfs">Path Finding (DFS)</h2>
-<p>This is a path finding problem, so we’re likely going to use either BFS or DFS. Since it’s far easier to represent the given data as a 2D array, we will implement the iterative version of whichever traversal algorithm we end up choosing, as the recursive version is better suited for the case in which the data is easier to represent as a graph.</p>
-<p>Here’s the graph representation of the pipe system above, for equivalency’s sake (although we won’t be using graphs).</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">   graph TD;
-      A["*02"] --&gt; B["╗12"];
-      B--&gt;C["╠11"];
-      C--&gt;D["C10"];
-      C--&gt;E["═21"]
-      E--&gt;F["╝31"]
-      F--&gt;G["╦32"]
-      G--&gt;H["═42"]
-      H--&gt;K["A"]
-      L["╚30"]--&gt;M["═40"]
-      M--&gt;N["B"]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p><br><br></p>
-<p>So we have two disjoint acyclic graphs representing the example pipe system above. Ignore the edge directions (<a href="https://mermaid.js.org/intro/">Mermaid</a> doesn’t provide a way to make undirected graphs to my knowledge). This graph will be undirected, as connectedness is a symmetric relationship: i.e.&nbsp;if an item is connected to another, like in the pipe system <code>═╦</code>, then the other item is certainly also connected to the first.</p>
-<p>In general, because BFS traverses a graph one level at a time, we tend to use BFS when looking for the shortest path between two nodes. The first time BFS lands on the target node constitutes the shortest path to that node (or one of the multiple such paths if it’s a tie between paths). DFS is better suited for just finding a <em>valid</em> path, or <em>all</em> valid paths (in which case we could throw in backtracking as well). Since we’re interested in a valid path between the source <code>*</code> and <em>any</em> given sink, and not necessarily the shortest such path, we use DFS (possibly with backtracking) for this problem.</p>
-<p>Note that BFS can, just as easily, be implemented on a 2D array as on a graph (graphs are nothing more, really, than <a href="https://en.wikipedia.org/wiki/Adjacency_list">adjacency lists</a>). So, let’s see how to implement DFS on a 2D array. But before that, let’s expand the given input into a 2D array of <code>Items</code>.</p>
-<div id="cell-18" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PipeSystem:</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_input(<span class="bu">input</span>: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> PipeSystem:</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Parses the input and returns the connected sinks.</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - input (list): A list of strings containing the contents of the input file.</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - str: A string containing the connected sinks.</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We explored how to use iterative DFS on a matrix to solve the connected sinks and sources problem. From here, we can explore other graph problems or learn about game development and turn this rudimentary algorithm into a fun game mechanic.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

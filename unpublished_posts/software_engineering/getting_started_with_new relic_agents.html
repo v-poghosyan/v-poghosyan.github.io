@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2024-11-07">
 
-<title>v-poghosyan</title>
+<title>Getting Started with New Relic Agents - A Complete Guide to Installation and Microservices Integration – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,35 +104,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
 
 <script type="text/javascript">
@@ -109,35 +114,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -148,10 +124,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./logo.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">v-poghosyan</span>
     </a>
   </div>
@@ -162,7 +138,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Info</span></a>
   </li>  
 </ul>
@@ -174,12 +150,55 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Getting Started with New Relic Agents - A Complete Guide to Installation and Microservices Integration</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Software Engineering</div>
+                <div class="quarto-category">DevOps</div>
+                <div class="quarto-category">Observability and Monitoring</div>
+                <div class="quarto-category">NewRelic</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(14)</span></div><div class="category" data-category="Algorithms">Algorithms <span class="quarto-category-count">(3)</span></div><div class="category" data-category="DFS">DFS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Data Structures">Data Structures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Deep Learning">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dyanmic Progamming">Dyanmic Progamming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Emulators">Emulators <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Functional Programming">Functional Programming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Game Development">Game Development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gaming">Gaming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Home Automation">Home Automation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Large Language Models">Large Language Models <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Leetcode">Leetcode <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Linear Algebra">Linear Algebra <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Machine Learning">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Optimization">Optimization <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Recursion">Recursion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Retro Gaming">Retro Gaming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Scala">Scala <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-does-a-new-relic-agent-collect-metrics-from-my-application" id="toc-how-does-a-new-relic-agent-collect-metrics-from-my-application" class="nav-link active" data-scroll-target="#how-does-a-new-relic-agent-collect-metrics-from-my-application">How Does a New Relic Agent Collect Metrics from My Application?</a></li>
+  <li><a href="#how-do-you-install-a-new-relic-agent" id="toc-how-do-you-install-a-new-relic-agent" class="nav-link" data-scroll-target="#how-do-you-install-a-new-relic-agent">How Do You Install a New Relic Agent?</a></li>
+  <li><a href="#where-does-it-sit-in-a-microservices-application" id="toc-where-does-it-sit-in-a-microservices-application" class="nav-link" data-scroll-target="#where-does-it-sit-in-a-microservices-application">Where Does It Sit in a Microservices Application?</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -187,146 +206,149 @@ window.Quarto = {
 
 
 
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
+<section id="how-does-a-new-relic-agent-collect-metrics-from-my-application" class="level1">
+<h1>How Does a New Relic Agent Collect Metrics from My Application?</h1>
+<p>A New Relic agent collects metrics by instrumenting your application’s code and runtime environment. Here’s how it works:</p>
+<ol type="1">
+<li><p><strong>Instrumentation</strong>: The agent integrates with your application at the code level or runtime environment. It uses techniques like bytecode manipulation (for languages like Java) or monkey patching (for dynamic languages like Python) to insert monitoring hooks into your application.</p></li>
+<li><p><strong>Data Collection</strong>: These hooks collect data on various aspects such as response times, database queries, external service calls, memory usage, and error rates.</p></li>
+<li><p><strong>Data Transmission</strong>: The collected data is asynchronously sent to New Relic’s cloud-based platform through secure channels.</p></li>
+<li><p><strong>Analysis and Visualization</strong>: Once the data reaches New Relic, it is processed and made available on dashboards, alerts, and reports, providing real-time insights into your application’s performance.</p></li>
+</ol>
+</section>
+<section id="how-do-you-install-a-new-relic-agent" class="level1">
+<h1>How Do You Install a New Relic Agent?</h1>
+<p>The installation process varies depending on the programming language and environment of your application. Below is a general step-by-step guide:</p>
+<ol type="1">
+<li><p><strong>Sign Up and Obtain License Key</strong>:</p>
+<ul>
+<li>Create an account on <a href="https://newrelic.com/">New Relic’s website</a>.</li>
+<li>Obtain your unique license key from the New Relic dashboard.</li>
+</ul></li>
+<li><p><strong>Choose the Right Agent</strong>:</p>
+<p>New Relic provides agents for various languages and platforms:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
 <thead>
-<tr>
-<th>
-Title
-</th>
-<th>
-Date
-</th>
+<tr class="header">
+<th>Language/Platform</th>
+<th>Agent</th>
 </tr>
 </thead>
-<tbody class="list">
-<tr data-index="0" data-categories="Home Automation,Python" data-listing-date-sort="1729321200000" data-listing-file-modified-sort="1729383565347" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6" data-listing-title-sort="Water Me - Home Automation for Watering Plants" data-listing-filename-sort="water-me.ipynb">
-<td>
-<a href="./posts/projects/water-me.html" class="title listing-title">Water Me - Home Automation for Watering Plants</a>
-</td>
-<td>
-<span class="listing-date">Oct 19, 2024</span>
-</td>
+<tbody>
+<tr class="odd">
+<td><strong>Java</strong></td>
+<td><code>newrelic.jar</code></td>
 </tr>
-<tr data-index="1" data-categories="Game Development" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1729384571221" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1075" data-listing-title-sort="Unreal Engine - First Steps" data-listing-filename-sort="unreal_engine_first_steps.ipynb">
-<td>
-<a href="./posts/game_development/unreal_engine_first_steps.html" class="title listing-title">Unreal Engine - First Steps</a>
-</td>
-<td>
-<span class="listing-date">Jan 13, 2023</span>
-</td>
+<tr class="even">
+<td><strong>.NET</strong></td>
+<td>New Relic .NET Agent</td>
 </tr>
-<tr data-index="2" data-categories="Machine Learning,Large Language Models,Deep Learning" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1728943713770" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="385" data-listing-title-sort="Building an LLM" data-listing-filename-sort="builing-an-LLM.ipynb">
-<td>
-<a href="./posts/machine_learning/builing-an-LLM.html" class="title listing-title">Building an LLM</a>
-</td>
-<td>
-<span class="listing-date">Jan 13, 2023</span>
-</td>
+<tr class="odd">
+<td><strong>Node.js</strong></td>
+<td><code>newrelic</code> npm package</td>
 </tr>
-<tr data-index="3" data-categories="Functional Programming,Recursion,Scala" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1730695627110" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3738" data-listing-title-sort="Functional Programming" data-listing-filename-sort="functional_programming.ipynb">
-<td>
-<a href="./posts/functional_programming/functional_programming.html" class="title listing-title">Functional Programming</a>
-</td>
-<td>
-<span class="listing-date">Jan 13, 2023</span>
-</td>
+<tr class="even">
+<td><strong>Python</strong></td>
+<td><code>newrelic</code> pip package</td>
 </tr>
-<tr data-index="4" data-categories="Gaming,Retro Gaming,Emulators" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1729573643720" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="86" data-listing-title-sort="RetroArch Setup" data-listing-filename-sort="retroarch_setup.ipynb">
-<td>
-<a href="./posts/instructibles/retroarch_setup.html" class="title listing-title">RetroArch Setup</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
+<tr class="odd">
+<td><strong>Ruby</strong></td>
+<td><code>newrelic_rpm</code> gem</td>
 </tr>
-<tr data-index="5" data-categories="Leetcode,Algorithms,Dyanmic Progamming" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713779" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1540" data-listing-title-sort="LC121 and LC53 - Kadane's Algorithm" data-listing-filename-sort="lc121_best_time_to_buy_and_sell_stock.ipynb">
-<td>
-<a href="./posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="title listing-title">LC121 and LC53 - Kadane’s Algorithm</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
+<tr class="even">
+<td><strong>PHP</strong></td>
+<td>New Relic PHP Agent</td>
 </tr>
-<tr data-index="6" data-categories="Leetcode,Algorithms,Data Structures,DFS" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731970425060" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1249" data-listing-title-sort="Connected Sinks and Sources" data-listing-filename-sort="connected_sinks_and_sources.ipynb">
-<td>
-<a href="./posts/leetcode/connected_sinks_and_sources.html" class="title listing-title">Connected Sinks and Sources</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="Leetcode,Algorithms" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="660" data-listing-title-sort="LC11 - Container with Most Water" data-listing-filename-sort="lc11_container_with_most_water.ipynb">
-<td>
-<a href="./posts/leetcode/lc11_container_with_most_water.html" class="title listing-title">LC11 - Container with Most Water</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="8" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2872" data-listing-title-sort="Linear Programs and LP Geometry" data-listing-filename-sort="linear-programs-and-lp-geometry.ipynb">
-<td>
-<a href="./posts/optimization/linear-programs-and-lp-geometry.html" class="title listing-title">Linear Programs and LP Geometry</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="9" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713770" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6402" data-listing-title-sort="Algorithms for Unconstrained Optimization" data-listing-filename-sort="algorithms-for-unconstrained-optimization-gradient-descent.ipynb">
-<td>
-<a href="./posts/optimization/algorithms-for-unconstrained-optimization-gradient-descent.html" class="title listing-title">Algorithms for Unconstrained Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="10" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="325" data-listing-title-sort="Introduction to Optimization" data-listing-filename-sort="introduction_to_optimization.ipynb">
-<td>
-<a href="./posts/optimization/introduction_to_optimization.html" class="title listing-title">Introduction to Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="11" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1328" data-listing-title-sort="Robust Linear Programs - Modelling Discrete Failures" data-listing-filename-sort="robust-lps-modelling-discrete-failures.ipynb">
-<td>
-<a href="./posts/optimization/robust-lps-modelling-discrete-failures.html" class="title listing-title">Robust Linear Programs - Modelling Discrete Failures</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="12" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1729139082424" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="41" data-listing-word-count-sort="8151" data-listing-title-sort="Duality Theory" data-listing-filename-sort="duality-theory.ipynb">
-<td>
-<a href="./posts/optimization/duality-theory.html" class="title listing-title">Duality Theory</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="13" data-categories="Linear Algebra" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1728943713765" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1856" data-listing-title-sort="Linear Algebra for Optimization" data-listing-filename-sort="linear_algebra_refresher_for_optimization.ipynb">
-<td>
-<a href="./posts/linear_algebra/linear_algebra_refresher_for_optimization.html" class="title listing-title">Linear Algebra for Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
+<tr class="odd">
+<td><strong>Go</strong></td>
+<td>New Relic Go Agent</td>
 </tr>
 </tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</table></li>
+<li><p><strong>Install the Agent</strong>:</p>
+<ul>
+<li><strong>For Java</strong>:
+<ul>
+<li><p>Download the <code>newrelic.jar</code> file.</p></li>
+<li><p>Add the agent to your JVM startup parameters:</p>
+<pre class="shell"><code>-javaagent:/path/to/newrelic.jar</code></pre></li>
+</ul></li>
+<li><strong>For Node.js</strong>:
+<ul>
+<li><p>Install via npm:</p>
+<pre class="shell"><code>npm install newrelic</code></pre></li>
+<li><p>Require New Relic at the top of your main JavaScript file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">require</span>(<span class="st">'newrelic'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+<li><strong>For Python</strong>:
+<ul>
+<li><p>Install via pip:</p>
+<pre class="shell"><code>pip install newrelic</code></pre></li>
+<li><p>Initialize the agent in your application’s entry point.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Configure the Agent</strong>:</p>
+<ul>
+<li>Update the configuration file (e.g., <code>newrelic.yml</code> for Java or <code>newrelic.js</code> for Node.js) with your license key and application name.</li>
+<li>Set any additional settings like logging level or transaction tracing as needed.</li>
+</ul></li>
+<li><p><strong>Restart Your Application</strong>:</p>
+<ul>
+<li>The agent begins collecting data when the application restarts with the agent enabled.</li>
+</ul></li>
+<li><p><strong>Verify Installation</strong>:</p>
+<ul>
+<li>Log in to your New Relic dashboard to confirm that data is being reported.</li>
+</ul></li>
+</ol>
+</section>
+<section id="where-does-it-sit-in-a-microservices-application" class="level1">
+<h1>Where Does It Sit in a Microservices Application?</h1>
+<p>In a microservices architecture, each service operates independently, often across different environments or platforms. Here’s how the New Relic agent fits in:</p>
+<ol type="1">
+<li><p><strong>Agent in Each Microservice</strong>:</p>
+<ul>
+<li>Install and configure the New Relic agent within each microservice you want to monitor.</li>
+<li>This ensures that performance data is collected at the granular level of each service.</li>
+</ul></li>
+<li><p><strong>Integration Points</strong>:</p>
+<ul>
+<li><strong>Within the Application Code</strong>: For languages like Node.js or Python, the agent is imported directly into the application code.</li>
+<li><strong>At the Runtime Level</strong>: For compiled languages like Java or .NET, the agent attaches to the runtime environment via startup parameters.</li>
+</ul></li>
+<li><p><strong>Containerized Environments</strong>:</p>
+<ul>
+<li>If your microservices run in containers (e.g., Docker, Kubernetes), include the agent installation and configuration in your container images.</li>
+<li>Alternatively, use sidecar containers for the agents.</li>
+</ul></li>
+<li><p><strong>Distributed Tracing</strong>:</p>
+<ul>
+<li>New Relic supports distributed tracing, allowing you to trace requests as they flow through different microservices.</li>
+<li>Ensure that distributed tracing is enabled in the agent configuration to correlate data across services.</li>
+</ul></li>
+<li><p><strong>Data Aggregation</strong>:</p>
+<ul>
+<li>All agents report back to New Relic’s centralized platform, where data is aggregated.</li>
+<li>You can view the performance of individual microservices or the entire application stack.</li>
+</ul></li>
+</ol>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<ul>
+<li><strong>Collection Mechanism</strong>: The New Relic agent instruments your application’s code and runtime to collect performance metrics, which are sent to New Relic’s servers for analysis.</li>
+<li><strong>Installation</strong>: Install the agent appropriate for your application’s language, configure it with your license key and application name, and restart your application with the agent enabled.</li>
+<li><strong>Placement in Microservices</strong>: Install the agent within each microservice to monitor them individually, allowing New Relic to provide insights both at the micro and macro levels of your application architecture.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -563,7 +585,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -918,6 +940,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
 
 
 
