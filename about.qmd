@@ -6,7 +6,7 @@ about:
       text: LinkedIn
       href: https://www.linkedin.com/in/vahrampoghosyan/
     - icon: github
-      text: LinkedIn
+      text: GitHub
       href: https://www.github.com/v-poghosyan
 page-layout: full
 sidebar: false
