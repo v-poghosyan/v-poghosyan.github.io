@@ -1,4 +1,4 @@
-#!/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/python3
+#!/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/python3.9
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,4 +1,4 @@
-#!/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/python3
+#!/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/manim-sandbox/bin/python3.9
 
 """Filter subtitles that match or don't match a particular pattern."""
 

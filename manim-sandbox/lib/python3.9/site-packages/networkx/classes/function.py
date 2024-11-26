@@ -5,7 +5,6 @@ from collections import Counter
 from itertools import chain
 
 import networkx as nx
-from networkx.classes.graphviews import reverse_view, subgraph_view
 from networkx.utils import not_implemented_for, pairwise
 
 __all__ = [
@@ -18,13 +17,10 @@ __all__ = [
     "number_of_edges",
     "density",
     "is_directed",
-    "info",
     "freeze",
     "is_frozen",
     "subgraph",
-    "subgraph_view",
     "induced_subgraph",
-    "reverse_view",
     "edge_subgraph",
     "restricted_view",
     "to_directed",
@@ -202,6 +198,7 @@ def freeze(G):
     G.remove_edge = frozen
     G.remove_edges_from = frozen
     G.clear = frozen
+    G.clear_edges = frozen
     G.frozen = True
     return G
 
@@ -391,7 +388,7 @@ def induced_subgraph(G, nbunch):
     [0, 1, 3]
     """
     induced_nodes = nx.filters.show_nodes(G.nbunch_iter(nbunch))
-    return nx.graphviews.subgraph_view(G, induced_nodes)
+    return nx.subgraph_view(G, filter_node=induced_nodes)
 
 
 def edge_subgraph(G, edges):
@@ -450,7 +447,7 @@ def edge_subgraph(G, edges):
             induced_edges = nxf.show_diedges(edges)
         else:
             induced_edges = nxf.show_edges(edges)
-    return nx.graphviews.subgraph_view(G, induced_nodes, induced_edges)
+    return nx.subgraph_view(G, filter_node=induced_nodes, filter_edge=induced_edges)
 
 
 def restricted_view(G, nodes, edges):
@@ -506,7 +503,7 @@ def restricted_view(G, nodes, edges):
             hide_edges = nxf.hide_diedges(edges)
         else:
             hide_edges = nxf.hide_edges(edges)
-    return nx.graphviews.subgraph_view(G, hide_nodes, hide_edges)
+    return nx.subgraph_view(G, filter_node=hide_nodes, filter_edge=hide_edges)
 
 
 def to_directed(graph):
@@ -550,51 +547,6 @@ def create_empty_copy(G, with_data=True):
     if with_data:
         H.graph.update(G.graph)
     return H
-
-
-def info(G, n=None):
-    """Return a summary of information for the graph G or a single node n.
-
-    The summary includes the number of nodes and edges, or neighbours for a single
-    node.
-
-    Parameters
-    ----------
-    G : Networkx graph
-       A graph
-    n : node (any hashable)
-       A node in the graph G
-
-    Returns
-    -------
-    info : str
-        A string containing the short summary
-
-    Raises
-    ------
-    NetworkXError
-        If n is not in the graph G
-
-    .. deprecated:: 2.7
-       ``info`` is deprecated and will be removed in NetworkX 3.0.
-    """
-    import warnings
-
-    warnings.warn(
-        ("info is deprecated and will be removed in version 3.0.\n"),
-        DeprecationWarning,
-        stacklevel=2,
-    )
-    if n is None:
-        return str(G)
-    if n not in G:
-        raise nx.NetworkXError(f"node {n} not in graph")
-    info = ""  # append this all to a string
-    info += f"Node {n} has the following properties:\n"
-    info += f"Degree: {G.degree(n)}\n"
-    info += "Neighbors: "
-    info += " ".join(str(nbr) for nbr in G.neighbors(n))
-    return info
 
 
 def set_node_attributes(G, values, name=None):
@@ -697,7 +649,7 @@ def set_node_attributes(G, values, name=None):
                 pass
 
 
-def get_node_attributes(G, name):
+def get_node_attributes(G, name, default=None):
     """Get node attributes from graph
 
     Parameters
@@ -706,6 +658,11 @@ def get_node_attributes(G, name):
 
     name : string
        Attribute name
+
+    default: object (default=None)
+       Default value of the node attribute if there is no value set for that
+       node in graph. If `None` then nodes without this attribute are not
+       included in the returned dict.
 
     Returns
     -------
@@ -718,7 +675,13 @@ def get_node_attributes(G, name):
     >>> color = nx.get_node_attributes(G, "color")
     >>> color[1]
     'red'
+    >>> G.add_node(4)
+    >>> color = nx.get_node_attributes(G, "color", default="yellow")
+    >>> color[4]
+    'yellow'
     """
+    if default is not None:
+        return {n: d.get(name, default) for n, d in G.nodes.items()}
     return {n: d[name] for n, d in G.nodes.items() if name in d}
 
 
@@ -859,7 +822,7 @@ def set_edge_attributes(G, values, name=None):
                     pass
 
 
-def get_edge_attributes(G, name):
+def get_edge_attributes(G, name, default=None):
     """Get edge attributes from graph
 
     Parameters
@@ -868,6 +831,11 @@ def get_edge_attributes(G, name):
 
     name : string
        Attribute name
+
+    default: object (default=None)
+       Default value of the edge attribute if there is no value set for that
+       edge in graph. If `None` then edges without this attribute are not
+       included in the returned dict.
 
     Returns
     -------
@@ -882,11 +850,17 @@ def get_edge_attributes(G, name):
     >>> color = nx.get_edge_attributes(G, "color")
     >>> color[(1, 2)]
     'red'
+    >>> G.add_edge(3, 4)
+    >>> color = nx.get_edge_attributes(G, "color", default="yellow")
+    >>> color[(3, 4)]
+    'yellow'
     """
     if G.is_multigraph():
         edges = G.edges(keys=True, data=True)
     else:
         edges = G.edges(data=True)
+    if default is not None:
+        return {x[:-1]: x[-1].get(name, default) for x in edges}
     return {x[:-1]: x[-1][name] for x in edges if name in x[-1]}
 
 
@@ -936,12 +910,12 @@ def non_neighbors(graph, node):
 
 
 def non_edges(graph):
-    """Returns the non-existent edges in the graph.
+    """Returns the nonexistent edges in the graph.
 
     Parameters
     ----------
     graph : NetworkX graph.
-        Graph to find non-existent edges.
+        Graph to find nonexistent edges.
 
     Returns
     -------
@@ -1298,10 +1272,7 @@ def is_path(G, path):
         True if `path` is a valid path in `G`
 
     """
-    for node, nbr in nx.utils.pairwise(path):
-        if (node not in G) or (nbr not in G[node]):
-            return False
-    return True
+    return all((node in G and nbr in G[node]) for node, nbr in nx.utils.pairwise(path))
 
 
 def path_weight(G, path, weight):
