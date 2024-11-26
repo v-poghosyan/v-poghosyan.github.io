@@ -13,14 +13,22 @@ sidebar: false
 toc: false
 ---
 
-# About this site
-Hi there, I'm Vahram,
+**About This Site** 
 
-This is my [digital garden](https://maggieappleton.com/garden-history?ref=ideasurg.pub), my notes on the internet. I started them in late 2021 from some college notes I took using Jupyter Notebooks (and from some online material I learned during my free time). Recently, I started trying out various static page generators (namely [quarto](https://github.com/quarto-dev)) to convert my notes into a form that looks presentable in a browser. I do my best communicating which part of my work is original and which is borrowed (with citation). Please refer to the copyright section for more details on how this content shoud be used.
+Hi, I’m Vahram! 
 
-# License
+Welcome to my [digital garden](https://maggieappleton.com/garden-history?ref=ideasurg.pub) — a collection of my notes and ideas shared on the internet.
 
-Copyright (c) 2023 Vahram Poghosyan
+This journey began in early 2021, inspired by some college notes I had compiled using Jupyter Notebooks and various online resources I explored during my free time. Recently, I’ve been experimenting with static page generators (like [Quarto](https://github.com/quarto-dev)) to transform my notes into a format that’s both functional and visually appealing for the web.  
 
-The assets (including general styling, custom pictures and videos, code, etc.), as well as some of the written content (with the exception of attributed content, or such content that's in the common domain) on these pages are copyrighted material. Exceptions will be considered (and generally granted), please reach out to [vapogyan@gmail.com](vapogyan@gmail.com) with specific inquiries about reusing any assets or conent.
+I strive to clearly distinguish between original work and borrowed content, always providing proper citations where applicable. For more details on content usage and attribution, please refer to the **Copyright** section.  
 
+---  
+
+**License** 
+
+**Copyright (c) 2023 Vahram Poghosyan**  
+
+The materials on this site — including the styling, custom images, videos, code, and most written content — are protected under copyright law, unless explicitly stated otherwise (e.g., content attributed to others or in the public domain).  
+
+If you'd like to reuse any assets or content, feel free to reach out to me at **vapogyan@gmail.com** with your request. Exceptions will be readily granted for reasonable use!  
