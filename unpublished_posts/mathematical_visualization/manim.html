@@ -349,6 +349,8 @@ Tip
 <div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>A combination of <code>brew info &lt;PackageName&gt;</code> and <code>which &lt;PackageName&gt;</code> can tell us where each package got installed (either in <code>/opt/homebrew/bin</code> or <code>/opt/homebrew/Cellar</code>).</p>
+<p>Note that the command <code>which py3cairo</code>, for example, won’t return anything because <code>py3cairo</code> is a Python module, not an executable program. The <code>which</code> command is used to locate the executable file associated with a given command by searching the directories listed in your <code>PATH</code> environment variable. Since <code>py3cairo</code> doesn’t install an executable named <code>py3cairo</code>, which won’t find it.</p>
+<p>However, if Homebrew (brew) says it’s installed, it means the <code>py3cairo</code> package is present on your system.</p>
 </div>
 </div>
 </div>
@@ -460,7 +462,7 @@ Note
 </section>
 <section id="square-to-circle-transformation" class="level2">
 <h2 class="anchored" data-anchor-id="square-to-circle-transformation">Square to circle transformation</h2>
-<p>Importing <code>jupyter-manim</code> for the access to the <code>manim</code> cell magic within these notes.</p>
+<p>Importing <code>jupyter-manim</code> for the access to the <code>manim</code> cell magic within these notes. This step is imperative. It must complete inside its own Jupyter Notebook cell before any cell that uses the <code>%%manim</code> cell magic can be run.</p>
 <div id="cell-4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
