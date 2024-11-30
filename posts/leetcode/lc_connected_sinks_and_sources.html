@@ -233,8 +233,10 @@ window.Quarto = {
   <li><a href="#path-finding-dfs" id="toc-path-finding-dfs" class="nav-link" data-scroll-target="#path-finding-dfs">Path finding (DFS)</a>
   <ul class="collapse">
   <li><a href="#expanding-the-input-into-a-2d-matrix" id="toc-expanding-the-input-into-a-2d-matrix" class="nav-link" data-scroll-target="#expanding-the-input-into-a-2d-matrix">Expanding the input into a 2D matrix</a></li>
+  <li><a href="#helper-functions-to-determine-attachment-of-pipes" id="toc-helper-functions-to-determine-attachment-of-pipes" class="nav-link" data-scroll-target="#helper-functions-to-determine-attachment-of-pipes">Helper functions to determine attachment of pipes</a></li>
+  <li><a href="#dfs-implementation" id="toc-dfs-implementation" class="nav-link" data-scroll-target="#dfs-implementation">DFS implementation</a></li>
   </ul></li>
-  <li><a href="#verifying-solution" id="toc-verifying-solution" class="nav-link" data-scroll-target="#verifying-solution">Verifying solution</a></li>
+  <li><a href="#verifying-the-solution" id="toc-verifying-the-solution" class="nav-link" data-scroll-target="#verifying-the-solution">Verifying the solution</a></li>
   <li><a href="#visualization-of-the-dfs-algorithm-using-manim" id="toc-visualization-of-the-dfs-algorithm-using-manim" class="nav-link" data-scroll-target="#visualization-of-the-dfs-algorithm-using-manim">Visualization of the DFS algorithm using Manim</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -474,7 +476,7 @@ Note
 </details>
 </div>
 <p>Let’s run <code>input</code> through <code>map_to_items</code> to obtain the programmatic representation of the items in our pipe system. We show only the first five from the output in the interest of brevity.</p>
-<div id="cell-15" class="cell" data-execution_count="17">
+<div id="cell-15" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>parsed_input_ex1 <span class="op">=</span> map_to_items(input_ex1)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> obj <span class="kw">in</span> parsed_input_ex1[:<span class="dv">3</span>]:</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -569,6 +571,9 @@ Note
 </div>
 <p>The output of <code>expand_input</code> contains <code>Item</code> types and <code>None</code> types (for empty cells).</p>
 <p>Before we implement DFS, let’s define a few helper functions that check if two <code>Item</code>-s are connected by the relevant edge.</p>
+</section>
+<section id="helper-functions-to-determine-attachment-of-pipes" class="level3">
+<h3 class="anchored" data-anchor-id="helper-functions-to-determine-attachment-of-pipes">Helper functions to determine attachment of pipes</h3>
 <div id="cell-19" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_top(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.top <span class="kw">and</span> item2.bottom</span>
@@ -583,6 +588,9 @@ Note
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.right <span class="kw">and</span> item2.left</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’re going to need these helper functions to check if two <code>Item</code>-s are connected by an edge before we add them to the DFS stack (to visit).</p>
+</section>
+<section id="dfs-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="dfs-implementation">DFS implementation</h3>
 <p>Finally, let’s implement iterative DFS using a stack.</p>
 <div id="cell-21" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterative version using a stack</span></span>
@@ -659,8 +667,8 @@ Found connected sink: C</code></pre>
 <p>There we have it!</p>
 </section>
 </section>
-<section id="verifying-solution" class="level2">
-<h2 class="anchored" data-anchor-id="verifying-solution">Verifying solution</h2>
+<section id="verifying-the-solution" class="level2">
+<h2 class="anchored" data-anchor-id="verifying-the-solution">Verifying the solution</h2>
 <p>Now let’s try it on a slightly altered input. This time, we have redirected the pipes so that only <code>B</code> and <code>C</code> are connected to the source.</p>
 <p><strong>Formatted input</strong></p>
 <pre><code>*╗ ╦═A
@@ -694,7 +702,7 @@ Found connected sink: C</code></pre>
 <h2 class="anchored" data-anchor-id="visualization-of-the-dfs-algorithm-using-manim">Visualization of the DFS algorithm using Manim</h2>
 <p>Let’s use Manim (a mathematical animation library), to visualize the DFS algorithm on the matrix for fun!</p>
 <p>Let’s import the cell magic <code>%%manim</code>, and set the stage with a table representation of this simpler grid.</p>
-<div id="cell-27" class="cell" data-execution_count="14">
+<div id="cell-27" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jupyter_manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-28" class="cell">
