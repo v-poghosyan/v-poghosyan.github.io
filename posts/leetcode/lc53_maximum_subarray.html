@@ -273,7 +273,7 @@ Output: 1</code></pre>
 <h2 class="anchored" data-anchor-id="kadanes-algorithm">Kadane’s Algorithm</h2>
 <section id="dynamic-programming---key-idea" class="level3">
 <h3 class="anchored" data-anchor-id="dynamic-programming---key-idea">Dynamic Programming - Key Idea</h3>
-<p>The key idea behind dynamic programming is to solve sub-problems once, store their results one way or another, and use them to solve the larger problem. Usually there’s some an optimal sub-structure to the problems which lend themselves to a solution by DP that allows us to obtain the solution to the larger problem from that of its sub-problems using a computationally cheap trick.</p>
+<p>The key idea behind dynamic programming is to solve sub-problems once, store their results one way or another, and use them to solve the larger problem. Usually there’s some optimal sub-structure to the problems that lend themselves to a solution by DP. The optimal sub-structure allows us to obtain the solution to the larger problem from that of its sub-problems using a computationally cheap step.</p>
 <section id="two-approaches" class="level4">
 <h4 class="anchored" data-anchor-id="two-approaches">Two Approaches</h4>
 <table class="caption-top table">
@@ -302,7 +302,7 @@ Output: 1</code></pre>
 </section>
 <section id="applying-dp-to-the-maximum-subarray-problem" class="level3">
 <h3 class="anchored" data-anchor-id="applying-dp-to-the-maximum-subarray-problem">Applying DP to the Maximum Subarray Problem</h3>
-<p>Kadane’s algorithm, which solves this problem in a single pass, relies on an optimal sub-structure in the problem. This optimal sub-structure that comes from the contiguity requirement. It’s what allows us to reduce the total number of passes required over the subarrays when computing their sums. The sub-problems are solved in a particular order, such that the solution of one sub-problem, stored in memory, obtains the solution to the next sub-problem and so on.</p>
+<p>Kadane’s algorithm, which solves this problem in a single pass, relies on two optimal sub-structures that exist within the problem. These optimal sub-structures comes from the contiguity requirement, which explains why a set of algorithms like Kadane’s algorithm solve a variety of subarray problems. These sub-structures are what allow us to reduce the total number of passes required over the subarrays when computing sums. In DP, the sub-problems are solved in a particular order such that the solution of one sub-problem, stored in memory, obtains the solution to the next sub-problem and so on.</p>
 <p>First, let’s break the overall problem down into its constituent sub-problems. There are several ways of doing that.</p>
 <p>One way is to observe that any subarray ends (or begins) at some index <code>k</code>. We may define an abstraction such as this: The solution to the problem of size-<code>k</code>. Note that this definition isn’t pulled out of thin air, it’s the global maximum for the <code>k</code>-sized sub-problem (i.e.&nbsp;the solution to the overall problem were it to have size <code>k</code>). So, let’s call it <code>global_max[k]</code>.</p>
 <p>We may define yet another useful abstraction: The solution to the problem if the optimal subarray was constrained to those subarrays which end at index <code>k</code>. Note that this, also, isn’t pulled out of thin air. It’s the local maximum at index <code>k</code>. So, we call it <code>local_max[k]</code>.</p>
