@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2022-01-23">
+<meta name="dcterms.date" content="2024-05-23">
 
-<title>LC121 and LC53: Kadane’s Algorithm – v-poghosyan</title>
+<title>LC121: Best Time to Buy and Sell Stock – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -182,7 +182,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">LC121 and LC53: Kadane’s Algorithm</h1>
+      <h1 class="title">LC121: Best Time to Buy and Sell Stock</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Leetcode</div>
                 <div class="quarto-category">Algorithms</div>
@@ -204,7 +204,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 23, 2022</p>
+        <p class="date">May 23, 2024</p>
       </div>
     </div>
     
@@ -220,18 +220,15 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a>
-  <ul class="collapse">
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
   <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#non-brute-force-solution" id="toc-non-brute-force-solution" class="nav-link" data-scroll-target="#non-brute-force-solution">Non-Brute-Force Solution</a>
+  <li><a href="#better-solutions" id="toc-better-solutions" class="nav-link" data-scroll-target="#better-solutions">Better Solutions</a>
   <ul class="collapse">
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#solution---dp-with-tabulation" id="toc-solution---dp-with-tabulation" class="nav-link" data-scroll-target="#solution---dp-with-tabulation">Solution - DP with Tabulation</a></li>
   </ul></li>
   <li><a href="#proof-of-correctness" id="toc-proof-of-correctness" class="nav-link" data-scroll-target="#proof-of-correctness">Proof of Correctness</a>
   <ul class="collapse">
-  <li><a href="#proof-of-invariance" id="toc-proof-of-invariance" class="nav-link" data-scroll-target="#proof-of-invariance">Proof of Invariance</a></li>
-  </ul></li>
-  <li><a href="#kadanes-algorithm---maximum-subarray" id="toc-kadanes-algorithm---maximum-subarray" class="nav-link" data-scroll-target="#kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</a></li>
+  <li><a href="#proof-of-invariance-of-max_profit" id="toc-proof-of-invariance-of-max_profit" class="nav-link" data-scroll-target="#proof-of-invariance-of-max_profit">Proof of Invariance of <code>max_profit</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -257,94 +254,50 @@ Output: 5</code></pre>
 Output: 0</code></pre>
 <p><strong>Explanation</strong></p>
 <p>In this case, no transactions are done and the max profit = 0.</p>
-<section id="brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="brute-force-solution">Brute-Force Solution</h2>
+</section>
+<section id="brute-force-solution" class="level1">
+<h1>Brute-Force Solution</h1>
 <p>Consider each viable pair of days. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^2)\)</span> because, for each possible day <code>i</code> that we choose to buy the stock on, there are <span class="math inline">\(n-i\)</span> possible days that we can sell it on. Since there are <span class="math inline">\(n\)</span> choices for which day to buy, the number of total pairs has a leading term of <span class="math inline">\(n(n-1)\)</span>, so it’s quadratic in <span class="math inline">\(n\)</span>.</p>
 <p>We can also think of choosing a subset of size <span class="math inline">\(2\)</span> and discarding those which have a reverse order of days. This essentially means choosing a subset of size <span class="math inline">\(2\)</span> without order (since each pair is either in the correct order or not, and we only count the one that is), so <span class="math inline">\({O \left ({n \choose 2} \right )}\)</span> which is, of course, <span class="math inline">\(O(n^2)\)</span>.</p>
 </section>
-<section id="non-brute-force-solution" class="level2">
-<h2 class="anchored" data-anchor-id="non-brute-force-solution">Non-Brute-Force Solution</h2>
-<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using DP with tabulation similar to <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a> which solves the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray</a> problem. The similarities between these two problems are due to fact that both are concerned with some score over a <em>contiguous</em> array (contiguity being what gives rise to the optimal substructure). Whereas Kadane’s is concerned with the contiguous subarray with maximum sum, this algorithm is interested in the maximum profit (which is the difference between the last element of the optimal subarray and the first one). Like Kadane’s algorithm, we can prove its correctness using <em>loop invariants</em>. We will give the solution and prove the correctness. As for building intuition for why this solution works, we will focus on the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum Subarray problem</a> which is a more general application of this type of pattern.</p>
-<section id="code" class="level3">
-<h3 class="anchored" data-anchor-id="code">Code</h3>
-<div id="cell-4" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxProfit(prices):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    min_price <span class="op">=</span> <span class="bu">float</span>(<span class="st">"inf"</span>) <span class="co"># +infinity</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    max_profit <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prices)):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prices[i] <span class="op">&lt;</span> min_price:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            min_price <span class="op">=</span> prices[i]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> prices[i] <span class="op">-</span> min_price <span class="op">&gt;</span> max_profit:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            max_profit <span class="op">=</span> prices[i] <span class="op">-</span> min_price</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_profit</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>]</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maxProfit(prices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="better-solutions" class="level1">
+<h1>Better Solutions</h1>
+<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using DP with tabulation similar to <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a> which is explored, in detail, in this <a href="../../posts/leetcode/lc53_maximum_subarray.html">post</a>. These posts are meant to complement each other. In this one, we simply offer the solution and its <strong>proof of correctness</strong>. In the <a href="../../posts/leetcode/lc53_maximum_subarray.html">Maximum Subarray post</a> we go over coming up with the DP solution in detail.</p>
+<section id="solution---dp-with-tabulation" class="level2">
+<h2 class="anchored" data-anchor-id="solution---dp-with-tabulation">Solution - DP with Tabulation</h2>
+<div id="cell-4" class="cell" data-code-false="false">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>min_price <span class="op">=</span> <span class="bu">float</span>(<span class="st">"inf"</span>) <span class="co"># +infinity</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>max_profit <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prices)):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prices[i] <span class="op">&lt;</span> min_price:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        min_price <span class="op">=</span> prices[i]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> prices[i] <span class="op">-</span> min_price <span class="op">&gt;</span> max_profit:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        max_profit <span class="op">=</span> prices[i] <span class="op">-</span> min_price</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(max_profit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="proof-of-correctness" class="level2">
-<h2 class="anchored" data-anchor-id="proof-of-correctness">Proof of Correctness</h2>
-<p>It’s easy to see that, at the end of each iteration <code>i</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>i</code>. This is called a loop invariant. Showing something is a loop invariant is a lot like proving the <em>inductive step</em> in a proof by induction (for example, when trying to prove recursive algorithms).</p>
-<p>It can also be shown that <code>max_profit</code> is another loop invariant, and that it holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<section id="proof-of-invariance" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-invariance">Proof of Invariance</h3>
-<p>The loop does one of two things exclusively: either it updates <code>min_price</code> or it doesn’t.</p>
-<p>Suppose it <em>doesn’t</em> update <code>min_price</code> (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>i</code>. In this case, the difference of <code>prices[i]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>only</em> if the difference is greater than the <code>max_profit</code> at the end of the previous iteration (iteration <code>i-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, the index <code>i</code>.</p>
-<p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>i</code>, it enters the subsequent iteration <code>i+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>i</code> (at the beginning of the iteration). If <code>prices[i+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> <em>only</em> until it encounters the lowest price dip (unless the price keeps dipping until the very end, in which case the proof is complete). At this iteration of the loop, let’s call it <code>k+1</code>, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code> (because there have just been consecutive dips in price since index <code>i</code>). Since <code>prices[k+1]</code> is the lowest price dip, by assumption, in the next iteration we are necessarily in the familiar again (<strong>case 1</strong>). Hence, <code>max_profit</code> is a loop invariant.</p>
-<p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code>. In other words, it will hold the solution to the problem.</p>
-</section>
-</section>
-<section id="kadanes-algorithm---maximum-subarray" class="level2">
-<h2 class="anchored" data-anchor-id="kadanes-algorithm---maximum-subarray">Kadane’s Algorithm - Maximum Subarray</h2>
-<p>At the heart of Kadane’s algorithm is an optimal substructure which lends itself to optimization using the principles of dynamic programming.</p>
-<p>Any subarray ends (or begins, but for now let’s stick with ends) at some index. We may also define a notion such as this: let there be a solution to the problem up to some index <code>i</code>. Le’t call that solution <code>global_max(i)</code>. This is, effectively, the final solution to the problem were the problem to have size <code>i</code> (i.e.&nbsp;if <code>nums</code> had size <code>i</code>).</p>
-<p>A relationship we may initially notice when looking at this problem is that:</p>
-<pre><code>local_max[i] = max(local_max[i-1] + nums[i], nums[i])</code></pre>
-<p>Where <code>local_max[i]</code> is the maximum of all subarrays ending at index <code>i</code> but, crucially, <em>not</em> the solution of the problem up to index <code>i</code> (that’s <code>global_max[i]</code>). It’s easy to get lost in this problem by conflating these two variables which track everything we need to implement a single-pass tabulated solution. They’re also, as it turns out, loop invariants.</p>
-<p>Feel free to tinker with the problem to notice this optimal substructure. It’s often helpful to illustrate the arrays…</p>
-<p>The final answer is the maximum over all the local maxima (obviously).</p>
-<p>Thinking in terms of solutions to sub-problems is, in essence, what dynamic programming is. It’s a way to cut down on the number of subarrays considered in the brute force approach by coming up with a computationally cheap rule that gives us the solution to the current problem based on the retrieved value of a previously solved sub-problem (whatever the relationship between the problem and its sub-problems may be). In the case of the Maximum Subarray problem the sub-problems are expressed in terms of <code>local_max[i]</code> and <code>global_max[i]</code>. If we know <code>local_max[i-1]</code>, <code>local_max[i]</code> is all but known through the above relationship and a similar relationship also exists for <code>global_max</code>.</p>
-<p>If we work through an example, the act itself will give us insight into the implementation of the single pass, iterative algorithm. Note that the recursive approach is already somewhat betrayed by the optimal substructure and, to further make it dynamic, we could implement memoization as a layer above it. Let’s take the first step, and then generalize.</p>
-<p>In the beginning, there’s just <code>nums[0]</code>. By virtue of being the only subarray that ends at index <code>0</code> it is its own <code>local_max[0]</code>. In situations like this we initialize <code>local_max</code> to <span class="math inline">\(-\infty\)</span> in order not to resort to handling special cases, like singleton arrays, in the loop.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max:</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s immediately clear that, since <code>local_max</code> is initialized to <span class="math inline">\(-\infty\)</span> (let’s call this <code>local_max[-1]</code> to stay consistent with array notation of the optimal substructure), <code>num &gt; local_max</code> is equivalent to:</p>
-<pre><code>nums[0] &gt; local_max[-1] + nums[0]</code></pre>
-<p>This is true in general for any <code>num[0]</code>. So the desired condition is actually:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>As it is, the loop invariant <code>local_max</code> will contain the local maximum at the last element of the <code>nums</code> array. We need to figure out what to do with the other loop invariant <code>global_max</code> which is supposed to be the solution to the problem of size <code>i</code>. Well, <code>global_max</code> is clearly just:</p>
-<pre><code>global_max[i] = max(global_max[i-1], local_max[i])</code></pre>
-<p>Which is the promised greedy-choice update for <code>global_max</code> – the loop invariant which will hold the final solution to the problem.</p>
-<p>We need to implement this relationship just as we implemented the previous one unless we just use the built in <code>max</code> function to essentially just update both loop invariants in sequence and be done with it. But let’s go with the more imperative version. Let’s take the first step.</p>
-<p>In the beginning there’s just <code>nums[0]</code>. Clearly <code>global_max[0]</code> equals <code>nums[0]</code> as that’s what <code>local_max[0]</code> is and <code>global_max[-1]</code> (as per our earlier abuse of notation) is <span class="math inline">\(-\infty\)</span> by choice.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> global_max <span class="op">&lt;</span> local_max:</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        global_max <span class="op">=</span> local_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We can reference <code>local_max</code> and assume its value to be as the promised invariant on line 9.</p>
-<p>Notice that <code>global_max</code> has two meanings, as does <code>local_max</code> in the implementation. It is used as the previous iterate <code>global_max[i-1]</code> (in the Boolean comparison) as well as the current (or next, depending on frame of reference) iterate <code>global_max[i]</code> (in the assignment operation).</p>
+<section id="proof-of-correctness" class="level1">
+<h1>Proof of Correctness</h1>
+<p>It’s easy to see that, at the end of each iteration <code>k</code>, the variable <code>min_price</code> holds the lowest price dip in the stock up to, and including, the index <code>k</code>. The variable <code>min_price</code> is what’s known as a <strong>loop invariant</strong>. Showing something is a loop invariant is a lot like proving the <strong>inductive step</strong> of a <strong>proof by induction</strong>.</p>
+<p>It can be shown that <code>max_profit</code> is yet another loop invariant, and that it holds the maximum profit up to, and including, the index <code>k</code>. This is the solution to the <code>k</code>-sized sub-problem.</p>
+<section id="proof-of-invariance-of-max_profit" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-invariance-of-max_profit">Proof of Invariance of <code>max_profit</code></h2>
+<p>The loop above does one of only two things: either it updates <code>min_price</code> or it doesn’t. These are, obviously, exclusive scenarios.</p>
+<p>Suppose it <em>doesn’t</em> update <code>min_price</code> and let’s label this case as (<strong>case 1</strong>). The first loop invariant, <code>min_price</code> holds the lowest price dip up to, and including, the index <code>k</code>. In this case, the difference of <code>prices[k]</code> and <code>min_price</code> is then calculated and <code>max_profit</code> is updated <em>if and only if</em> the difference is greater than the value of <code>max_profit</code> at the end of the previous iteration (iteration <code>k-1</code>). This guarantees that <code>max_profit</code> holds the maximum profit up to, and including, index <code>k</code>.</p>
+<p>In the other case (<strong>case 2</strong>), when the loop <em>does</em> update <code>min_price]</code> at iteration <code>k</code>, it proceeds to the subsequent iteration <code>k+1</code> with <code>max_profit</code> still holding the maximum profit up to, and including, index <code>k</code> (at the start of the iteration). If <code>prices[k+1]</code> is, again, less than <code>min_price</code> then the loop just goes on updating <code>min_price</code> until it encounters the lowest price dip (if the price keeps dipping until the very end, then the proof is complete). At the current, <code>k+1</code>-th iteration of the loop, <code>max_profit</code> still holds the maximum profit up to, and including, index <code>k</code>. This is because there’s been a consecutive dip in prices since index <code>k</code>. Since <code>prices[k+1]</code> is the lowest price dip so far, by assumption, in the next iteration, <code>k+2</code>, we are necessarily in the familiar (<strong>case 1</strong>) again. Hence, <code>max_profit</code> is a loop invariant.</p>
+<p>Therefore, once the loop is finished, <code>max_profit</code> will hold the maximum profit up to, and including, the last index <code>n</code> (for some <code>n</code>-sized problem). In other words, it will hold the final solution.</p>
 
 
 </section>

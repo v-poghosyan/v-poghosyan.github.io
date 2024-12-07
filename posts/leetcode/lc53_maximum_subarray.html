@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2024-05-23">
+
+<title>LC53: Maximum Subarray – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">LC53: Maximum Subarray</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Leetcode</div>
+                <div class="quarto-category">Algorithms</div>
+                <div class="quarto-category">Dyanmic Progamming</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 23, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
+  <li><a href="#better-solutions" id="toc-better-solutions" class="nav-link" data-scroll-target="#better-solutions">Better Solutions</a>
+  <ul class="collapse">
+  <li><a href="#similarity-to-other-subarray-problems" id="toc-similarity-to-other-subarray-problems" class="nav-link" data-scroll-target="#similarity-to-other-subarray-problems">Similarity to Other Subarray Problems</a></li>
+  <li><a href="#kadanes-algorithm" id="toc-kadanes-algorithm" class="nav-link" data-scroll-target="#kadanes-algorithm">Kadane’s Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#dynamic-programming---key-idea" id="toc-dynamic-programming---key-idea" class="nav-link" data-scroll-target="#dynamic-programming---key-idea">Dynamic Programming - Key Idea</a></li>
+  <li><a href="#applying-dp-to-the-maximum-subarray-problem" id="toc-applying-dp-to-the-maximum-subarray-problem" class="nav-link" data-scroll-target="#applying-dp-to-the-maximum-subarray-problem">Applying DP to the Maximum Subarray Problem</a></li>
+  <li><a href="#final-solution" id="toc-final-solution" class="nav-link" data-scroll-target="#final-solution">Final Solution</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="problem-statement" class="level1">
+<h1>Problem Statement</h1>
+<p>Given an integer array <code>nums</code>, find the subarray with the largest sum, and return its sum.</p>
+<p><strong>Example 1</strong></p>
+<pre><code>Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6</code></pre>
+<p><strong>Explanation</strong></p>
+<p>The subarray <code>[4,-1,2,1]</code> has the largest sum <code>6</code>.</p>
+<p><strong>Example 2</strong></p>
+<pre><code>Input: nums = [1]
+Output: 1</code></pre>
+<p><strong>Explanation</strong></p>
+<p>The subarray <code>[1]</code> has the largest sum <code>1</code>.</p>
+</section>
+<section id="brute-force-solution" class="level1">
+<h1>Brute-Force Solution</h1>
+<p>Consider each subarray. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^3)\)</span>. There are <code>n</code> subarrays of size <code>1</code>, <code>n-1</code> subarrays of size <code>2</code>, …, and <code>1</code> subarray of size <code>n</code> (the entire array itself). In addition, for each subarray, computing the sum over it takes <span class="math inline">\(O(n)\)</span> time. So, the leading term of the total time complexity is cubic in <code>n</code>.</p>
+<p>The code for the brute force solution will not be provided.</p>
+</section>
+<section id="better-solutions" class="level1">
+<h1>Better Solutions</h1>
+<section id="similarity-to-other-subarray-problems" class="level2">
+<h2 class="anchored" data-anchor-id="similarity-to-other-subarray-problems">Similarity to Other Subarray Problems</h2>
+<p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> with <strong>tabulation</strong>. This solution is known by the name of <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>.</p>
+<p>The <strong>Maximum Subarray</strong> problem is similar to the <strong>Best Time to Buy and Sell Stock</strong> problem (see <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">post</a>), which also lends itself to a DP solution with tabulation. Its solution closely resembles Kadane’s algorithm. The similarities between these two problems are due to fact that both problems are concerned with finding some optimal <em>score</em> over a <em>contiguous</em> subarray – contiguity being what gives rise to the key optimal sub-structures in both problems. Whereas Kadane’s is concerned with the contiguous subarray having <em>maximum sum</em>, the algorithm that solves <strong>Best Time to Buy and Sell Stock</strong> is concerned with <em>maximum profit</em>, which is defined as the difference between the last element of the optimal subarray and the first one.</p>
+<p>We can prove the correctness of Kadane’s algorithm using <em>loop invariants</em>, but we will omit the proof here. Instead, we will dive into how one might derive the algorithm from scratch. Conversely, in the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock post</a>, we won’t spend much time exploring the solution. Instead, we will offer a proof of its correctness. The proof of correctness of Kadane’s algorithm will be very similar to the proof offerend in that post. These two posts are meant to complement each other.</p>
+</section>
+<section id="kadanes-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="kadanes-algorithm">Kadane’s Algorithm</h2>
+<section id="dynamic-programming---key-idea" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-programming---key-idea">Dynamic Programming - Key Idea</h3>
+<p>The key idea behind dynamic programming is to solve sub-problems once, store their results one way or another, and use them to solve the larger problem. Usually there’s some an optimal sub-structure to the problems which lend themselves to a solution by DP that allows us to obtain the solution to the larger problem from that of its sub-problems using a computationally cheap trick.</p>
+<section id="two-approaches" class="level4">
+<h4 class="anchored" data-anchor-id="two-approaches">Two Approaches</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Top-Down (Memoization)</strong></td>
+<td>Uses <strong>recursion</strong> to solve the problem, and <strong>memoization</strong> to store the solutions to sub-problems</td>
+</tr>
+<tr class="even">
+<td><strong>Bottom-Up (Tabulation)</strong>:</td>
+<td><strong>Iteratively</strong> solves sub-problems in a specific order, eliminating the need for recursion (this technique is also known as <strong>tabulation</strong>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="applying-dp-to-the-maximum-subarray-problem" class="level3">
+<h3 class="anchored" data-anchor-id="applying-dp-to-the-maximum-subarray-problem">Applying DP to the Maximum Subarray Problem</h3>
+<p>Kadane’s algorithm, which solves this problem in a single pass, relies on an optimal sub-structure in the problem. This optimal sub-structure that comes from the contiguity requirement. It’s what allows us to reduce the total number of passes required over the subarrays when computing their sums. The sub-problems are solved in a particular order, such that the solution of one sub-problem, stored in memory, obtains the solution to the next sub-problem and so on.</p>
+<p>First, let’s break the overall problem down into its constituent sub-problems. There are several ways of doing that.</p>
+<p>One way is to observe that any subarray ends (or begins) at some index <code>k</code>. We may define an abstraction such as this: The solution to the problem of size-<code>k</code>. Note that this definition isn’t pulled out of thin air, it’s the global maximum for the <code>k</code>-sized sub-problem (i.e.&nbsp;the solution to the overall problem were it to have size <code>k</code>). So, let’s call it <code>global_max[k]</code>.</p>
+<p>We may define yet another useful abstraction: The solution to the problem if the optimal subarray was constrained to those subarrays which end at index <code>k</code>. Note that this, also, isn’t pulled out of thin air. It’s the local maximum at index <code>k</code>. So, we call it <code>local_max[k]</code>.</p>
+<p>Note that <code>global_max[k]</code> and <code>local_max[k]</code> aren’t the same thing. It’s easy to get lost in trying to solve this problem by conflating <code>local_max</code> with <code>global_max</code>, but they’re not the same. They’re also the only variables needed to implement a single-pass solution, as we’ll soon see. Let’s see how these two definitions differ.</p>
+<p>There may be an input array for which the best <code>local_max[k]</code> can achieve are negative sums. For instance, take <code>k=3</code> in the following Manim animation (which demonstrates such a case). First, let’s import <code>manim</code>…</p>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following is the Manim code that generates the animation below. It’s collapsed, because it’s not the focus of this post.</p>
+<div id="cell-7" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm KadaneAlgoDemo</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KadaneAlgoDemo(Scene):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create table</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        array<span class="op">=</span>[[<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">3</span>,<span class="op">-</span><span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>]]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        table <span class="op">=</span> IntegerTable(array, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(table))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get table out of the way...</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(table.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(table.animate.to_corner(UP <span class="op">+</span> LEFT))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">=</span> <span class="fl">6.25</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 0</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i]    </span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">-=</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span><span class="op">*</span><span class="fl">0.20</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="fl">0.5</span> <span class="co"># Reset vertical shift</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 1</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP))</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i]           </span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">-=</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span><span class="fl">0.20</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="fl">0.5</span> <span class="co"># Reset vertical shift</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 2</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP))</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i] </span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW)</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE)</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">-=</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span><span class="fl">0.20</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="fl">0.5</span> <span class="co"># Reset vertical shift</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 3</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP))</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i] </span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW)</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE)</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">=</span> <span class="dv">5</span> <span class="co"># Reset horizontal shift</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="dv">3</span> <span class="co"># Reset vertical shift</span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 4</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT))</span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i] </span></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW)</span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE)</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Positioning of subarrays</span></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>        h_shift <span class="op">-=</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">4</span><span class="op">*</span><span class="fl">0.20</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>        v_shift <span class="op">=</span> <span class="dv">3</span> <span class="co"># Reset vertical shift</span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print subarray(s) ending at index 4</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>        index_text <span class="op">=</span> Text(<span class="ss">f"i = </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(Write(index_text))</span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.play(index_text.animate.shift(h_shift <span class="op">*</span> LEFT))</span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> left <span class="kw">in</span> <span class="bu">range</span>(index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>            subarray<span class="op">=</span>[array[<span class="dv">0</span>][left:index<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>            subtable <span class="op">=</span> IntegerTable(subarray, include_outer_lines<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subtable))</span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.scale(<span class="fl">0.25</span>)) </span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subtable.animate.shift(h_shift <span class="op">*</span> LEFT <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> UP <span class="op">+</span> v_shift <span class="op">*</span> DOWN))</span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>            subarray_sum <span class="op">=</span> <span class="bu">sum</span>(subarray[<span class="dv">0</span>]) <span class="co"># This is local_max[i] </span></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>            subarray_sum_text <span class="op">=</span> Text(<span class="ss">f"Sum: </span><span class="sc">{</span>subarray_sum<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(Write(subarray_sum_text))</span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.scale(<span class="fl">0.35</span>))</span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.play(subarray_sum_text.animate.next_to(subtable, RIGHT))</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW)</span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE)</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="fig-kadane-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kadane-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="./media/videos/leetcode/720p30/KadaneAlgoDemo.mp4" class="img-fluid" controls=""><a href="./media/videos/leetcode/720p30/KadaneAlgoDemo.mp4">Video</a></video></p>
+<figcaption>Kadane’s Demo</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-kadane-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>Ignore the cell colors, for now. We will explain what those mean later.</p>
+<p>In the case above, <code>global_max[k]</code> actually retains its previous value (<code>global_max[k-1]</code>), totally omitting the <code>k</code>-th cell from consideration. But the word <em>Sum</em> in the video is closely related to <code>local_max[k]</code>. For a given index <code>k</code>, <code>local_max[k]</code> is just the greatest of the <em>Sum</em> values for that index. This spells out the following optimal sub-structure:</p>
+<pre><code>global_max[k] = max(global_max[k-1], global_max[k-1] + local_max[k])</code></pre>
+<p>Note that this is a greedy-choice update for <code>global_max</code>. It gives us a shortcut by which to update <code>global_max[k]</code>, if we already have <code>local_max[k]</code> for free (by some dark magic). If we only had a way to go from <code>local_max[k-1]</code> to <code>local_max[k]</code>, we’d get to the final solution very quickly. We could start with <code>global_max[0]</code>, the solution to the base sub-problem which is trivially known, and substitute in this way, in a single pass, until we got to <code>global_max[n]</code> (for some <code>n</code>-sized problem). Luckily for us, there <em>is</em> such a cheap rule that obtains <code>local_max[k]</code> from <code>local_max[k-1]</code>. It is, again, the result of an optimal sub-structure stemming from the contiguity requirement.</p>
+<p>For any given index <code>k</code>, to obtain <code>local_max[k]</code>, we need not compute the sums of all the subarrays ending at index <code>k</code>. Since we know <code>local_max[k-1]</code> from solving the previous sub-problem, the update is simply:</p>
+<pre><code>local_max[k] = max(local_max[k-1] + nums[k], nums[k])</code></pre>
+<p>To convince ourselves of this, let’s see the Manim video again and pay close attention to the yellow and blue highlights that expose this optimal sub-structure. In the video, you’ll notice that any subarray ending at index <code>k</code> can be divided into two parts, a subarray ending at index <code>k-1</code> (highlighted in yellow) and the single-element subarray <code>nums[k]</code> (in blue). Since we know <code>local_max[k-1]</code>, to find out <code>local_max[k]</code> we no longer need to compute the sums of all the possible subarrays ending at <code>k</code>. That’s a problem we’ve solved already. Rather, <code>local_max[k]</code> will always be either <code>nums[k]</code>, or the sum <code>nums[k] + local_max[k-1]</code>. So we can do away with a lot of the summation from the brute force approach.</p>
+<p>Let’s walk through a potential solution that uses these two optimal sub-structures. Because we know <code>nums[0]</code> and <code>local_max[0]</code> (trivially), we can find out <code>local_max[1]</code> by using the expression for <code>local_max[k]</code>. And, since we have <code>global_max[0]</code> (again, trivially), we can find <code>global_max[1]</code> by using the expression for <code>global_max[k]</code>. It’s easy to see that proceeding iteratively in this manner, by first updating <code>local_max[k]</code> then <code>global_max[k]</code>, we can arrive at the solution to the overall <code>n</code>-sized problem (i.e.&nbsp;<code>global_max[n]</code>) without the need to compute sums over subarrays at all!</p>
+</section>
+<section id="final-solution" class="level3">
+<h3 class="anchored" data-anchor-id="final-solution">Final Solution</h3>
+<p>Now we just need to implement a loop that updates <code>local_max</code> and <code>global_max</code> in this particular manner. For more involved DP problems, we may need a matrix (or some other higher-dimensional data structure) to store the solutions to the sub-problems. But for this problem, two loop invariants (<code>local_max</code> and <code>global_max</code>) will suffice. Let’s write the solution.</p>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="op">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">3</span>,<span class="dv">4</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">5</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>local_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>global_max <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, num <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">&gt;</span> local_max <span class="op">+</span> num:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> num</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        local_max <span class="op">=</span> local_max <span class="op">+</span> num</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> global_max <span class="op">&lt;</span> local_max:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        global_max <span class="op">=</span> local_max</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(global_max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>6</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="v-poghosyan/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
+
+
+
+</body></html>
