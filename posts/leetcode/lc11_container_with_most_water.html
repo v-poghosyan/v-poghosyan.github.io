@@ -223,9 +223,9 @@ window.Quarto = {
   <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
   <li><a href="#the-two-pointer-solution" id="toc-the-two-pointer-solution" class="nav-link" data-scroll-target="#the-two-pointer-solution">The Two Pointer Solution</a>
   <ul class="collapse">
-  <li><a href="#optimal-substructure" id="toc-optimal-substructure" class="nav-link" data-scroll-target="#optimal-substructure">Optimal Substructure</a>
+  <li><a href="#optimal-sub-structure" id="toc-optimal-sub-structure" class="nav-link" data-scroll-target="#optimal-sub-structure">Optimal Sub-Structure</a>
   <ul class="collapse">
-  <li><a href="#proof-of-optimal-substructure" id="toc-proof-of-optimal-substructure" class="nav-link" data-scroll-target="#proof-of-optimal-substructure">Proof of Optimal Substructure</a></li>
+  <li><a href="#proof-of-optimal-sub-structure" id="toc-proof-of-optimal-sub-structure" class="nav-link" data-scroll-target="#proof-of-optimal-sub-structure">Proof of Optimal Sub-Structure</a></li>
   </ul></li>
   <li><a href="#the-two-pointers-algorithm" id="toc-the-two-pointers-algorithm" class="nav-link" data-scroll-target="#the-two-pointers-algorithm">The Two Pointers Algorithm</a></li>
   <li><a href="#the-code" id="toc-the-code" class="nav-link" data-scroll-target="#the-code">The Code</a></li>
@@ -263,15 +263,15 @@ Output: 49</code></pre>
 </section>
 <section id="the-two-pointer-solution" class="level1">
 <h1>The Two Pointer Solution</h1>
-<p>The non-brute-force solution (i.e.&nbsp;the <strong>Two Pointer Solution</strong>), follows almost trivially after noticing an <em>optimal substructure</em> to the problem. This optimal substructure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal substructure.</p>
-<section id="optimal-substructure" class="level2">
-<h2 class="anchored" data-anchor-id="optimal-substructure">Optimal Substructure</h2>
+<p>The non-brute-force solution (i.e.&nbsp;the <strong>Two Pointer Solution</strong>), follows almost trivially after noticing an optimal sub-structure in the problem. This optimal sub-structure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal sub-structure.</p>
+<section id="optimal-sub-structure" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-sub-structure">Optimal Sub-Structure</h2>
 <ul>
 <li><p>Let <span class="math inline">\(h(i)\)</span> denote the height of the <span class="math inline">\(i\)</span>-th vertical line.</p></li>
 <li><p>Let <span class="math inline">\(a(i,j)\)</span> denote the area of the container formed by the pair of vertical lines <span class="math inline">\((i,j)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(maxArea(i,j)\)</span> denote the maximum area formed by the lines <span class="math inline">\({i,...,j}\)</span> – that is the output of the procedure on the subarray <code>height[i:j]</code>.</p></li>
 </ul>
-<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). Then, the problem has <em>top-down optimal substructure</em>:</p>
+<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). Then, the problem has a <em>top-down</em> optimal sub-structure:</p>
 <p><br> <span class="math display">\[maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\]</span> <br></p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -285,16 +285,16 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>This optimal substructure also exposes an obvious dynamic programming approach to the problem (we simply consider the sub-problems of sizes <span class="math inline">\(n-1\)</span>, <span class="math inline">\(n-2\)</span>, and so on). However, in order to minimize the complexity, we offer a <em>tabulation</em> approach instead — the Two Pointer Solution.</p>
+<p>This top down optimal sub-structure hints at an obvious recursive solution, however, in this post, we offer a <em>bottom-up tabulated</em> iterative solution instead. This solution is known as the <strong>Two Pointer Solution</strong>.</p>
 </div>
 </div>
 </div>
-<section id="proof-of-optimal-substructure" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-optimal-substructure">Proof of Optimal Substructure</h3>
+<section id="proof-of-optimal-sub-structure" class="level3">
+<h3 class="anchored" data-anchor-id="proof-of-optimal-sub-structure">Proof of Optimal Sub-Structure</h3>
 <p>For the initial pair <span class="math inline">\((1,n)\)</span> where <span class="math inline">\(h(1) \leq h(n)\)</span> we have <span class="math inline">\(a(1,n) &gt; a(1,k)  \ \ \forall k\)</span>. This is because we’re starting out from the <em>widest container</em> formed by <span class="math inline">\({(1,n)}\)</span> and considering containers of decreasing width formed by the pairs <span class="math inline">\({(1, n-1), (1, n-2), ..., (1,2)}\)</span>.</p>
 <p>In case <span class="math inline">\({h(k) &gt; h(1)}\)</span> for some <span class="math inline">\({n \geq k &gt; 1}\)</span> the area of the container formed by <span class="math inline">\({(1,k)}\)</span> is still determined by <span class="math inline">\({h(1)}\)</span>, except now it’s less wide. Whereas if <span class="math inline">\({h(k) &lt; h(1)}\)</span> the area of the container decreases not only in width but also in height.</p>
 <p>In both cases we have <span class="math inline">\({a(1,n) &gt; a(1,k)}\)</span> which means in general <span class="math inline">\({a(1,n) &gt; a(1, k) \ \ \forall k}\)</span>.</p>
-<p>Therefore, we may omit the first vertical line from consideration and consider the subproblem on the indices <span class="math inline">\({2,...,n}\)</span>. The overall optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
+<p>Therefore, we may omit the first vertical line from consideration and consider the sub-problem on the indices <span class="math inline">\({2,...,n}\)</span>. The overall optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
 </section>
 </section>
 <section id="the-two-pointers-algorithm" class="level2">
@@ -335,7 +335,7 @@ Note
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>With some raw intuition it would’ve been possible to come up with the Two Pointer Solution without identifying and proving the optimal substructure at all. However, without a full justification the solution simply feels unrewarding. With some problems it’s not enough to solve them, there is more insight to be gained by understanding <em>why</em> the correct solution is, in fact, correct.</p>
+<p>With some raw intuition it would’ve been possible to come up with the Two Pointer Solution without identifying and proving the optimal sub-structure at all. However, without a full justification the solution simply feels unrewarding. With some problems it’s not enough to solve them, there is more insight to be gained by understanding <em>why</em> the correct solution is, in fact, correct.</p>
 <p><img src="../../assets/leetcode/lc11_container_with_most_water/container_with_most_water.dark.png" height="0"></p>
 
 
