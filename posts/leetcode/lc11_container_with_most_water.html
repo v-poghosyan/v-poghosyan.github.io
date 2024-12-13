@@ -186,6 +186,7 @@ window.Quarto = {
                                 <div class="quarto-categories">
                 <div class="quarto-category">Leetcode</div>
                 <div class="quarto-category">Algorithms</div>
+                <div class="quarto-category">Dynamic Programming</div>
               </div>
                   </div>
   </div>
@@ -221,14 +222,14 @@ window.Quarto = {
   <ul>
   <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
   <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#the-two-pointer-solution" id="toc-the-two-pointer-solution" class="nav-link" data-scroll-target="#the-two-pointer-solution">The Two Pointer Solution</a>
+  <li><a href="#dp-the-two-pointer-solution" id="toc-dp-the-two-pointer-solution" class="nav-link" data-scroll-target="#dp-the-two-pointer-solution">DP: The Two-Pointer Solution</a>
   <ul class="collapse">
   <li><a href="#optimal-sub-structure" id="toc-optimal-sub-structure" class="nav-link" data-scroll-target="#optimal-sub-structure">Optimal Sub-Structure</a>
   <ul class="collapse">
-  <li><a href="#proof-of-optimal-sub-structure" id="toc-proof-of-optimal-sub-structure" class="nav-link" data-scroll-target="#proof-of-optimal-sub-structure">Proof of Optimal Sub-Structure</a></li>
+  <li><a href="#proof-of-the-optimal-sub-structure" id="toc-proof-of-the-optimal-sub-structure" class="nav-link" data-scroll-target="#proof-of-the-optimal-sub-structure">Proof of The Optimal Sub-Structure</a></li>
   </ul></li>
-  <li><a href="#the-two-pointers-algorithm" id="toc-the-two-pointers-algorithm" class="nav-link" data-scroll-target="#the-two-pointers-algorithm">The Two Pointers Algorithm</a></li>
-  <li><a href="#the-code" id="toc-the-code" class="nav-link" data-scroll-target="#the-code">The Code</a></li>
+  <li><a href="#the-two-pointers-algorithm-pseudo-code" id="toc-the-two-pointers-algorithm-pseudo-code" class="nav-link" data-scroll-target="#the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</a></li>
+  <li><a href="#the-solution" id="toc-the-solution" class="nav-link" data-scroll-target="#the-solution">The Solution</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -261,9 +262,9 @@ Output: 49</code></pre>
 <h1>Brute-Force Solution</h1>
 <p>The brute force solution to this problem checks each pair of vertical lines (or each subset of size <span class="math inline">\(2\)</span>). Since the order of any given pair in the subset does not matter, this solution has time complexity <span class="math inline">\({O \left ({n \choose 2} \right )= O \left (\frac{n(n-1)}{2} \right ) = O(n^2)}\)</span> where <span class="math inline">\(n\)</span> is the length of the <code>height</code> array.</p>
 </section>
-<section id="the-two-pointer-solution" class="level1">
-<h1>The Two Pointer Solution</h1>
-<p>The non-brute-force solution (i.e.&nbsp;the <strong>Two Pointer Solution</strong>), follows almost trivially after noticing an optimal sub-structure in the problem. This optimal sub-structure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal sub-structure.</p>
+<section id="dp-the-two-pointer-solution" class="level1">
+<h1>DP: The Two-Pointer Solution</h1>
+<p>The more efficient solution, the <strong>Two-Pointer Solution</strong>, follows from an optimal sub-structure in the problem. This optimal sub-structure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal sub-structure.</p>
 <section id="optimal-sub-structure" class="level2">
 <h2 class="anchored" data-anchor-id="optimal-sub-structure">Optimal Sub-Structure</h2>
 <ul>
@@ -273,33 +274,18 @@ Output: 49</code></pre>
 </ul>
 <p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). Then, the problem has a <em>top-down</em> optimal sub-structure:</p>
 <p><br> <span class="math display">\[maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\]</span> <br></p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>This top down optimal sub-structure hints at an obvious recursive solution, however, in this post, we offer a <em>bottom-up tabulated</em> iterative solution instead. This solution is known as the <strong>Two Pointer Solution</strong>.</p>
-</div>
-</div>
-</div>
-<section id="proof-of-optimal-sub-structure" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-optimal-sub-structure">Proof of Optimal Sub-Structure</h3>
+<p>This top down optimal sub-structure hints at a recursive solution. This is left as an exercise. In this post, we offer a <em>bottom-up tabulated</em> iterative solution instead. A solution known as the <strong>Two-Pointer Solution</strong>. We have explored dynamic programming in a <a href="../../posts/leetcode/lc53_maximum_subarray.html">similar post about finding the Maximum Subarray</a> before, and have even <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">proved the correctness of another DP, tabulated solution</a>.</p>
+<section id="proof-of-the-optimal-sub-structure" class="level3">
+<h3 class="anchored" data-anchor-id="proof-of-the-optimal-sub-structure">Proof of The Optimal Sub-Structure</h3>
 <p>For the initial pair <span class="math inline">\((1,n)\)</span> where <span class="math inline">\(h(1) \leq h(n)\)</span> we have <span class="math inline">\(a(1,n) &gt; a(1,k)  \ \ \forall k\)</span>. This is because we’re starting out from the <em>widest container</em> formed by <span class="math inline">\({(1,n)}\)</span> and considering containers of decreasing width formed by the pairs <span class="math inline">\({(1, n-1), (1, n-2), ..., (1,2)}\)</span>.</p>
 <p>In case <span class="math inline">\({h(k) &gt; h(1)}\)</span> for some <span class="math inline">\({n \geq k &gt; 1}\)</span> the area of the container formed by <span class="math inline">\({(1,k)}\)</span> is still determined by <span class="math inline">\({h(1)}\)</span>, except now it’s less wide. Whereas if <span class="math inline">\({h(k) &lt; h(1)}\)</span> the area of the container decreases not only in width but also in height.</p>
 <p>In both cases we have <span class="math inline">\({a(1,n) &gt; a(1,k)}\)</span> which means in general <span class="math inline">\({a(1,n) &gt; a(1, k) \ \ \forall k}\)</span>.</p>
-<p>Therefore, we may omit the first vertical line from consideration and consider the sub-problem on the indices <span class="math inline">\({2,...,n}\)</span>. The overall optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
+<p>Therefore, we may omit the first vertical line from consideration and consider the sub-problem on the indices <span class="math inline">\({2,...,n}\)</span>. The final, optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
 </section>
 </section>
-<section id="the-two-pointers-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="the-two-pointers-algorithm">The Two Pointers Algorithm</h2>
-<p>At this point, the Two Pointers Algorithm is almost trivially easy to implement:</p>
+<section id="the-two-pointers-algorithm-pseudo-code" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</h2>
+<p>At this point, the Two-Pointers Algorithm is trivial to see:</p>
 <ul>
 <li>Initialize two pointers, ‘left’ and ‘right’, at the first and last index respectively.</li>
 <li>While the pointers do not intersect:
@@ -310,8 +296,8 @@ Note
 </ul></li>
 </ul>
 </section>
-<section id="the-code" class="level2">
-<h2 class="anchored" data-anchor-id="the-code">The Code</h2>
+<section id="the-solution" class="level2">
+<h2 class="anchored" data-anchor-id="the-solution">The Solution</h2>
 <div id="31f6dbfd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxArea(height) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> <span class="dv">0</span>, <span class="bu">len</span>(height) <span class="op">-</span> <span class="dv">1</span></span>
