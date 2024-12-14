@@ -53,22 +53,6 @@
     <lastmod>2024-11-26T03:21:40.900Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/mapbox_earcut-1.0.2.dist-info/LICENSE.html</loc>
-    <lastmod>2024-11-30T04:06:09.719Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/numpy/random/LICENSE.html</loc>
-    <lastmod>2024-11-30T04:06:06.516Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/pyzmq-26.2.0.dist-info/licenses/LICENSE.html</loc>
-    <lastmod>2024-11-30T04:06:30.436Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/nx_pylab.html</loc>
-    <lastmod>2024-11-30T04:06:07.272Z</lastmod>
-  </url>
-  <url>
     <loc>https://v-poghosyan.github.io/posts/linear_algebra/review_of_linear_algebra_for_optimization.html</loc>
     <lastmod>2024-11-18T23:06:53.762Z</lastmod>
   </url>
@@ -86,7 +70,7 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc53_maximum_subarray.html</loc>
-    <lastmod>2024-12-08T04:41:17.687Z</lastmod>
+    <lastmod>2024-12-14T05:35:25.912Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html</loc>
@@ -106,7 +90,7 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc11_container_with_most_water.html</loc>
-    <lastmod>2024-12-13T06:32:35.428Z</lastmod>
+    <lastmod>2024-12-14T05:35:25.912Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/optimization/duality_theory.html</loc>
@@ -119,22 +103,6 @@
   <url>
     <loc>https://v-poghosyan.github.io/posts/functional_programming/functional_programming.html</loc>
     <lastmod>2024-11-18T23:22:52.424Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/tests/test_latex.html</loc>
-    <lastmod>2024-11-30T04:06:07.273Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/manimlib/once_useful_constructs/NOTE.html</loc>
-    <lastmod>2024-11-30T04:09:56.396Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/manim/renderer/shaders/include/NOTE.html</loc>
-    <lastmod>2024-11-30T04:06:09.845Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/screeninfo-0.8.1.dist-info/LICENSE.html</loc>
-    <lastmod>2024-11-30T04:06:09.745Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/index.html</loc>
