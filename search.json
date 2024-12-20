@@ -511,13 +511,6 @@
     "text": "We are given an array of prices where prices[i] is the price of a given stock on the i-th day.\nWe want to maximize our profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.\nExample 1\nInput: prices = [7,1,5,3,6,4]\nOutput: 5\nExplanation\nBuy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell\nExample 2:\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation\nIn this case, no transactions are done and the max profit = 0."
   },
   {
-    "objectID": "posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html#solution---dp-with-tabulation",
-    "href": "posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html#solution---dp-with-tabulation",
-    "title": "LC121: Best Time to Buy and Sell Stock",
-    "section": "Solution - DP with Tabulation",
-    "text": "Solution - DP with Tabulation\n\n\nCode\nprices = [7,1,5,3,6,4]\n\n\n\nmin_price = float(\"inf\")\nmax_profit = 0 \n\nfor i in range(len(prices)):\n    if prices[i] &lt; min_price:\n        min_price = prices[i]\n    elif prices[i] - min_price &gt; max_profit:\n        max_profit = prices[i] - min_price\n\nprint(max_profit)\n\n5"
-  },
-  {
     "objectID": "posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html#proof-of-invariance-of-max_profit",
     "href": "posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html#proof-of-invariance-of-max_profit",
     "title": "LC121: Best Time to Buy and Sell Stock",
