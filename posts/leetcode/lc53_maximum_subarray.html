@@ -266,8 +266,8 @@ Output: 1</code></pre>
 <p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> with <strong>tabulation</strong>. This solution is known by the name of <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>.</p>
 <section id="similarity-to-other-subarray-problems" class="level2">
 <h2 class="anchored" data-anchor-id="similarity-to-other-subarray-problems">Similarity to Other Subarray Problems</h2>
-<p>The <strong>Maximum Subarray</strong> problem is similar to the <strong>Best Time to Buy and Sell Stock</strong> problem (see <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">post</a>), which also lends itself to a DP solution with tabulation. Its solution closely resembles Kadane’s algorithm. The similarities between these two problems are due to fact that both problems are concerned with finding some optimal <em>score</em> over a <em>contiguous</em> subarray – contiguity being what gives rise to the key optimal sub-structures in both problems. Whereas Kadane’s is concerned with the contiguous subarray having <em>maximum sum</em>, the algorithm that solves <strong>Best Time to Buy and Sell Stock</strong> is concerned with <em>maximum profit</em>, which is defined as the difference between the last element of the optimal subarray and the first one.</p>
-<p>We can prove the correctness of Kadane’s algorithm using <em>loop invariants</em>, but we will omit the proof here. Instead, we will dive into how one might derive the algorithm from scratch. Conversely, in the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock post</a>, we won’t spend much time exploring the solution. Instead, we will offer a proof of its correctness. The proof of correctness of Kadane’s algorithm will be very similar to the proof offerend in that post. These two posts are meant to complement each other.</p>
+<p>The <strong>Maximum Subarray</strong> problem is similar to the <strong>Best Time to Buy and Sell Stock</strong> problem (see <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">post</a>) and a number of other subarray problems. All of them lends themselves to an iterative, tabulated DP solution. In fact, the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a> solution closely resembles Kadane’s algorithm (even on sight). The similarities between these two problems are due to the fact that both problems are concerned with finding some <em>optimal score</em> over a <em>contiguous</em> subarray. Whereas Kadane’s is concerned with the subarray having <em>maximum sum</em>, the (nameless) algorithm that solves <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a> is concerned with <em>maximum profit</em> (which is defined as the difference between the last element of the optimal subarray and the first one). The score function (how it determines optimality), and the contiguity requirement are what give rise to the key optimal sub-structures in both problems.</p>
+<p>We can prove the correctness of Kadane’s algorithm by <em>proving</em> the optimal sub-structures (which are simply stated in this post), and by using <em>loop invariants</em> to show that the overall answer must be correct. But, we will omit the proof here. Instead, in this post, we will give the intuition for how one might derive the algorithm from scratch. To see an example of a proof, check out the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock post</a>, where we don’t spend any time solving the problem and, instead, offer its proof of correctness. The proof of correctness of Kadane’s algorithm will be very similar to the proof offered in that complementary post (and it is left as an exercise).</p>
 </section>
 <section id="kadanes-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="kadanes-algorithm">Kadane’s Algorithm</h2>
@@ -284,17 +284,17 @@ Output: 1</code></pre>
 <thead>
 <tr class="header">
 <th>Approach</th>
-<th>Explanation</th>
+<th>Implementation details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Top-Down (Memoization)</strong></td>
-<td>Uses <strong>recursion</strong> to solve the problem, and <strong>memoization</strong> to store the solutions to sub-problems</td>
+<td>Uses <strong>recursion</strong> to solve the problem, and <strong>memoization</strong> to store the solutions to the sub-problems</td>
 </tr>
 <tr class="even">
 <td><strong>Bottom-Up (Tabulation)</strong>:</td>
-<td><strong>Iteratively</strong> solves sub-problems in a specific order, eliminating the need for recursion (this technique is also known as <strong>tabulation</strong>)</td>
+<td><strong>Iteratively</strong> solves sub-problems, in a specific order, eliminating the need for recursion (this technique is also known as <strong>tabulation</strong>)</td>
 </tr>
 </tbody>
 </table>
