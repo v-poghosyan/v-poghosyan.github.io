@@ -227,7 +227,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#proof-of-invariance-of-max_profit" id="toc-proof-of-invariance-of-max_profit" class="nav-link" data-scroll-target="#proof-of-invariance-of-max_profit">Proof of Invariance of <code>max_profit</code></a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -295,8 +295,8 @@ Output: 0</code></pre>
 <p>Hence, <code>max_profit</code> is a loop invariant in both of the cases above (which constitute the set of <em>all</em> possible cases). Therefore, at the last iteration of the loop, <code>max_profit</code> holds the maximum profit up to, and including, the last index <code>n-1</code> (for an <code>n</code>-sized problem). In other words, it holds the final solution.</p>
 </section>
 </section>
-<section id="summary" class="level1">
-<h1>Summary</h1>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
 <p>In this notebook, we explored the problem of finding the best time to buy and sell stock to maximize profit. We started with a brute-force solution that has a time complexity of (O(n^2)). Then, we offered an optimal solution using dynamic programming with a time complexity of (O(n)) without discussing the process of coming up with the algorithm (the intuition is discussed more extensively in the post on <a href="../../posts/leetcode/lc53_maximum_subarray.html">Maximum Subarray</a>). The focus of this post was the proof of correctness of the optimal solution.</p>
 
 
