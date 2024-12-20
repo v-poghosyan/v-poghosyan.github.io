@@ -222,12 +222,12 @@ window.Quarto = {
   <ul>
   <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
   <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#better-solutions" id="toc-better-solutions" class="nav-link" data-scroll-target="#better-solutions">Better Solutions</a>
+  <li><a href="#optimal-solution" id="toc-optimal-solution" class="nav-link" data-scroll-target="#optimal-solution">Optimal Solution</a>
   <ul class="collapse">
   <li><a href="#similarity-to-other-subarray-problems" id="toc-similarity-to-other-subarray-problems" class="nav-link" data-scroll-target="#similarity-to-other-subarray-problems">Similarity to Other Subarray Problems</a></li>
   <li><a href="#kadanes-algorithm" id="toc-kadanes-algorithm" class="nav-link" data-scroll-target="#kadanes-algorithm">Kadane’s Algorithm</a>
   <ul class="collapse">
-  <li><a href="#dynamic-programming---key-idea" id="toc-dynamic-programming---key-idea" class="nav-link" data-scroll-target="#dynamic-programming---key-idea">Dynamic Programming - Key Idea</a></li>
+  <li><a href="#dynamic-programming---the-key-idea" id="toc-dynamic-programming---the-key-idea" class="nav-link" data-scroll-target="#dynamic-programming---the-key-idea">Dynamic Programming - The Key Idea</a></li>
   <li><a href="#applying-dp-to-the-maximum-subarray-problem" id="toc-applying-dp-to-the-maximum-subarray-problem" class="nav-link" data-scroll-target="#applying-dp-to-the-maximum-subarray-problem">Applying DP to the Maximum Subarray Problem</a></li>
   </ul></li>
   <li><a href="#final-solution" id="toc-final-solution" class="nav-link" data-scroll-target="#final-solution">Final Solution</a></li>
@@ -261,8 +261,8 @@ Output: 1</code></pre>
 <p>Consider each subarray. It’s easy to see that this leads to time complexity <span class="math inline">\(O(n^3)\)</span>. There are <code>n</code> subarrays of size <code>1</code>, <code>n-1</code> subarrays of size <code>2</code>, …, and <code>1</code> subarray of size <code>n</code> (the entire array itself). In addition, for each subarray, computing the sum over it takes <span class="math inline">\(O(n)\)</span> time. So, the leading term of the total time complexity is cubic in <code>n</code>.</p>
 <p>The code for the brute force solution will not be provided.</p>
 </section>
-<section id="better-solutions" class="level1">
-<h1>Better Solutions</h1>
+<section id="optimal-solution" class="level1">
+<h1>Optimal Solution</h1>
 <p>We can solve this problem in a single pass, achieving <span class="math inline">\(O(n)\)</span> complexity by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> with <strong>tabulation</strong>. This solution is known by the name of <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm">Kadane’s algorithm</a>.</p>
 <section id="similarity-to-other-subarray-problems" class="level2">
 <h2 class="anchored" data-anchor-id="similarity-to-other-subarray-problems">Similarity to Other Subarray Problems</h2>
@@ -271,9 +271,9 @@ Output: 1</code></pre>
 </section>
 <section id="kadanes-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="kadanes-algorithm">Kadane’s Algorithm</h2>
-<section id="dynamic-programming---key-idea" class="level3">
-<h3 class="anchored" data-anchor-id="dynamic-programming---key-idea">Dynamic Programming - Key Idea</h3>
-<p>The key idea behind dynamic programming is to solve sub-problems once, store their results one way or another, and use them to solve the larger problem. Usually there’s some optimal sub-structure to the problems that lend themselves to a solution by DP. The optimal sub-structure allows us to obtain the solution to the larger problem from that of its sub-problems using a computationally cheap step.</p>
+<section id="dynamic-programming---the-key-idea" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-programming---the-key-idea">Dynamic Programming - The Key Idea</h3>
+<p>The key idea behind dynamic programming is to solve sub-problems once, store their results (one way or another), and use them to solve the larger problem. Usually there’s some optimal sub-structure to DP problems that make this type of optimization possible – optimal sub-structure that may reveal itself in the process of walking through an example. Optimal sub-structures are just computationally cheap steps to obtain the solution to the larger problem from that of its sub-problems.</p>
 <section id="two-approaches" class="level4">
 <h4 class="anchored" data-anchor-id="two-approaches">Two Approaches</h4>
 <table class="caption-top table">
@@ -302,8 +302,8 @@ Output: 1</code></pre>
 </section>
 <section id="applying-dp-to-the-maximum-subarray-problem" class="level3">
 <h3 class="anchored" data-anchor-id="applying-dp-to-the-maximum-subarray-problem">Applying DP to the Maximum Subarray Problem</h3>
-<p>Kadane’s algorithm, which solves this problem in a single pass, relies on two top-down optimal sub-structures that exist within the problem. Once uncovered, these will hint at an obvious recursive solution (which will be left as an exercise). In this post we will give the iterative, bottom-up, tabulated algorithm. These optimal sub-structures come, mostly, from the contiguity requirement, which explains why a set of algorithms like Kadane’s algorithm solve a variety of other subarray problems (like <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">The Best Time to Buy and Sell Stock</a>). These sub-structures, ultimately, lead to a quadratic reduction in the total number of passes required over the subarrays when computing sums. In DP, the sub-problems are solved in a particular order such that the solution of one sub-problem, stored in memory, obtains the solution to the next sub-problem and so on. We will see that, in fact, this approach ends up not requiring us to do <em>any</em> sums over <em>any</em> subarrays at all!</p>
-<p>First, let’s break the overall problem down into its constituent sub-problems. There are several ways of doing that.</p>
+<p>Kadane’s algorithm, which solves this problem in a single pass, relies on two top-down optimal sub-structures that exist within this problem. Once uncovered, these will give us a clue on how to write a recursive solution (but this will be left as exercise). In this post we will give the iterative, bottom-up, tabulated algorithm known as Kadane’s Algorithm. It’s worth noting that the optimal sub-structures in this problem stem from the contiguity requirement of subarrays, which explains why a set of algorithms <em>like</em> Kadane’s solve a variety of other subarray-related problems (for example, <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a>). These sub-structures, ultimately, lead to a <em>quadratic</em> reduction in the total number of passes required over subarrays when computing the answer.</p>
+<p>First, let’s break the overall problem down into its constituent sub-problems. The sub-problems will be solved in a particular order such that the solution of one, stored in memory, obtains the solution to the next sub-problem (and so on). We shall see that, in fact, this approach ends up not requiring us to do <em>any</em> sums over <em>any</em> subarrays at all! There are several ways of breaking a problem down array problems into sub-problems using clever indexing.</p>
 <p>One way is to observe that any subarray ends (or begins) at some index <code>k</code>. We may define an abstraction such as this: The solution to the problem of size-<code>k+1</code> (since index <code>0</code> corresponds to a problem of size <code>1</code>). Note that this definition isn’t pulled out of thin air, it’s the global maximum for the <code>k+1</code>-sized sub-problem (i.e.&nbsp;the solution to the overall problem were it to have size <code>k+1</code>). So, let’s call it <code>global_max[k]</code> (to tether it to the index, rather than the iteration).</p>
 <p>We may define yet another useful abstraction: The solution to the problem if the optimal subarray was constrained to those subarrays which end at index <code>k</code>. Note that this, also, isn’t pulled out of thin air. It’s the local maximum at index <code>k</code>. So, we call it <code>local_max[k]</code>.</p>
 <p>Note that <code>global_max[k]</code> and <code>local_max[k]</code> aren’t the same thing. It’s easy to get lost in trying to solve this problem by conflating <code>local_max</code> with <code>global_max</code>, but they’re not the same. They’re also the only variables needed to implement a single-pass solution, as we’ll soon see. Let’s see how these two definitions differ.</p>
@@ -315,7 +315,7 @@ Output: 1</code></pre>
 <div id="cell-7" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qm KadaneAlgoDemo</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qh KadaneAlgoDemo</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KadaneAlgoDemo(Scene):</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> construct(<span class="va">self</span>):    </span>
@@ -377,9 +377,9 @@ Output: 1</code></pre>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
 <span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_A)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_D)</span>
 <span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                subtable.get_entries((<span class="dv">1</span>, idx <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>TEAL_A)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE_E)</span>
 <span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>            subtable.get_entries((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
 <span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
@@ -407,9 +407,9 @@ Output: 1</code></pre>
 <span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
 <span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
 <span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_A)</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_D)</span>
 <span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                subtable.get_entries((<span class="dv">1</span>, idx <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>TEAL_A)</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE_E)</span>
 <span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>            subtable.get_entries((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
 <span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
 <span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a></span>
@@ -437,9 +437,9 @@ Output: 1</code></pre>
 <span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
 <span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
 <span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_A)</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_D)</span>
 <span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                subtable.get_entries((<span class="dv">1</span>, idx <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>TEAL_A)</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE_E)</span>
 <span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>            subtable.get_entries((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
 <span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
 <span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a></span>
@@ -467,9 +467,9 @@ Output: 1</code></pre>
 <span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
 <span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
 <span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_A)</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_D)</span>
 <span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>                subtable.get_entries((<span class="dv">1</span>, idx <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>TEAL_A)</span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE_E)</span>
 <span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>            subtable.get_entries((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
 <span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">1</span>)</span>
 <span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a></span>
@@ -497,9 +497,9 @@ Output: 1</code></pre>
 <span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>            h_shift <span class="op">-=</span> <span class="fl">0.20</span></span>
 <span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>            v_shift <span class="op">+=</span> <span class="fl">0.5</span></span>
 <span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(index <span class="op">-</span> left):</span>
-<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_A)</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>                subtable.add_highlighted_cell((<span class="dv">1</span>,idx <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>YELLOW_D)</span>
 <span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>                subtable.get_entries((<span class="dv">1</span>, idx <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
-<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>TEAL_A)</span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>            subtable.add_highlighted_cell((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>), color<span class="op">=</span>BLUE_E)</span>
 <span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>            subtable.get_entries((<span class="dv">1</span>, index <span class="op">-</span> left <span class="op">+</span> <span class="dv">1</span>)).set_color(BLACK)  <span class="co"># Darken the color of the text against the lighter background</span></span>
 <span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.wait(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -509,7 +509,7 @@ Output: 1</code></pre>
 <div aria-describedby="fig-kadane-manim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><video src="./media/videos/leetcode/720p30/KadaneAlgoDemo.mp4" class="img-fluid" controls=""><a href="./media/videos/leetcode/720p30/KadaneAlgoDemo.mp4">Video</a></video></p>
+<p><video src="./media/videos/leetcode/1080p60/KadaneAlgoDemo.mp4" class="img-fluid" controls=""><a href="./media/videos/leetcode/1080p60/KadaneAlgoDemo.mp4">Video</a></video></p>
 <figcaption>Kadane’s Demo</figcaption>
 </figure>
 </div>
