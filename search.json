@@ -641,7 +641,7 @@
     "href": "posts/leetcode/lc11_container_with_most_water.html#the-solution",
     "title": "LC11: Container with Most Water",
     "section": "The Solution",
-    "text": "The Solution\n\ndef maxArea(height) -&gt; int:\n    i, j = 0, len(height) - 1\n    water = 0\n    while i &lt; j:\n        water = max(water, (j - i) * min(height[i], height[j]))\n        if height[i] &lt; height[j]:\n            i += 1\n        else:\n            j -= 1\n    return water\n\n# Example input\nheights = [1,8,6,2,5,4,8,3,7]\nprint(f'The container with most water has area: {maxArea(heights)}')\n\nThe container with most water has area: 49\n\n\n\n\nCode\n# Conclusion\n\nIn this post, we explored the problem of finding the container with the most water using both a brute-force approach and a more efficient two-pointer approach (rooted in DP). The Two-Pointer Approach is a classic example of how dynamic programming principles can be applied to optimize solutions by identifying and exploiting an optimal sub-structure."
+    "text": "The Solution\n\ndef maxArea(height) -&gt; int:\n    i, j = 0, len(height) - 1\n    water = 0\n    while i &lt; j:\n        water = max(water, (j - i) * min(height[i], height[j]))\n        if height[i] &lt; height[j]:\n            i += 1\n        else:\n            j -= 1\n    return water\n\n# Example input\nheights = [1,8,6,2,5,4,8,3,7]\nprint(f'The container with most water has area: {maxArea(heights)}')\n\nThe container with most water has area: 49"
   },
   {
     "objectID": "posts/optimization/duality_theory.html",
