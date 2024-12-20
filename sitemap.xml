@@ -49,8 +49,24 @@
     <lastmod>2024-11-28T07:05:53.296Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/about.html</loc>
-    <lastmod>2024-11-26T03:21:40.900Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/software_engineering/getting_started_with_new_relic_agents.html</loc>
+    <lastmod>2024-11-08T01:52:44.109Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/index.html</loc>
+    <lastmod>2024-10-25T09:03:24.911Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/screeninfo-0.8.1.dist-info/LICENSE.html</loc>
+    <lastmod>2024-12-20T19:29:05.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/manim/renderer/shaders/include/NOTE.html</loc>
+    <lastmod>2024-12-20T19:29:05.642Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/nx_pylab.html</loc>
+    <lastmod>2024-12-20T19:29:03.089Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/linear_algebra/review_of_linear_algebra_for_optimization.html</loc>
@@ -70,7 +86,7 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc53_maximum_subarray.html</loc>
-    <lastmod>2024-12-14T05:35:25.912Z</lastmod>
+    <lastmod>2024-12-20T19:49:10.774Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html</loc>
@@ -105,12 +121,28 @@
     <lastmod>2024-11-18T23:22:52.424Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/index.html</loc>
-    <lastmod>2024-10-25T09:03:24.911Z</lastmod>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/networkx/drawing/tests/test_latex.html</loc>
+    <lastmod>2024-12-20T19:29:03.090Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/software_engineering/getting_started_with_new_relic_agents.html</loc>
-    <lastmod>2024-11-08T01:52:44.109Z</lastmod>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/pyzmq-26.2.0.dist-info/licenses/LICENSE.html</loc>
+    <lastmod>2024-12-20T19:29:42.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/numpy/random/LICENSE.html</loc>
+    <lastmod>2024-12-20T19:29:02.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/manim-sandbox/lib/python3.9/site-packages/mapbox_earcut-1.0.2.dist-info/LICENSE.html</loc>
+    <lastmod>2024-12-20T19:29:05.512Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/about.html</loc>
+    <lastmod>2024-11-26T03:21:40.900Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/software_engineering/build-a-ci-cd-pipeline.html</loc>
+    <lastmod>2024-12-20T19:03:52.841Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/neuroscience_notes/grief.html</loc>
