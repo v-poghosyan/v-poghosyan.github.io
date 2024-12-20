@@ -231,7 +231,6 @@ window.Quarto = {
   <li><a href="#the-two-pointers-algorithm-pseudo-code" id="toc-the-two-pointers-algorithm-pseudo-code" class="nav-link" data-scroll-target="#the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</a></li>
   <li><a href="#the-solution" id="toc-the-solution" class="nav-link" data-scroll-target="#the-solution">The Solution</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -272,12 +271,13 @@ Output: 49</code></pre>
 <li><p>Let <span class="math inline">\(a(i,j)\)</span> denote the area of the container formed by the pair of vertical lines <span class="math inline">\((i,j)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(maxArea(i,j)\)</span> denote the maximum area formed by the lines <span class="math inline">\({i,...,j}\)</span> – that is the output of the procedure on the subarray <code>height[i:j]</code>.</p></li>
 </ul>
-<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). The <span class="math inline">\(w.l.o.g.\)</span> there will boil down to having to keep track of two pointers within the implementation itself (to determine which height is less).</p>
+<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). The <span class="math inline">\(w.l.o.g.\)</span> there will boil down to having to keep track of two pointers at the implementation stage (in the iterative approach) needed to determine which height is less at any particular iteration.</p>
 <p>Now, we can state a <em>top-down</em> optimal sub-structure for the problem:</p>
 <p><span class="math display">\[
 maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}
 \]</span></p>
-<p>This top-down expression hints at a recursive solution (which is left as an exercise). In this post, we will offer a <em>bottom-up</em>, iterative, and <em>tabulated</em> solution – one that’s often called the <strong>Two-Pointer Solution</strong> (which is apt, because most of what we have to do is keep track of two pointers to the vertical lines). We have explored dynamic programming before in some detail in a similar post about finding the <a href="../../posts/leetcode/lc53_maximum_subarray.html">Maximum Subarray</a>, and have even proven the correctness of another, similar, DP solution to the problem of finding the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a>.</p>
+<p>This top-down expression hints at a recursive solution (which is left as an exercise to the reader). In this post, we will offer a <em>bottom-up</em>, iterative solution (with very basic tabulation – just the running maximum <code>water</code> variable, really) – one that’s often called the <strong>Two-Pointer Solution</strong> (which is apt, because most of what we have to do is keep track of two pointers pointing to the vertical lines).</p>
+<p>We have explored dynamic programming before in some detail in a similar post about finding the <a href="../../posts/leetcode/lc53_maximum_subarray.html">Maximum Subarray</a>, and have even proven the correctness of another, similar, DP solution to the problem of finding the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a>. This problem is yet another, very basic, example of DP. As we know, DP solutions are often proven by proving the underlying optimal sub-structure. Let’s look at such a proof.</p>
 <section id="proof-of-the-optimal-sub-structure" class="level3">
 <h3 class="anchored" data-anchor-id="proof-of-the-optimal-sub-structure">Proof of The Optimal Sub-Structure</h3>
 <p>For the initial pair <span class="math inline">\((1,n)\)</span> where <span class="math inline">\(h(1) \leq h(n)\)</span> we have <span class="math inline">\(a(1,n) &gt; a(1,k)  \ \ \forall k\)</span>. This is because we’re starting out from the <em>widest container</em> formed by <span class="math inline">\({(1,n)}\)</span> and considering containers of decreasing width formed by the pairs <span class="math inline">\({(1, n-1), (1, n-2), ..., (1,2)}\)</span>.</p>
@@ -288,7 +288,7 @@ maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}
 </section>
 <section id="the-two-pointers-algorithm-pseudo-code" class="level2">
 <h2 class="anchored" data-anchor-id="the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</h2>
-<p>At this point, the Two-Pointers Algorithm is trivial to see:</p>
+<p>At this point, the <strong>Two-Pointers Algorithm</strong> is all but trivial to see:</p>
 <ul>
 <li>Initialize two pointers, ‘left’ and ‘right’, at the first and last index respectively.</li>
 <li>While the pointers do not intersect:
@@ -320,14 +320,18 @@ maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}
 <pre><code>The container with most water has area: 49</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>With some raw intuition it would’ve been possible to come up with the Two Pointer Solution without identifying and proving the optimal sub-structure at all. However, without a full justification the solution simply feels unrewarding. With some problems it’s not enough to solve them, there is more insight to be gained by understanding <em>why</em> the correct solution is, in fact, correct.</p>
+<div id="0ef163d9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;tex&quot;}">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conclusion</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>In this post, we explored the problem of finding the container <span class="cf">with</span> the most water using both a brute<span class="op">-</span>force approach <span class="kw">and</span> a more efficient two<span class="op">-</span>pointer approach (rooted <span class="kw">in</span> DP). The Two<span class="op">-</span>Pointer Approach <span class="kw">is</span> a classic example of how dynamic programming principles can be applied to optimize solutions by identifying <span class="kw">and</span> exploiting an optimal sub<span class="op">-</span>structure.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p><img src="../../assets/leetcode/lc11_container_with_most_water/container_with_most_water.dark.png" height="0"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
