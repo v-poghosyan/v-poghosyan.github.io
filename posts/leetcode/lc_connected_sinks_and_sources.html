@@ -292,7 +292,7 @@ A52</code></pre>
 <section id="parsing-the-input" class="level3">
 <h3 class="anchored" data-anchor-id="parsing-the-input">Parsing the input</h3>
 <p>Let’s define a function <code>load_file</code> that loads the input file and returns the contents as a list of strings.</p>
-<div id="cell-3" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_file(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filePath, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">file</span>.readlines()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -322,13 +322,13 @@ Note
 </div>
 </div>
 <p>As we can see the lines include the newline character, We can further clean up <code>input</code> by using <code>map</code> and <a href="https://docs.python.org/3/library/stdtypes.html#str.rstrip">rstrip</a> which strips the right-end of each line of any undesired characters. We can modify the definition of <code>load_file</code> to return the cleaned up input.</p>
-<div id="cell-7" class="cell" data-execution_count="2">
+<div id="cell-7" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_file(filePath: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filePath, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [line.rstrip(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s run this re-defined <code>load_file</code> for the example file again to see the difference.</p>
-<div id="cell-9" class="cell" data-execution_count="3">
+<div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>input_ex1 <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example1.txt"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(input_ex1[:<span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -349,7 +349,7 @@ Note
 <p>Which will indicate whether the corresponding edge is open or closed (<code>True</code> or <code>False</code> respectively).</p>
 <p>It will also have instance variables <code>x</code> and <code>y</code> for the item’s coordinates. An additional <code>type</code> instance variable with possible values in <span class="math inline">\(\{\)</span><code>Source</code>,<code>Pipe</code>,<code>Sink</code><span class="math inline">\(\}\)</span>. This may be helpful for checking edge conditions later on.</p>
 <p>Here’s the implementation of the <code>Item</code> class. Since it’s quite long and trivial, I’ve collapsed the definition. Feel free to expand and examine…</p>
-<div id="cell-11" class="cell" data-execution_count="4">
+<div id="cell-11" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Item:</span>
@@ -402,7 +402,7 @@ Note
 </details>
 </div>
 <p>Unfortunately, there’s no way to get around the hard-coding of the ASCII characters into <code>Item</code>-s. Here’s an implementation of <code>map_to_items</code>. It’s quite long and trivial, but feel free to expand and examine the implementation…</p>
-<div id="cell-13" class="cell" data-execution_count="5">
+<div id="cell-13" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> map_to_items(<span class="bu">input</span>: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[Item]: <span class="co"># Converts the text input to a list of Item objects</span></span>
@@ -476,7 +476,7 @@ Note
 </details>
 </div>
 <p>Let’s run <code>input</code> through <code>map_to_items</code> to obtain the programmatic representation of the items in our pipe system. We show only the first five from the output in the interest of brevity.</p>
-<div id="cell-15" class="cell" data-execution_count="6">
+<div id="cell-15" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>parsed_input_ex1 <span class="op">=</span> map_to_items(input_ex1)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> obj <span class="kw">in</span> parsed_input_ex1[:<span class="dv">3</span>]:</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -550,7 +550,7 @@ Note
 <p>That means the <code>grid</code> should be something like:</p>
 <pre><code>[[None, None, *],[C,╠,╗], ...]</code></pre>
 <p>Then the 1st argument to <code>grid</code> will point to the 1st subarray, and the 2nd argument will point to the sink itself. In other words, the first argument refers to the columns of the formatted input, and the second to the rows. The empty space above <code>* (0, 2)</code>, in the formatted input, will then be referenced by <code>grid[0][3]</code>.</p>
-<div id="cell-17" class="cell" data-execution_count="7">
+<div id="cell-17" class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expand_parsed_input(<span class="bu">input</span>: <span class="bu">list</span>[Item]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Item]]:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the maximum x and y coordinates occuring the given input</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    max_rows  <span class="op">=</span> <span class="dv">0</span></span>
@@ -574,7 +574,7 @@ Note
 </section>
 <section id="helper-functions-to-determine-connectedness-at-an-edge" class="level3">
 <h3 class="anchored" data-anchor-id="helper-functions-to-determine-connectedness-at-an-edge">Helper functions to determine connectedness at an edge</h3>
-<div id="cell-19" class="cell" data-execution_count="8">
+<div id="cell-19" class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> connected_at_top(item1: Item, item2: Item) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> item1.top <span class="kw">and</span> item2.bottom</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -592,7 +592,7 @@ Note
 <section id="dfs-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="dfs-implementation">DFS Implementation</h3>
 <p>Finally, let’s implement iterative DFS using a stack.</p>
-<div id="cell-21" class="cell" data-execution_count="9">
+<div id="cell-21" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterative version using a stack</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dfs_iterative(grid, start_x, start_y):</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtain the dimensions of the grid</span></span>
@@ -656,7 +656,7 @@ Note
 </div>
 </div>
 <p>Finally, let’s run the DFS on the expanded input, supplying the coordinates of the source <code>*</code> as the starting point.</p>
-<div id="cell-23" class="cell" data-execution_count="10">
+<div id="cell-23" class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dfs_iterative(expanded_parsed_input_ex1, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found connected sink: A
@@ -686,7 +686,7 @@ C10
 ═42
 B50
 A52</code></pre>
-<div id="cell-25" class="cell" data-execution_count="11">
+<div id="cell-25" class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>input_ex2 <span class="op">=</span> load_file(<span class="st">"./problem_assets/connected_sinks_and_sources/example2.txt"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>parsed_input_ex2 <span class="op">=</span> map_to_items(input_ex2)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>expanded_parsed_input_ex2 <span class="op">=</span> expand_parsed_input(parsed_input_ex2)</span>
@@ -700,11 +700,16 @@ Found connected sink: C</code></pre>
 <section id="visualization-of-the-dfs-algorithm-using-manim" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-the-dfs-algorithm-using-manim">Visualization of the DFS algorithm using Manim</h2>
 <p>Let’s use Manim (a mathematical animation library), to visualize the DFS algorithm on the matrix for fun!</p>
-<p>We start by importing the cell magic <code>%%manim</code>, then modify and insert our <code>dfs_iterative</code> implementation into a Manim scene.</p>
+<p>We start by importing the cell magic <code>%%manim</code>, then modify and insert our <code>dfs_iterative</code> implementation into a Manim scene. The Manim code itself is collapsed, as it’s not the focus of this post.</p>
 <div id="cell-27" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> manim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="cell-28" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>manim <span class="op">-</span>qh ConnectedSinksAndSourcesDemo</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> manim <span class="im">import</span> <span class="op">*</span></span>
@@ -769,6 +774,7 @@ Found connected sink: C</code></pre>
 <span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x <span class="op">-</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> x <span class="op">-</span> <span class="dv">1</span> <span class="op">&lt;=</span>  dim_cols <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> grid[x <span class="op">-</span> <span class="dv">1</span>][y] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
 <span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> connected_at_left(grid[x][y], grid[x <span class="op">-</span> <span class="dv">1</span>][y]):</span>
 <span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>                    stack.append((x <span class="op">-</span> <span class="dv">1</span>, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Here’s DFS on the grid visualized using Manim.</p>
 <div id="fig-sinks-and-sources-manim" class="quarto-float quarto-figure quarto-figure-center anchored">
