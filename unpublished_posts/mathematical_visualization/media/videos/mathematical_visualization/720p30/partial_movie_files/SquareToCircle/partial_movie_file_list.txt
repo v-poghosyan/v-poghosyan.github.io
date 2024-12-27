@@ -1,4 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/unpublished_posts/mathematical_visualization/media/videos/mathematical_visualization/720p30/partial_movie_files/SquareToCircle/2016333726_781026064_223132457.mp4'
-file 'file:/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/unpublished_posts/mathematical_visualization/media/videos/mathematical_visualization/720p30/partial_movie_files/SquareToCircle/543634251_4131973648_3256495558.mp4'
-file 'file:/Users/vahrampoghosyan/Documents/github/v-poghosyan.github.io/unpublished_posts/mathematical_visualization/media/videos/mathematical_visualization/720p30/partial_movie_files/SquareToCircle/543634251_990087768_3256495558.mp4'
