@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/manim.html</loc>
-    <lastmod>2024-11-30T04:04:15.845Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/seting_up_manim_in_jupyter.html</loc>
+    <lastmod>2024-12-27T06:57:37.592Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
-    <lastmod>2024-10-14T22:08:33.732Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
+    <lastmod>2024-10-14T22:08:33.738Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/set_up_a_local_development_environment_for_ML.html</loc>
-    <lastmod>2024-11-04T04:58:58.505Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/shell_configs.html</loc>
+    <lastmod>2024-10-31T19:35:07.683Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/brew.html</loc>
+    <lastmod>2024-10-25T06:06:22.377Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/projects/water-me.html</loc>
@@ -177,15 +181,19 @@
     <lastmod>2024-10-14T22:08:33.770Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/brew.html</loc>
-    <lastmod>2024-10-25T06:06:22.377Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/algorithms/merge_sort.html</loc>
+    <lastmod>2024-12-27T06:57:37.592Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/shell_configs.html</loc>
-    <lastmod>2024-10-31T19:35:07.683Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/set_up_a_local_development_environment_for_ML.html</loc>
+    <lastmod>2024-11-04T04:58:58.505Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
-    <lastmod>2024-10-14T22:08:33.738Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
+    <lastmod>2024-10-14T22:08:33.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/setting_up_js_and_d3_in_jupyter.html</loc>
+    <lastmod>2024-12-27T06:57:37.593Z</lastmod>
   </url>
 </urlset>
