@@ -1,3 +1,13 @@
 /.quarto/
 /_site/
+
+# VS Code
 .DS_Store
+
+# npm
+node_modules/
+package-lock.json
+package.json
+
+# pyenv
+manim-sandbox/
