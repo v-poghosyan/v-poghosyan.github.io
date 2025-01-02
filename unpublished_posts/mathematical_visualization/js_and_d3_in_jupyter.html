@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2024-12-26">
 
-<title>Using D3 inside Jupyter Notebooks – v-poghosyan</title>
+<title>Using JavaScript and D3 in Jupyter – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -113,6 +113,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -125,7 +128,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../logo.png" alt="" class="navbar-logo">
+    <img src="../../logo.pngclear" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">v-poghosyan</span>
@@ -152,19 +155,18 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Using D3 inside Jupyter Notebooks</h1>
+    <div class="quarto-title column-page">
+      <h1 class="title">Using JavaScript and D3 in Jupyter</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">D3</div>
                 <div class="quarto-category">Visualization</div>
                 <div class="quarto-category">JavaScript</div>
-                <div class="quarto-category">TypeScript</div>
               </div>
                   </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta column-page">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -187,54 +189,292 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#jupyter-deno-setup" id="toc-jupyter-deno-setup" class="nav-link" data-scroll-target="#jupyter-deno-setup">Jupyter-Deno Setup</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>In this post we will set up D3 and TypeScrip inside this Jupyter notebook using <a href="https://deno.com/">Deno</a> which enables us to use modern JavaScript, TypeScript, and <code>npm</code> inside of a Jupyter notebook.</p>
-<section id="jupyter-deno-setup" class="level2">
-<h2 class="anchored" data-anchor-id="jupyter-deno-setup">Jupyter-Deno Setup</h2>
-<p>Create a Python virtual environment. Then, install <a href="https://ipython.org/">IPython</a> within it.</p>
-<pre><code>pip install ipython</code></pre>
-<p>Install <a href="https://pypi.org/project/ipykernel/">ipykernel</a> which allows IPython to be used as a Juypter kernel.</p>
-<pre><code>pip install ipykernel</code></pre>
-<p>Now we need a JavaScript runtime environment. <a href="https://deno.com/">Deno</a> is a new contender to <a href="https://nodejs.org/en">Node</a>. Download and install Deno by issuing the following CURL.</p>
-<pre><code>curl -fsSL https://deno.land/install.sh | sh</code></pre>
-<p>Now we need to register Deno as a kernel for Jupyter. The following command does the trick.</p>
-<pre><code>deno jupyter --install</code></pre>
-<p>Note that we may need to activate the Deno kernel. To do so issue this command.</p>
-<pre><code>deno jupyter --unstable</code></pre>
-<p>Finally, inside our Jupyer editor (for me that’s just VS Code), we need to select the Deno kernel.</p>
-<p>After all of this, let’s verify that we can run TypeScript inside a Jupyer notebook.</p>
-<div id="cell-2" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hello from a Jupyter notebook!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello from a Jupyter notebook!</code></pre>
+<p>By far the quickest, and dirtiest way to use D3 in Jupyter notebooks is using the Jupyter kernel. This poses disadvantages, namely that we need to write the JavaScript and D3 code non-interactively, then pass it as a raw string inside a <code>&lt;script&gt;</code> tag. We may stub some data fields (like <code>$data</code>) and, on-the-fly, switch out the stub with data gathered using Python. But we can also use <a href="https://deno.com/">Deno</a>, a JavaScript runtime environment from the maker of Node.js, as a kernel instead (more on that <a href="../../unpublished_posts/mathematical_visualization/js_and_d3_in_jupyter_with_deno.html">here</a>)</p>
+<p>Let’s look at a minimal example.</p>
+<div id="cell-2" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>HTML(<span class="st">'&lt;p&gt; Hello world! &lt;/p&gt;'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<p> Hello world! </p>
 </div>
 </div>
+<p>Let’s get some simple styling options.</p>
+<div id="cell-5" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>HTML(<span class="st">'''</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;style scoped&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">.steely {</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">    color: steelblue;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    font: 16px script;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/style&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;p class="steely"&gt; Hello world! &lt;/div&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+
+<style scoped="">
+.steely {
+    color: steelblue;
+    font: 16px script;
+}
+</style>
+<p class="steely"> Hello world! </p></div>
+</div>
+</main></div>
+<p>We can, similarly, use a <code>&lt;script&gt;</code> tag to encapsulate our JavaScript. Let’s use one to import D3.</p>
+<div id="cell-7" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>HTML(<span class="st">'''</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script src="https://cdn.jsdelivr.net/npm/d3@7/+esm"&gt;&lt;/script&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"&gt;&lt;/script&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;script&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">    const width = 975;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">    const height = 610;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">     </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">    // Fetch and parse the US map TopoJSON</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">    const url = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">    const us = await (await fetch(url)).json();</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">    const states = feature(us, us.objects.states) as any; // GeoJSON 'FeatureCollection'</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">    const zoom = d3.zoom()</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">        .scaleExtent([1, 8])</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">        .on("zoom", zoomed);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">    const svg = d3.create("svg")</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("viewBox", [0, 0, width, height])</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("width", width)</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("height", height)</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("style", "max-width: 100%; height: auto;")</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">        .on("click", reset);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">    const path = d3.geoPath();</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">    const g = svg.append("g");</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">    const states = g.append("g")</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("fill", "#444")</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("cursor", "pointer")</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">        .selectAll("path")</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">        .data(topojson.feature(us, us.objects.states).features)</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">        .join("path")</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">        .on("click", clicked)</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("d", path);</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="st">    states.append("title")</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="st">        .text(d =&gt; d.properties.name);</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="st">    g.append("path")</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("fill", "none")</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("stroke", "white")</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("stroke-linejoin", "round")</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="st">        .attr("d", path(topojson.mesh(us, us.objects.states, (a, b) =&gt; a !== b)));</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="st">    svg.call(zoom);</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="st">    function reset() {</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="st">        states.transition().style("fill", null);</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="st">        svg.transition().duration(750).call(</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="st">        zoom.transform,</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="st">        d3.zoomIdentity,</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="st">        d3.zoomTransform(svg.node()).invert([width / 2, height / 2])</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="st">        );</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="st">    function clicked(event, d) {</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="st">        const [[x0, y0], [x1, y1]] = path.bounds(d);</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="st">        event.stopPropagation();</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="st">        states.transition().style("fill", null);</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="st">        d3.select(this).transition().style("fill", "red");</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="st">        svg.transition().duration(750).call(</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="st">        zoom.transform,</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="st">        d3.zoomIdentity</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="st">            .translate(width / 2, height / 2)</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="st">            .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="st">            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="st">        d3.pointer(event, svg.node())</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="st">        );</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="st">    function zoomed(event) {</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="st">        const </span><span class="sc">{transform}</span><span class="st"> = event;</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="st">        g.attr("transform", transform);</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="st">        g.attr("stroke-width", 1 / transform.k);</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="st">    svg.node();</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/script&gt;</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div id="map-container"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script>
+    require.config({
+        paths: {
+            d3: "https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.min",
+            topojson: "https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min"
+        }
+    });
+
+    require(['d3', 'topojson'], function(d3, topojson) {
+        // Fetch and parse the US map TopoJSON
+        const url = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+        fetch(url)
+            .then(response => response.json())
+            .then(us => {
+                const states = topojson.feature(us, us.objects.states);
+
+                const width = 975;
+                const height = 610;
+
+                const zoom = d3.zoom()
+                    .scaleExtent([1, 8])
+                    .on("zoom", zoomed);
+
+                const svg = d3.select("#map-container").append("svg")
+                    .attr("viewBox", [0, 0, width, height])
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("style", "max-width: 100%; height: auto;")
+                    .on("click", reset);
+
+                const path = d3.geoPath();
+
+                const g = svg.append("g");
+
+                const statePaths = g.append("g")
+                    .attr("fill", "#444")
+                    .attr("cursor", "pointer")
+                    .selectAll("path")
+                    .data(states.features)
+                    .join("path")
+                    .on("click", clicked)
+                    .attr("d", path);
+
+                statePaths.append("title")
+                    .text(d => d.properties.name);
+
+                g.append("path")
+                    .attr("fill", "none")
+                    .attr("stroke", "white")
+                    .attr("stroke-linejoin", "round")
+                    .attr("d", path(topojson.mesh(us, us.objects.states, (a, b) => a !== b)));
+
+                svg.call(zoom);
+
+                function reset() {
+                    statePaths.transition().style("fill", null);
+                    svg.transition().duration(750).call(
+                        zoom.transform,
+                        d3.zoomIdentity,
+                        d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
+                    );
+                }
+
+                function clicked(event, d) {
+                    const [[x0, y0], [x1, y1]] = path.bounds(d);
+                    event.stopPropagation();
+                    statePaths.transition().style("fill", null);
+                    d3.select(this).transition().style("fill", "red");
+                    svg.transition().duration(750).call(
+                        zoom.transform,
+                        d3.zoomIdentity
+                            .translate(width / 2, height / 2)
+                            .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+                            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+                        d3.pointer(event, svg.node())
+                    );
+                }
+
+                function zoomed(event) {
+                    const { transform } = event;
+                    g.attr("transform", transform);
+                    g.attr("stroke-width", 1 / transform.k);
+                }
+            });
+    });
+</script>
+</div>
+</div>
+<p>D3 is a JavaScript library for visualization. The D-s in D3 are for “Data Driven Documents.” Think DOM elements that are styled, positioned, scaled, etc. based on data…</p>
+<p>A core pattern in D3 is the following:</p>
+<ol type="1">
+<li>Select some array of DOM elements</li>
+<li>‘Attach’ an array of data to that array of DOM elements</li>
+<li>Perform some actions for each DOM element formed from the data array</li>
+</ol>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Imports: D3, TopoJSON, <span class="kw">and</span> Linkedom</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">"npm:topojson"</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { DOMParser } <span class="im">from</span> <span class="st">"npm:linkedom"</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Create a fake DOM via Linkedom</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>const document <span class="op">=</span> new DOMParser().parseFromString(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  `<span class="op">&lt;!</span>DOCTYPE html<span class="op">&gt;&lt;</span>html lang<span class="op">=</span><span class="st">"en"</span><span class="op">&gt;&lt;</span>head<span class="op">&gt;&lt;/</span>head<span class="op">&gt;&lt;</span>body<span class="op">&gt;&lt;/</span>body<span class="op">&gt;&lt;/</span>html<span class="op">&gt;</span>`,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"text/html"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Fetch <span class="kw">and</span> parse the US <span class="bu">map</span> TopoJSON</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>const url <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>const us <span class="op">=</span> <span class="cf">await</span> (<span class="cf">await</span> fetch(url)).json()<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>const states <span class="op">=</span> topojson.feature(us, us.objects.states) <span class="im">as</span> <span class="bu">any</span><span class="op">;</span> <span class="op">//</span> GeoJSON <span class="st">'FeatureCollection'</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Create an <span class="op">&lt;</span>svg<span class="op">&gt;</span> using Linkedom<span class="st">'s fake DOM using D3</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="er">const width = 975;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>const height <span class="op">=</span> <span class="dv">610</span><span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>const body <span class="op">=</span> d3.select(document.body)<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>body</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  .append(<span class="st">"p"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  .text(<span class="st">"💡 Tip: Try hovering over a county!"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  .style(<span class="st">"text-align"</span>, <span class="st">"center"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>const svg <span class="op">=</span> body</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  .append(<span class="st">"svg"</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"xmlns"</span>, <span class="st">"http://www.w3.org/2000/svg"</span>) </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"width"</span>, width)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"height"</span>, height)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"viewBox"</span>, `<span class="dv">0</span> <span class="dv">0</span> ${width} ${height}`)<span class="op">;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>const mapGroup <span class="op">=</span> svg.append(<span class="st">"g"</span>)<span class="op">;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Create a geo<span class="op">-</span>projection <span class="op">&amp;</span> path generator</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>const projection <span class="op">=</span> d3.geoAlbersUsa().fitSize([width, height], states)<span class="op">;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>const path <span class="op">=</span> d3.geoPath(projection)<span class="op">;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>const statesGroup <span class="op">=</span> mapGroup.append(<span class="st">"g"</span>)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"fill"</span>, <span class="st">"#EBE8E7"</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"stroke"</span>, <span class="st">"#191516"</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> Append a <span class="op">&lt;</span>path<span class="op">&gt;</span> per state</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>statesGroup.selectAll(<span class="st">"path"</span>)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  .data(states.features)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  .join(<span class="st">"path"</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="op">//</span> Add attributes to each <span class="op">&lt;</span>path<span class="op">&gt;</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>  .on(<span class="st">"mouseover"</span>, mouseover)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"cursor"</span>, <span class="st">"pointer"</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"onmouseover"</span>, <span class="st">"this.style.fill = '#F9C22E';"</span>)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"onmouseout"</span>, <span class="st">"this.style.fill = '#EBE8E7';"</span>)</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  .attr(<span class="st">"d"</span>, path)<span class="op">;</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>function mouseover(event, d) {</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>  console.log(<span class="st">"HERE"</span>)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -799,7 +1039,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-</div> <!-- /content -->
+ <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
