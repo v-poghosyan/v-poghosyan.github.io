@@ -21,18 +21,6 @@ website:
       light: [flatly, theme-light.scss]
       dark: [flatly, theme-dark.scss]
     search: true
-        
-  # sidebar:
-  # - title: "Posts"
-  #   style: "docked"
-  #   collapse-level: 3
-  #   pinned: true
-  #   border: false
-  #   theme:
-  #     light: [flatly, theme-light.scss]
-  #     dark: [flatly, theme-dark.scss]
-  #   contents: posts
-        
   page-footer: 
     left: "Copyright 2021, Vahram Poghosyan" 
     right: 
