@@ -2,8 +2,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 // Selects all elements with `id=state-path`and attaches an event-listener for a `mouseover` event
 d3.selectAll("#state-path")
-    .on("mouseover", onMouseOver)
-    .on("mouseout", onMouseOut);
+    .on("mouseover", showTooltip)
+    .on("mouseout", hideTooltip);
 
 // Tooltip
 const mapNode = d3.select("#map-wrapper").node(); // Grab the DOM node, the DOM API provides `parentNode`, a method to getb the parent of an element
@@ -22,12 +22,9 @@ const tooltip = parentSelection.append("div")
     .style("background", "#EBE8E7")
     .style("color", "#191516");
 
-function onMouseOver(event, d) {
+function showTooltip(event, d) {
     const left = parseInt(event.target.getAttribute("cx")) 
     const top = parseInt(event.target.getAttribute("cy")) - 610  // The additive term (which the the height of the container) is a trial and error adjustment parameter
-
-    console.log(left, top)
-
     tooltip
         // Set the state name displayed inside the tooltip
         .text(`${event.target.getAttribute("state-name")}`)
@@ -37,7 +34,7 @@ function onMouseOver(event, d) {
         .style("top", `${top}px`);
 }
 
-function onMouseOut(event, d) {
+function hideTooltip(event, d) {
     tooltip
         .style("opacity", "0");
 }
