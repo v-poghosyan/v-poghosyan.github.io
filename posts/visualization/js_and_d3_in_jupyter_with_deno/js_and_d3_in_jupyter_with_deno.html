@@ -348,8 +348,9 @@ Click to expand dull interactive map code
 <span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"activated"</span><span class="op">,</span> <span class="st">"false"</span>)</span>
 <span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</details>
 <p>We will discuss how to render the map inside a Jupyter notebook using Deno later. For now, here’s the code to do that.</p>
-<div id="cell-7" class="cell" data-execution_count="4">
+<div id="cell-8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the new markup from Linkedom to display it</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> htmlOutput <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="at">outerHTML</span><span class="op">;</span> <span class="co">// Entire &lt;html&gt;…&lt;/html&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -362,11 +363,11 @@ Click to expand dull interactive map code
 </div>
 </div>
 <p>We will use <a href="https://geojson.org/">GeoJSON</a>, and its extension <a href="https://github.com/topojson/topojson">TopoJSON</a>, as our map data in order to visualize an interactive map of the United States with county-level granularity. The TopoJSON project is more than just a raw re-representation of the GeoJSON US political map. It also provides an interface to manipulate the raw data in various useful ways. We will import the raw data as well as the extra tooling surrounding it. But first, let’s focus on getting the raw data.</p>
-</details></section>
+</section>
 <section id="downloading-geographic-data" class="level2">
 <h2 class="anchored" data-anchor-id="downloading-geographic-data">Downloading Geographic Data</h2>
 <p>We use this convenient <a href="https://github.com/topojson/us-atlas/tree/master">re-distribution</a> of the US map data.</p>
-<div id="cell-9" class="cell" data-execution_count="18">
+<div id="cell-10" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Fetch the US map TopoJSON data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"</span><span class="op">;</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> us <span class="op">=</span> <span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(url))<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -374,7 +375,7 @@ Click to expand dull interactive map code
 <section id="examining-the-downloaded-geographic-data" class="level3">
 <h3 class="anchored" data-anchor-id="examining-the-downloaded-geographic-data">Examining the Downloaded Geographic Data</h3>
 <p>If we examine the TopoJSON file <code>us</code> obtained above, we can notice useful patterns. For example, we can log the first state’s <code>id</code>, and <code>name</code>.</p>
-<div id="cell-11" class="cell" data-execution_count="19">
+<div id="cell-12" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(us<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="at">states</span><span class="op">.</span><span class="at">geometries</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>)<span class="op">,</span> [<span class="st">"id"</span><span class="op">,</span> <span class="st">"properties"</span><span class="op">,</span> <span class="st">"name"</span>]<span class="op">,</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
@@ -388,12 +389,12 @@ Click to expand dull interactive map code
 </div>
 </div>
 <p>Now let’s do the same for the counties TopoJSON dataset.</p>
-<div id="cell-13" class="cell" data-execution_count="20">
+<div id="cell-14" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Fetch the US map TopoJSON data</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"</span><span class="op">;</span> </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> us <span class="op">=</span> <span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(url))<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="21">
+<div id="cell-15" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(us<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="at">counties</span><span class="op">.</span><span class="at">geometries</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">1</span>)<span class="op">,</span> [<span class="st">"id"</span><span class="op">,</span> <span class="st">"properties"</span><span class="op">,</span> <span class="st">"name"</span>]<span class="op">,</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
@@ -409,7 +410,7 @@ Click to expand dull interactive map code
 <p>Notice that both states and counties are represented in a similar JSON format (specifically, TopoJSON). They both have an <code>id</code> field (which uniquely identifies a region), and a <code>properties.name</code> field containing the name of the region.</p>
 <p>As it turns out, there is further structure in this representation that we can exploit. We can easily identify all counties belonging to a given state. The field <code>counties.geometry.id</code> is tied to <code>states.geometries.id</code> by its first two digits. Meaning, if <code>Mohave</code> county above has <code>id = 04015</code>, then the state of <code>Arizona</code> must have <code>id = 04</code>.</p>
 <p>Let’s define a utility function to do just that.</p>
-<div id="cell-16" class="cell" data-execution_count="22">
+<div id="cell-17" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Helper function to get the counties of a given state based on `state.id`</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getCountiesOfState <span class="op">=</span> (us<span class="op">,</span> stateId) <span class="kw">=&gt;</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    us<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="at">counties</span><span class="op">.</span><span class="fu">filter</span>((county) <span class="kw">=&gt;</span> county<span class="op">.</span><span class="at">id</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">2</span>) <span class="op">==</span> stateId)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -421,7 +422,7 @@ Click to expand dull interactive map code
 <section id="data-driven-documents-d3---a-versatile-visualization-library" class="level3">
 <h3 class="anchored" data-anchor-id="data-driven-documents-d3---a-versatile-visualization-library">Data Driven Documents (D3) - A Versatile Visualization Library</h3>
 <p>First order of business is importing <a href="https://d3js.org/">D3</a>. With Deno, it is as simple as:</p>
-<div id="cell-18" class="cell" data-execution_count="23">
+<div id="cell-19" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>D3 is a JavaScript library for visualization. The three D-s in “D3” stand for <strong>“Data Driven Documents.”</strong> Think DOM elements that are styled, positioned, scaled, etc. according to some attached source of data.</p>
@@ -432,7 +433,7 @@ Click to expand dull interactive map code
 <li>Perform some actions for each DOM element formed from the data array</li>
 </ol>
 <p>The first two steps above roughly translates to the following API.</p>
-<div id="cell-20" class="cell">
+<div id="cell-21" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">selectAll</span>(<span class="st">"div"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">data</span>(correspondingDataset)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">join</span>(<span class="st">"div"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -454,7 +455,7 @@ Click to expand dull interactive map code
 <p>The following code uses Linkedom to create a new HTML document, fetches the TopoJSON data, uses the D3 pattern mentioned above to bind the data to the DOM elements, and, finally, uses D3 to draw the states as <code>&lt;paths&gt;</code> inside an <code>&lt;svg&gt;</code> wrapper of the map.</p>
 <p>Note that we need to, first, convert the TopoJSON into a format similar to GeoJSON using the <code>topojson.feature</code> method. We, then, project the resulting <code>Feature</code>-s, before supplying them to the method <code>d3.geoPath</code> which generates the path data (attribute <code>d</code> of HTML <code>&lt;path&gt;</code> elements).</p>
 <p>The following is all the code that’s required to render the static map of US states. It’s also only a matter of adding a couple of more lines to render the full map, including the counties (see the last section for an interactive county-level map).</p>
-<div id="cell-24" class="cell" data-execution_count="25">
+<div id="cell-25" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Imports: D3, TopoJSON, and Linkedom</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span><span class="op">;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">"npm:topojson"</span><span class="op">;</span></span>
@@ -510,7 +511,7 @@ Click to expand dull interactive map code
 </div>
 </div>
 <p>To render the resulting DOM we use <code>Deno.jupyer.display</code> which enables us to render objects as <em>rich media types</em> (such as HTML, Markdown, SVG, etc.). This builds upon Jupyter’s support of <a href="https://docs.jupyter.org/en/latest/reference/mimetype.html">mimetypes</a>. All we have to do, to display the above DOM, is to simply create a wrapper object that invokes the function <code>Jupyter.display</code>. In fact, the last few lines of the code above use a shorthand for exactly doing that. However, here’s a minimal example of using <code>Deno.jupyter.display</code> (without the shorthand) to render an HTML paragraph for educational purposes.</p>
-<div id="cell-26" class="cell" data-execution_count="26">
+<div id="cell-27" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    [<span class="bu">Symbol</span><span class="op">.</span><span class="fu">for</span>(<span class="st">'Jupyter.display'</span>)]<span class="op">:</span> () <span class="kw">=&gt;</span> ({</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">'text/html'</span><span class="op">:</span> <span class="st">'&lt;p&gt; Hello from this Jupyter notebook!&lt;p&gt;'</span></span>
@@ -547,7 +548,7 @@ Click to expand dull interactive map code
 <summary>
 Click to expand interactive map code
 </summary>
-<div id="cell-29" class="cell">
+<div id="cell-30" class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Imports: D3, TopoJSON, and Linkedom</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span><span class="op">;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">"npm:topojson"</span><span class="op">;</span></span>
@@ -752,7 +753,7 @@ Click to expand tooltip code
 <span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>Let’s re-render the map.</p>
-<div id="cell-33" class="cell" data-execution_count="36">
+<div id="cell-34" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the new markup from Linkedom to display it</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> htmlOutput <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="at">outerHTML</span><span class="op">;</span> <span class="co">// Entire &lt;html&gt;…&lt;/html&gt;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -850,7 +851,7 @@ Click to expand zoom-and-drag code
 <summary>
 Click to expand interactive map code
 </summary>
-<div id="cell-38" class="cell">
+<div id="cell-39" class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Imports: D3, TopoJSON, and Linkedom</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span><span class="op">;</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">"npm:topojson"</span><span class="op">;</span></span>
@@ -1136,7 +1137,7 @@ Click to expand full zoom-and-drag code
 <span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>Let’s see zoom and drag in action!</p>
-<div id="cell-43" class="cell" data-execution_count="30">
+<div id="cell-44" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the new markup from Linkedom to display it</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> htmlOutput <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="at">outerHTML</span><span class="op">;</span> <span class="co">// Entire &lt;html&gt;…&lt;/html&gt;</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1158,7 +1159,7 @@ Click to expand full zoom-and-drag code
 <summary>
 Click to expand updated interactive map code
 </summary>
-<div id="cell-46" class="cell">
+<div id="cell-47" class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Imports: D3, TopoJSON, and Linkedom</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"npm:d3"</span><span class="op">;</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">"npm:topojson"</span><span class="op">;</span></span>
@@ -1246,7 +1247,7 @@ Click to expand updated interactive map code
 </div>
 </details>
 <p>Let’s generate the map one more time!</p>
-<div id="cell-49" class="cell" data-execution_count="38">
+<div id="cell-50" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the new markup from Linkedom to display it</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> htmlOutput <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="at">outerHTML</span><span class="op">;</span> <span class="co">// Entire &lt;html&gt;…&lt;/html&gt;</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
