@@ -1,6 +1,20 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 /*---------------------------------------*/
+////////////////// MAP 0 //////////////////
+/*---------------------------------------*/
+
+// Selects the <svg> map wrapper element by `id` and attaches the `reset` callback to its click event
+const demoStateMapSvg = d3.select("#zoomable-state-map-wrapper")
+    .on("click", resetStateView);
+
+// Selects the group of states within the <svg>
+const demoGroupOfStates = d3.select("#zoomable-group-of-states");
+
+// Tooltip
+const demoStateTooltip = d3.select("#zoomable-state-name-tooltip");
+
+/*---------------------------------------*/
 ////////////////// MAP 2 //////////////////
 /*---------------------------------------*/
 
@@ -50,6 +64,7 @@ const zoomBehaviorCountyMap = d3.zoom()
     .on("zoom", zoomInCounties);
 // Binds the zoom behavior to the <svg> (`#zoomable-map-container`)
 stateMapSvg.call(zoomBehaviorStateMap);
+demoGroupOfStates.call(zoomBehaviorStateMap)
 countiesMapSvg.call(zoomBehaviorCountyMap);
 
 // Zooms in using mousewheel, pans using drag
@@ -72,6 +87,10 @@ function zoomInCounties(event, d) {
         .style("opacity", "0");
 }    
 
+// Selects the states (elements with `id=zoomable-demo-state-path`) and attaches an event-listener for a `click` event
+const demoStates = d3.selectAll("#zoomable-demo-state-path")
+    .on("click", zoomIntoState)
+
 // Selects the states (elements with `id=zoomable-state-path`) and attaches an event-listener for a `click` event
 const states = d3.selectAll("#zoomable-state-path")
     .on("click", zoomIntoState)
@@ -90,6 +109,13 @@ function resetStateView(event, d) {
     );
     stateTooltip
         .style("opacity", "0");
+    demoStateMapSvg.transition().duration(750).call(
+            zoomBehaviorStateMap.transform,
+            d3.zoomIdentity,
+            d3.zoomTransform(stateMapSvg.node()).invert([width / 2, height / 2])
+        );
+        stateTooltip
+            .style("opacity", "0");
     d3.selectAll("#zoomable-state-path").attr("activated", "false");
 }
 
