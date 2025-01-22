@@ -577,7 +577,7 @@ Click to expand interactive map code
 <p>Here’s the external script for the tooltip, feel free to expand and examine!</p>
 <details>
 <summary>
-<strong>Click to expand show-tooltip.js</strong>
+<strong>Click to expand tooltip code</strong>
 </summary>
 <div class="sourceCode" id="cb20"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/d3@7/+esm"</span><span class="op">;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -706,7 +706,7 @@ Click to expand interactive map code
 <p>Here’s the zoom-in script. Expand to view.</p>
 <details>
 <summary>
-<strong>Click to See How to add D3 Zoom Behavior</strong>
+<strong>Click to expand zoom-and-drag code</strong>
 </summary>
 <div class="sourceCode" id="cb25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/d3@7/+esm"</span><span class="op">;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -735,7 +735,7 @@ Click to expand interactive map code
 <p>Here’s the updated fully-interactive map code. Not much has changed, but feel free to expand and examine.</p>
 <details>
 <summary>
-Click to expand updated interactive map code
+Click to expand interactive map code
 </summary>
 <div id="cell-33" class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Imports: D3, TopoJSON, and Linkedom</span></span>
@@ -852,7 +852,7 @@ Click to expand updated interactive map code
 <p>Let’s take a look at the <code>resetView</code> code.</p>
 <details>
 <summary>
-<strong>Click to expand</strong>
+<strong>Click to expand code to reset the zoom level</strong>
 </summary>
 <div class="sourceCode" id="cb29"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*--------------------------------- Global State -----------------------------------*/</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> width <span class="op">=</span> svg<span class="op">.</span><span class="fu">attr</span>(<span class="st">"width"</span>)<span class="op">;</span></span>
@@ -883,7 +883,7 @@ Click to expand updated interactive map code
 <p>We also add zooming into a state on a click event. Expand the code block below to see how we define the <code>zoomInto</code> callback function.</p>
 <details>
 <summary>
-<strong>Click to expand</strong>
+<strong>Click to expand code to zoom on click</strong>
 </summary>
 <div class="sourceCode" id="cb30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Zoom into state</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">zoomInto</span>(<span class="bu">event</span><span class="op">,</span> d) {</span>
@@ -924,7 +924,7 @@ Click to expand updated interactive map code
 <p>Here’s the final external script <code>zoom-in.js</code> which contains all the drag and zoom behavior in one file.</p>
 <details>
 <summary>
-<strong>Click to zoom-in.js</strong>
+<strong>Click to expand full zoom-and-drag code</strong>
 </summary>
 <div class="sourceCode" id="cb31"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/d3@7/+esm"</span><span class="op">;</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
