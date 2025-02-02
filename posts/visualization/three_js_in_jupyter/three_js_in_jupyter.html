@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2024-12-26">
 
-<title>v-poghosyan</title>
+<title>Three.js - 3D Animations in the Browser – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
 
 <script type="text/javascript">
@@ -109,35 +80,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -148,10 +90,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./logo.png" alt="" class="navbar-logo">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">v-poghosyan</span>
     </a>
   </div>
@@ -162,7 +104,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">Info</span></a>
   </li>  
 </ul>
@@ -174,12 +116,57 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Three.js - 3D Animations in the Browser</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Three.js</div>
+                <div class="quarto-category">Visualization</div>
+                <div class="quarto-category">JavaScript</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 26, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(14)</span></div><div class="category" data-category="Algorithms">Algorithms <span class="quarto-category-count">(4)</span></div><div class="category" data-category="D3">D3 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="DFS">DFS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Data Structures">Data Structures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dynamic Programming">Dynamic Programming <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Functional Programming">Functional Programming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Game Development">Game Development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JavaScript">JavaScript <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Leetcode">Leetcode <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Linear Algebra">Linear Algebra <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Optimization">Optimization <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Recursion">Recursion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Scala">Scala <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Three.js">Three.js <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TypeScript">TypeScript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ureal Engine">Ureal Engine <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Visualization">Visualization <span class="quarto-category-count">(2)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#three.js" id="toc-three.js" class="nav-link" data-scroll-target="#three.js">Three.js</a>
+  <ul>
+  <li><a href="#understanding-how-three.js-works" id="toc-understanding-how-three.js-works" class="nav-link" data-scroll-target="#understanding-how-three.js-works">Understanding How Three.js Works</a></li>
+  </ul></li>
+  <li><a href="#d---scenes-in-general" id="toc-d---scenes-in-general" class="nav-link" data-scroll-target="#d---scenes-in-general">3D - Scenes in General</a></li>
+  <li><a href="#d---canvas" id="toc-d---canvas" class="nav-link" data-scroll-target="#d---canvas">3D - Canvas</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -187,146 +174,48 @@ window.Quarto = {
 
 
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this post we use <a href="https://threejs.org/">Three.js</a> external scripts to render 3D scenes inside this Jupyter notebook.</p>
+<p>This post will be very similar, in terms of its stack, to the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map posy</a>.</p>
+<p>In <em>that</em> post, we learned that Canvas and SVG are two ways in which we can display complex graphics inside a web browser. We already explored SVG graphics in <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map</a>. It’s worth noting that a lot of the same functionality could’ve been replicated using the HTML Canvas element instead of SVG (which we ultimately chose for its superior interactive capabilities) – the article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
+<p>We ended up using <a href="https://github.com/WebReflection/linkedom#readme">linkedom</a> to add a DOM API on top of the Deno environment.</p>
+<p>In fact, what I realized later on is that we could’ve simply used simple Markdown inside our Jupyter notebook to create the <code>&lt;svg&gt;</code> element without the need to introduce a DOM API on top of a browser-less JavaScript environment. In that case, we could have fetched the <code>TopoJSON</code> data and constructed the map inside our external scripts (which we ended up reserving <em>only</em> for the D3 animations). These scripts are run by Quarto only <em>after</em> the page has been rendered to the browser, so we could easily reference the DOM by <code>class</code> or <code>id</code>. Crucially, the external scripts are meant to run <em>inside the browser</em> (as opposed to being pre-computed in the browser-less Deno environment) where they’re able to leverage the existing DOM API provided by the browser’s engine (e.g.&nbsp;<code>document.getElementById</code>).</p>
+<p>The <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3 US Map</a> post shows a <em>mixture</em> of approaches that still works. However, in <em>this</em> post we will simplify things a little by sticking with one approach only. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, we will add a <code>&lt;canvas&gt;</code> element below this very Jupyter notebook cell as plain HTML.</p>
+<p>This approach effectively means we can also do away with Deno itself. The notebook does not to pre-compute any JavaScript, it can just serve as the DOM scaffolding for the external scrips to hook into.</p>
+</section>
+<section id="three.js" class="level1">
+<h1>Three.js</h1>
+<p><a href="https://threejs.org/">Three.js</a> is a library for drawing 3D graphics in the browser using JavaScript and <a href="https://get.webgl.org/">WebGL</a> (see <a href="https://www.khronos.org/webgl/wiki/Main_Page">wiki</a>).</p>
+<p>WebGL runs in an HTML Canvas (i.e.&nbsp;<code>&lt;canvas&gt;</code>). Canvas and SVG are two ways in which we can display complex graphics inside a browser. We already explored SVG graphics in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map</a> post. It’s worth noting that a lot of the same functionality could’ve been achieved by using the HTML Canvas instead. The article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
+<p>In that post, we ended up using a combination of <a href="https://github.com/WebReflection/linkedom#readme">linkedom</a> to mock a DOM API on the Deno environment. In fact, what I realized later on is that we could’ve simply used the Markdown inside our Jupyter notebook to create the <code>&lt;svg&gt;</code> element. Then, we could construct the rest of the map inside our external scripts (which we used only for animations). These scripts are meant to run only <em>after</em> the page has been rendered to the browser, so we could easily reference the DOM by <code>class</code> or <code>id</code>. Crucially, the external scripts run <em>in the browser</em> (as opposed to being pre-computed in the browser-less Deno environment). In the browser they are able to leverage the DOM API provided by the browser’s engine (e.g.&nbsp;<code>document.getElementById</code>).</p>
+<p>The D3 post shows a mixture of approaches that works. However, in this post we will simplify things by sticking to one approach. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, I’ll include one below this very Jupyter notebook cell as plain HTML.</p>
+<p>This approach effectively means we can also do away with Deno. The notebook itself need not pre-compute any JavaScript.</p>
+<section id="understanding-how-three.js-works" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-how-three.js-works">Understanding How Three.js Works</h2>
+<p>But the HTML Canvas is not the focus of this post.</p>
+<p>From the WebGL wiki:</p>
+<blockquote class="blockquote">
+<p>WebGL is a DOM API, which means that it can be used from any DOM-compatible language: e.g.&nbsp;JavaScript</p>
+</blockquote>
+<p>Three.js is a library that provides conveniences in JavaScript that abstract much of this DOM API calls. Note that Three.js isn’t suitable for modelling purposes, for that we can use <a href="https://www.blender.org/">Blender</a> or a number of other closed-source 3D modelling applications. We can even download or purchase third-party models from vendors.</p>
+</section>
+</section>
+<section id="d---scenes-in-general" class="level1">
+<h1>3D - Scenes in General</h1>
+<p>In <em>any</em> 3D scene, be it in the web browser, inside a game engine, in a movie, in a 3D modelling application, etc. there are a bunch of <strong>geometries</strong>, or <strong>shapes</strong> (or <strong>meshes</strong>) that get styled with <strong>textures</strong> (which can range from a complex mapping, like a <strong>shader</strong> animation, to a simple <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a> image).</p>
+<p>A scene will also have one or more <strong>light sources</strong>, and a <strong>camera</strong> to <em>serve</em> the scene in some perspective.</p>
+</section>
+<section id="d---canvas" class="level1">
+<h1>3D - Canvas</h1>
+<p>Let’s create a <code>&lt;canvas&gt;</code> with <code>id="#3d-canvas"</code>.</p>
+<canvas id="#3d-canvas">
+</canvas>
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Title
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="Three.js,Visualization,JavaScript" data-listing-date-sort="1735200000000" data-listing-file-modified-sort="1738478880511" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="801" data-listing-title-sort="Three.js - 3D Animations in the Browser" data-listing-filename-sort="three_js_in_jupyter.ipynb">
-<td>
-<a href="./posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html" class="title listing-title">Three.js - 3D Animations in the Browser</a>
-</td>
-<td>
-<span class="listing-date">Dec 26, 2024</span>
-</td>
-</tr>
-<tr data-index="1" data-categories="D3,Visualization,JavaScript,TypeScript" data-listing-date-sort="1735200000000" data-listing-file-modified-sort="1738381609768" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5382" data-listing-title-sort="D3.js in Jupyter with Deno" data-listing-filename-sort="d3_js_in_jupyter_with_deno.ipynb">
-<td>
-<a href="./posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html" class="title listing-title">D3.js in Jupyter with Deno</a>
-</td>
-<td>
-<span class="listing-date">Dec 26, 2024</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="Leetcode,Algorithms,Dynamic Programming" data-listing-date-sort="1716447600000" data-listing-file-modified-sort="1737616158116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="921" data-listing-title-sort="LC121: Best Time to Buy and Sell Stock" data-listing-filename-sort="lc121_best_time_to_buy_and_sell_stock.ipynb">
-<td>
-<a href="./posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html" class="title listing-title">LC121: Best Time to Buy and Sell Stock</a>
-</td>
-<td>
-<span class="listing-date">May 23, 2024</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="Leetcode,Algorithms,Dynamic Programming" data-listing-date-sort="1716447600000" data-listing-file-modified-sort="1737616158117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1679" data-listing-title-sort="LC53: Maximum Subarray" data-listing-filename-sort="lc53_maximum_subarray.ipynb">
-<td>
-<a href="./posts/leetcode/lc53_maximum_subarray.html" class="title listing-title">LC53: Maximum Subarray</a>
-</td>
-<td>
-<span class="listing-date">May 23, 2024</span>
-</td>
-</tr>
-<tr data-index="4" data-categories="Game Development,Ureal Engine" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1731971202533" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059" data-listing-title-sort="Unreal Engine: Cheat Sheet" data-listing-filename-sort="unreal_engine_cheat_sheet.ipynb">
-<td>
-<a href="./posts/game_development/unreal_engine_cheat_sheet.html" class="title listing-title">Unreal Engine: Cheat Sheet</a>
-</td>
-<td>
-<span class="listing-date">Jan 13, 2023</span>
-</td>
-</tr>
-<tr data-index="5" data-categories="Functional Programming,Recursion,Scala" data-listing-date-sort="1673596800000" data-listing-file-modified-sort="1734746716995" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3926" data-listing-title-sort="A Beginner's Introduction to Concepts in Functional Programming" data-listing-filename-sort="functional_programming.ipynb">
-<td>
-<a href="./posts/functional_programming/functional_programming.html" class="title listing-title">A Beginner’s Introduction to Concepts in Functional Programming</a>
-</td>
-<td>
-<span class="listing-date">Jan 13, 2023</span>
-</td>
-</tr>
-<tr data-index="6" data-categories="Leetcode,Algorithms,Data Structures,DFS" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1734799245868" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1282" data-listing-title-sort="LC: Connected Sinks and Sources" data-listing-filename-sort="lc_connected_sinks_and_sources.ipynb">
-<td>
-<a href="./posts/leetcode/lc_connected_sinks_and_sources.html" class="title listing-title">LC: Connected Sinks and Sources</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="Leetcode,Algorithms,Dynamic Programming" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1737230386365" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="783" data-listing-title-sort="LC11: Container with Most Water" data-listing-filename-sort="lc11_container_with_most_water.ipynb">
-<td>
-<a href="./posts/leetcode/lc11_container_with_most_water.html" class="title listing-title">LC11: Container with Most Water</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="8" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731972394623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2872" data-listing-title-sort="Notes: Linear Programs and LP Geometry" data-listing-filename-sort="linear_programs_and_lp_geometry.ipynb">
-<td>
-<a href="./posts/optimization/linear_programs_and_lp_geometry.html" class="title listing-title">Notes: Linear Programs and LP Geometry</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="9" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731971616839" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="41" data-listing-word-count-sort="8151" data-listing-title-sort="Notes: Duality Theory" data-listing-filename-sort="duality_theory.ipynb">
-<td>
-<a href="./posts/optimization/duality_theory.html" class="title listing-title">Notes: Duality Theory</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="10" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731971616839" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6402" data-listing-title-sort="Notes: Algorithms for Unconstrained Optimization" data-listing-filename-sort="algorithms_for_unconstrained_optimization_gradient_descent.ipynb">
-<td>
-<a href="./posts/optimization/algorithms_for_unconstrained_optimization_gradient_descent.html" class="title listing-title">Notes: Algorithms for Unconstrained Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="11" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731971616833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379" data-listing-title-sort="Notes: Introduction to Optimization" data-listing-filename-sort="introduction_to_optimization.ipynb">
-<td>
-<a href="./posts/optimization/introduction_to_optimization.html" class="title listing-title">Notes: Introduction to Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="12" data-categories="Optimization" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731972394622" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1328" data-listing-title-sort="Notes: Robust Linear Programs - Modelling Discrete Failures" data-listing-filename-sort="robust_lps_modelling_discrete_failures.ipynb">
-<td>
-<a href="./posts/optimization/robust_lps_modelling_discrete_failures.html" class="title listing-title">Notes: Robust Linear Programs - Modelling Discrete Failures</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-<tr data-index="13" data-categories="Linear Algebra" data-listing-date-sort="1642924800000" data-listing-file-modified-sort="1731971213762" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1855" data-listing-title-sort="Notes: Review of Linear Algebra for Optimization" data-listing-filename-sort="review_of_linear_algebra_for_optimization.ipynb">
-<td>
-<a href="./posts/linear_algebra/review_of_linear_algebra_for_optimization.html" class="title listing-title">Notes: Review of Linear Algebra for Optimization</a>
-</td>
-<td>
-<span class="listing-date">Jan 23, 2022</span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -918,6 +807,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
+<script type="module" src="./javascript/three-js-demo.js"></script>
 
 
 
