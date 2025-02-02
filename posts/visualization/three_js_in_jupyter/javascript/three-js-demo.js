@@ -3,21 +3,11 @@ import * as three from 'https://cdn.jsdelivr.net/npm/three@0.173.0/+esm'
 const scene = new three.Scene();
 
 const body = document.getElementById("quarto-document-content");
-console.log(body);
 const bodyWidth = body.clientWidth;
-console.log(bodyWidth);
 const bodyHeight = 600;
-console.log(bodyHeight);
-
-// // Function to detect if the user is on a mobile device using matchMedia
-// function isMobile() {
-//     return window.matchMedia("(max-width: 767px)").matches;
-// }
 
 
-
-const canvas = document.getElementById("#3d-canvas")
-console.log(canvas)
+const canvas = document.getElementById("#three-d-canvas")
 
 const camera = new three.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
 
@@ -44,13 +34,7 @@ function animate() {
     torus.rotation.y += 0.005;
     torus.rotation.z += 0.01;
 
-
-
-
-
     renderer.render(scene, camera);
 }
 
 animate();
-
-

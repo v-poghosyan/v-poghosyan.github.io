@@ -22,10 +22,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -79,8 +113,12 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
+<link rel="stylesheet" href="./css/three-js-demo.css">
 </head>
 
 <body class="nav-fixed">
@@ -164,6 +202,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#d---scenes-in-general" id="toc-d---scenes-in-general" class="nav-link" data-scroll-target="#d---scenes-in-general">3D - Scenes in General</a></li>
   <li><a href="#d---canvas" id="toc-d---canvas" class="nav-link" data-scroll-target="#d---canvas">3D - Canvas</a></li>
+  <li><a href="#grid-view" id="toc-grid-view" class="nav-link" data-scroll-target="#grid-view">Grid View</a></li>
   </ul>
 </nav>
     </div>
@@ -177,11 +216,11 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>In this post we use <a href="https://threejs.org/">Three.js</a> external scripts to render 3D scenes inside this Jupyter notebook.</p>
-<p>This post will be very similar, in terms of its stack, to the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map posy</a>.</p>
-<p>In <em>that</em> post, we learned that Canvas and SVG are two ways in which we can display complex graphics inside a web browser. We already explored SVG graphics in <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map</a>. It’s worth noting that a lot of the same functionality could’ve been replicated using the HTML Canvas element instead of SVG (which we ultimately chose for its superior interactive capabilities) – the article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
+<p>This post will be very similar, in terms of its stack, to the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US map posy</a>.</p>
+<p>In <em>that</em> post, we learned that Canvas and SVG are two ways in which we can display complex graphics inside a web browser. We already explored SVG graphics in <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US map</a>. It’s worth noting that a lot of the same functionality could’ve been replicated using the HTML Canvas element instead of SVG (which we ultimately chose for its superior interactive capabilities) – the article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
 <p>We ended up using <a href="https://github.com/WebReflection/linkedom#readme">linkedom</a> to add a DOM API on top of the Deno environment.</p>
 <p>In fact, what I realized later on is that we could’ve simply used simple Markdown inside our Jupyter notebook to create the <code>&lt;svg&gt;</code> element without the need to introduce a DOM API on top of a browser-less JavaScript environment. In that case, we could have fetched the <code>TopoJSON</code> data and constructed the map inside our external scripts (which we ended up reserving <em>only</em> for the D3 animations). These scripts are run by Quarto only <em>after</em> the page has been rendered to the browser, so we could easily reference the DOM by <code>class</code> or <code>id</code>. Crucially, the external scripts are meant to run <em>inside the browser</em> (as opposed to being pre-computed in the browser-less Deno environment) where they’re able to leverage the existing DOM API provided by the browser’s engine (e.g.&nbsp;<code>document.getElementById</code>).</p>
-<p>The <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3 US Map</a> post shows a <em>mixture</em> of approaches that still works. However, in <em>this</em> post we will simplify things a little by sticking with one approach only. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, we will add a <code>&lt;canvas&gt;</code> element below this very Jupyter notebook cell as plain HTML.</p>
+<p>The <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js US map post</a> shows a <em>mixture</em> of approaches that still works. However, in <em>this</em> post we will simplify things a little by sticking with one approach only. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, we will add a <code>&lt;canvas&gt;</code> element below this very Jupyter notebook cell as plain HTML.</p>
 <p>This approach effectively means we can also do away with Deno itself. The notebook does not to pre-compute any JavaScript, it can just serve as the DOM scaffolding for the external scrips to hook into.</p>
 </section>
 <section id="three.js" class="level1">
@@ -209,8 +248,70 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="d---canvas" class="level1">
 <h1>3D - Canvas</h1>
 <p>Let’s create a <code>&lt;canvas&gt;</code> with <code>id="#3d-canvas"</code>.</p>
-<canvas id="#3d-canvas">
-</canvas>
+<p>We can do it either using raw markup below this very cell, or by using the <code>IPython.display</code> module which allows us to display rich representations of objects in a Jupyter notebook (much like the <code>Deno.jupyter.display</code> module we saw in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js US map post</a>).</p>
+<p>Using <code>IPython.display</code> is more reliable.</p>
+<div id="cell-2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='#three-d-canvas'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<canvas id="#three-d-canvas"></canvas>
+</div>
+</div>
+</section>
+<section id="grid-view" class="level1">
+<h1>Grid View</h1>
+<p>To display multiple 3D <code>Scenes</code> in a grid, we can simply use CSS-grid.</p>
+<p>First we lay out the markup inside the Jupyter note:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-container"</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-item"</span><span class="dt">&gt;&lt;</span><span class="kw">canvas</span><span class="ot"> id</span><span class="op">=</span><span class="st">"three-d-canvas-1"</span><span class="dt">&gt;&lt;/</span><span class="kw">canvas</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-item"</span><span class="dt">&gt;&lt;</span><span class="kw">canvas</span><span class="ot"> id</span><span class="op">=</span><span class="st">"three-d-canvas-2"</span><span class="dt">&gt;&lt;/</span><span class="kw">canvas</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-item"</span><span class="dt">&gt;&lt;</span><span class="kw">canvas</span><span class="ot"> id</span><span class="op">=</span><span class="st">"three-d-canvas-3"</span><span class="dt">&gt;&lt;/</span><span class="kw">canvas</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-item"</span><span class="dt">&gt;&lt;</span><span class="kw">canvas</span><span class="ot"> id</span><span class="op">=</span><span class="st">"three-d-canvas-4"</span><span class="dt">&gt;&lt;/</span><span class="kw">canvas</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, we include the stylesheet in the post subdirectory and use something like Quarto’s <code>include-after-body</code> (as we do with the external script(s)):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include-after-body</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">    &lt;script type="module" src="./javascript/three-js-demo.js"&gt;&lt;/script&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It turns out that there’s a supported way of including CSS inside a Quarto post. It’s done using the <code>format.html</code> flag as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> ./css/three-js-demo.css</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The file <code>three-js-demo.css</code> should contain:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#three-d-grid-container</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">grid</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">grid-template-columns</span><span class="ch">:</span> <span class="fu">repeat(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="dt">fr</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">grid-template-rows</span><span class="ch">:</span> <span class="fu">repeat(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="dt">fr</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">gap</span><span class="ch">:</span> <span class="dv">10</span><span class="dt">px</span><span class="op">;</span> <span class="co">/* Optional: Adds space between grid items */</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span> <span class="co">/* Adjust as needed */</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">height</span><span class="ch">:</span> <span class="dv">50</span><span class="dt">%</span><span class="op">;</span> <span class="co">/* Adjust as needed */</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.three-d-grid-item</span> {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-4" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>display(HTML(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;div id='three-d-grid-container'&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;div class="three-d-grid-item" id="three-d-grid-item-1"&gt;&lt;canvas id="three-d-canvas-1"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;div class="three-d-grid-item" id="three-d-grid-item-2"&gt;&lt;canvas id="three-d-canvas-2"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;div class="three-d-grid-item" id="three-d-grid-item-3"&gt;&lt;canvas id="three-d-canvas-3"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;div class="three-d-grid-item" id="three-d-grid-item-4"&gt;&lt;canvas id="three-d-canvas-4"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/div&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+    <div id="three-d-grid-container">
+        <div class="three-d-grid-item" id="three-d-grid-item-1"><canvas id="three-d-canvas-1"></canvas></div>
+        <div class="three-d-grid-item" id="three-d-grid-item-2"><canvas id="three-d-canvas-2"></canvas></div>
+        <div class="three-d-grid-item" id="three-d-grid-item-3"><canvas id="three-d-canvas-3"></canvas></div>
+        <div class="three-d-grid-item" id="three-d-grid-item-4"><canvas id="three-d-canvas-4"></canvas></div>
+    </div>
+    
+</div>
+</div>
+<p>Now, inside the external script, we can reference the various <code>canvas</code> elements by <code>id</code>.</p>
 
 
 </section>
@@ -809,6 +910,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script type="application/javascript" src="../../../javascript/light-dark.js"></script>
 <script type="module" src="./javascript/three-js-demo.js"></script>
+<script type="module" src="./javascript/three-js-grid-demo.js"></script>
 
 
 
