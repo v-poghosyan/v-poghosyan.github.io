@@ -6,8 +6,15 @@ const body = document.getElementById("quarto-document-content");
 console.log(body);
 const bodyWidth = body.clientWidth;
 console.log(bodyWidth);
-const bodyHeight = body.clientHeight;
+const bodyHeight = 600;
 console.log(bodyHeight);
+
+// // Function to detect if the user is on a mobile device using matchMedia
+// function isMobile() {
+//     return window.matchMedia("(max-width: 767px)").matches;
+// }
+
+
 
 const canvas = document.getElementById("#3d-canvas")
 console.log(canvas)
