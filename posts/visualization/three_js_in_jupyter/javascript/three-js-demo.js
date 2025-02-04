@@ -6,7 +6,6 @@ const body = document.getElementById("quarto-document-content");
 const bodyWidth = body.clientWidth;
 const bodyHeight = 600;
 
-
 const canvas = document.getElementById("#three-d-canvas")
 
 const camera = new three.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
