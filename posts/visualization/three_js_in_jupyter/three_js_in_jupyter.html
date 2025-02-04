@@ -433,11 +433,11 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that <code>OBJLoader</code> takes the URL of the object followed by a callback function that gets triggered by the object fully loading. The geometries of the object are in <code>object.children[n].geometry</code>. Each child is a part of the object (for example the eyes, wings, and nose of a duck). The <code>Mesh</code> constructor takes these <code>geometry</code> data passed to it through the callback function <code>init</code>. This is a common pattern in Three.js.</p>
 <p>Let’s create another canvas to render the rubber ducky.</p>
-<div id="cell-7" class="cell" data-execution_count="15">
+<div id="cell-7" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='#three-d-canvas-5'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='three-d-canvas-5'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<canvas id="#three-d-canvas-5"></canvas>
+<canvas id="three-d-canvas-5"></canvas>
 </div>
 </div>
 
