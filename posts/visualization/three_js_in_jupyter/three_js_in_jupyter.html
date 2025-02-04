@@ -248,14 +248,14 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </section>
 <section id="first-canvas" class="level1">
 <h1>First Canvas</h1>
-<p>Let’s create a <code>&lt;canvas&gt;</code> with <code>id="#3d-canvas"</code>.</p>
+<p>Let’s create a <code>&lt;canvas&gt;</code> with <code>id="three-d-canvas"</code>.</p>
 <p>We can do it either using raw markup below this very cell, or by using the <code>IPython.display</code> module which allows us to display rich representations of objects in a Jupyter notebook (much like the <code>Deno.jupyter.display</code> module we saw in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js US map post</a>).</p>
 <p>Using <code>IPython.display</code> is more reliable.</p>
-<div id="cell-2" class="cell" data-execution_count="8">
+<div id="cell-2" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='#three-d-canvas'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='three-d-canvas'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<canvas id="#three-d-canvas"></canvas>
+<canvas id="three-d-canvas"></canvas>
 </div>
 </div>
 <p>The code to produce the above output is this:</p>
@@ -267,7 +267,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyWidth <span class="op">=</span> body<span class="op">.</span><span class="at">clientWidth</span><span class="op">;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyHeight <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> canvas <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"#three-d-canvas"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> canvas <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"three-d-canvas"</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> camera <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">75</span><span class="op">,</span> bodyWidth <span class="op">/</span> bodyHeight<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
@@ -329,7 +329,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.three-d-grid-item</span> {</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="cell-5" class="cell" data-execution_count="11">
+<div id="cell-5" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>display(HTML(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""</span></span>
@@ -377,16 +377,16 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyWidth <span class="op">=</span> body<span class="op">.</span><span class="at">clientWidth</span><span class="op">;</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyHeight <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> canvas5 <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"#three-d-canvas-5"</span>)<span class="op">;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> scene5 <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Scene</span>()<span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> camera5 <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">75</span><span class="op">,</span> bodyWidth <span class="op">/</span> bodyHeight<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> renderer5 <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">WebGLRenderer</span>({</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> canvas <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"three-d-canvas"</span>)<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> scene <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Scene</span>()<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> camera <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">75</span><span class="op">,</span> bodyWidth <span class="op">/</span> bodyHeight<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> renderer <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">WebGLRenderer</span>({</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> canvas5</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>renderer5<span class="op">.</span><span class="fu">setPixelRatio</span>(<span class="bu">window</span><span class="op">.</span><span class="at">devicePixelRatio</span>)<span class="op">;</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>renderer5<span class="op">.</span><span class="fu">setSize</span>(bodyWidth<span class="op">,</span> bodyHeight)<span class="op">;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>camera5<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">setZ</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>camera5<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">setY</span>(<span class="dv">20</span>)<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="fu">setPixelRatio</span>(<span class="bu">window</span><span class="op">.</span><span class="at">devicePixelRatio</span>)<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="fu">setSize</span>(bodyWidth<span class="op">,</span> bodyHeight)<span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">setZ</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">setY</span>(<span class="dv">20</span>)<span class="op">;</span></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">init</span>(geometry) {</span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -395,14 +395,14 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    pottedPlant<span class="op">.</span><span class="at">scale</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    pottedPlant<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="op">-</span><span class="dv">20</span>)<span class="op">;</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    scene5<span class="op">.</span><span class="fu">add</span>(pottedPlant)<span class="op">;</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    scene<span class="op">.</span><span class="fu">add</span>(pottedPlant)<span class="op">;</span></span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">function</span> <span class="fu">animate5</span>() {</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">requestAnimationFrame</span>(animate5)<span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">function</span> <span class="fu">animate</span>() {</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">requestAnimationFrame</span>(animate)<span class="op">;</span></span>
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        pottedPlant<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">y</span> <span class="op">+=</span> <span class="fl">0.01</span><span class="op">;</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        renderer5<span class="op">.</span><span class="fu">render</span>(scene5<span class="op">,</span> camera5)<span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        renderer<span class="op">.</span><span class="fu">render</span>(scene<span class="op">,</span> camera)<span class="op">;</span></span>
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">animate5</span>()<span class="op">;</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">animate</span>()<span class="op">;</span></span>
 <span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> loader <span class="op">=</span> <span class="kw">new</span> <span class="fu">OBJLoader</span>()<span class="op">;</span></span>
@@ -432,8 +432,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that <code>OBJLoader</code> takes the URL of the object followed by a callback function that gets triggered by the object fully loading. The geometries of the object are in <code>object.children[n].geometry</code>. Each child is a part of the object (for example the eyes, wings, and nose of a duck). The <code>Mesh</code> constructor takes these <code>geometry</code> data passed to it through the callback function <code>init</code>. This is a common pattern in Three.js.</p>
-<p>Let’s create a fifth canvas to render the rubber ducky.</p>
-<div id="cell-7" class="cell" data-execution_count="12">
+<p>Let’s create another canvas to render the rubber ducky.</p>
+<div id="cell-7" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='#three-d-canvas-5'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">

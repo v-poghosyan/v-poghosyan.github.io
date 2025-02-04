@@ -7,7 +7,7 @@ const body = document.getElementById("quarto-document-content");
 const bodyWidth = body.clientWidth;
 const bodyHeight = 600;
 
-const canvas5 = document.getElementById("#three-d-canvas-5");
+const canvas5 = document.getElementById("three-d-canvas-5");
 const scene5 = new THREE.Scene();
 const camera5 = new THREE.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
 const renderer5 = new THREE.WebGLRenderer({
