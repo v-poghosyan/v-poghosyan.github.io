@@ -1,46 +1,123 @@
-// import * as three from 'https://cdn.jsdelivr.net/npm/three@0.173.0/+esm';
-// import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/loaders/OBJLoader.js";
+// // import * as three from 'https://cdn.jsdelivr.net/npm/three@0.173.0/+esm';
+// // import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/loaders/OBJLoader.js";
 
-import * as three from 'three';
-import { OBJLoader } from 'OBJLoader';
+// import * as three from 'three';
+// import { OBJLoader } from 'OBJLoader';
 
 
-const scene5 = new three.Scene();
+// const scene5 = new three.Scene();
+
+// const body = document.getElementById("quarto-document-content");
+// const bodyWidth = body.clientWidth;
+// const bodyHeight = 600;
+
+// const canvas5 = document.getElementById("#three-d-canvas-5")
+
+// const camera5 = new three.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
+
+// const renderer5 = new three.WebGLRenderer({
+//     canvas: canvas5
+// });
+
+// renderer5.setPixelRatio( window.devicePixelRatio );
+// renderer5.setSize( bodyWidth, bodyHeight );
+// camera5.position.setZ(30);
+
+// const ambientLight = new three.AmbientLight( 0xffffff );
+// scene5.add( ambientLight );
+
+// const pointLight = new three.PointLight( 0xffffff, 15 );
+// camera5.add( pointLight );
+// scene5.add( camera5 );
+
+// renderer5.render(scene5, camera5);
+
+// const loader = new OBJLoader();
+// loader.load(
+//     // URL to the OBJ file
+//     "https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/potted_plant.obj",
+//     // Called when the resource is loaded
+//     function (object) {
+//         scene5.add(object);
+//         console.log(object);
+//     },
+//     // Called while loading is progressing
+//     function (xhr) {
+//         console.log("Object loading...");
+//     },
+//     // Called when loading has errors
+//     function (error) {
+//         console.error('An error happened', error);
+//     }
+// );
+
+// renderer5.render(scene5, camera5);
+
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.173.0/build/three.module.js';
+import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/loaders/OBJLoader.js';
 
 const body = document.getElementById("quarto-document-content");
 const bodyWidth = body.clientWidth;
 const bodyHeight = 600;
 
-const canvas5 = document.getElementById("#three-d-canvas-5")
+const canvas5 = document.getElementById("#three-d-canvas-5");
 
-const camera5 = new three.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
+function init(geometry) {
 
-const renderer5 = new three.WebGLRenderer({
-    canvas: canvas5
-});
+    const scene5 = new THREE.Scene();
 
-renderer5.setPixelRatio( window.devicePixelRatio );
-renderer5.setSize( bodyWidth, bodyHeight );
-camera5.position.setZ(30);
+    const camera5 = new THREE.PerspectiveCamera(75, bodyWidth / bodyHeight, 0.1, 1000);
 
-renderer5.render(scene5, camera5);
+    const renderer5 = new THREE.WebGLRenderer({
+        canvas: canvas5
+    });
+
+    renderer5.setPixelRatio(window.devicePixelRatio);
+    renderer5.setSize(bodyWidth, bodyHeight);
+    camera5.position.setZ(0);
+    camera5.position.setY(20);
+
+    // Add directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 10, 7.5);
+    scene5.add(directionalLight);
+
+    // Add ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene5.add(ambientLight);
+
+    const material = new THREE.MeshBasicMaterial({ color: 0xFF6347, wireframe: false });
+    const pottedPlant = new THREE.Mesh(geometry, material)
+
+    pottedPlant.scale.set(1.5, 1.5, 1.5);
+    pottedPlant.position.set(0, 0, -40);
+    scene5.add(pottedPlant);
+
+    function animate5() {
+        requestAnimationFrame(animate5);
+        pottedPlant.rotation.y += 0.01;
+        renderer5.render(scene5, camera5);
+    }
+    animate5();
+}
+
+
 
 const loader = new OBJLoader();
 loader.load(
     // URL to the OBJ file
-    "models/potted_plant.obj",
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj',
     // Called when the resource is loaded
-    function (object) {
-        scene5.add(object);
-    },
+    (object) => {
+        console.log(object);
+        init(object.children[0].geometry)
+    }, 
     // Called while loading is progressing
-    function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    (xhr) => {
+        console.log("Loading object...");
     },
     // Called when loading has errors
-    function (error) {
-        console.error('An error happened', error);
+    (error) => {
+        console.error('An error occured:', error);
     }
 );
-
-renderer5.render(scene5, camera5);
