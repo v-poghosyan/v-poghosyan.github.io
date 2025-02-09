@@ -581,6 +581,13 @@
     "text": "Understanding How Three.js Works\nBut the HTML Canvas is not the focus of this post.\nFrom the WebGL wiki:\n\nWebGL is a DOM API, which means that it can be used from any DOM-compatible language: e.g. JavaScript\n\nThree.js is a library that provides conveniences in JavaScript that abstract much of this DOM API calls. Note that Three.js isn’t suitable for modelling purposes, for that we can use Blender or a number of other closed-source 3D modelling applications. We can even download or purchase third-party models from vendors."
   },
   {
+    "objectID": "posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html#meshes-objects-geometries-and-materials",
+    "href": "posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html#meshes-objects-geometries-and-materials",
+    "title": "Three.js - 3D Animations in the Browser",
+    "section": "Meshes, Objects, Geometries, and Materials",
+    "text": "Meshes, Objects, Geometries, and Materials\nAn object, for the foreseeable future, means an object file of the OBJ Wavefront format. These are files that consist of object.children[n].geometry and object.children[n].material fields. However, the material fields inside an OBJ are just references (via usemtl statements) to the true materials which come separately in .mtl files (typically from the same place as the .obj file).\nThere’s usually no need to break the object down into individual child geometries and their corresponding objects. But, it’s certainly possible. One use case would be if we want to apply a different transformation to each component. Usually, however, we load the object as a whole."
+  },
+  {
     "objectID": "posts/game_development/unreal_engine_cheat_sheet.html",
     "href": "posts/game_development/unreal_engine_cheat_sheet.html",
     "title": "Unreal Engine: Cheat Sheet",
