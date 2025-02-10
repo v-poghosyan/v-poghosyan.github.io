@@ -196,17 +196,16 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#three.js" id="toc-three.js" class="nav-link" data-scroll-target="#three.js">Three.js</a>
-  <ul>
-  <li><a href="#understanding-how-three.js-works" id="toc-understanding-how-three.js-works" class="nav-link" data-scroll-target="#understanding-how-three.js-works">Understanding How Three.js Works</a></li>
-  </ul></li>
-  <li><a href="#d-scenes-in-general" id="toc-d-scenes-in-general" class="nav-link" data-scroll-target="#d-scenes-in-general">3D Scenes in General</a></li>
-  <li><a href="#first-canvas" id="toc-first-canvas" class="nav-link" data-scroll-target="#first-canvas">First Canvas</a>
+  <li><a href="#three.js-and-webgl" id="toc-three.js-and-webgl" class="nav-link" data-scroll-target="#three.js-and-webgl">Three.js and WebGL</a></li>
+  <li><a href="#d-scenes---a-primer" id="toc-d-scenes---a-primer" class="nav-link" data-scroll-target="#d-scenes---a-primer">3D Scenes - A Primer</a>
   <ul>
   <li><a href="#meshes-objects-geometries-and-materials" id="toc-meshes-objects-geometries-and-materials" class="nav-link" data-scroll-target="#meshes-objects-geometries-and-materials">Meshes, Objects, Geometries, and Materials</a></li>
   </ul></li>
+  <li><a href="#our-first-canvas" id="toc-our-first-canvas" class="nav-link" data-scroll-target="#our-first-canvas">Our First Canvas</a>
+  <ul>
   <li><a href="#grid-view" id="toc-grid-view" class="nav-link" data-scroll-target="#grid-view">Grid View</a></li>
-  <li><a href="#loading-custom-objects-with-materials" id="toc-loading-custom-objects-with-materials" class="nav-link" data-scroll-target="#loading-custom-objects-with-materials">Loading Custom Objects with Materials</a></li>
+  </ul></li>
+  <li><a href="#loading-custom-objects-with-their-materials" id="toc-loading-custom-objects-with-their-materials" class="nav-link" data-scroll-target="#loading-custom-objects-with-their-materials">Loading Custom Objects with Their Materials</a></li>
   </ul>
 </nav>
     </div>
@@ -227,30 +226,32 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <p>The <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js US map post</a> shows a <em>mixture</em> of approaches that still works. However, in <em>this</em> post we will simplify things a little by sticking with one approach only. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, we will add a <code>&lt;canvas&gt;</code> element below this very Jupyter notebook cell as plain HTML.</p>
 <p>This approach effectively means we can also do away with Deno itself. The notebook does not to pre-compute any JavaScript, it can just serve as the DOM scaffolding for the external scrips to hook into.</p>
 </section>
-<section id="three.js" class="level1">
-<h1>Three.js</h1>
+<section id="three.js-and-webgl" class="level1">
+<h1>Three.js and WebGL</h1>
 <p><a href="https://threejs.org/">Three.js</a> is a library for drawing 3D graphics in the browser using JavaScript and <a href="https://get.webgl.org/">WebGL</a> (see <a href="https://www.khronos.org/webgl/wiki/Main_Page">wiki</a>).</p>
-<p>WebGL runs in an HTML Canvas (i.e.&nbsp;<code>&lt;canvas&gt;</code>). Canvas and SVG are two ways in which we can display complex graphics inside a browser. We already explored SVG graphics in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map</a> post. It’s worth noting that a lot of the same functionality could’ve been achieved by using the HTML Canvas instead. The article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
-<p>In that post, we ended up using a combination of <a href="https://github.com/WebReflection/linkedom#readme">linkedom</a> to mock a DOM API on the Deno environment. In fact, what I realized later on is that we could’ve simply used the Markdown inside our Jupyter notebook to create the <code>&lt;svg&gt;</code> element. Then, we could construct the rest of the map inside our external scripts (which we used only for animations). These scripts are meant to run only <em>after</em> the page has been rendered to the browser, so we could easily reference the DOM by <code>class</code> or <code>id</code>. Crucially, the external scripts run <em>in the browser</em> (as opposed to being pre-computed in the browser-less Deno environment). In the browser they are able to leverage the DOM API provided by the browser’s engine (e.g.&nbsp;<code>document.getElementById</code>).</p>
-<p>The D3 post shows a mixture of approaches that works. However, in this post we will simplify things by sticking to one approach. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, I’ll include one below this very Jupyter notebook cell as plain HTML.</p>
-<p>This approach effectively means we can also do away with Deno. The notebook itself need not pre-compute any JavaScript.</p>
-<section id="understanding-how-three.js-works" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-how-three.js-works">Understanding How Three.js Works</h2>
-<p>But the HTML Canvas is not the focus of this post.</p>
+<p>WebGL runs in an HTML Canvas (i.e.&nbsp;<code>&lt;canvas&gt;</code>).</p>
 <p>From the WebGL wiki:</p>
 <blockquote class="blockquote">
 <p>WebGL is a DOM API, which means that it can be used from any DOM-compatible language: e.g.&nbsp;JavaScript</p>
 </blockquote>
 <p>Three.js is a library that provides conveniences in JavaScript that abstract much of this DOM API calls. Note that Three.js isn’t suitable for modelling purposes, for that we can use <a href="https://www.blender.org/">Blender</a> or a number of other closed-source 3D modelling applications. We can even download or purchase third-party models from vendors.</p>
+<p>Canvas and SVG are two ways in which we can display complex graphics inside a web browser. We already explored SVG graphics in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js interactive US Map</a> post. It’s worth noting that a lot of the same functionality could’ve been achieved by using the HTML Canvas instead. The article mentions one way to do that by using <a href="https://github.com/samizdatco/skia-canvas">skia-canvas</a>.</p>
+<p>In that post, we ended up using a combination of <a href="https://github.com/WebReflection/linkedom#readme">linkedom</a> to mock a DOM API on the Deno environment. In fact, what I realized later on is that we could’ve simply used the Markdown inside our Jupyter notebook to create the <code>&lt;svg&gt;</code> element. Then, we could construct the rest of the map inside our external scripts (which we used only for animations). These scripts are meant to run only <em>after</em> the page has been rendered to the browser, so we could easily reference the DOM by <code>class</code> or <code>id</code>. Crucially, the external scripts run <em>in the browser</em> (as opposed to being pre-computed in the browser-less Deno environment). In the browser they are able to leverage the DOM API provided by the browser’s engine (e.g.&nbsp;<code>document.getElementById</code>).</p>
+<p>The D3 post shows a mixture of approaches that works. However, in this post we will simplify things by sticking to one approach. We will not use either <code>skia-canvas</code> or <code>linkedom</code> for generating the <code>&lt;canvas&gt;</code> (or <code>&lt;svg&gt;</code>) element. Instead, I’ll include one below this very Jupyter notebook cell as plain HTML.</p>
+<p>This approach effectively means we can also do away with Deno. The notebook itself need not pre-compute any JavaScript.</p>
 </section>
-</section>
-<section id="d-scenes-in-general" class="level1">
-<h1>3D Scenes in General</h1>
-<p>In <em>any</em> 3D scene, be it in the web browser, inside a game engine, in a movie, in a 3D modelling application, etc. there are a bunch of <strong>geometries</strong>, or <strong>shapes</strong> (or <strong>meshes</strong>) that get styled with <strong>textures</strong> (which can range from a complex mapping, like a <strong>shader</strong> animation, to a simple <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a> image).</p>
+<section id="d-scenes---a-primer" class="level1">
+<h1>3D Scenes - A Primer</h1>
+<p>In <em>any</em> 3D scene, be it in the web browser, inside a game engine, in a movie, in a 3D modelling application, etc. there are a bunch of <strong>geometries</strong>, or <strong>shapes</strong> that are packaged with <strong>materials</strong> as <strong>meshes</strong>. The materials can describe simple properties like reflectivity, opacity, refraction index, etc. or they can be <strong>textures</strong> which are just simple <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a> images. We can also apply <strong>shaders</strong> to our objects, which are complex mappings of pixels (or vertices) that make up an interesting animation.</p>
 <p>A scene will also have one or more <strong>light sources</strong>, and a <strong>camera</strong> to <em>serve</em> the scene in some perspective.</p>
+<section id="meshes-objects-geometries-and-materials" class="level2">
+<h2 class="anchored" data-anchor-id="meshes-objects-geometries-and-materials">Meshes, Objects, Geometries, and Materials</h2>
+<p>An <code>object</code>, for the foreseeable future, means an object file of the <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">OBJ Wavefront format</a>. These are files that consist of <code>object.children[n].geometry</code> and <code>object.children[n].material</code> fields. However, the material fields inside an OBJ are just <em>references</em> (via <code>usemtl</code> statements) to the true materials which come separately in <code>.mtl</code> files (typically from the same place as the <code>.obj</code> file).</p>
+<p>There’s usually no need to break the object down into individual child geometries and their corresponding objects. But, it’s certainly possible. One use case would be if we want to apply a different transformation to each component. Usually, however, we load the object as a whole.</p>
 </section>
-<section id="first-canvas" class="level1">
-<h1>First Canvas</h1>
+</section>
+<section id="our-first-canvas" class="level1">
+<h1>Our First Canvas</h1>
 <p>Let’s create a <code>&lt;canvas&gt;</code> with <code>id="three-d-canvas"</code>.</p>
 <p>We can do it either using raw markup below this very cell, or by using the <code>IPython.display</code> module which allows us to display rich representations of objects in a Jupyter notebook (much like the <code>Deno.jupyter.display</code> module we saw in the <a href="../../../posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html">D3.js US map post</a>).</p>
 <p>Using <code>IPython.display</code> is more reliable.</p>
@@ -345,14 +346,8 @@ Click to expand the Torus code
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can invoke the animation within the outer lexical environment, for now.</p>
 <pre><code>animate();</code></pre>
-<section id="meshes-objects-geometries-and-materials" class="level2">
-<h2 class="anchored" data-anchor-id="meshes-objects-geometries-and-materials">Meshes, Objects, Geometries, and Materials</h2>
-<p>An <code>object</code>, for the foreseeable future, means an object file of the <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">OBJ Wavefront format</a>. These are files that consist of <code>object.children[n].geometry</code> and <code>object.children[n].material</code> fields. However, the material fields inside an OBJ are just <em>references</em> (via <code>usemtl</code> statements) to the true materials which come separately in <code>.mtl</code> files (typically from the same place as the <code>.obj</code> file).</p>
-<p>There’s usually no need to break the object down into individual child geometries and their corresponding objects. But, it’s certainly possible. One use case would be if we want to apply a different transformation to each component. Usually, however, we load the object as a whole.</p>
-</section>
-</section>
-<section id="grid-view" class="level1">
-<h1>Grid View</h1>
+<section id="grid-view" class="level2">
+<h2 class="anchored" data-anchor-id="grid-view">Grid View</h2>
 <p>To display multiple 3D <code>scenes</code> in a grid, we can simply use CSS-grid inside Jupyter.</p>
 <p>First we lay out the markup inside the notes:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"three-d-grid-container"</span><span class="dt">&gt;</span></span>
@@ -382,7 +377,7 @@ Click to expand the Torus code
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s add the grid markup.</p>
 <p>Now, inside the external script, we can reference the various <code>canvas</code> elements by <code>id</code>.</p>
-<div id="cell-8" class="cell" data-execution_count="14">
+<div id="cell-7" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>display(HTML(</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""</span></span>
@@ -406,8 +401,9 @@ Click to expand the Torus code
 </div>
 </div>
 </section>
-<section id="loading-custom-objects-with-materials" class="level1">
-<h1>Loading Custom Objects with Materials</h1>
+</section>
+<section id="loading-custom-objects-with-their-materials" class="level1">
+<h1>Loading Custom Objects with Their Materials</h1>
 <p>Quarto won’t serve <code>.obj</code> files (at least by default), so we can just commit the object file to the remote repository and use the <code>raw</code> GitHub link (as a CDN).</p>
 <p>We will also need the <code>OBJLoader</code>, a Three.js add-on. This can be grabbed from a CDN as well. We may also include it in the <code>include-after-body.text</code> front matter <em>before</em> loading the script file itself as:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;script type="importmap"&gt;</span></span>
@@ -503,7 +499,7 @@ Click to expand the code used to generate the rubber ducky
 <p>Note that <code>OBJLoader</code> takes the URL of the object followed by a callback function that gets triggered by the object fully loading.</p>
 <p>The geometries of the object are in <code>object.children[n].geometry</code>. Each child is a part of the object (for example the eyes, wings, and nose of the duck correspond to the object’s child geometries).</p>
 <p>Let’s create another canvas to render the rubber ducky.</p>
-<div id="cell-10" class="cell" data-execution_count="19">
+<div id="cell-9" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='three-d-canvas-5'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
