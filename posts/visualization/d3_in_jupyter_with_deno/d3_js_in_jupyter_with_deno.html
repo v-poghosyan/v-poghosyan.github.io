@@ -854,8 +854,8 @@ Click to expand zoom-and-drag code
 </section>
 <section id="zooming-into-a-state" class="level4">
 <h4 class="anchored" data-anchor-id="zooming-into-a-state">Zooming into a State</h4>
-<p>We would like to zoom into a state by clicking into it. We’d also like to reset the zoom whenever a user clicks outside a state, or inside an already clicked state. Here’We can lump in this code with the rest of the zoom script (<code>zoom-in.js</code>) above.</p>
-<p>First, the <code>svg</code> (i.e.&nbsp;<code>id = zoomable-state-map-wrapper</code>), gets a callback function <code>resetView</code> for its <code>click</code> event. That callback, <code>resetView</code>, is invoked whenever a user clicks the empty space (i.e.&nbsp;outside a state, with <code>id = zoomable-state-path</code>, but <em>inside</em> the <code>svg</code> wrapper.</p>
+<p>We would like to zoom into a state by clicking into it. We’d also like to reset the zoom whenever a user clicks outside a state, or inside an already clicked state. We will lump in this code with the rest of the zoom script (<code>zoom-in.js</code>) above.</p>
+<p>First, the <code>svg</code> (i.e.&nbsp;<code>id = zoomable-state-map-wrapper</code>), gets a callback function <code>resetView</code> for its <code>click</code> event. That callback, <code>resetView</code>, is invoked whenever a user clicks on empty space (i.e.&nbsp;outside a state <code>&lt;path&gt;</code> with <code>id = zoomable-state-path</code>, but <em>inside</em> the <code>svg</code> wrapper).</p>
 <p>In the last section, we saw how to get the zoom state from <code>event.transform</code>. In this section, we will use D3 to construct a zoom state using the D3 <em>behavior</em> <code>zoom</code>. From the D3 <a href="https://d3js.org/d3-zoom#_zoom">docs</a>:</p>
 <blockquote class="blockquote">
 <p>The zoom behavior stores the zoom state on the element to which the zoom behavior was applied, not on the zoom behavior itself. This allows the zoom behavior to be applied to many elements simultaneously with independent zooming. The zoom state can change either on user interaction or programmatically via <code>zoom.transform</code>.</p>
