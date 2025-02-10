@@ -817,7 +817,7 @@ Click to expand tooltip code
 <section id="zoom-and-drag" class="level4">
 <h4 class="anchored" data-anchor-id="zoom-and-drag">Zoom and Drag</h4>
 <p>Much like with the tooltips, we can define an external script for zooming into the map on a <code>zoom</code> event (e.g.&nbsp;using the mouse wheel or panning).</p>
-<p>Here’s the zoom-in script. Expand to view.</p>
+<p>Here’s the zoom-in logic. Expand to view.</p>
 <details>
 <summary>
 Click to expand zoom-and-drag code
@@ -846,7 +846,6 @@ Click to expand zoom-and-drag code
 <span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="st">"0"</span>)<span class="op">;</span></span>
 <span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<p>Here’s the updated fully-interactive map code. Not much has changed, but feel free to expand and examine.</p>
 <p>When the user interacts with the DOM, D3 computes an object called <code>event.transform</code> describing the current transformation (i.e.&nbsp;translation, scaling, keys pressed, and/or other relevant event parameters). This is passed to the callback function for the event, where we can use it to specify the exact transformation. In other words, this object is what captures <em>how much</em> the user has zoomed in using their mouse wheel, or <em>how far</em> they’ve panned.</p>
 <p><strong>Zoom Behavior - General Strokes</strong></p>
 <p>We define a new zoom behavior called <code>zoom</code>. We can assign an event listener to a behavior using <code>on</code> (much like when assigning listeners to D3 selections of DOM elements). Later, when we <em>bind</em> the behavior to a DOM element, D3 will attach the relevant event listeners to the DOM object itself. Inside the callback function of the event listener, <code>zoomIn</code>, we can take the <code>event.transform</code> object and apply the same, <em>exact</em> transformation to <code>groupOfStates</code>. We also need to narrow the stroke width, as we zoom, by the inverse relationship <code>1/transform.k</code> where <code>transform.k</code> is the scalar magnification of <code>event.transform</code> (i.e.&nbsp;if <code>k</code> is <code>1</code> then the zoom level is 1x)</p>
