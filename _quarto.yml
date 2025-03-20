@@ -11,7 +11,7 @@ website:
   favicon: favicon.png
   google-analytics: "G-KLCX05QFPN"
   navbar:
-    logo: logo.png
+    logo: assets/site/logo.png
     pinned: true
     background: secondary
     left:
