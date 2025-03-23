@@ -26,18 +26,44 @@ const directionalLight = new three.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(10, 20, 10);
 scene5.add(directionalLight);
 
-// Load the MTL file first.
+// Add a skybox
+const loader = new three.CubeTextureLoader();
+const px = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png'
+const nx = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png'
+const py = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png'
+const ny = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png'
+const pz = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png'
+const nz = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
+const texture = loader.load([
+  px, // Right
+  nx, // Left
+  py, // Top
+  ny, // Bottom
+  pz, // Front
+  nz  // Back
+]);
+// Set the scene's background to `texture`
+scene5.background = texture;
+// Create the CubeRenderTarget
+const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(512);
+const cubeCamera = new THREE.CubeCamera(1, 1000, cubeRenderTarget);
+scene5.add(cubeCamera);
+
+// Instantiate MTLLoader and define the URLs for the material and object.
 const mtlLoader = new MTLLoader();
+const duckMtl = "https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl"
+const duckObj = "https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj"
+
+// Load the MTL file first.
 mtlLoader.load(
-  'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl',
+  duckMtl,
   (materials) => {
     materials.preload();
-
     // Now load the OBJ file and set its materials.
     const objLoader = new OBJLoader();
     objLoader.setMaterials(materials);
     objLoader.load(
-      'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj',
+      duckObj,
       (object) => {
         // Scale and position the loaded object.
         object.scale.set(5, 5, 5);
