@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2022-01-23">
+<meta name="dcterms.date" content="2025-03-15">
 
-<title>LC11: Container with Most Water – v-poghosyan</title>
+<title>GUIs in Python using Tkinter – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,24 +59,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,35 +114,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -153,10 +124,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../assets/site/logo.png" alt="" class="navbar-logo">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../assets/site/logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">v-poghosyan</span>
     </a>
   </div>
@@ -167,7 +138,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">Info</span></a>
   </li>  
 </ul>
@@ -182,11 +153,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">LC11: Container with Most Water</h1>
+      <h1 class="title">GUIs in Python using Tkinter</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Leetcode</div>
-                <div class="quarto-category">Algorithms</div>
-                <div class="quarto-category">Dynamic Programming</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">GUIs</div>
               </div>
                   </div>
   </div>
@@ -204,7 +174,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 23, 2022</p>
+        <p class="date">March 15, 2025</p>
       </div>
     </div>
     
@@ -220,18 +190,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
-  <li><a href="#brute-force-solution" id="toc-brute-force-solution" class="nav-link" data-scroll-target="#brute-force-solution">Brute-Force Solution</a></li>
-  <li><a href="#dp-the-two-pointer-solution" id="toc-dp-the-two-pointer-solution" class="nav-link" data-scroll-target="#dp-the-two-pointer-solution">DP: The Two-Pointer Solution</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#example-project---calendar-app-habit-tracker" id="toc-example-project---calendar-app-habit-tracker" class="nav-link" data-scroll-target="#example-project---calendar-app-habit-tracker">Example Project - Calendar App &amp; Habit Tracker</a>
   <ul class="collapse">
-  <li><a href="#optimal-sub-structure" id="toc-optimal-sub-structure" class="nav-link" data-scroll-target="#optimal-sub-structure">Optimal Sub-Structure</a>
-  <ul class="collapse">
-  <li><a href="#proof-of-the-optimal-sub-structure" id="toc-proof-of-the-optimal-sub-structure" class="nav-link" data-scroll-target="#proof-of-the-optimal-sub-structure">Proof of The Optimal Sub-Structure</a></li>
+  <li><a href="#system-design-considerations" id="toc-system-design-considerations" class="nav-link" data-scroll-target="#system-design-considerations">System Design Considerations</a></li>
+  <li><a href="#evolving-system-diagram" id="toc-evolving-system-diagram" class="nav-link" data-scroll-target="#evolving-system-diagram">Evolving system diagram</a></li>
+  <li><a href="#start-a-python-project" id="toc-start-a-python-project" class="nav-link" data-scroll-target="#start-a-python-project">Start a Python Project</a></li>
+  <li><a href="#create-a-simple-gui" id="toc-create-a-simple-gui" class="nav-link" data-scroll-target="#create-a-simple-gui">Create a Simple GUI</a></li>
   </ul></li>
-  <li><a href="#the-two-pointers-algorithm-pseudo-code" id="toc-the-two-pointers-algorithm-pseudo-code" class="nav-link" data-scroll-target="#the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</a></li>
-  <li><a href="#the-solution" id="toc-the-solution" class="nav-link" data-scroll-target="#the-solution">The Solution</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -242,98 +208,67 @@ window.Quarto = {
 
 
 
-<section id="problem-statement" class="level1">
-<h1>Problem Statement</h1>
-<p>We are given an integer array <code>height</code> of length <code>n</code>. Each element of the array corresponds to a vertical line (of <code>n</code> total lines) drawn from the horizontal axis such that the <code>i</code>-th line’s two endpoints are <code>(i, 0)</code> and <code>(i, height[i])</code> (see the figure below).</p>
-<p>Find two lines which, together with the x-axis, form a container which can hold the most water. Return the maximum amount of water this container can store.</p>
-<p><strong>Example</strong></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>There’s a standard library in Python used for creating simple GUIs called <a href="https://docs.python.org/3/library/tkinter.html">tkinter</a> which stands for “TK interface”.</p>
+<p>According to Wikipedia, “<a href="https://en.wikipedia.org/wiki/Tk_(software)">Tk</a> is a cross-platform widget toolkit that provides a library of basic GUI elements for building a graphical user interface in many programming languages. It is free and open-source software. It was first developed by John Ousterhout as an extension for the <a href="https://en.wikipedia.org/wiki/Tcl">Tcl</a> scripting language.” <a href="https://en.wikipedia.org/wiki/Language_binding">Language binding</a> brings TK to Python in the form of <a href="https://docs.python.org/3/library/tkinter.html">tkinter</a>, which is what we’ll be using in this post.</p>
+</section>
+<section id="example-project---calendar-app-habit-tracker" class="level1">
+<h1>Example Project - Calendar App &amp; Habit Tracker</h1>
+<p>We’re calling our project <strong>Frictionless</strong>, it’s a combined habit tracker and calendar app.</p>
+<section id="system-design-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="system-design-considerations">System Design Considerations</h2>
+<p>Here are the requirements:</p>
+<ol type="1">
+<li>Display a calendar</li>
+<li>Add/modify/delete events or accomplishments</li>
+<li>Save changes locally</li>
+<li>Store results into a database on the cloud</li>
+<li>Calculate simple stats on accomplishments (top streaks, number of total days, etc.)</li>
+<li>Calculate complex stats on accomplishments (e.g.&nbsp;gas money saved from days biking instead of driving)</li>
+</ol>
+<p>Optional milestones:</p>
+<ol type="1">
+<li>Reminder service for events</li>
+<li>A global reference service that pulls data from the live web (such as gas prices on a particular day)</li>
+</ol>
+<p>Due to the principle of separation of concerns, we will need to split the product into a corresponding number of services (corresponding to each requirement).</p>
+</section>
+<section id="evolving-system-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="evolving-system-diagram">Evolving system diagram</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../assets/leetcode/lc11_container_with_most_water/container_with_most_water.light.png" class="img-fluid figure-img"></p>
-<figcaption>Container with most water</figcaption>
+<p><img src=".png" class="img-fluid figure-img"></p>
+<figcaption>Diagram</figcaption>
 </figure>
 </div>
-<pre><code>Input: height = [1,8,6,2,5,4,8,3,7]
-Output: 49</code></pre>
-<p><strong>Explanation</strong></p>
-<p>The above vertical lines are represented by array <code>[1,8,6,2,5,4,8,3,7]</code>. In this case, the max area of the water (highlighted section) the container can contain is 49 (in units of area).</p>
+<p>The database write operation is mediated by a retry scheduler service. Or we do a synchronous write since data integrity is a priority. Especially if we use this service to remind us about taking any medications or other critical matters.</p>
+<p>There may be some role for queue system as well.</p>
+<p>The downstream services, such as the statistical layer, will need to access</p>
 </section>
-<section id="brute-force-solution" class="level1">
-<h1>Brute-Force Solution</h1>
-<p>The brute force solution to this problem checks each pair of vertical lines (or each subset of size <span class="math inline">\(2\)</span>). Since the order of any given pair in the subset does not matter, this solution has time complexity <span class="math inline">\({O \left ({n \choose 2} \right )= O \left (\frac{n(n-1)}{2} \right ) = O(n^2)}\)</span> where <span class="math inline">\(n\)</span> is the length of the <code>height</code> array.</p>
+<section id="start-a-python-project" class="level2">
+<h2 class="anchored" data-anchor-id="start-a-python-project">Start a Python Project</h2>
+<p>We use <code>pipenv</code>, a combination of <code>pip</code> and <code>venv</code> that creates a Pipfile for tracking dependencies and a <code>Pipfile.lock</code> for ensuring consistent installations.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pipenv install requests      <span class="co"># Creates virtual environment and installs the package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pipenv shell                 <span class="co"># Activate the virtual environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="dp-the-two-pointer-solution" class="level1">
-<h1>DP: The Two-Pointer Solution</h1>
-<p>The more efficient solution, the <strong>Two-Pointer Solution</strong>, follows from an optimal sub-structure in the problem. This optimal sub-structure allows us to remove certain pairs <span class="math inline">\((i,j)\)</span> entirely from consideration, thereby reducing the number of pairs to be considered. The main difficulty lies in noticing and proving this optimal sub-structure.</p>
-<section id="optimal-sub-structure" class="level2">
-<h2 class="anchored" data-anchor-id="optimal-sub-structure">Optimal Sub-Structure</h2>
-<ul>
-<li><p>Let <span class="math inline">\(h(i)\)</span> denote the height of the <span class="math inline">\(i\)</span>-th vertical line.</p></li>
-<li><p>Let <span class="math inline">\(a(i,j)\)</span> denote the area of the container formed by the pair of vertical lines <span class="math inline">\((i,j)\)</span>.</p></li>
-<li><p>Let <span class="math inline">\(maxArea(i,j)\)</span> denote the maximum area formed by the lines <span class="math inline">\({i,...,j}\)</span> – that is the output of the procedure on the subarray <code>height[i:j]</code>.</p></li>
-</ul>
-<p>Suppose, without loss of generality, <span class="math inline">\(h(1) \leq h(n)\)</span> (that is, the first line is shorter than the last). The <span class="math inline">\(w.l.o.g.\)</span> there will boil down to having to keep track of two pointers at the implementation stage (in the iterative approach) needed to determine which height is less at any particular iteration.</p>
-<p>Now, we can state a <em>top-down</em> optimal sub-structure for the problem:</p>
-<p><span class="math display">\[
-maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}
-\]</span></p>
-<p>This top-down expression hints at a recursive solution (which is left as an exercise to the reader). In this post, we will offer a <em>bottom-up</em>, iterative solution (with very basic tabulation – just the running maximum <code>water</code> variable, really) – one that’s often called the <strong>Two-Pointer Solution</strong> (which is apt, because most of what we have to do is keep track of two pointers pointing to the vertical lines).</p>
-<p>We have explored dynamic programming before in some detail in a similar post about finding the <a href="../../posts/leetcode/lc53_maximum_subarray.html">Maximum Subarray</a>, and have even proven the correctness of another, similar, DP solution to the problem of finding the <a href="../../posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html">Best Time to Buy and Sell Stock</a>. This problem is yet another, very basic, example of DP. As we know, DP solutions are often proven by proving the underlying optimal sub-structure. Let’s look at such a proof.</p>
-<section id="proof-of-the-optimal-sub-structure" class="level3">
-<h3 class="anchored" data-anchor-id="proof-of-the-optimal-sub-structure">Proof of The Optimal Sub-Structure</h3>
-<p>For the initial pair <span class="math inline">\((1,n)\)</span> where <span class="math inline">\(h(1) \leq h(n)\)</span> we have <span class="math inline">\(a(1,n) &gt; a(1,k)  \ \ \forall k\)</span>. This is because we’re starting out from the <em>widest container</em> formed by <span class="math inline">\({(1,n)}\)</span> and considering containers of decreasing width formed by the pairs <span class="math inline">\({(1, n-1), (1, n-2), ..., (1,2)}\)</span>.</p>
-<p>In case <span class="math inline">\({h(k) &gt; h(1)}\)</span> for some <span class="math inline">\({n \geq k &gt; 1}\)</span> the area of the container formed by <span class="math inline">\({(1,k)}\)</span> is still determined by <span class="math inline">\({h(1)}\)</span>, except now it’s less wide. Whereas if <span class="math inline">\({h(k) &lt; h(1)}\)</span> the area of the container decreases not only in width but also in height.</p>
-<p>In both cases we have <span class="math inline">\({a(1,n) &gt; a(1,k)}\)</span> which means in general <span class="math inline">\({a(1,n) &gt; a(1, k) \ \ \forall k}\)</span>.</p>
-<p>Therefore, we may omit the first vertical line from consideration and consider the sub-problem on the indices <span class="math inline">\({2,...,n}\)</span>. The final, optimal solution will then be <span class="math inline">\(maxArea(1,n) = max\{a(1,n), maxArea(2,n)\}\)</span> as was the claim.</p>
-</section>
-</section>
-<section id="the-two-pointers-algorithm-pseudo-code" class="level2">
-<h2 class="anchored" data-anchor-id="the-two-pointers-algorithm-pseudo-code">The Two Pointers Algorithm (Pseudo-Code)</h2>
-<p>At this point, the <strong>Two-Pointers Algorithm</strong> is all but trivial to see:</p>
-<ul>
-<li>Initialize two pointers, ‘left’ and ‘right’, at the first and last index respectively.</li>
-<li>While the pointers do not intersect:
-<ul>
-<li>Calculate the area of the container formed by the pointers and determine if it’s the maximum area encountered so far</li>
-<li>Keep the position of the pointer of the vertical line that’s longer fixed</li>
-<li>Advance the pointer of vertical line that’s shorter towards the fixed pointer</li>
-</ul></li>
-</ul>
-</section>
-<section id="the-solution" class="level2">
-<h2 class="anchored" data-anchor-id="the-solution">The Solution</h2>
-<div id="31f6dbfd" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maxArea(height) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> <span class="dv">0</span>, <span class="bu">len</span>(height) <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    water <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> j:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        water <span class="op">=</span> <span class="bu">max</span>(water, (j <span class="op">-</span> i) <span class="op">*</span> <span class="bu">min</span>(height[i], height[j]))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> height[i] <span class="op">&lt;</span> height[j]:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> water</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Example input</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>heights <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">7</span>]</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The container with most water has area: </span><span class="sc">{</span>maxArea(heights)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The container with most water has area: 49</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>In this post, we explored the problem of finding the container with the most water using both a brute-force approach and a more efficient two-pointer approach (rooted in DP). The Two-Pointer Approach is a classic example of how dynamic programming principles can be applied to optimize solutions by identifying and exploiting an optimal sub-structure.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/leetcode/lc11_container_with_most_water/container_with_most_water.dark.png" height="0" class="figure-img"></p>
-<figcaption>Container with most water</figcaption>
-</figure>
-</div>
+<section id="create-a-simple-gui" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-simple-gui">Create a Simple GUI</h2>
+<p>We first construct a <code>Tk</code> object by importing <code>tkinter</code> as <code>tk</code>. It’s typical to call this object <code>root</code>. We add properties like <code>title</code> to <code>root</code>.</p>
+<p>In order for our GUI application not to close immediately, leading us to believe nothing happens when we run our code, we need to run the <code>mainloop</code> method of the <code>Tk</code> object <code>root</code>. This is also where all event handling happens. Yes, that’s right, tkinter has an event handling system like the browser’s DOM API (well, only insofar as they are both event handling systems for GUIs).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>root.title (<span class="st">"Simple App"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>root.mainloop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This opens a window.</p>
+<p>Perhaps the simplest thing we can add to our new window is a button.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>btn <span class="op">=</span> tk.Button(root, text<span class="op">=</span><span class="st">"Button"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In order to display it, we need to add it to our window using a <em>geometry manager</em> like <code>grid</code>. This controls where in the UI the object is placed.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
