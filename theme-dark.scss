@@ -326,13 +326,6 @@ a.pagination-link {
     color: #F9C22E;
 }
 
-
-// PDF iframes in dark mode
-iframe[src$=".pdf"] {
-    filter: invert(0.9) hue-rotate(180deg);
-}
-
-
 ////////////////////////////////////////////////////////////
 /// MY CUSTOM THEMES
 ////////////////////////////////////////////////////////////
