@@ -1,0 +1,128 @@
+<mxfile host="65bd71144e">
+    <diagram id="Um5UQkkA05jx3OKsi89t" name="Page-1">
+        <mxGraphModel dx="1561" dy="607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="92" value="Leetcode Mental Map" style="swimlane;startSize=20;horizontal=1;containerType=tree;strokeColor=#808080;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="473" y="120" width="1087" height="880" as="geometry">
+                        <mxRectangle x="840" y="40" width="90" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="167" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="97" target="166">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="170" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=30;entryX=0;entryY=0;entryDx=170;entryDy=32.5;strokeColor=#808080;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="92" source="97" target="107">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="Dictionaries" style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="720" y="408" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=30;entryX=0;entryY=0;entryDx=160;entryDy=35;strokeColor=#808080;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="92" source="73" target="156">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="169" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=40;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="73" target="168">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" value="Sets" style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="475" y="210" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;Manual hashmaps? &lt;br&gt;An array of on 24bits&lt;/font&gt;" style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};fillColor=#22878E;strokeColor=#0B3236;shape=cube;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="300" y="408" width="175" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="171" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=35;entryX=0;entryY=0;entryDx=175;entryDy=47.5;strokeColor=#616355;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="92" source="107" target="118">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="&lt;a href=&quot;https://leetcode.com/problems/group-anagrams/description/&quot;&gt;&lt;font style=&quot;color: rgb(34, 135, 142);&quot;&gt;LC: Group of Anagrams&lt;/font&gt;&lt;/a&gt;" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="510" y="400" width="170" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" value="&lt;a href=&quot;https://leetcode.com/problems/contains-duplicate/description/&quot;&gt;&lt;font style=&quot;color: rgb(34, 135, 142);&quot;&gt;LC: Contains Duplicate&lt;/font&gt;&lt;/a&gt;" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="275" y="170" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;Compare lenghts&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;of sets&lt;/font&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=50;align=center;verticalAlign=middle;strokeWidth=1;autosize=1;spacing=4;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};fillColor=#22878E;strokeColor=#0B3236;shape=cube;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" collapsed="1" parent="92">
+                    <mxGeometry x="90" y="135" width="140" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="" style="edgeStyle=entityRelationEdgeStyle;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=40;entryX=0;entryY=0;entryDx=140;entryDy=42.5;entryPerimeter=0;strokeColor=#808080;exitPerimeter=0;" edge="1" parent="92" source="156" target="76">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="300" y="220"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="140" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;Comparizon between &lt;br&gt;dictionaries in &lt;br&gt;Python can be done &lt;br&gt;using ==&lt;/font&gt;" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#22878E;align=center;verticalAlign=middle;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#0B3236;rounded=1;backgroundOutline=1;darkOpacity=0.05;fixedSize=1;boundedLbl=1;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="160" y="278" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="&lt;a href=&quot;https://leetcode.com/problems/valid-anagram/description/&quot;&gt;&lt;font style=&quot;color: rgb(34, 135, 142);&quot;&gt;LC: Valid Anagram&lt;/font&gt;&lt;/a&gt;" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="540" y="358" width="140" height="48" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="" style="edgeStyle=entityRelationEdgeStyle;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;strokeColor=#808080;entryX=0;entryY=0;entryDx=140;entryDy=34;entryPerimeter=0;exitX=0;exitY=0;exitDx=10;exitDy=30;exitPerimeter=0;" edge="1" parent="92" source="97" target="101">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="161" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=35;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="97" target="160">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="880" y="430"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="163" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="97" target="162">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="870" y="468"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="166" value="Memoization &lt;br&gt;(Caching function results)" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;" vertex="1" parent="92">
+                    <mxGeometry x="870" y="448" width="170" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="139" value="" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0;entryY=0;entryDx=150;entryDy=42.5;entryPerimeter=0;exitX=0;exitY=0;exitDx=10;exitDy=38;strokeColor=#808080;exitPerimeter=0;" edge="1" parent="92" source="101" target="138">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="141" value="" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0;entryY=0;entryDx=150;entryDy=55;exitX=0;exitY=0;exitDx=10;exitDy=55;exitPerimeter=0;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="138" target="140">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="138" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;Make a dictionary of &lt;br&gt;character counts&amp;nbsp;&lt;/font&gt;" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#22878E;align=center;verticalAlign=middle;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#0B3236;rounded=1;backgroundOutline=1;darkOpacity=0.05;fixedSize=1;boundedLbl=1;darkOpacity2=0.1;" vertex="1" parent="92">
+                    <mxGeometry x="355" y="315" width="150" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="168" value="Uniqueness checking" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;" vertex="1" parent="92">
+                    <mxGeometry x="590" y="170" width="170" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="162" value="LRU &lt;br&gt;(Recency Caching)" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;" vertex="1" parent="92">
+                    <mxGeometry x="870" y="390" width="170" height="65" as="geometry"/>
+                </mxCell>
+                <object label="Character counting" tags="CharacterCountingTopic" id="160">
+                    <mxCell style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;" vertex="1" parent="92">
+                        <mxGeometry x="870" y="350" width="170" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="164" value="Graph representaion&lt;br&gt;(adjacency lists)" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;" vertex="1" parent="92">
+                    <mxGeometry x="870" y="293" width="170" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="175" value="" style="shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;treeFolding=1;" vertex="1" parent="92">
+                    <mxGeometry x="917" y="50" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="165" style="edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;" edge="1" parent="92" source="97" target="164">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="178" value="" style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;" vertex="1" parent="92">
+                    <mxGeometry x="917" y="100" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="179" value="" style="whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;entityRelationEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;,&quot;segment&quot;:10,&quot;curved&quot;:1,&quot;sourcePerimeterSpacing&quot;:0,&quot;targetPerimeterSpacing&quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;" vertex="1" parent="92">
+                    <mxGeometry x="917" y="150" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="180" value="Concepts" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="92">
+                    <mxGeometry x="970" y="61" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="181" value="Data Structures" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="92">
+                    <mxGeometry x="967" y="110" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="182" value="Problems" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="92">
+                    <mxGeometry x="975" y="160" width="50" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="184" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=none;strokeColor=#808080;" vertex="1" parent="92">
+                    <mxGeometry x="897" y="30" width="180" height="180" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
