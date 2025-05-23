@@ -38,8 +38,8 @@ world.gravity.set(0, -9.82, 0); // Gravity pointing down
 
 // Water plane
 // Water-like material
-const waterTexture = new three.TextureLoader().load('https://threejs.org/examples/textures/water.jpg');
-const waterBumpMap = new three.TextureLoader().load('https://threejs.org/examples/textures/water-bump.jpg');
+const waterTexture = new three.TextureLoader().load('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water.jpg');
+const waterBumpMap = new three.TextureLoader().load('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water-bump.jpg');
 const waterMaterial = new three.MeshStandardMaterial({
   map: waterTexture, // Water texture
   bumpMap: waterBumpMap, // Bump map for surface detail
