@@ -24,8 +24,10 @@ const quadMesh = new three.Mesh(
 
 /* Shader Material ---------------------------------------------- */
 // Import shaders from ../shaders
-import vertexShader from 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.vert?raw';
-import fragmentShader from 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.frag?raw';
+const vertResponse = await fetch('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.vert');
+const vertexShader = await vertResponse.text();
+const fragResponse = await fetch('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.frag');
+const fragmentShader = await fragResponse.text();
 const shaderMaterial = new three.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
