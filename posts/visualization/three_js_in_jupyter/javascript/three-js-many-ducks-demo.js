@@ -35,7 +35,7 @@ function randInRange(min, max) {
 // Load the MTL file first.
 const mtlLoader = new MTLLoader();
 mtlLoader.load(
-  'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl',
+  'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl',
   (materials) => {
     materials.preload();
 
@@ -43,7 +43,7 @@ mtlLoader.load(
     const objLoader = new OBJLoader();
     objLoader.setMaterials(materials);
     objLoader.load(
-      'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj',
+      'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj',
       (object) => {
         // Scale the loaded object.
         object.scale.set(3, 3, 3);
