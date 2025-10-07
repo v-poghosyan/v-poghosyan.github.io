@@ -25,7 +25,7 @@ website:
     left: "Copyright 2021, Vahram Poghosyan" 
     right: 
       - icon: github
-        href: https://www.github.com/vahram-pg
+        href: https://www.github.com/v-poghosyan
         aria-label: GitHub
       - icon: linkedin 
         href: https://www.linkedin.com/in/vahrampoghosyan/

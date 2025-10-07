@@ -23,12 +23,12 @@ scene7.add(dir);
 
 /* Skybox ---------------------------------------------- */
 scene7.background = new three.CubeTextureLoader().load([
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
 ]);
 
 
@@ -38,8 +38,8 @@ world.gravity.set(0, -9.82, 0); // Gravity pointing down
 
 // Water plane
 // Water-like material
-const waterTexture = new three.TextureLoader().load('https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water.jpg');
-const waterBumpMap = new three.TextureLoader().load('https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water-bump.jpg');
+const waterTexture = new three.TextureLoader().load('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water.jpg');
+const waterBumpMap = new three.TextureLoader().load('https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/water-bump.jpg');
 const waterMaterial = new three.MeshStandardMaterial({
   map: waterTexture, // Water texture
   bumpMap: waterBumpMap, // Bump map for surface detail
@@ -107,8 +107,8 @@ const wallBodies = walls.map((wall, index) => {
 });
 
 /* Load duck model ---------------------------------------------- */
-const mtlURL = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl';
-const objURL = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj';
+const mtlURL = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl';
+const objURL = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj';
 
 new MTLLoader().load(mtlURL, (materials) => {
   materials.preload();

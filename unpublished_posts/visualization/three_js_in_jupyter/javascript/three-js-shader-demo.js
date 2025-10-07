@@ -21,12 +21,12 @@ scene8.add(dir);
 
 /* Skybox ---------------------------------------------- */
 scene8.background = new three.CubeTextureLoader().load([
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png',
-    'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png',
+    'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
 ]);
 
 

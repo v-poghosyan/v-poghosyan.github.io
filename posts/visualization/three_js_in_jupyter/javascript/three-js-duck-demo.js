@@ -29,12 +29,12 @@ scene5.add(directionalLight);
 
 // Add a skybox
 const loader = new three.CubeTextureLoader();
-const px = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png'
-const nx = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png'
-const py = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png'
-const ny = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png'
-const pz = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png'
-const nz = 'https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
+const px = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/px.png'
+const nx = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nx.png'
+const py = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/py.png'
+const ny = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/ny.png'
+const pz = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/pz.png'
+const nz = 'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/textures/skybox/nz.png'
 const texture = loader.load([
   px, // Right
   nx, // Left
@@ -57,8 +57,8 @@ controls.dampingFactor = 0.05;
 
 // Instantiate MTLLoader and define the URLs for the material and object.
 const mtlLoader = new MTLLoader();
-const duckMtl = "https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl"
-const duckObj = "https://raw.githubusercontent.com/vahram-pg/digital-garden/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj"
+const duckMtl = "https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.mtl"
+const duckObj = "https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/posts/visualization/three_js_in_jupyter/models/rubber_duck.obj"
 
 // Load the MTL file first.
 mtlLoader.load(

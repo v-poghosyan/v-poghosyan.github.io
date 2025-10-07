@@ -4,10 +4,10 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://www.linkedin.com/in/vahram-p/
+      href: https://www.linkedin.com/in/vahrampoghosyan/
     - icon: github
       text: GitHub
-      href: https://www.github.com/vahram-pg
+      href: https://www.github.com/v-poghosyan
 page-layout: full
 sidebar: false
 toc: false
