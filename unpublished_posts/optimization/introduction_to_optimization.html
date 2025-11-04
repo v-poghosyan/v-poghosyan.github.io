@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2023-01-13">
+<meta name="dcterms.date" content="2022-01-23">
 
-<title>Recursion Optimizations – v-poghosyan</title>
+<title>Notes: Introduction to Optimization – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -182,10 +148,9 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Recursion Optimizations</h1>
+      <h1 class="title">Notes: Introduction to Optimization</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Recursion</div>
-                <div class="quarto-category">Functional Programming</div>
+                <div class="quarto-category">Optimization</div>
               </div>
                   </div>
   </div>
@@ -203,7 +168,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2023</p>
+        <p class="date">January 23, 2022</p>
       </div>
     </div>
     
@@ -219,12 +184,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#recursion-optimizations" id="toc-recursion-optimizations" class="nav-link active" data-scroll-target="#recursion-optimizations">Recursion Optimizations</a>
-  <ul>
-  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a>
-  <ul>
-  <li><a href="#classic-example-factorial" id="toc-classic-example-factorial" class="nav-link" data-scroll-target="#classic-example-factorial">Classic Example: Factorial</a></li>
-  </ul></li>
+  <li><a href="#introduction-to-optimization" id="toc-introduction-to-optimization" class="nav-link active" data-scroll-target="#introduction-to-optimization">Introduction to Optimization</a>
+  <ul class="collapse">
+  <li><a href="#model-of-a-convex-optimization-problem" id="toc-model-of-a-convex-optimization-problem" class="nav-link" data-scroll-target="#model-of-a-convex-optimization-problem">Model of a Convex Optimization Problem</a></li>
+  <li><a href="#why-convex-optimization" id="toc-why-convex-optimization" class="nav-link" data-scroll-target="#why-convex-optimization">Why Convex Optimization?</a></li>
+  <li><a href="#where-to-go-from-here" id="toc-where-to-go-from-here" class="nav-link" data-scroll-target="#where-to-go-from-here">Where to go from here</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -236,98 +200,27 @@ window.Quarto = {
 
 
 
-<section id="recursion-optimizations" class="level1">
-<h1>Recursion Optimizations</h1>
-<p>Recursive algorithms, while elegant and expressive, can sometimes lead to performance issues due to the overhead of function calls and potential for repeated computations. Several optimization techniques can be employed to enhance their efficiency. One common method is <strong>memoization</strong>, which stores the results of expensive function calls and reuses them when the same inputs occur again, avoiding repeated computations. Another technique is <strong>tail recursion optimization</strong>, where the recursive call is the final operation in the function, allowing the system to reuse the current stack frame for each recursive call. Tail recursion optimization reduces the space complexity from <span class="math inline">\(O(n)\)</span> to <span class="math inline">\(O(1)\)</span>. Additionally, <strong>iterative solutions</strong> can often be more efficient than their recursive counterparts, so converting a recursive algorithm to an iterative one can be considered an optimization. Understanding these techniques, and variations on them, can greatly improve the performance of our recursive algorithms.</p>
-<section id="tail-recursion---avoiding-stack-overflow" class="level4">
-<h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../unpublished_posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames and, as mentioned earlier, makes our recursive algorithms take a constant amount of space instead of a linear amount (or worse).</p>
-<section id="classic-example-factorial" class="level5">
-<h5 class="anchored" data-anchor-id="classic-example-factorial">Classic Example: Factorial</h5>
-<p>Let’s take the classic example of calculating a factorial.</p>
-<p><strong>Naive Recursive Implementation:</strong></p>
-<div id="cell-3" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>) <span class="co"># Recursive step</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>24</code></pre>
-</div>
-</div>
-<p>From the below untangled definition of factorial (for <span class="math inline">\(n=4\)</span>) we can surmise what goes on in the stack. The stack first fills up with stack frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, which is the last frame on the stack before it begins to pop and actual evaluation happens.</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = 4 * factorial(3) \\
-        &amp; = 4 * (3 * factorial(2)) \\
-        &amp; = 4 * (3 * (2 * factorial(1))) \\
-        &amp; = 4 * (3 * (2 * (1 * factorial(0)))) \\
-        &amp; = 4 * (3 * (2 * (1 * 1))) \\
-        &amp; = 4 * (3 * (2 * 1)) \\
-        &amp; = 4 * (3 * 2) \\
-        &amp; = 4 * 6 \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up in memory) before evaluation even begins. Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
-<p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this particular function <em>fail</em> to be tail-recursive). It helps to think in terms of <em>carried state</em>. In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next frame. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
-<p>In the case of the factorial function above, this means that in the tail-recursive implementation the stack is not filled up with as many frames of recursive <code>factorial</code> calls as the input (<span class="math inline">\(n\)</span>) is big. There are still <span class="math inline">\(n\)</span> total calls, however the memory used in the stack is held constant (at a single frame in this case) as each old frame gives way to the new one.</p>
-<p>So, for now, let’s <em>define</em> a magic function called <code>go(n,acc)</code> with inputs <code>n</code> and what’s called an <em>accumulator</em> <code>acc</code> such that <code>factorial(n) := go(n,1)</code>. We take this to be <em>by construction</em>. The function <code>go</code> will be the <em>tail-recursive helper</em> of <code>factorial</code>. The accumulator <code>acc</code>, which is initialized to <code>1</code>, will be used to remember the state inside the current stack frame (in this case just the multiplicative factor before the recursive call).</p>
-<p>But so far we’ve only given <code>go(n, acc)</code> its desired properties without actually defining it. The following is the tail-recursive version of factorial which includes the definition of <code>go</code>.</p>
-<p><strong>Tail-Recursive Factorial:</strong></p>
-<div id="cell-5" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> go(n,acc): <span class="co"># Helper function with an accumulator</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> acc</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> go(n<span class="op">-</span><span class="dv">1</span>, n <span class="op">*</span> acc) <span class="co"># Tail-recusrive step</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go(n,<span class="dv">1</span>) <span class="co"># Delegate the problem solution to a helper function</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>24</code></pre>
-</div>
-</div>
-<p>Let’s unpack this:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = go(4,1) \\
-        &amp; = go(3,4) \\
-        &amp; = go(2,12) \\
-        &amp; = go(1,24) \\
-        &amp; = go(0,24) \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>Right away we can see that, with this approach, we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that in the expression above evaluation happens immediately, rather than step-by-step (with each step corresponding to the popping of a stack frame), as is the case in the naive implementation.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>It’s important to note that this effort only pays off if the language compiler in question supports <strong>TCO</strong> (<strong>Tail Call Optimization</strong>). Most, in fact, do. If the language supports TCO the compiler can recognize tail calls and simply pop the current stack frame after the recursive call, replacing it with the subsequent call (rather than blindly stacking frames on top of each other as in the naive recursive algorithm)</p>
-</div>
-</div>
-</div>
-
-
+<section id="introduction-to-optimization" class="level1">
+<h1>Introduction to Optimization</h1>
+<p>An optimization problem can be viewed as the attempt to find those parameter(s), if such exist, that optimize (i.e.&nbsp;minimize or maximize) some objective function. The objective function can be almost anything — cost, profit, number of nodes in a wireless network, distance to a destination, a similarity measure between two images, etc. If the objective function describes cost we may wish to minimize it. If, on the other hand, it describes profit then it would suit us to maximize it.</p>
+<p>The problems of minimization and maximization, summed up as <em>optimization</em> in one word, are basically the same problem. Formally, if the objective function is <span class="math inline">\(f: \mathbb{R^n} \to \mathbb{R}\)</span>, and it has a minimizer <span class="math inline">\(x^* \in \mathbb{R^n}\)</span>. Then, by definition of minimizer, <span class="math inline">\(f(x^*) \leq f(x) \ \ \forall x \in \mathbb{R^n}\)</span>. It follows that <span class="math inline">\(-f(x^*) \geq -f(x) \ \ \forall x \in \mathbb{R^n}\)</span>, so <span class="math inline">\(x^*\)</span> is a maximizer for <span class="math inline">\(-f\)</span>, the reflected objective function.</p>
+<section id="model-of-a-convex-optimization-problem" class="level2">
+<h2 class="anchored" data-anchor-id="model-of-a-convex-optimization-problem">Model of a Convex Optimization Problem</h2>
+<p>This post is the first in a series of posts on optimization. In this series, we frame an optimization problem in the following form:</p>
+<p><span class="math display">\[\textrm{minimize}: f(x)\]</span> <span class="math display">\[\textrm{subject to}: x \in \mathcal{X}\]</span></p>
+<p>where the <em>objective function</em> <span class="math inline">\(f\)</span> is a <em>convex function</em>, and the <em>constraint set</em> <span class="math inline">\(\mathcal{X}\)</span> is a <em>convex set</em>.</p>
+<p>We will not go over the ways in which we can model a real-world problem as one in the given form. There are many creative ways of doing that, one of which you can read about in <a href="../optimization/robust-lps-modelling-discrete-failures.ipynb">this post</a>.</p>
 </section>
+<section id="why-convex-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="why-convex-optimization">Why Convex Optimization?</h2>
+<p>First, let’s define the <em>size</em> of an optimization problem as: The dimensionality of the parameter <span class="math inline">\(x\)</span>, added to the number of the problem constraints.</p>
+<p>Convex optimization problems are a class of <em>easy</em> optimization problems — problems whose time and/or space complexity grows slowly with respect to problem size. These problems are general enough to capture many scenarios of interest, even some that do not fall strictly into the convex category, but specific enough to be solvable through generic algorithms and numerical methods.</p>
+</section>
+<section id="where-to-go-from-here" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-go-from-here">Where to go from here</h2>
+<p>Feel free to read about check out my posts about some of the more advanced concepts in optimization like <a href="../../unpublished_posts/optimization/linear_programs_and_lp_geometry.html">linear programs and their geometry</a>, <a href="../../unpublished_posts/optimization/algorithms_for_unconstrained_optimization_gradient_descent.html">optimization algorithms</a>, or <a href="../../unpublished_posts/optimization/duality_theory.html">duality theory</a>. For a fun problem solvable using linear programs, check out the post on <a href="./robust_lps_modelling_discrete_failures">modelling discrete failures in any given system</a>.</p>
+
+
 </section>
 </section>
 

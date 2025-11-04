@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2024-12-26">
 
-<title>D3.js in Jupyter with Deno – v-poghosyan</title>
+<title>Interactive U.S. Map using D3.js inside Jupyter Notebooks – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,12 +156,12 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">D3.js in Jupyter with Deno</h1>
+      <h1 class="title">Interactive U.S. Map using D3.js inside Jupyter Notebooks</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">D3</div>
                 <div class="quarto-category">Visualization</div>
                 <div class="quarto-category">JavaScript</div>
-                <div class="quarto-category">TypeScript</div>
+                <div class="quarto-category">Deno</div>
               </div>
                   </div>
   </div>
@@ -238,7 +238,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In this post we will set up <a href="https://d3js.org/">D3</a> and JavaScript inside a Jupyter notebook using <a href="https://deno.com/">Deno</a>. Deno is “the open-source JavaScript runtime for the modern web.” Importantly for us, it will enable the use modern JavaScript, TypeScript, and <code>npm</code> inside Jupyter notes.</p>
+<p>In this post we will set up <a href="https://d3js.org/">D3</a> and JavaScript inside a Jupyter notebook using <a href="https://deno.com/">Deno</a>. Deno is “the open-source JavaScript runtime for the modern web.” Importantly for us, it will enable the use modern JavaScript, TypeScript, and <code>npm</code> inside Jupyter notes. After making this post, I realized this is a bit of a roundabout way of doing things, since <code>IPython.display</code> can be used to render rich HTML (including a <code>canvas</code> element) directly. However, this post is still useful for those who want to run JavaScript code inside Jupyter notebooks.</p>
 </section>
 <section id="jupyter-deno-setup" class="level1">
 <h1>Jupyter-Deno Setup</h1>

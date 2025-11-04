@@ -192,6 +192,7 @@ window.Quarto = {
 
 <p><strong>Mergesort</strong> consists of two phases (or subroutines). The function <code>mergesort</code> itself (i.e.&nbsp;the <em>divide</em> phase), and <code>merge</code> (or the <em>conquer</em>) phase. <code>mergesort</code> divides the problem into two half-sized sub-problems recursively. At any given stack frame of <code>mergesort</code>, once both recursive calls exit, we’re left with two separately ordered subarrays that the <code>merge</code> subroutine accepts, and merges together while preserving sortedness of the result.</p>
 <p>Like most sorting algorithms, Mergsort is <span class="math inline">\(O(n * log n)\)</span> and, in this case, it’s easy to intuit why. The process of dividing an <span class="math inline">\(n\)</span>-sized array into equal halves can be done, loosely speaking, <span class="math inline">\(log n\)</span> times. Each time it’s done, the <code>merge</code> subroutine will be called which takes <span class="math inline">\(O(n)\)</span> time to merge the resulting half-sized sub-arrays.</p>
+<p>As a sidenote: Quicksort is a similar algorithm, in that it splits the list, but whwreas Mergestor has O(n) memory complexity, mergesort is in-place and has only <span class="math inline">\(O(1)\)</span> memory complexity.</p>
 <p>First let’s write down the algorithm, then we will visualize it using Manim.</p>
 
 

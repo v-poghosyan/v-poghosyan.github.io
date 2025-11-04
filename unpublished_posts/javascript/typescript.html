@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2023-01-13">
+<meta name="dcterms.date" content="2025-04-15">
 
-<title>Recursion Optimizations – v-poghosyan</title>
+<title>TypeScript - An Introduction – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,35 +114,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -181,17 +152,16 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Recursion Optimizations</h1>
+    <div class="quarto-title column-page">
+      <div class="quarto-title-block"><div><h1 class="title">TypeScript - An Introduction</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/v-poghosyan/manim-projects"><i class="bi"></i> Code</button></div></div>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Recursion</div>
-                <div class="quarto-category">Functional Programming</div>
+                <div class="quarto-category">TypeScript</div>
               </div>
                   </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta column-page">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -203,7 +173,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 13, 2023</p>
+        <p class="date">April 15, 2025</p>
       </div>
     </div>
     
@@ -214,122 +184,25 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#recursion-optimizations" id="toc-recursion-optimizations" class="nav-link active" data-scroll-target="#recursion-optimizations">Recursion Optimizations</a>
-  <ul>
-  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a>
-  <ul>
-  <li><a href="#classic-example-factorial" id="toc-classic-example-factorial" class="nav-link" data-scroll-target="#classic-example-factorial">Classic Example: Factorial</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
 
 
-<section id="recursion-optimizations" class="level1">
-<h1>Recursion Optimizations</h1>
-<p>Recursive algorithms, while elegant and expressive, can sometimes lead to performance issues due to the overhead of function calls and potential for repeated computations. Several optimization techniques can be employed to enhance their efficiency. One common method is <strong>memoization</strong>, which stores the results of expensive function calls and reuses them when the same inputs occur again, avoiding repeated computations. Another technique is <strong>tail recursion optimization</strong>, where the recursive call is the final operation in the function, allowing the system to reuse the current stack frame for each recursive call. Tail recursion optimization reduces the space complexity from <span class="math inline">\(O(n)\)</span> to <span class="math inline">\(O(1)\)</span>. Additionally, <strong>iterative solutions</strong> can often be more efficient than their recursive counterparts, so converting a recursive algorithm to an iterative one can be considered an optimization. Understanding these techniques, and variations on them, can greatly improve the performance of our recursive algorithms.</p>
-<section id="tail-recursion---avoiding-stack-overflow" class="level4">
-<h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../unpublished_posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames and, as mentioned earlier, makes our recursive algorithms take a constant amount of space instead of a linear amount (or worse).</p>
-<section id="classic-example-factorial" class="level5">
-<h5 class="anchored" data-anchor-id="classic-example-factorial">Classic Example: Factorial</h5>
-<p>Let’s take the classic example of calculating a factorial.</p>
-<p><strong>Naive Recursive Implementation:</strong></p>
-<div id="cell-3" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>) <span class="co"># Recursive step</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>24</code></pre>
-</div>
-</div>
-<p>From the below untangled definition of factorial (for <span class="math inline">\(n=4\)</span>) we can surmise what goes on in the stack. The stack first fills up with stack frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, which is the last frame on the stack before it begins to pop and actual evaluation happens.</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = 4 * factorial(3) \\
-        &amp; = 4 * (3 * factorial(2)) \\
-        &amp; = 4 * (3 * (2 * factorial(1))) \\
-        &amp; = 4 * (3 * (2 * (1 * factorial(0)))) \\
-        &amp; = 4 * (3 * (2 * (1 * 1))) \\
-        &amp; = 4 * (3 * (2 * 1)) \\
-        &amp; = 4 * (3 * 2) \\
-        &amp; = 4 * 6 \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up in memory) before evaluation even begins. Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
-<p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this particular function <em>fail</em> to be tail-recursive). It helps to think in terms of <em>carried state</em>. In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next frame. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
-<p>In the case of the factorial function above, this means that in the tail-recursive implementation the stack is not filled up with as many frames of recursive <code>factorial</code> calls as the input (<span class="math inline">\(n\)</span>) is big. There are still <span class="math inline">\(n\)</span> total calls, however the memory used in the stack is held constant (at a single frame in this case) as each old frame gives way to the new one.</p>
-<p>So, for now, let’s <em>define</em> a magic function called <code>go(n,acc)</code> with inputs <code>n</code> and what’s called an <em>accumulator</em> <code>acc</code> such that <code>factorial(n) := go(n,1)</code>. We take this to be <em>by construction</em>. The function <code>go</code> will be the <em>tail-recursive helper</em> of <code>factorial</code>. The accumulator <code>acc</code>, which is initialized to <code>1</code>, will be used to remember the state inside the current stack frame (in this case just the multiplicative factor before the recursive call).</p>
-<p>But so far we’ve only given <code>go(n, acc)</code> its desired properties without actually defining it. The following is the tail-recursive version of factorial which includes the definition of <code>go</code>.</p>
-<p><strong>Tail-Recursive Factorial:</strong></p>
-<div id="cell-5" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> go(n,acc): <span class="co"># Helper function with an accumulator</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> acc</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> go(n<span class="op">-</span><span class="dv">1</span>, n <span class="op">*</span> acc) <span class="co"># Tail-recusrive step</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go(n,<span class="dv">1</span>) <span class="co"># Delegate the problem solution to a helper function</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>24</code></pre>
-</div>
-</div>
-<p>Let’s unpack this:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = go(4,1) \\
-        &amp; = go(3,4) \\
-        &amp; = go(2,12) \\
-        &amp; = go(1,24) \\
-        &amp; = go(0,24) \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>Right away we can see that, with this approach, we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that in the expression above evaluation happens immediately, rather than step-by-step (with each step corresponding to the popping of a stack frame), as is the case in the naive implementation.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>It’s important to note that this effort only pays off if the language compiler in question supports <strong>TCO</strong> (<strong>Tail Call Optimization</strong>). Most, in fact, do. If the language supports TCO the compiler can recognize tail calls and simply pop the current stack frame after the recursive call, replacing it with the subsequent call (rather than blindly stacking frames on top of each other as in the naive recursive algorithm)</p>
-</div>
-</div>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>T <span class="kw">extends</span> (<span class="op">...</span>args<span class="op">:</span> <span class="dt">any</span>[]) <span class="kw">=&gt;</span> <span class="dt">any</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Defines a generic function type that takes any number of <code>any</code> type arguments and returns an <code>any</code> type. This is as generic as it gets.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> debounce<span class="op">&lt;</span>T <span class="kw">extends</span> (<span class="op">...</span>args<span class="op">:</span> <span class="dt">any</span>[]) <span class="kw">=&gt;</span> <span class="dt">any</span><span class="op">&gt;</span>(func<span class="op">:</span> T<span class="op">,</span> wait<span class="op">:</span> <span class="dt">number</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...implementation...</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then we declare <code>debounce</code> to take such a function (of generic type <code>T</code>) as one of its arguments, the other being of a simple <code>number</code> type.</p>
+<p>In our specific case <code>debounce</code> takes <code>deleteActivity</code> (well, wrapped inside an anonymous function which <code>calls</code> it, in order to include any necessary environment with the call). We can think of this as dependency injection. The other parameter <code>debounce</code> takes is, of course, the number signifying the time. Both are simply just passed to <code>clearTimeout</code> by <code>debounce</code>.</p>
 
 
-</section>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -565,6 +438,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);

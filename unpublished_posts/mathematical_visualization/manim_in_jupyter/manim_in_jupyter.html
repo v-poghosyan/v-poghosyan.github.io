@@ -451,7 +451,8 @@ Note
 <section id="alternate-setup" class="level2">
 <h2 class="anchored" data-anchor-id="alternate-setup"><i class="bi bi-laptop"></i> Alternate setup</h2>
 <p>Grant Sanderson himself defines a custom script that hooks into a local Python file defining the entire scene. The script continually parses the file looking for certain leading comments (usually before class or function definitions). It then renders the scene only up to that comment, so that the scene pauses at the part of the code he’s working on (so that the state of the scene is maintained until that point). He then uses an IDE shortcut to execute that single code block (which is clearly demarcated with a leading comment) inside a Python interpreter. The interpreter then renders the relevant portion of the scene to the output window. In this way, it’s possible to incrementally test parts of a scene (mimicking a Jupyter notebook setup).</p>
-<p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YouTube tutorial</a>.</p>
+<p>More on this specific setup can be found in the <a href="https://www.youtube.com/watch?v=rbu7Zu5X1zI&amp;t=549s">official Manim YouTube tutorial</a> (embedded below).</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/rbu7Zu5X1zI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>I have created a dedicated repository called <a href="https://github.com/v-poghosyan/manim-projects">manim-projects</a> (which is also linked in the title banner) which will contain my Manim projects and will mimic this setup. However, throughout these notes, I will use <code>jupyter-manim</code>’s cell magic <code>%%manim</code> to render Manim scenes directly inside the repository containing these notes. When I do so, on my end, the result will get rendered inside <code>v-poghosyan.github.io/posts/mathematical_visualization/media</code> directory (and from there I can reference them inside these posts).</p>
 <p>Now let’s draw some actual Manim scenes.</p>
 </section>
@@ -1344,7 +1345,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
 
 
 

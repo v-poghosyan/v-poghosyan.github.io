@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2025-05-24">
+
+<title>Computer Graphics – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../assets/site/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Computer Graphics</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Game Development</div>
+                <div class="quarto-category">Computer Graphics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 24, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#openglwebgl-shaders" id="toc-openglwebgl-shaders" class="nav-link active" data-scroll-target="#openglwebgl-shaders">OpenGL/WebGL &amp; Shaders</a>
+  <ul class="collapse">
+  <li><a href="#shader-code-glsl" id="toc-shader-code-glsl" class="nav-link" data-scroll-target="#shader-code-glsl">Shader Code (GLSL)</a>
+  <ul class="collapse">
+  <li><a href="#glsl-basics" id="toc-glsl-basics" class="nav-link" data-scroll-target="#glsl-basics">GLSL Basics</a></li>
+  <li><a href="#writing-our-first-basic-shaders" id="toc-writing-our-first-basic-shaders" class="nav-link" data-scroll-target="#writing-our-first-basic-shaders">Writing Our First Basic Shaders</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#the-main-stages-of-the-rendering-pipeline" id="toc-the-main-stages-of-the-rendering-pipeline" class="nav-link" data-scroll-target="#the-main-stages-of-the-rendering-pipeline">The Main Stages of the Rendering Pipeline</a>
+  <ul class="collapse">
+  <li><a href="#vertex-shading" id="toc-vertex-shading" class="nav-link" data-scroll-target="#vertex-shading">Vertex Shading</a>
+  <ul class="collapse">
+  <li><a href="#world-matrix-local-matrix-and-model-matrix" id="toc-world-matrix-local-matrix-and-model-matrix" class="nav-link" data-scroll-target="#world-matrix-local-matrix-and-model-matrix">World Matrix, Local Matrix, and Model Matrix</a></li>
+  <li><a href="#uv-coordinates" id="toc-uv-coordinates" class="nav-link" data-scroll-target="#uv-coordinates">UV Coordinates</a></li>
+  </ul></li>
+  <li><a href="#rasterization-andor-ray-tracing" id="toc-rasterization-andor-ray-tracing" class="nav-link" data-scroll-target="#rasterization-andor-ray-tracing">Rasterization and/or Ray-Tracing</a>
+  <ul class="collapse">
+  <li><a href="#ray-tracing-vs-ray-marching" id="toc-ray-tracing-vs-ray-marching" class="nav-link" data-scroll-target="#ray-tracing-vs-ray-marching">Ray-Tracing vs Ray-Marching</a></li>
+  </ul></li>
+  <li><a href="#fragment-shading" id="toc-fragment-shading" class="nav-link" data-scroll-target="#fragment-shading">Fragment Shading</a></li>
+  </ul></li>
+  <li><a href="#the-rendering-pipeline" id="toc-the-rendering-pipeline" class="nav-link" data-scroll-target="#the-rendering-pipeline">The Rendering Pipeline</a></li>
+  <li><a href="#euler-angles-and-rotation-matrices" id="toc-euler-angles-and-rotation-matrices" class="nav-link" data-scroll-target="#euler-angles-and-rotation-matrices">Euler Angles and Rotation Matrices</a>
+  <ul class="collapse">
+  <li><a href="#intertial-frame-and-body-frame" id="toc-intertial-frame-and-body-frame" class="nav-link" data-scroll-target="#intertial-frame-and-body-frame">Intertial Frame and Body Frame</a></li>
+  </ul></li>
+  <li><a href="#quaternion-rotation" id="toc-quaternion-rotation" class="nav-link" data-scroll-target="#quaternion-rotation">Quaternion Rotation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="openglwebgl-shaders" class="level1">
+<h1>OpenGL/WebGL &amp; Shaders</h1>
+<p>OpenGL is a cross-platform graphics API that is widely used in video game development and computer graphics (it’s a competitor to Nvidia’s DirectX). WebGL is a <a href="https://en.wikipedia.org/wiki/Language_binding">language binding</a> of OpenGL in JavaScript. I will use WebGL and OpenGL interchangeably throughout these posts. It provides a set of functions for rendering 2D and 3D graphics, allowing developers to create complex visual effects and realistic environments. GLSL is part of OpenGL. In the Three.js post <a href="../../../unpublished_posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html">Three.js: Introduction to 3D Graphics</a>, we learned how to create a simple 3D scene using Three.js, which is a JavaScript library that abstracts the use of OpenGL API. It uses OpenGL’s API calls, internally, to compile, link, and send our GLSL shader code to the GPU.</p>
+<p>In this post, we will explore how to use shaders in Three.js to create custom visual effects. Shaders are small programs that run on the GPU and are used to control the rendering of graphics. They allow developers to manipulate the appearance of objects in a scene, such as their color, texture, and lighting. Shaders are separate from the <a href="#the-three-stages-of-the-rendering-pipeline"><em>rendering pipeline</em></a> (see below), they can be thought of as ad-hoc programs that run on the GPU in a massively parallel way. They can run at <em>any</em> point of the rendering pipeline, and do so totally independently of it. Because of this, shaders give us fine-grained control over the rendering process.</p>
+<p>Let’s create a new scene containing a simple quadrilateral mesh (created using Three.js, which is an abstraction layer over OpenGL). We will use this quad mesh as our canvas to draw on (with shaders). First, we’ll stick to 2D. We’ll create a vertex shader that takes the vertices of our quadrelateral and maps them to the full screen. The fragment shader will contain most of the magic, for now. It will essentially paint the surface of the quad…</p>
+<details>
+<summary>
+Click to expand the code used to create a basic scene
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> three <span class="im">from</span> <span class="st">'https://cdn.jsdelivr.net/npm/three@0.173.0/+esm'</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Scene / Camera / renderer ---------------------------------------------- */</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyWidth <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"quarto-document-content"</span>)<span class="op">.</span><span class="at">clientWidth</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bodyHeight <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> canvas <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"three-d-canvas"</span>)<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> scene <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Scene</span>()<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> camera <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">PerspectiveCamera</span>(<span class="dv">75</span><span class="op">,</span> bodyWidth <span class="op">/</span> bodyHeight<span class="op">,</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> renderer <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">WebGLRenderer</span>({ <span class="dt">canvas</span><span class="op">:</span> canvas })<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="fu">setPixelRatio</span>(<span class="bu">window</span><span class="op">.</span><span class="at">devicePixelRatio</span>)<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="fu">setSize</span>(bodyWidth<span class="op">,</span> bodyHeight)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">/* Lights ---------------------------------------------- */</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(<span class="kw">new</span> three<span class="op">.</span><span class="fu">AmbientLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="dv">1</span>))<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> dir <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">DirectionalLight</span>(<span class="bn">0xffffff</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dir<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(dir)<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">/* Plane  ---------------------------------------------- */</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> quadMesh <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Mesh</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">new</span> three<span class="op">.</span><span class="fu">PlaneGeometry</span>(<span class="dv">250</span><span class="op">,</span> <span class="dv">250</span>)<span class="op">,</span> <span class="co">// Plane is added to the XY plane (x+ = right, y+ = up, z+ = out of the screen)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(quadMesh)<span class="op">;</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">/* Camera ---------------------------------------------- */</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">set</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">200</span>)<span class="op">;</span> <span class="co">// The z+ represetns 100 units towards the viewer (out of the screen)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>camera<span class="op">.</span><span class="fu">lookAt</span>(quadMesh<span class="op">.</span><span class="at">position</span>)<span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>renderer<span class="op">.</span><span class="fu">render</span>(scene<span class="op">,</span> camera)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>This is pretty much it for the CPU-side code that creates the scene, camera, and renderer. The next step is to create the shaders.</p>
+<p>Final Result:</p>
+<div id="cell-2" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='three-d-canvas-1'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<canvas id="three-d-canvas-1"></canvas>
+</div>
+</div>
+<p>Here it is, our empty canvas. Let’s add some color to it.</p>
+<section id="shader-code-glsl" class="level2">
+<h2 class="anchored" data-anchor-id="shader-code-glsl">Shader Code (GLSL)</h2>
+<p>As mentioned above, the shader code is written in GLSL (OpenGL Shading Language). The <em>vertex shader</em> is responsible for transforming the vertices of the geometry. The fragment shader is responsible for determining the color of each pixel. Note that the fragment shader is also sometimes called <em>the pixel shader</em>.</p>
+<p>First, we create a vertex shader in the <code>/shaders</code> subdirectory of this page. Then, a fragment shader. We import these shaders into our JavaScript code and use them to create a <code>ShaderMaterial</code>. Finally, we apply this material to our quad mesh.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vertexShader <span class="im">from</span> <span class="st">'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.vert?raw'</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fragmentShader <span class="im">from</span> <span class="st">'https://raw.githubusercontent.com/v-poghosyan/v-poghosyan.github.io/refs/heads/main/unpublished_posts/game_development/computer_graphics/shaders/shader2.frag?raw'</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> shaderMaterial <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">ShaderMaterial</span>({</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">vertexShader</span><span class="op">:</span> vertexShader<span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fragmentShader</span><span class="op">:</span> fragmentShader<span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uniforms</span><span class="op">:</span> {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uTime</span><span class="op">:</span> { <span class="dt">value</span><span class="op">:</span> <span class="fl">0.0</span> }<span class="op">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uResolution</span><span class="op">:</span> { <span class="dt">value</span><span class="op">:</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Vector2</span>(bodyWidth<span class="op">,</span> bodyHeight) }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>quadMesh<span class="op">.</span><span class="at">material</span> <span class="op">=</span> shaderMaterial<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note, if we add empty shaders to an object in our canvas we will see pitch black and the following error will be printed to the console:</p>
+<pre><code>Program Info Log: Vertex shader is not compiled.</code></pre>
+<p>This is expected, because we haven’t written any code in our vertex shader yet. Let’s code up our shaders!</p>
+<section id="glsl-basics" class="level3">
+<h3 class="anchored" data-anchor-id="glsl-basics">GLSL Basics</h3>
+<section id="main-function" class="level4">
+<h4 class="anchored" data-anchor-id="main-function">Main Function</h4>
+<p>Every shader has a main function, which is the entry point for the shader code. We can write more functions, which main will call.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">otherFunction</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// More code here</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">main</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Your code here</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="types" class="level4">
+<h4 class="anchored" data-anchor-id="types">Types</h4>
+<p>GLSL is strongly typed, meaning we need to declare the types of our variables. The most common types are <code>float</code>, <code>int</code>, <code>vec2</code>, <code>vec3</code>, and <code>vec4</code>.</p>
+<ul>
+<li>A <code>float</code> variable needs to explicitly have a decimal point, e.g.&nbsp;<code>1.0</code> or <code>3.14</code> or <code>2.</code> (otherwise it’s interpreted as an <code>int</code>).</li>
+<li>All <code>vec</code> types are vectors, which are arrays of floats. For example, <code>vec2</code> is a 2D vector (array of 2 floats). Vectors can be initialized using the <code>vec2(x, y)</code> constructor, where <code>x</code> and <code>y</code> are the components of the vector. Initializing based on one parameter will create a vector with all components equal to that parameter, e.g.&nbsp;<code>vec2(1.0)</code> will create a vector with both components equal to <code>1.0</code>.</li>
+</ul>
+</section>
+<section id="reading-vectors" class="level4">
+<h4 class="anchored" data-anchor-id="reading-vectors">Reading Vectors</h4>
+<p>We can read the components of a vector using the <code>x</code>, <code>y</code>, <code>z</code>, and <code>w</code> properties (<code>w</code> is the translation in homogeneous coordinates). If the vector represents a color, we can also use <code>r</code>, <code>g</code>, <code>b</code>, and <code>a</code> properties (where <code>a</code> is the opacity value).</p>
+<p>Given the vector <code>vec4 v = vec4(0.1,0.2,0.3,0.4)</code>, we can access its components as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>0.1</th>
+<th>0.2</th>
+<th>0.3</th>
+<th>0.4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>v.x</code></td>
+<td><code>v.y</code></td>
+<td><code>v.z</code></td>
+<td><code>v.w</code></td>
+</tr>
+<tr class="even">
+<td><code>v.r</code></td>
+<td><code>v.g</code></td>
+<td><code>v.b</code></td>
+<td><code>v.a</code></td>
+</tr>
+<tr class="odd">
+<td><code>v.s</code></td>
+<td><code>v.t</code></td>
+<td><code>v.p</code></td>
+<td><code>v.q</code></td>
+</tr>
+</tbody>
+</table>
+<p>We can also access multiple components at once using the <code>xy</code>, <code>xyz</code>, and <code>xyzw</code> properties. For example, <code>v.xy</code> will return a <code>vec2</code> with the first two components of <code>v</code>, i.e.&nbsp;<code>vec2(0.1, 0.2)</code>. This is called vector <em>swizzling</em>.</p>
+<p>Swizzling use cases include: - Extracting a 2D vector from a 3D vector (such as for simple projection), e.g.&nbsp;<code>vec3 v = vec3(1.0, 2.0, 3.0); vec2 v2 = v.xy;</code> will create a <code>vec2</code> with the first two components of <code>v</code>. - Swapping color channels, e.g.&nbsp;<code>vec4 color = vec4(1.0, 0.0, 0.0, 1.0); vec4 swappedColor = color.bgra;</code> will create a new color with the blue channel in the first position, green in the second, red in the third, and alpha in the fourth.</p>
+<p>This is a very powerful way to go hop from dimension into dimension, and to manipulate vectors in a very flexible way. Say we wanted to go from 2D to 3D and we didn’t care about the z-coordinate, we could do this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">vec2</span> v1 <span class="op">=</span> <span class="dt">vec2</span><span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">);</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">vec3</span> v2 <span class="op">=</span> v1<span class="op">.</span><span class="fu">xyx</span> <span class="co">// This will initialize a 3D vector with its z-coordinate equal to the x-coordinate of the 2D vector.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="attributes-uniforms-and-varying" class="level4">
+<h4 class="anchored" data-anchor-id="attributes-uniforms-and-varying">Attributes, Uniforms, and Varying</h4>
+<p>Just as we can instantiate variables inside our GLSL shader code, some are also passed into our shaders from the external OpenGL context. These are called <em>attributes</em>, and <em>uniforms</em>.</p>
+<p>We’ve already seen how to pass uniforms into our shaders using Three.js’s <code>ShaderMaterial</code>. Here’s a quick recap:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> shaderMaterial <span class="op">=</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">ShaderMaterial</span>({</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">vertexShader</span><span class="op">:</span> vertexShader<span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fragmentShader</span><span class="op">:</span> fragmentShader<span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uniforms</span><span class="op">:</span> {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uTime</span><span class="op">:</span> { <span class="dt">value</span><span class="op">:</span> <span class="fl">0.0</span> }<span class="op">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uResolution</span><span class="op">:</span> { <span class="dt">value</span><span class="op">:</span> <span class="kw">new</span> three<span class="op">.</span><span class="fu">Vector2</span>(bodyWidth<span class="op">,</span> bodyHeight) }</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The above code passes two uniforms into our shaders: <code>uTime</code> and <code>uResolution</code>. These can be used in both the vertex and fragment shaders to control the rendering process. For example, <code>uTime</code> can be used to create animations, while <code>uResolution</code> can be used to adjust the rendering based on the size of the HTML canvas.</p>
+<p>The difference between attributes and uniforms is that attributes are per-vertex data, while uniforms are global data that is shared across all vertices and fragments. See table below for a summary of the differences:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Attribute</th>
+<th>Uniform</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Available in Vertex Shader?</td>
+<td>Read Only</td>
+<td>Read only</td>
+</tr>
+<tr class="even">
+<td>Available in Fragment Shader?</td>
+<td>N.A</td>
+<td>Read only</td>
+</tr>
+<tr class="odd">
+<td>Set From</td>
+<td>CPU</td>
+<td>CPU</td>
+</tr>
+<tr class="even">
+<td>Contain Information</td>
+<td>Per Vertex</td>
+<td>Constant</td>
+</tr>
+</tbody>
+</table>
+<p>There are also <em>varying</em> variables, which are used to pass data from the vertex shader to the fragment shader (because they’re the only variables that are writable to). Varying variables are written to inside the vertex shader and passed as read-only to the fragment shader. They are commonly used for interpolating values across the surface of a mesh. For example, if we want to pass the color of a vertex to the fragment shader, we can declare a varying variable in the vertex shader and assign it a value. Then, in the fragment shader, we can read that varying variable to get the interpolated color for each pixel.</p>
+<p>Here’s the table summarizing the differences between attributes, uniforms, and varying variables:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Attribute</th>
+<th>Uniform</th>
+<th>Varying</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Available in Vertex Shader?</td>
+<td>Read Only</td>
+<td>Read only</td>
+<td>Read/Write</td>
+</tr>
+<tr class="even">
+<td>Available in Fragment Shader?</td>
+<td>N.A</td>
+<td>Read only</td>
+<td>Read Only</td>
+</tr>
+<tr class="odd">
+<td>Set From</td>
+<td>CPU</td>
+<td>CPU</td>
+<td>Vertex Shader</td>
+</tr>
+<tr class="even">
+<td>Contain Information</td>
+<td>Per Vertex</td>
+<td>Constant</td>
+<td>Per Fragment</td>
+</tr>
+</tbody>
+</table>
+<p>Attributes contain information per vertex (i.e.&nbsp;data about each vertex, such as its color) because they’re passed to the vertex shader as variables (which works on vector geometry – i.e.&nbsp;vertices). Varying Variables, on the other hand, are used to pass data from the vertex shader down to the fragment shader, which works with fragments, hence they contain information <em>per fragment</em>.</p>
+</section>
+<section id="normalized-vectors" class="level4">
+<h4 class="anchored" data-anchor-id="normalized-vectors">Normalized Vectors</h4>
+<p>In GLSL, vectors are often normalized to have a length of 1. This is useful for many operations, such as lighting calculations and texture mapping. Normalizing a vector is done using the <code>normalize()</code> function. For example, if we have a vector <code>vec3 v = vec3(1.0, 2.0, 3.0);</code>, we can normalize it by calling <code>vec3 normalizedV = normalize(v);</code>. This will create a new vector with the same direction as <code>v</code>, but with a length of 1.</p>
+<p>Individual entries are normalized too. For example white is represented as <code>vec3(1.0, 1.0, 1.0)</code>, rather than <code>vec3(255, 255, 255)</code>. Note, this vector is not normalized. But <em>normalization</em> is also often used in this sense.</p>
+</section>
+</section>
+<section id="writing-our-first-basic-shaders" class="level3">
+<h3 class="anchored" data-anchor-id="writing-our-first-basic-shaders">Writing Our First Basic Shaders</h3>
+<p>Let’s start with a fragment shader that maps all pixels to a single color. The function <code>main()</code> below runs per each pixel and sets their value to purple. We use this to simply color the entire quad purple.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">main</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Make every pixel purple</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">gl_FragColor</span> <span class="op">=</span> <span class="dt">vec4</span><span class="op">(</span><span class="fl">0.5</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> <span class="fl">0.5</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span> <span class="co">// Set the color to purple (RGBA)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, let’s write our first vertex shader. It will simply stretch out the rectangle to cover the entire screen. Then, we will pass the final vertex positions to the fragment shader, which will use them to color the pixels.</p>
+<p>As mentioned before, the vertex shader receives attributes (per vertex data). These include:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">attribute</span> <span class="dt">vec3</span> aPosition<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">attribute</span> <span class="dt">vec2</span> aTexCoord<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>aPosition</code> is the position (relative to world space) of the vertex in 3D space (x, y, z). Our vertex shader will run once per vertex, and it will receive the position of that vertex as an attribute.</li>
+<li><code>aTexCoord</code> is the texture coordinate of the vertex (u, v). This is used to map textures onto the geometry in the fragment shading stage. This is the coordinate we would use in the fragment shader to draw on the pixel corresponding to this vertex.</li>
+</ul>
+<p>These attributes are automatically set by Three.js (via the OpenGL API, internally).</p>
+<p>In our vertex shader we define a Varying Variable <code>pos</code>, which will be used to pass the texture coordinates (<code>aTexCoord</code>) to the fragment shader. Essentially, after the vertex shader is done scrambling the vertices, the new texture coordinates of these scrambled vertices are passed down to the fragment shader.</p>
+<p>Let’s stretch the quad to cover the entire screen.</p>
+<details>
+<summary>
+Click to expand the vertex shader code
+</summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">attribute</span> <span class="dt">vec3</span> aPosition<span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">attribute</span> <span class="dt">vec2</span> aTexCoord<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">varying</span> <span class="dt">vec2</span> pos<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">main</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    pos <span class="op">=</span> aTexCoord<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">vec4</span> position <span class="op">=</span> <span class="dt">vec4</span><span class="op">(</span>aPosition<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    position<span class="op">.</span><span class="fu">xy</span> <span class="op">=</span> position<span class="op">.</span><span class="fu">xy</span> <span class="op">*</span> <span class="fl">2.0</span> <span class="op">-</span> <span class="fl">1.0</span><span class="op">;</span> <span class="co">// Map the positions from the [0,1] range to the [-1,1] range</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">gl_Position</span> <span class="op">=</span> position<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>This gives:</p>
+<div id="cell-4" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;canvas id='three-d-canvas-2'&gt;&lt;/canvas&gt;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<canvas id="three-d-canvas-2"></canvas>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="the-main-stages-of-the-rendering-pipeline" class="level1">
+<h1>The Main Stages of the Rendering Pipeline</h1>
+<p>After some CPU side pre-processing, that breaks our scene down into vertex data and sends it to the GPU, the rendering pipeline consists of three main stages:</p>
+<section id="vertex-shading" class="level2">
+<h2 class="anchored" data-anchor-id="vertex-shading">Vertex Shading</h2>
+<p>The first stage of the rendering pipeline is the vertex shading stage. In this stage, the vertex shader is executed for each vertex of the geometry. The vertex shader is responsible for transforming the vertices of the geometry from object space to clip space. It can also be used to perform other operations, such as calculating normals or texture coordinates.</p>
+<pre class="mermaid"><code>graph TD
+    A["Vertex (x, y, z),(u, v),(n1, n2, n3),id" ] --&gt;|Input| B[Vertex Shader]
+    C["Matrix (Model/View/Projection)" ] --&gt;|Uniform| B
+    B --&gt;|Output| D[Transformed Vertex]</code></pre>
+<section id="world-matrix-local-matrix-and-model-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="world-matrix-local-matrix-and-model-matrix">World Matrix, Local Matrix, and Model Matrix</h3>
+<p>This is where three crucial matrices come into play: the <em>model matrix</em>, the <em>view matrix</em>, and the <em>projection matrix</em>. The model matrix transforms the vertices from object space to world space, the view matrix transforms the vertices from world space to camera space, and the projection matrix transforms the vertices from camera space to clip space. The final position of each vertex is calculated by multiplying these three matrices together. As always with matrices, the order of multiplication matters. The final position of each vertex is given by:</p>
+<p>The position of a given vertex <span class="math inline">\(\mathbf{v}\)</span> in clip space is:</p>
+<p><span class="math display">\[
+\mathbf{v}_{\text{clip}} = \mathbf{P} \cdot \mathbf{V} \cdot \mathbf{M} \cdot \mathbf{v}
+\]</span></p>
+<p>Once the position of each vertex is calculated, a <em>primitives assembly</em> stage is performed, where the vertices are grouped into primitives (e.g., triangles, lines, etc.). The primitives are then rasterized to generate fragments, which are the pixels that will be drawn on the screen.</p>
+<p>Geometry shading is a more advanced stage that can be used to generate new primitives based on the existing primitives. It is not always used, but it can be useful for certain effects, such as generating shadows or reflections.</p>
+<p>A <em>tessellation stage</em> can also be used to subdivide the primitives into smaller ones, allowing for more detailed rendering. This is often used in high-end graphics applications, such as video games and simulations.</p>
+</section>
+<section id="uv-coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="uv-coordinates">UV Coordinates</h3>
+<p>A UV coordinate is simply a 2D point on a texture atlas (or image) that tells the GPU “for this vertex, here’s where you should sample the texture.” Think of it like this: Our mesh lives in 3D space: each vertex has a position <span class="math inline">\((x, y, z)\)</span>, a normal vector, maybe a color, etc. If we want to “paint” an image onto that mesh -— a brick wall, a wood plank, whatever -— we need a way to say “vertex <span class="math inline">\(v\)</span> in 3D should use the pixel at <span class="math inline">\((u, v)\)</span> in my 2D bitmap.” That <span class="math inline">\((u, v)\)</span> pair is just two numbers, usually in the range <span class="math inline">\([0, 1]\)</span>, that index into the texture. <span class="math inline">\((0, 0)\)</span> is, by convention, the bottom-left corner of the texture; <span class="math inline">\((1, 1)\)</span> is top-right. Any point in between picks a pixel (or a filtered blend) in the middle.</p>
+<p>UV coordinates are per-vertex attributes, so they’re defined in the vertex shader only. The fragment shader, which runs per pixel of a fragment, gets an interpolated UV coordinate. Once the GPU has processed all vertices of a triangle, it figures out which pixels (<em>fragments</em>) lie inside that triangle, and runs the fragment shader for each of those pixels. By construction, a fragment shader does not have direct access to <em>attribute</em> inputs -— those only live in the vertex stage. A triangle face has three corners (three vertices), each corner has its own <span class="math inline">\((u, v)\)</span>. When the rasterizer draws all the pixels inside that triangle (more on this in the section right below this one), it “interpolates” between those three <span class="math inline">\((u, v)\)</span>-s so that each pixel (fragment) ends up sampling the exact correct spot on the texture.</p>
+<p>In our vertex shader, we write something like:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode glsl code-with-copy"><code class="sourceCode glsl"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">out</span> <span class="dt">vec2</span> vUv<span class="op">;</span> <span class="co">// A varying that stores the UVs of the vector to pass along to the fragment shader</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">main</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute view direction in world space</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">vec4</span> worldPos <span class="op">=</span> modelViewMatrix <span class="op">*</span> <span class="dt">vec4</span><span class="op">(</span>position<span class="op">,</span> <span class="fl">1.0</span><span class="op">)</span> <span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">vec3</span> viewDir <span class="op">=</span> <span class="bu">normalize</span><span class="op">(-</span>worldPos<span class="op">.</span><span class="fu">xyz</span><span class="op">)</span> <span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Output vertex position</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">gl_Position</span> <span class="op">=</span> projectionMatrix <span class="op">*</span> worldPos<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Pass the UV coordinates to the fragment shader</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    vUv <span class="op">=</span> uv<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This vertex shader runs per-vertex, and it outputs the UV coordinates of each vertex to the fragment shader via a varying variable <code>vUv</code>. The fragment shader can then use this varying variable to sample the texture at the correct location for each pixel that resides in the primitive it’s part of (as determined by the rasterization step). Each pixel (i.e.&nbsp;fragment) then has its individual UV coordinate, which is interpolated from the UV coordinates of the vertices of the primitive it belongs to.</p>
+</section>
+</section>
+<section id="rasterization-andor-ray-tracing" class="level2">
+<h2 class="anchored" data-anchor-id="rasterization-andor-ray-tracing">Rasterization and/or Ray-Tracing</h2>
+<p>The magical rendering pipeline stage where vector-based primitives are converted into fragments (final abstraction layer before pixels, basically the 2D projection on the screen of the 3D primitives). The rasterization stage takes the primitives (generated in the previous stage) and converts them into fragments, which are then shader by the fragment shader (the next stage of the rendering pipeline) to produce the actual pixels values that will be shown to the screen. <a href="https://en.wikipedia.org/wiki/Rasterisation">Rasterization</a> and <a href="https://en.wikipedia.org/wiki/Ray_tracing_(graphics)">ray-tracing</a> achieve this same exact end goal using very different approaches. Both algorithms use <em>lighting models</em> (like <a href="https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model">Phong, or Blinn-Phong</a> for <em>diffuse light</em>, and <a href="https://en.wikipedia.org/wiki/Lambertian_reflectance">Lambert</a> for <em>specular highlights</em>) to calculate the final value of a pixel based on the light sources that exist in the scene, but ray-tracing does so by actually simulating the path of light rays in the scene. Rasterization, on the other hand, does so by interpolating the values of the vertices of the primitive that the pixel belongs to (since a lot of information is associated with each vertex, including its position in space, its color, its texture and its <em>normal</em>). Rasterization also applies lighting effects by using lighting models and the known positions (and directions) of the light sources. A depth or <em>z-buffer</em> is also used to store pixel depth information to ensure front-most objects at a pixel’s <span class="math inline">\((x,y)\)</span> screen location are displayed on-screen, and objects behind the front-most object remain hidden. So, rasterization relies heavily on vertex-to-pixel interpolation. Ray-tracing, on the other hand, simulates light transport and performs exact calculations (rather than interpolation). It also doesn’t need to use a z-buffer as rays will naturally intersect with the closest primitive in the scene.</p>
+<p>Note that while ray-tracing calculations need to be performed in 3D space, ray-tracing is performed at the fragment-level as well, much like rasterization, rather at than at the primitive-level (in the vertex shader). Why? Well, vertex shaders execute once per vertex, but ray-tracing needs to be performed for each pixel on the screen. Ray-tracing also requires random access to the entire scene geometry. Vertex shaders only have access to data for the single vertex being processed, while fragment shaders have access to the entire scene data via uniforms/textures/buffers (which is just the way the rendering pipeline is designed). Not to mention, vertex shaders can’t directly write color outputs to arbitrary pixels - they pass data downstream to the fragment shader. Ray-tracing is fundamentally a per-pixel operation (for each pixel, determine what color it should be based on ray intersection tests). But how can a ray-tracer work inside a fragment shader? Because the fragment shader gets a bunch of variables passed to it as attributes from upstream of the rendering pipeline (i.e.&nbsp;from the vertex shader or even the 3D framework, or engine, itself) scene data like the camera position are known to the vertex shader. Based on these known values, a surface (albeit a primitive one) can be defined in the fragment shader itself (mathematically). So, the fragment shader may be aware of an object that’s defined within it as code, and it can simulate interactions with said object before assigning a value to a particular pixel. This is the basis of ray-tracing inside a fragment shader as we shall see. But this limits us to ray-tracing of scenes comprised of primitive shapes (like spheres, planes, etc.) that can be defined mathematically. For more complex scenes, perhaps with imported geometry, we need to use a different approach. There are pure ray-tracing pipelines which don’t use rasterization at all, and provide specialized shader types (ray generation shaders, intersection shaders, closest hit shaders, etc.). We’ll learn about these later. There are also <em>hybrid rendering pipelines</em> that use rasterization for the bulk of the scene and ray-tracing for advanced visual effects.</p>
+<p>Ray-tracing can also be used in conjunction with rasterization to achieve a balance between quality and performance, as well as to render complex scenes with imported geometry. This is the approach taken by most video games today. <code>WebGLRenderer</code> (and the <code>CanvasRenderer</code>) in Three.js, for example, use a rasterization pipeline. However, since parts of the rasterization pipeline are open to being programmable (with shaders), we can write our own ray-tracing implementation (which is what we’ll eventually try to do).</p>
+<p>Before now, we only saw a trivial example of a hybrid rendering pipeline. The pipeline rasterized a simple quadrilateral, initially, to cover the whole screen. This was done to, basically, start a computation thread for each pixel where we could do the ray-tracing. But we can also rasterize a good chunk of our scene and use ray-tracing only for certain, advanced visual effects. For example, ray-tracing can be used to calculate reflections and refractions, while rasterization can be used for the rest of the scene. This is often referred to as a <em>hybrid rendering pipeline</em>. For example, <em>screen-space reflections (SSR)</em> is a technique that uses ray-tracing to calculate reflections in a scene, while rasterization is used for the rest of the scene. This allows for more realistic reflections without the performance overhead of full ray-tracing.</p>
+<p>How does this work? After the first rasterization pass:</p>
+<ul>
+<li>The scene (including complex imported models) is rasterized into fragments</li>
+<li>A primary visibility buffer (what’s directly visible to the camera) is created</li>
+<li><em>G-buffers</em> store additional data like depth, normals, material properties</li>
+</ul>
+<p>SSR then ray-marches against the depth buffer.</p>
+<p><em>Ambient occlusion</em> is another technique that uses ray-tracing to calculate the amount of light that reaches a surface, while rasterization is used for the rest of the scene. While these can be thought of as <em>post-processing effects</em>, but that term can also mean “effects that are applied after the entire scene has been drawn and colored (i.e.&nbsp;after <em>fragment shading</em>).” These effects include: <em>bloom</em>, <em>motion blur</em>, <em>depth of field</em>, <em>aliasing</em>, etc. However, after rasterization we already have a colored scene, more or less, so the term post-processing can still apply. <em>Fragment shading</em> and <em>post-processing</em> are basically at the same level in the pipeline, it’s just a matter of preference whether to call these effects post-processing or not. <em>Post-processing</em> is <em>fragment shading</em> (in essence). The</p>
+<p>But why does ray-tracing start from the camera (more specifically the <em>near-plane</em> of the camera) and not the object? After all, in the real world, the sun’s rays reflect off of objects <em>into</em> our eyes (and not vice-versa). Most of the rays cast from objects would not even hit the camera, so doing that will lead us to calculate the path of a lot of extra rays for no reason. <em>The Principle of Reversibility of Light</em>, sometimes referred to as the <em>Principle of Reciprocity</em> in optics, states that if a ray of light is sent along a path and its direction is reversed, it will retrace its original path exactly. This holds true regardless of reflections or refractions the light ray undergoes. In other words, when we see someone in a mirror they can also see us back. This means casting rays from the camera into the scene is equivalent to casting rays from the scene into the camera.</p>
+<p>To further understand the difference between rasterization and ray tracing at an algorithmic level, think in terms of two nested loops. Each primitive covers a certain area of pixels on the screen, so the rasterization algorithm takes each primitive first and determines which pixels it covers. For each primitive, and for each pixel, rasterization asks: does the primitive cover the pixel? Does it fall outside the pixel? Maybe there’s another primitive in front of it? Ray tracing, on the other hand, flips the loops. It asks, for each pixel, which primitive is the closest one to it. It does this by casting <em>rays</em> from the camera into the scene and checking for intersections with primitives.</p>
+<p>Here’s a great <a href="https://www.youtube.com/watch?v=ynCxnR1i0QY&amp;t=111s">video</a> from Nvidia that explains the difference between rasterization and ray-tracing in more detail. I will embed it here.</p>
+<p></p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ynCxnR1i0QY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><br>
+<p></p>
+<p>Rasterization is the common approach taken by video games (or other real-time applications)because it’s computationally cheaper (so a single frame can be rendered in fractions of a second), while ray-tracing is more accurate and more computationally intensive (it’s used in Pixar-style animations where render farms can take their time rendering the frames of a movie). However, this is changing with the advent of modern GPUs that can perform ray-tracing in real-time.</p>
+<section id="ray-tracing-vs-ray-marching" class="level3">
+<h3 class="anchored" data-anchor-id="ray-tracing-vs-ray-marching">Ray-Tracing vs Ray-Marching</h3>
+<p>Ray-marching, on the other hand, is also a ray-tracing algorithm that works by casting a ray from the camera of a scene, however, whereas ray-tracing finds the exact intersection of a ray and a primitive, ray-marching iteratively approaches this intersection point. Ray-marching is used for volumetric shapes (like clouds), and to render fractal worlds that have infinite detail (see this cool <a href="https://www.youtube.com/watch?v=svLzmFuSBhk">video</a>)!</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/svLzmFuSBhk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Ray-marching is better form fractals because fractals (and other procedural geometry) are implicitly defined surfaces (defined by mathematical functions like SDFs), rather than actual primitives. We can use ray-tracing too, but that would require taking a <em>mesh approximation</em> of the fractal (which is an expensive operation that also removes the infinite detail from the fractal). While traditional ray tracing excels at rendering explicit, polygonal geometry by calculating exact intersections, ray marching thrives on implicit, mathematically defined surfaces (like fractals) by iteratively stepping through space using distance information (SDFs, once again).</p>
+</section>
+</section>
+<section id="fragment-shading" class="level2">
+<h2 class="anchored" data-anchor-id="fragment-shading">Fragment Shading</h2>
+<p>The final stage of the rendering pipeline is the fragment shading stage. In this stage, the fragment shader is executed for each fragment generated in the rasterization stage. The fragment shader is responsible for determining the color of each pixel based on the lighting and shading calculations performed in the previous stages. It can also be used to apply <em>textures</em>, perform <em>post-processing</em> effects, and more.</p>
+<p>A key object in this stage is the <em>frame buffer</em>, which is a memory buffer that stores the color and depth information of each pixel. A <em>Frame Buffer Object (FBO)</em> is an object that’s used to store the shader calculations on a given scene to a <em>texture</em> rather than to the screen itself. This allows us to overlay post-processing effects. Each effect is drawn to its own <em>texture</em> within a separate FBO. What’s shown on the screen is, then, all of these <em>textures</em> (along with other shader calculations performed during the fragment shading stage) overlaid on top of the rasterized scene.</p>
+</section>
+</section>
+<section id="the-rendering-pipeline" class="level1">
+<h1>The Rendering Pipeline</h1>
+<p>This has to be fact checked, but here’s a pipeline diagram.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph "CPU Processing"
+        A[Scene Data] --&gt;|"Mesh Data\nTextures\nLights\nMaterials"| B[Geometry Processing]
+        B --&gt;|"Vertex Data\nIndices\nShader Programs"| C[Send to GPU]
+    end
+    
+    subgraph "GPU Pipeline"
+        C --&gt;|"Vertex Attributes\n(positions, normals, UVs)"| D[Vertex Shader]
+        
+        D --&gt;|"Transformed Vertices"| E[Primitive Assembly]
+        
+        subgraph "Optional Stages"
+            E --&gt;|"Primitives"| F1[Tessellation]
+            F1 --&gt;|"Subdivided Primitives"| F2[Geometry Shader]
+            F2 --&gt;|"Modified/New Primitives"| G
+        end
+        
+        E --&gt;|"Assembled Primitives\n(triangles, lines)"| G[Rasterization]
+        
+        G --&gt;|"Fragments\n(potential pixels)"| H[Fragment Shader]
+        
+        H --&gt;|"Colored Fragments"| I[Per-Sample Operations]
+        I --&gt;|"Final Pixel Colors"| J[Frame Buffer]
+    end
+    
+    subgraph "Matrix Transformations"
+        M["Model Matrix (M)\nObject → World Space"] -.-&gt;|"Uniform"| D
+        V["View Matrix (V)\nWorld → Camera Space"] -.-&gt;|"Uniform"| D
+        P["Projection Matrix (P)\nCamera → Clip Space"] -.-&gt;|"Uniform"| D
+    end
+    
+    subgraph "Varying Data Flow"
+        D -.-&gt;|"Interpolated Data\n(UVs, normals, etc.)"| H
+    end
+    
+    subgraph "Alternative Path"
+        G --&gt;|"For ray-tracing effects"| RT[Ray Generation]
+        RT --&gt;|"Rays"| RT2[Ray Intersections]
+        RT2 --&gt;|"Hit Information"| H
+    end
+    
+    J --&gt;|"Display"| K[Screen]</code></pre>
+</section>
+<section id="euler-angles-and-rotation-matrices" class="level1">
+<h1>Euler Angles and Rotation Matrices</h1>
+<section id="intertial-frame-and-body-frame" class="level2">
+<h2 class="anchored" data-anchor-id="intertial-frame-and-body-frame">Intertial Frame and Body Frame</h2>
+<p><span class="math inline">\(R_{yaw}\)</span>, <span class="math inline">\(R_{pitch}\)</span>, and <span class="math inline">\(R_{roll}\)</span>.</p>
+</section>
+</section>
+<section id="quaternion-rotation" class="level1">
+<h1>Quaternion Rotation</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
+<script type="importmap">
+  {
+      "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.173.0/+esm",
+          "OBJLoader": "https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/loaders/OBJLoader.js",
+          "MTLLoader": "https://cdn.jsdelivr.net/npm/three@0.173.0/examples/jsm/loaders/MTLLoader.js",
+          "OrbitControls": "https://cdn.skypack.dev/three@0.133.0/examples/jsm/controls/OrbitControls.js",
+          "Cannon": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+      }
+  }
+</script>
+<script type="module" src="./javascript/three-js-basic-shader-demo-1.js"></script>
+<script type="module" src="./javascript/three-js-basic-shader-demo-2.js"></script>
+
+
+
+
+</body></html>

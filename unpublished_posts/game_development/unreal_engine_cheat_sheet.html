@@ -9,7 +9,7 @@
 <meta name="author" content="Vahram Poghosyan">
 <meta name="dcterms.date" content="2023-01-13">
 
-<title>Recursion Optimizations – v-poghosyan</title>
+<title>Unreal Engine: Cheat Sheet – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -114,35 +80,6 @@ gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -182,10 +119,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Recursion Optimizations</h1>
+      <h1 class="title">Unreal Engine: Cheat Sheet</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Recursion</div>
-                <div class="quarto-category">Functional Programming</div>
+                <div class="quarto-category">Game Development</div>
+                <div class="quarto-category">Ureal Engine</div>
               </div>
                   </div>
   </div>
@@ -219,11 +156,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#recursion-optimizations" id="toc-recursion-optimizations" class="nav-link active" data-scroll-target="#recursion-optimizations">Recursion Optimizations</a>
-  <ul>
-  <li><a href="#tail-recursion---avoiding-stack-overflow" id="toc-tail-recursion---avoiding-stack-overflow" class="nav-link" data-scroll-target="#tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</a>
-  <ul>
-  <li><a href="#classic-example-factorial" id="toc-classic-example-factorial" class="nav-link" data-scroll-target="#classic-example-factorial">Classic Example: Factorial</a></li>
+  <li><a href="#getting-started-installation-and-setup" id="toc-getting-started-installation-and-setup" class="nav-link active" data-scroll-target="#getting-started-installation-and-setup">Getting Started (Installation and Setup)</a>
+  <ul class="collapse">
+  <li><a href="#option-1-cloning-unrealengine-project-from-github" id="toc-option-1-cloning-unrealengine-project-from-github" class="nav-link" data-scroll-target="#option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</a></li>
+  <li><a href="#option-2-install-using-unreal-launcher" id="toc-option-2-install-using-unreal-launcher" class="nav-link" data-scroll-target="#option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</a></li>
+  <li><a href="#starting-a-project" id="toc-starting-a-project" class="nav-link" data-scroll-target="#starting-a-project">Starting a Project</a></li>
+  <li><a href="#unreal-cheat-sheet" id="toc-unreal-cheat-sheet" class="nav-link" data-scroll-target="#unreal-cheat-sheet">Unreal Cheat Sheet</a>
+  <ul class="collapse">
+  <li><a href="#key-bindings-and-shortcuts" id="toc-key-bindings-and-shortcuts" class="nav-link" data-scroll-target="#key-bindings-and-shortcuts">Key Bindings and Shortcuts</a></li>
+  <li><a href="#view-mode-options" id="toc-view-mode-options" class="nav-link" data-scroll-target="#view-mode-options">View Mode Options</a></li>
+  <li><a href="#translation-and-snap-tools" id="toc-translation-and-snap-tools" class="nav-link" data-scroll-target="#translation-and-snap-tools">Translation and Snap Tools</a></li>
+  <li><a href="#working-with-objects" id="toc-working-with-objects" class="nav-link" data-scroll-target="#working-with-objects">Working with Objects</a></li>
+  <li><a href="#ui-windows" id="toc-ui-windows" class="nav-link" data-scroll-target="#ui-windows">UI Windows</a></li>
+  <li><a href="#blueprint-programming" id="toc-blueprint-programming" class="nav-link" data-scroll-target="#blueprint-programming">Blueprint Programming</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -236,97 +181,349 @@ window.Quarto = {
 
 
 
-<section id="recursion-optimizations" class="level1">
-<h1>Recursion Optimizations</h1>
-<p>Recursive algorithms, while elegant and expressive, can sometimes lead to performance issues due to the overhead of function calls and potential for repeated computations. Several optimization techniques can be employed to enhance their efficiency. One common method is <strong>memoization</strong>, which stores the results of expensive function calls and reuses them when the same inputs occur again, avoiding repeated computations. Another technique is <strong>tail recursion optimization</strong>, where the recursive call is the final operation in the function, allowing the system to reuse the current stack frame for each recursive call. Tail recursion optimization reduces the space complexity from <span class="math inline">\(O(n)\)</span> to <span class="math inline">\(O(1)\)</span>. Additionally, <strong>iterative solutions</strong> can often be more efficient than their recursive counterparts, so converting a recursive algorithm to an iterative one can be considered an optimization. Understanding these techniques, and variations on them, can greatly improve the performance of our recursive algorithms.</p>
-<section id="tail-recursion---avoiding-stack-overflow" class="level4">
-<h4 class="anchored" data-anchor-id="tail-recursion---avoiding-stack-overflow">Tail Recursion - Avoiding Stack Overflow</h4>
-<p><strong>Stack overflow</strong> (which is when the system runs out of short term memory) is a common concern when working with recursive functions or when doing <a href="../../unpublished_posts/functional_programming/functional_programming.html">functional programming</a>, where function composition is the mode in which we think. <strong>Tail recursion optimization</strong> helps us drastically cut the number of stack frames and, as mentioned earlier, makes our recursive algorithms take a constant amount of space instead of a linear amount (or worse).</p>
-<section id="classic-example-factorial" class="level5">
-<h5 class="anchored" data-anchor-id="classic-example-factorial">Classic Example: Factorial</h5>
-<p>Let’s take the classic example of calculating a factorial.</p>
-<p><strong>Naive Recursive Implementation:</strong></p>
-<div id="cell-3" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>) <span class="co"># Recursive step</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>24</code></pre>
+<section id="getting-started-installation-and-setup" class="level1">
+<h1>Getting Started (Installation and Setup)</h1>
+<section id="option-1-cloning-unrealengine-project-from-github" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-cloning-unrealengine-project-from-github">Option 1: Cloning <code>UnrealEngine</code> Project from Github</h2>
+<p>The following steps are meant broadly as the specific instructions might change over time. You will need to download the latest version of <a href="https://developer.apple.com/xcode/">Xcode</a>.</p>
+<ol type="1">
+<li>Navigate to the Unreal Engine <a href="https://www.unrealengine.com/">website</a>.</li>
+<li>Register an account.</li>
+<li>Request access to the <a href="https://github.com/EpicGames">GitHub org</a></li>
+<li>Fork the <a href="https://github.com/EpicGames/UnrealEngine">UnrealEngine</a> repo and clone to local</li>
+<li>Follow the README to compile and run the Unreal Editor. The Editor uses a version of the Unreal Engine which can be downloaded by running a few installation scripts in the <code>UnrealEngine</code> project that download the engine and game files.</li>
+</ol>
+</section>
+<section id="option-2-install-using-unreal-launcher" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-install-using-unreal-launcher">Option 2: Install Using Unreal Launcher</h2>
+<p>We can also install Unreal Engine through the <a href="https://www.unrealengine.com/en-US/download">Unreal Launcher</a>.</p>
+</section>
+<section id="starting-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="starting-a-project">Starting a Project</h2>
+<p>Before starting a project, make sure to:</p>
+<ol type="1">
+<li>Load <strong>static content</strong></li>
+<li>Enable <strong>raytracing</strong></li>
+</ol>
+<p>Feel free to pick a template project from the project browser, such as a first-person or a third-person game. Once the new project opens a <code>.uproject</code> file is created in the default <code>~/Documents/Unreal Projects</code> directory. We can click this file directly to open the project to continue where we left it off in the future.</p>
+</section>
+<section id="unreal-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="unreal-cheat-sheet">Unreal Cheat Sheet</h2>
+<section id="key-bindings-and-shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="key-bindings-and-shortcuts">Key Bindings and Shortcuts</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RMB</td>
+<td>Rotate camera</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RMB + <kbd>W</kbd> or <kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd></td>
+<td>Movement front/left/back/right</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RMB + <kbd>E</kbd> or <kbd>Q</kbd></td>
+<td>Movement up or down</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Scroll Wheel Up/Down + RMB</td>
+<td>Adjust camera speed</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>LMB</td>
+<td>Select object in world</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Q</kbd></td>
+<td>Object selection mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>W</kbd></td>
+<td>Movement translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>E</kbd></td>
+<td>Rotation translation mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>R</kbd></td>
+<td>Scale translation mode</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Del</kbd></td>
+<td>Delete selected object</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>H</kbd></td>
+<td>Hide selected object</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd>D</kbd></td>
+<td>Duplicate selected object</td>
+<td>Another shortcut is holding <kbd class="inline">Opt</kbd> and dragging the selected object</td>
+</tr>
+<tr class="odd">
+<td>Hold <kbd>Shift</kbd> + LMB</td>
+<td>Select multiple objects</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>Ctrl</kbd> + LMB</td>
+<td>Deselect multiple objects from a multi-object selection</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>F</kbd></td>
+<td>Focus on selected object</td>
+<td>If we’re lost in our scene we can always select an object in the <strong>Outliner</strong> window and press <kbd class="inline">F</kbd> to re-focus on the object</td>
+</tr>
+<tr class="even">
+<td><kbd>G</kbd></td>
+<td>Game view mode</td>
+<td>Hides widgets, see the world as if in-game</td>
+</tr>
+<tr class="odd">
+<td><kbd>Cmd</kbd> + <kbd>F11</kbd></td>
+<td>Immersive mode</td>
+<td>Hides all windows and shows the world in full screen (note: we may also need to press <kbd class="inline">Fn</kbd>)</td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> + <kbd class="large"> Space </kbd></td>
+<td>Open <strong>Content Drawer</strong></td>
+<td>The Content Drawer is what contains all of our in-game assets (3D/2D assets, code, etc.)</td>
+</tr>
+<tr class="odd">
+<td><kbd>Opt</kbd> + <kbd>P</kbd></td>
+<td>Play game</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><kbd>Esc</kbd></td>
+<td>Exit game and go back to Edit mode</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><kbd>Shift</kbd> + <kbd>1</kbd> or <kbd>2</kbd>/<kbd>3</kbd>/…</td>
+<td>Change Unreal Editor mode</td>
+<td>The default is <strong>Selection Mode</strong>. Other modes include <strong>Landsaping Mode</strong>, <strong>Foliage Mode</strong>, etc. These bring up various tools to edit landscapes and make foliage (as their names suggest)</td>
+</tr>
+<tr class="even">
+<td>Hold <kbd>L</kbd> + LMB</td>
+<td>Rotate sun</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="view-mode-options" class="level3">
+<h3 class="anchored" data-anchor-id="view-mode-options">View Mode Options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>View mode</th>
+<th>Function</th>
+<th>Optional explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wireframe</td>
+<td>Shows only the wireframe mesh</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Unlit</td>
+<td>Shows the world disregarding lighting information</td>
+<td>Useful for visibility when editing in dark environments</td>
+</tr>
+<tr class="odd">
+<td>Light only</td>
+<td>The world with lighting alone (i.e.&nbsp;without material information)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="translation-and-snap-tools" class="level3">
+<h3 class="anchored" data-anchor-id="translation-and-snap-tools">Translation and Snap Tools</h3>
+<p>The translation modes and snap tools are available in the top-right corner of the viewport.</p>
+<div id="fig-unreal-translation-snap-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/translate_snap_modes.png" class="img-fluid figure-img" width="500">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-translation-snap-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Translation and snap tools
+</figcaption>
+</figure>
 </div>
-<p>From the below untangled definition of factorial (for <span class="math inline">\(n=4\)</span>) we can surmise what goes on in the stack. The stack first fills up with stack frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, which is the last frame on the stack before it begins to pop and actual evaluation happens.</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = 4 * factorial(3) \\
-        &amp; = 4 * (3 * factorial(2)) \\
-        &amp; = 4 * (3 * (2 * factorial(1))) \\
-        &amp; = 4 * (3 * (2 * (1 * factorial(0)))) \\
-        &amp; = 4 * (3 * (2 * (1 * 1))) \\
-        &amp; = 4 * (3 * (2 * 1)) \\
-        &amp; = 4 * (3 * 2) \\
-        &amp; = 4 * 6 \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up in memory) before evaluation even begins. Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
-<p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this particular function <em>fail</em> to be tail-recursive). It helps to think in terms of <em>carried state</em>. In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next frame. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
-<p>In the case of the factorial function above, this means that in the tail-recursive implementation the stack is not filled up with as many frames of recursive <code>factorial</code> calls as the input (<span class="math inline">\(n\)</span>) is big. There are still <span class="math inline">\(n\)</span> total calls, however the memory used in the stack is held constant (at a single frame in this case) as each old frame gives way to the new one.</p>
-<p>So, for now, let’s <em>define</em> a magic function called <code>go(n,acc)</code> with inputs <code>n</code> and what’s called an <em>accumulator</em> <code>acc</code> such that <code>factorial(n) := go(n,1)</code>. We take this to be <em>by construction</em>. The function <code>go</code> will be the <em>tail-recursive helper</em> of <code>factorial</code>. The accumulator <code>acc</code>, which is initialized to <code>1</code>, will be used to remember the state inside the current stack frame (in this case just the multiplicative factor before the recursive call).</p>
-<p>But so far we’ve only given <code>go(n, acc)</code> its desired properties without actually defining it. The following is the tail-recursive version of factorial which includes the definition of <code>go</code>.</p>
-<p><strong>Tail-Recursive Factorial:</strong></p>
-<div id="cell-5" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> go(n,acc): <span class="co"># Helper function with an accumulator</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>: <span class="co"># Base case: 0! = 1</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> acc</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> go(n<span class="op">-</span><span class="dv">1</span>, n <span class="op">*</span> acc) <span class="co"># Tail-recusrive step</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> go(n,<span class="dv">1</span>) <span class="co"># Delegate the problem solution to a helper function</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>24</code></pre>
+<p>From left to right, we have:</p>
+<ul>
+<li>Object selection mode</li>
+<li>Translation mode</li>
+<li>Rotation mode</li>
+<li>Scale mode</li>
+<li>Toggle for coordinate system (global vs local) relative to which the transform gizmo is shown</li>
+<li>Surface snapping options (controls how objects snap to existing surfaces)</li>
+<li>Translation snapping</li>
+<li>Rotation snapping</li>
+<li>Scale snapping</li>
+<li>Camera speed adjustment</li>
+<li>Minimize/maximize current viewport</li>
+</ul>
+<p>The default viewport includes a grid, this can be disabled in <strong>Show</strong> menu in the top-left corner of the viewport by un-checking <strong>Grid</strong>.</p>
+</section>
+<section id="working-with-objects" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-objects">Working with Objects</h3>
+<p>There are two ways to add objects to the scene. The first is through <strong>Add Object</strong> in the top-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/add_object.png" class="img-fluid"></p>
+<p>The second way is by using the <strong>Content Drawer</strong> in the bottom-left corner.</p>
+<p>Click <img src="../../assets/game_development/unreal_engine_first_steps/content_drawer.png" class="img-fluid"> or use shortcut <kbd class="inline">Ctrl</kbd> + <kbd class="inline">‎ ‎ ‎ ‎ Space ‎ ‎ ‎ ‎</kbd></p>
+<p>The latter method is for adding custom game objects (blueprints as well as 2D/3D assets and more).</p>
+<p>We often need to see where a particular game asset is located in the Content Drawer. The shortcut to find any object inside the Content Drawer is <kbd class="inline">Ctrl</kbd> + <kbd class="inline">B</kbd> while having the object selected.</p>
+<p>All the assets that make up our game, such as custom 3D assets, custom blueprints (code), etc are stored within the <code>/Content</code> folder of the project.</p>
+</section>
+<section id="ui-windows" class="level3">
+<h3 class="anchored" data-anchor-id="ui-windows">UI Windows</h3>
+<section id="details" class="level4">
+<h4 class="anchored" data-anchor-id="details">Details</h4>
+<p>The <strong>Details</strong> window looks as follows.</p>
+<div id="fig-unreal-details" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/details.png" class="img-fluid figure-img" width="300">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Details window
+</figcaption>
+</figure>
 </div>
-<p>Let’s unpack this:</p>
-<p><span class="math display">\[
-\begin{equation}
-    \begin{split}
-        factorial(4) &amp; = go(4,1) \\
-        &amp; = go(3,4) \\
-        &amp; = go(2,12) \\
-        &amp; = go(1,24) \\
-        &amp; = go(0,24) \\
-        &amp; = 24
-    \end{split}
-\end{equation}
-\]</span></p>
-<p>Right away we can see that, with this approach, we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that in the expression above evaluation happens immediately, rather than step-by-step (with each step corresponding to the popping of a stack frame), as is the case in the naive implementation.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p>It contains all the details about a selected object such as:</p>
+<ul>
+<li>Transformation information (coordinates, angle of rotation, and scale)</li>
+<li>Material information</li>
+<li>Physics and many more…</li>
+</ul>
+</section>
+<section id="outliner" class="level4">
+<h4 class="anchored" data-anchor-id="outliner">Outliner</h4>
+<p>The <strong>Outliner</strong> window looks as follows.</p>
+<div id="fig-unreal-outliner" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/outliner.png" class="img-fluid figure-img" width="300">
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-outliner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Outliner window
+</figcaption>
+</figure>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+<p>It contains all the objects that make up the scene, as well as options to show/hide, save, and pin objects:</p>
+</section>
+</section>
+<section id="blueprint-programming" class="level3">
+<h3 class="anchored" data-anchor-id="blueprint-programming">Blueprint Programming</h3>
+<p>Assuming we’ve selected the third person template, go into the Content Browser and go to <code>/Content/ThirdPerson/Blueprints</code> to access the blueprints of the third person character.</p>
+<div id="fig-unreal-third-person-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/blueprints.png" class="img-fluid figure-img" width="500">
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>It’s important to note that this effort only pays off if the language compiler in question supports <strong>TCO</strong> (<strong>Tail Call Optimization</strong>). Most, in fact, do. If the language supports TCO the compiler can recognize tail calls and simply pop the current stack frame after the recursive call, replacing it with the subsequent call (rather than blindly stacking frames on top of each other as in the naive recursive algorithm)</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-third-person-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Content Drawer - Third person blueprints
+</figcaption>
+</figure>
 </div>
+<p>Click on the humanoid. Feel free to dock the newly opened window (as a new tab) next to the open viewport in the Unreal Editor.</p>
+<p>A blueprint consists of three views:</p>
+<ol type="1">
+<li><strong>EventGraph</strong></li>
+<li><strong>Construction Script</strong></li>
+<li><strong>Viewport</strong></li>
+</ol>
+<section id="eventgraph" class="level4">
+<h4 class="anchored" data-anchor-id="eventgraph">EventGraph</h4>
+<p>Contains most of the blueprint’s logic.</p>
+<div id="fig-unreal-event-graph" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/event_graph.png" class="img-fluid figure-img" width="500">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-event-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Blueprints - Event graph
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="construction-script" class="level4">
+<h4 class="anchored" data-anchor-id="construction-script">Construction Script</h4>
+<p>More on this later…</p>
+</section>
+<section id="viewport" class="level4">
+<h4 class="anchored" data-anchor-id="viewport">Viewport</h4>
+<div id="fig-unreal-viewport" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/viewport.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-viewport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Blueprints - Viewport
+</figcaption>
+</figure>
+</div>
+<p>This view shows everything within the selected blueprint as an object. Objects in a blueprint are called <strong>components</strong>. The <strong>Components</strong> window is the equivalent of the Outliner window but for blueprints. Rather than showing every object in the world, it shows every component in the blueprint.</p>
+<div id="fig-unreal-components" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/components.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Blueprints - Components window
+</figcaption>
+</figure>
+</div>
+<p>The <strong>My Blueprint</strong> window contains all the nodes and variables contained in the blueprint. We can click on the EventGraph in the <strong>Graphs</strong> tab of this window to go into the EventGraph view directly.</p>
+<div id="fig-unreal-my-blueprint" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../assets/game_development/unreal_engine_first_steps/my_blueprint.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unreal-my-blueprint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Blueprints - My Blueprint window
+</figcaption>
+</figure>
 </div>
 
 
+</section>
 </section>
 </section>
 </section>

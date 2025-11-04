@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2025-11-03">
+
+<title>Dump of old ML notes – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/site/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Dump of old ML notes</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Large Language Models</div>
+                <div class="quarto-category">Deep Learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 3, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link active" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#mistake-bounded-learning" id="toc-mistake-bounded-learning" class="nav-link" data-scroll-target="#mistake-bounded-learning"><strong>Mistake Bounded Learning</strong></a></li>
+  <li><a href="#holdout-sets" id="toc-holdout-sets" class="nav-link" data-scroll-target="#holdout-sets"><strong>Holdout Sets</strong></a>
+  <ul>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><strong>Cross-Validation</strong></a></li>
+  </ul></li>
+  <li><a href="#perceptron-learning" id="toc-perceptron-learning" class="nav-link" data-scroll-target="#perceptron-learning"><strong>Perceptron Learning</strong></a></li>
+  <li><a href="#decision-trees-wip" id="toc-decision-trees-wip" class="nav-link" data-scroll-target="#decision-trees-wip"><strong>Decision Trees (WIP)</strong></a></li>
+  <li><a href="#principal-component-analysis-wip" id="toc-principal-component-analysis-wip" class="nav-link" data-scroll-target="#principal-component-analysis-wip"><strong>Principal Component Analysis (WIP)</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="logistic-regression" class="level1">
+<h1>Logistic Regression</h1>
+<p>So far, we’ve seen Linear Regression (which is a <em>regression problem</em>), and Classification Trees as well as Perceptron (which are <em>classification</em> problems). On a high level, regression problems are those that extrapolate (or <em>fit</em>) discrete input to a continuous valued output. For instance, Linear Regression fits an <span class="math inline">\(n\)</span>-dimensional line (a continous output) to the data set of <span class="math inline">\(n\)</span>-dimensional points (a discrete input). Logistic Regression is a <em>regression</em> problem (as its name correctly implies) whose continuous output is within the probabilistic range <span class="math inline">\((0,1)\)</span> as opposed to Linear Regression’s unbounded output in <span class="math inline">\(\mathbb{R}\)</span> (or <span class="math inline">\(\mathbb{R^n}\)</span> in the <span class="math inline">\(n\)</span>-dimensional case). Specifically, Linear Regression hopes that the data fits the model <span class="math inline">\(\mathbb{E}[Y|X] = w^TX\)</span> (so that it may fit a line), whereas Logistic Regression hopes it fits the model <span class="math inline">\(\mathbb{E}[Y|X]=\sigma(Yw^TX)\)</span> where <span class="math inline">\(\sigma\)</span> is the <em>sigmoid function</em> we will define in time (so that it may fit a <em>sigmoid</em>). The fact that Logistic Regression outputs a value in <span class="math inline">\((0,1)\)</span> makes it practical for use in classification problems since we can use its output (which is just a probability) to decide a label.</p>
+<p><strong>Recall Perceptron</strong></p>
+<p>What happens when the data supplied to Perceptron not only lacks the margin <span class="math inline">\(\rho\)</span> needed for the <span class="math inline">\(O(R^2/\rho^2)\)</span> mistake-bound, but is not even linearly separable at all? Perceptron could theoretically still be run with some error, and in minimizing this error we should get a somewhat acceptable classifcation.</p>
+<p>To that end, we define the following <em>0-1 Loss Function</em>.</p>
+<p><span class="math display">\[
+\Phi_{0-1}(z) =
+\begin{cases}
+  1 &amp; \text{if } z \le 0 \\
+  0 &amp; \text{if } z &gt; 0
+\end{cases}
+\]</span> Now, note that Perceptron’s guess for the a label <span class="math inline">\(y^i \in \{-1,+1\}\)</span> is <span class="math inline">\(sign(w^Tx^i)\)</span>. When <span class="math inline">\(y^i(w^Tx^i)&gt;0\)</span>, the label and the guess have the same sign <span class="math inline">\(\implies\)</span> no penalty should apply. When <span class="math inline">\(y^i(w^Tx^i)&lt;0\)</span>, the label and the guess have opposite signs <span class="math inline">\(\implies\)</span> a penalty should apply.</p>
+<p>Then clearly <span class="math inline">\(\Phi_{0-1}(y^iw^Tx^i)\)</span> is the correct loss function and, if there are a total of <span class="math inline">\(m\)</span> data points, then <span class="math inline">\(\frac{1}{m}\sum_{i=1}^m \Phi_{0-1}(y^iw^Tx^i)\)</span> is the average loss over the entire dataset. This is the <em>objective function</em> to minimize and so we’re faced with the following optimization problem:</p>
+<p><span class="math display">\[ \min_{w} (\frac{1}{m}\sum_{i=1}^m \Phi_{0-1}(y^iw^Tx^i)) \ \ ^{\dagger} \]</span></p>
+<p>Recall that the loss associated to linear regression was <em>Least Squares Loss</em> which is the quantity inside the summation of its objective function <span class="math inline">\(\min_w (\frac{1}{m} \sum_{i=1}^{m}(w^Tx^i - y^i)^2)\)</span>.</p>
+<p>Unlike <em>Least Squares Loss</em>, <em>0-1 Loss</em> is neither convex, nor differentiable. This, unfortunately, means that we cannot minimize it using <em>gradient descent</em>. In fact there’s more bad news… the problem of minimizing <span class="math inline">\(\dagger\)</span> turns out to be NP-hard.</p>
+<p><strong>Surrogate Loss Functions</strong></p>
+<p>What if we relaxed <em>0-1 Loss</em> to a similarly behaved function which <em>is</em> convex and differentiable? Then minimizing this new <em>surrogate loss function</em> would closely approximate minimizing the <em>0-1 Loss</em>.</p>
+<p>To this end, we define <em>Logistic Loss</em> as: <span class="math inline">\(\Phi_{log}(z) = \log(1+e^{-z})\)</span>.</p>
+<p>Note what happens when we put <span class="math inline">\(z = y^iw^Tx^i\)</span> as in <em>0-1 Loss</em>…</p>
+<ul>
+<li><p>When <span class="math inline">\(y^iw^Tx^i &lt;&lt; 0\)</span>, which is when <span class="math inline">\(x^T\)</span> is pointing in a direction that’s very opposite to the best norm <span class="math inline">\(w^*\)</span> (i.e.&nbsp;the one we’re trying to solve for, the norm for which <span class="math inline">\(sign(w^{*^{T}}x)\)</span> is closest to <span class="math inline">\(y^i\)</span> since the data isn’t perfectly linearly separable), then the guess is <em>very</em> wrong.</p>
+<p>In this case note that <span class="math inline">\(\Phi_{log}(y^iw^Tx^i)\)</span> is very large, applying a large penalty.</p></li>
+<li><p>When <span class="math inline">\(y^iw^Tx^i &gt;&gt; 0\)</span>, which is when <span class="math inline">\(x^T\)</span> is pointing in a direction that’s very close to the best norm <span class="math inline">\(w^*\)</span>, then the guess is <em>very</em> correct.</p>
+<p>In this case note that <span class="math inline">\(\Phi_{log}(y^iw^Tx^i)\)</span> is very small, almost no penalty.</p></li>
+</ul>
+<p>In both cases, we no longer have a perfect measure for the loss in terms of the number of mistakes made (which <em>0-1 Loss</em> provided) since we’re still applying some penalty to right classifcations (<span class="math inline">\(log(1+e^{-z})\)</span> is never <span class="math inline">\(0\)</span>). But some sloppiness is to be expected from a <em>relaxtation</em> procedure. Overall, <em>Logistic Loss</em> has the desired properties of a loss function.</p>
+<p>So, our new optimization problem is: <span class="math inline">\(\min_w L(w)\)</span> where <span class="math inline">\(L(w) = \frac{1}{m}\sum_{i=1}^m \log(1 + e^{-y^iw^Tx^i})\)</span>.</p>
+<p><strong>Where does Logistic Loss Come From? Enter the Sigmoid Function…</strong></p>
+<p>The <em>sigmoid function</em> is defined as <span class="math inline">\(\sigma(z) = \frac{1}{1+e^{-z}}\)</span> . Crucially, it maps <span class="math inline">\(R\)</span> to the probability range<span class="math inline">\((0,1)\)</span> and has the property <span class="math inline">\(\sigma(z) + \sigma(-z) = 1\)</span>.</p>
+<p>Recall that there are only two events for the label, <span class="math inline">\(y^i = -1\)</span>, and <span class="math inline">\(y^i = +1\)</span> each of which corresponds to <span class="math inline">\(y^iw^Tx^i = -w^Tx^i\)</span>, and <span class="math inline">\(y^iw^Tx^i = +w^Tx^i\)</span>. And by the property above, <span class="math inline">\(\sigma(+w^Tx^i) + \sigma(-w^Tx^i) = 1\)</span> (i.e.&nbsp;the probability on the entire event space is 1). So <span class="math inline">\(\sigma(y^iw^Tx)\)</span> satisfies the probability laws (namely <em>nonnegativity</em>, <em>additivity</em>, and <em>normalization</em>).</p>
+<p>So, we can model the <em>problem of classifying linearly inseparable data</em> as follows.</p>
+<p>Let <span class="math inline">\(Y\)</span> be a random variable corresponding to the labels, <span class="math inline">\(X\)</span> a random variable corresponding to the samples. Furthermore, fix a norm vector <em>w</em> that best classifies the samples.</p>
+<p>Set <span class="math inline">\(\mathbb{P}[Y = y^i \ | \ X=x^i;w] = \sigma(y^iw^Tx^i)\)</span></p>
+<p>This means that as <span class="math inline">\(y^iw^Tx^i &gt; 0\)</span> (which indicates that the point would <em>certainly</em> have been classified correctly in the simple, linearly separable, case) grows to be more positive, the probability that <span class="math inline">\(Y\)</span> actually <em>does</em> take on the value of the corresponding label <span class="math inline">\(y^i\)</span> (and thus that the point <em>is</em> actually correctly classified in the actual, linearly inseparable, case) is large. Conversely the probability of misclassification is <span class="math inline">\(1-\delta(y^iw^Tx^i)\)</span> which is small.</p>
+<p>So, how do we get from this model to minimizing <em>Logistic Loss</em>?</p>
+<p>We fixed parameter <span class="math inline">\(w\)</span> above to define the model. We can now ask ourselves about its <em>likelihood</em> (i.e.&nbsp;the joint probability of seeing a set of observations given <span class="math inline">\(w\)</span>). That is, how likely it is to be the one we seek, given a set of observations. This question falls under the broad category of <em>Maximum Likelihood Estimation</em> in which we use a set of observations (in this case <em>not experimental</em> observations, but <em>desired</em> observations <span class="math inline">\(\{y^i\}\)</span>), to decide the unknown parameter <span class="math inline">\(\hat{w}\)</span> of a distribution. In other words, given a set of observartions, we work back to surmise the probability distribution they could’ve been drawn from.</p>
+<p><span class="math inline">\(Likelihood(w) = \prod_{i=1}^m \mathbb{P}[Y = y^i \ | \ X=x^i;w] = \prod_{i=1}^m \sigma(y^iw^Tx^i)\)</span></p>
+<p>That is, <span class="math inline">\(w\)</span> has more likelihood the larger the probabilities of guessing each point correctly in the training set are. Some choice of <span class="math inline">\(w\)</span> (denoted <span class="math inline">\(\hat{w}\)</span>) maximizes the product, the questions is which.</p>
+<p>Instead of maximizing the <em>likelihood</em> of <span class="math inline">\(w\)</span>, we can maximize its <em>log-likelihood</em> in order to turn the product into a sum.</p>
+<p><span class="math inline">\(Log-Likelihood(w) =  \sum_{i=1}^m \log(\sigma(y^iw^Tx^i)) = - \sum_{i=1}^m \log(1+e^{-y^iw^Tx^i}) = -mL(w)\)</span> where <span class="math inline">\(L(w)\)</span> is the average <em>Logistic Loss</em> over the dataset as seen before.</p>
+<p>But <span class="math inline">\(\max_w -mL(w)\)</span> amounts to <span class="math inline">\(\min_w mL(w)\)</span> which is equivalent to just <span class="math inline">\(\min_w L(w)\)</span>. So, from simply modeling the problem of classification of a linearly inseparable dataset we’ve arrived at the propblem of minmizing <em>Logistic Loss</em>.</p>
+<p><strong>Gradient Descent for Logistic Regression</strong></p>
+<p>Note that for <span class="math inline">\(z \in \mathbb{R}\)</span>, the derivative of <em>Logistic Loss</em> is:</p>
+<p><span class="math inline">\(\Phi'_{log}(z) = \frac{d \Phi_{log}(z)}{dz} = \frac{-e^{-z}}{1+e^{-z}} = \frac{e^z}{e^z} \cdot \frac{-e^{-z}}{1+e^{-z}} = - \frac{1}{1+e^z} = -\sigma(-z)\)</span>.</p>
+<p>Then, for a fixed <span class="math inline">\(k \leq m\)</span>, the partial derivatives w.r.t. the coordinates of <span class="math inline">\(w\)</span> of <span class="math inline">\(\Phi_{log}(y^kw^Tx^k)\)</span> are:</p>
+<p><span class="math display">\[
+\frac{\delta \Phi_{log}(y^kw^Tx^k)}{\delta w_i} = \frac{d \Phi_{log}(y^kw^Tx^k)}{d (y^kw^Tx^k)} \cdot \frac{\delta(y^kw^Tx^k)}{\delta w_i} = -\sigma(-y^kw^Tx^k) \cdot (y^kx^k_i)
+\]</span></p>
+<p>These are the coordinates of the gradient:</p>
+<p><span class="math display">\[
+\nabla \Phi_{log}(y^kw^Tx^k) = \langle -\sigma(-y^kw^Tx^k) \cdot (y^kx^k_1) \ , ... , -\sigma(-y^kw^Tx^k) \cdot (y^kx^k_n) \rangle ^T
+\]</span></p>
+<p>Then <span class="math inline">\(\nabla L(w)\)</span> can be computed using the sum of these gradients.</p>
+</section>
+<section id="mistake-bounded-learning" class="level1">
+<h1><strong>Mistake Bounded Learning</strong></h1>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> We say that a learner has <em>mistake-bound</em> <span class="math inline">\(t\)</span> if for every sequence of challenges the learner makes at most <span class="math inline">\(t\)</span> mistakes.</p>
+</blockquote>
+<p><strong>Example: Learning Monotone Disjunctions</strong></p>
+<p>Suppose we want to come up with a learner for the function class <span class="math inline">\(C = \{monotone \ \ disjunctions \ \ on \ \ n \ \ literals\}\)</span>.</p>
+<p>First, let’s look at some examples of functions that inhabit this class. <em>Monotone</em> refers to the fact that negation of literals is not allowed, and <em>disjunction</em> refers to the Boolean <span class="math inline">\(\lor\)</span> (the ‘OR’ operator). So <span class="math inline">\(C\)</span> is a class of Boolean functions which receive Boolean strings of leangth <span class="math inline">\(n\)</span> as input (i.e.&nbsp;<span class="math inline">\(x \in \{0,1\}^n\)</span>) . For example, <span class="math inline">\(f(x) = x_1 \lor x_2 \lor x_3\)</span> is a monotone disjunction on <span class="math inline">\(3\)</span> Literals (i.e.&nbsp;<span class="math inline">\(x \in \{0,1\}^3\)</span>).</p>
+<p>Let <span class="math inline">\(c \in C\)</span> be the true function the learner is trying to guess. The hypothesis <span class="math inline">\(h \in C\)</span> is the current state of the learner (i.e.&nbsp;its current best guess for <span class="math inline">\(c\)</span>). Set the initial state to <span class="math inline">\(h_0(x) = x_1 \lor x_2 \lor ... \lor x_n\)</span>. Now suppose the learner is given the challenge <span class="math inline">\(0110 ...0\)</span>. Its classification will be <span class="math inline">\(h_0(0110...0) = 1\)</span>. If this is correct, the learner moves on to the next challenge without updating its state. If it’s incorrect, then the learner knows that the literals <span class="math inline">\(x_2\)</span>, and <span class="math inline">\(x_3\)</span> are not in <span class="math inline">\(c\)</span>. The new state is <span class="math inline">\(h_1(x) = x_1 \lor x_4 \lor ... \lor x_n\)</span>.</p>
+<p>Note that two literals were eliminated from consideration. In fact, every time the learner makes a mistake at least one literal must be eliminated. Since there are <span class="math inline">\(n\)</span> literals in any given challenge, the learner can make at most <span class="math inline">\(n\)</span> mistakes.</p>
+<p><strong>Example: Learning Disjunctions</strong></p>
+<p>Now suppose the goal is to learn the function class <span class="math inline">\(C' = \{disjunctions \ \ on \ \ n \ \ literals\}\)</span>. With some extra setup we can re-use the learner in the previous example to learn this larger class.</p>
+<p>First, here’s an example of a function in $C’ $: <span class="math inline">\(f(x) = \neg{x_1} \lor x_2 \lor \neg(x_3)\)</span>.</p>
+<p>Suppose the learner again receives the challenge <span class="math inline">\(0110...0\)</span> and that it’s initial state is, again, <span class="math inline">\(h_0\)</span>. If the learner’s classification is incorrect, there’s no way to distinguish between the following cases:</p>
+<p>Case 1: The actual function <span class="math inline">\(c\)</span> contains neither the literals <span class="math inline">\(x_2\)</span> nor <span class="math inline">\(x_3\)</span> Case 2: The actual function <span class="math inline">\(c\)</span> contains both the literals <span class="math inline">\(\neg{x_2}\)</span> and <span class="math inline">\(\neg{x_3}\)</span> Case 3: The actual function <span class="math inline">\(c\)</span> contains one of the literals <span class="math inline">\(\neg x_2\)</span> or <span class="math inline">\(\neg x_3\)</span> and does not contain the other</p>
+<p>In short, the strategy outlined in the previous example yields non-deterministic results.</p>
+<p>Note that each literal in a function belonging to <span class="math inline">\(C'\)</span> is encoded using <span class="math inline">\(2\)</span> bits of information as opposed to the <span class="math inline">\(1\)</span> bit required to encode a literal in a function belonging to <span class="math inline">\(C\)</span>. We can ask two Boolean questions: the literal either exists in the function or not (<span class="math inline">\(1\)</span> bit), and it’s negated or not (the <span class="math inline">\(2\)</span>nd bit). So, it seems that in a sense <span class="math inline">\(C'\)</span> is twice the size of <span class="math inline">\(C\)</span>. Motivated by this insight, we come up with a bijection from <span class="math inline">\(C'\)</span> to <span class="math inline">\(\{monotone \ \ disjunctions \ \ on \ \ 2n \ \ literals\}\)</span>. We append <span class="math inline">\(n\)</span> extra <span class="math inline">\(y\)</span>-literals at the end of the input such that each <span class="math inline">\(y\)</span>-literal is the negation of its corresponding <span class="math inline">\(x\)</span>-literal. That is, an input of the form <span class="math inline">\(x = (x_1, x_2, ...,  x_n)\)</span> is mapped to <span class="math inline">\(\hat x = (x_1, x_2, ... ,x_n,y_1, y_2, ..., y_n)\)</span> with <span class="math inline">\(y_i = \neg x_i \ \ \forall i\)</span>.</p>
+<p>Now we are back to learning monotone disjunctions, except on <span class="math inline">\(2n\)</span> literals instead of <span class="math inline">\(n\)</span>. We can do this with mistake bound <span class="math inline">\(2n\)</span> as shown in the previous example.</p>
+</section>
+<section id="holdout-sets" class="level1">
+<h1><strong>Holdout Sets</strong></h1>
+<p>Holdout sets provide a naive strategy to test the <em>true error</em> of a classifier. Recall that if a classifier has a small <em>training error</em> on a training set <span class="math inline">\(S\)</span>, we can’t infer how well it generalizes to a new training set. That is, it might’ve been overfitted to <span class="math inline">\(S\)</span>, in which case its <em>true error</em>, the probability of misclassifying a point drawn from a new training set, could be large.</p>
+<p>A holdout set <span class="math inline">\(H\)</span> is a subset of <span class="math inline">\(S\)</span> which we’ve ‘stashed away’ for testing. We do not present it to the classifier until it’s been trained on the set <span class="math inline">\(S \setminus H\)</span>. We then test the classifier on the holdout set <span class="math inline">\(H\)</span> to approximate its <em>true error</em>.</p>
+<p><strong>Objective</strong></p>
+<p>We would like to find a size <span class="math inline">\(|H|\)</span> for this holdout set such that the <em>training error</em> on <span class="math inline">\(H\)</span> (finding which is simply a matter of counting the number of mistakes the classifier makes on <span class="math inline">\(H\)</span>) closely approximates the <em>true error</em> of the classifier.</p>
+<p><strong>So, How Big of a Holdout Set Should We Put Aside?</strong></p>
+<p>Suppose <span class="math inline">\(h\)</span> is our classifier and suppose it has <em>true error</em> <span class="math inline">\(\epsilon\)</span>. Let <span class="math inline">\(|H| = n\)</span>. We start by defining an indicator random variable <span class="math inline">\(X^i \in \{1,0\}\)</span>, <span class="math inline">\(X^i = \cases{1 \ \ \text{ if  $h$  is  incorrect on the $i^{th}$ point of $H$} \cr 0 \ \ \  \text{otherwise}}\)</span> Consider <span class="math inline">\(\mathbb{E}[X^i] = 1 \cdot \mathbb{P}[X^i = 1] + 0 \cdot \mathbb{P}[X^i=0] = \mathbb{P}[X^i = 1]\)</span>. But <span class="math inline">\(X^i = 1\)</span> is the event in which <span class="math inline">\(h\)</span> misclassifies <span class="math inline">\(x^i \in H\)</span> so, by definition, it’s the <em>true error</em> <span class="math inline">\(\epsilon\)</span> of <span class="math inline">\(h\)</span>.<span class="math inline">\(^\dagger\)</span> Put simply, the way we’ve defined the indicator variables <span class="math inline">\(X^i\)</span> makes for <span class="math inline">\(\mathbb{E}[X^i] = \epsilon\)</span>, the <em>true error</em> of <span class="math inline">\(h\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong><span class="math inline">\(^\dagger\)</span> True Error</strong>: <span class="math inline">\(true \ error \coloneqq  \mathbb{P}_{x \sim H}[h(x)\ne c(x)]\)</span> where <span class="math inline">\(c\)</span> is the true classifier.</p>
+</blockquote>
+<p>Now, consider <span class="math inline">\(S = \sum_{i=1}^{n} X^i\)</span> which is the <em>total number of mistakes</em> <span class="math inline">\(h\)</span> makes on <span class="math inline">\(H\)</span>. By linearity of expectation, <span class="math inline">\(\mathbb{E}[S] = \sum_{i=1}^{n} \mathbb{E}[X^i] = n\mathbb{E}[X^i] =n\epsilon\)</span> .</p>
+<p>We can now apply a famous probabilistic bound called the <em>Chernoff Bound</em>. We will apply the version of the Chernoff Bound which applies to sums of independent, identically distributed indicator random variables (also known as <em>Bernouli Random Variables</em>). Here, the <span class="math inline">\(X^i\)</span>s are indeed <em>i.i.d.</em> since the drawing of data points from <span class="math inline">\(H\)</span> represent independent events and the probability distribution on each <span class="math inline">\(X^i\)</span> is the same: namely <span class="math inline">\(\mathbb{P}[X^i = 1] = \epsilon\)</span> (i.e.&nbsp;the <em>true error</em>) <span class="math inline">\(\ \forall i\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Chernoff Bound:</strong> If <span class="math inline">\(X\)</span> is the sum of <span class="math inline">\(n\)</span> <em>i.i.d.</em> indicator random variables <span class="math inline">\(X^1, ... , X^n\)</span>, <span class="math inline">\(\mu\)</span> is its mean (i.e.&nbsp;<span class="math inline">\(\mu = \mathbb{E}[X]\)</span>), and <span class="math inline">\(\delta \in (0,1)\)</span>, then <span class="math inline">\(\mathbb{P}[ \ |X-\mu| &gt; n \delta \ ] \leq 2e^{-2n\delta^2}\)</span></p>
+</blockquote>
+<p>Intuitively, the Chernoff Bound says that the probability of the sum of <span class="math inline">\(n\)</span> <em>i.i.d.</em> indicator random variables being more than <span class="math inline">\(n\)</span> standard deviations away from its mean is <em>exponentially small</em> in <span class="math inline">\(n\)</span>.</p>
+<p>Applying the Chernoff Bound to <span class="math inline">\(S\)</span>, we get: <span class="math inline">\(\mathbb{P}[ \ |S - n\epsilon| &gt; n\delta \ ] \leq 2e^{-2n\delta^2}\)</span>, which implies that <span class="math inline">\(\mathbb{P}[|\frac{S}{n} - \epsilon| &gt; \delta] \leq 2e^{-2n\delta^2}\)</span>.</p>
+<p>Since <span class="math inline">\(S\)</span> is the <em>total number of mistakes</em> <span class="math inline">\(h\)</span> makes on <span class="math inline">\(H\)</span> and <span class="math inline">\(n = |H|\)</span>, <span class="math inline">\(\frac{S}{n}\)</span> is the <em>training error</em> of <span class="math inline">\(h\)</span> on the holdout set <span class="math inline">\(H\)</span>. And as we recall <span class="math inline">\(\epsilon\)</span> was the <em>true error</em> of <span class="math inline">\(h\)</span>. So we can make the <em>true error</em> arbitrarily close to the <em>training error</em> by choosing <span class="math inline">\(\delta\)</span>.</p>
+<p>Fix <span class="math inline">\(\delta \in (0,1)\)</span> to be small. Now fix a small <em>confidence threshold</em> <span class="math inline">\(\alpha\)</span> and set <span class="math inline">\(2e^{-2n\delta^2} &lt; \alpha\)</span>. We end up with $ [| - | &gt; ] &lt; $ which means that we’ve bounded the probability of the <em>true error</em> deviating from the <em>training error</em> by more than a factor of <span class="math inline">\(\delta\)</span> by <span class="math inline">\(\alpha\)</span>. Solving for <span class="math inline">\(n\)</span>, the required size of the holdout set <span class="math inline">\(H\)</span>, we get <span class="math inline">\(n &gt; \frac{ln(2/\alpha)}{2\delta^2}\)</span>.</p>
+<p>In summary, if we want to be <span class="math inline">\(\alpha\)</span> confident that the <em>true error</em> and the <em>training error</em> are <span class="math inline">\(\delta\)</span> close, we choose a holdout set of more than <span class="math inline">\(\frac{ln(2/\alpha)}{2\delta^2}\)</span> data points.</p>
+<section id="cross-validation" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation"><strong>Cross-Validation</strong></h3>
+<p>The holdout set method is impractical for two reasons.</p>
+<ol type="1">
+<li>Labeled data is expensive. When we stash a holdout set, we’re wasting valuable labeled data that we could’ve used to train the model.</li>
+<li>Probabilities of failure add up if we want to try multiple algorithms in building our classifier, making us quickly lose confidence in its <em>true error</em>. Suppose with <span class="math inline">\(\alpha\)</span> confidence a classifier we’ve created has <em>training error</em> closely approximating <em>true error</em>. Now suppose we build another classifier and run it over the holdout set again. Now we are only <span class="math inline">\(2\alpha\)</span> confident in its <em>true error</em> since we’ve done it twice…</li>
+</ol>
+<p><em>Cross-validation</em> is a method to overcome these limitations which is not currently backed by theory but works really well in practice.</p>
+<p>The process is simple, we divide the training set <span class="math inline">\(S\)</span> into <span class="math inline">\(k\)</span> ‘folds,’ collections of training points. At each iteration <span class="math inline">\(i\)</span> we stash the <span class="math inline">\(i^{th}\)</span> fold away (as a holdout set), train on the rest of the folds <span class="math inline">\(1,...,i-1,i+1,...,k\)</span> and get en estimate of the <em>true error</em> as the <em>training error</em> on the <span class="math inline">\(i^{th}\)</span> fold. We keep track of all <span class="math inline">\(k\)</span> <em>true error</em> estimates and average them up at the end.</p>
+<p>In practice, we typically choose <span class="math inline">\(k = 5\)</span> to <span class="math inline">\(10\)</span> folds.</p>
+<p>This may seem counterintuitive because there’s no independence in this procedure. The model is exposed to any given <span class="math inline">\(i^{th}\)</span> fold (for <span class="math inline">\(i&gt;1\)</span>) before it’s used as a holdout set. Yet, this methods works very well in practice…</p>
+</section>
+</section>
+<section id="perceptron-learning" class="level1">
+<h1><strong>Perceptron Learning</strong></h1>
+<p>Perceptron <em>classification</em> is yet another algorithm for dividing the input space into decision boundaries (which are <em>halfspaces</em> in this case).</p>
+<p>Consider the set of halfspaces where <span class="math inline">\(w^* \in \mathbb{Z^n}\)</span> (the <em>normal</em> vector of the associated <em>hyperplane</em>) and <span class="math inline">\(\theta^* \in \mathbb{Z}\)</span> (its <em>offset</em> from the origin) are in some bounded range in <span class="math inline">\(\mathbb{Z^n}\)</span> and <span class="math inline">\(\mathbb{Z}\)</span> respectively. This is a simplifying assumption we make so that the set is finite. Perceptron will be trying to learn the following class of Boolean functions <span class="math inline">\(C = \{h(x) = sign(w^Tx - \theta)\}\)</span> for different values of <span class="math inline">\(w\)</span> and <span class="math inline">\(\theta\)</span>. In doing so, the data points will end up being classified based on whether or not they fall inside or outside the true halfspace, since <span class="math inline">\(sign(w^{*^{T}}x -\theta^*)\)</span> outputs either <span class="math inline">\(-1\)</span> or <span class="math inline">\(1\)</span> based on where <span class="math inline">\(x\)</span> lies relative to the dividing hyperplane.</p>
+<p>Suppose the actual function that Perceptron is trying to learn is <span class="math inline">\(f \in C\)</span>. This comes down to learning <span class="math inline">\(f\)</span>’s’ <span class="math inline">\(w^*\)</span> and <span class="math inline">\(\theta^*\)</span>. Any given data point <span class="math inline">\((x, f(x))\)</span> in the training set <span class="math inline">\(S\)</span>, corresponds to a linear inequality <span class="math inline">\(x_1w_1^* + ... x_nw_n^* - \theta^* &gt; 0\)</span> or <span class="math inline">\(x_1w_1^* + ... x_nw_n^* - \theta^* &lt; 0\)</span> depending on the value of the label <span class="math inline">\(f(x)\)</span>. So the training set is a system of linear inequalities in the literals <span class="math inline">\(w^*_i\)</span> and <span class="math inline">\(\theta^*\)</span> which can be solved in polynomial time using <em>Linear Programming</em>. However, Perceptron is a much simpler algorithm than LP and it’s suited specifically to learning halfspaces. There is also an associated <em>kernel trick</em> in a variation of Perceptron called <em>Kernel Perceptron</em> (which we will discuss in some detail in a different post) that dramatically cuts down on time complexity.</p>
+<p><strong>The Perceptron Algorithm</strong></p>
+<p>For simplicity, assume <span class="math inline">\(\theta = 0\)</span>. This assumption is done without loss of generality since we can get rid of it simply by extending the dimension of the problem to <span class="math inline">\(x \in \mathbb{R^{n+1}}, \ \ w^* \in \mathbb{Z^{n+1}}\)</span> with <span class="math inline">\(x = (x_1,  ..., x_n, 1)\)</span>, and <span class="math inline">\(w^* = (w_1^*, ...,w_n^*,-\theta)\)</span>.</p>
+<p>The algorithm starts with an initial guess <span class="math inline">\(w_0\)</span> for the norm vector <span class="math inline">\(w^*\)</span>. By convention, it’s either the <em>zero vector</em> <span class="math inline">\(w_0 = 0^n \in \mathbb{Z^n}\)</span> or the unit vector <span class="math inline">\(w_0 = (\frac{1}{\sqrt{n}},...,\frac{1}{\sqrt{n}}) \in \mathbb{Z^n}\)</span>. For the rest of this discussion, we’ll adopt the first convention.</p>
+<p>The algorithm then receives a challenge <span class="math inline">\((x,y)\)</span> where <span class="math inline">\(y = f(x)\)</span> (recall that <span class="math inline">\(f \in C\)</span> is the actual function Perceptron must learn) and evaluates it based on its current hypothesis <span class="math inline">\(h(x)=sign(w_0^Tx)\)</span>.</p>
+<ul>
+<li><p><u>Case 1:</u> The guess was correct, i.e.&nbsp;<span class="math inline">\(h(x) = y\)</span></p>
+<p>No update is needed</p></li>
+<li><p><u>Case 2:</u> The guess was incorrect, i.e.&nbsp;<span class="math inline">\(h(x) \ne y\)</span></p>
+<p>Perceptron updates its state to <span class="math inline">\(w_{new} = w_{old} + yx\)</span>.</p>
+<p>Geometrically this update rule nudges the old norm into a direction which brings it closer to <span class="math inline">\(w^*\)</span>. On the next iteration, <span class="math inline">\(x\)</span> is to the correct side of the hypothesis.</p></li>
+</ul>
+<p><strong>Perceptron Convergence Theorem</strong></p>
+<p>Perceptron turns out to be a mistake bounded algorithm. In order to show this, we first lay out a number of simplifying assumptions.</p>
+<p><u>Assumptions</u></p>
+<ol type="1">
+<li><p>The true norm exists (i.e.&nbsp;<span class="math inline">\(\exists w^*\)</span>)</p></li>
+<li><p>The true norm is a unit vector (i.e.&nbsp;<span class="math inline">\(||w^*||_2 = 1\)</span>)</p></li>
+<li><p>Every input <span class="math inline">\(x \in \mathbb{R^n}\)</span> is also a unit vector (i.e.&nbsp;<span class="math inline">\(\forall x, \ \ ||x||_2=1\)</span>)</p></li>
+<li><p>The offset is zero (i.e.&nbsp;<span class="math inline">\(\theta = 0\)</span>)</p></li>
+<li><p>There is a margin <span class="math inline">\(\rho &gt; 0\)</span> s.t. all inputs <span class="math inline">\(x \in \mathbb{R^n}\)</span> are at least a distance <span class="math inline">\(\rho\)</span> away from the separating hyperplane. That is, the magnitude of the projection of <span class="math inline">\(x\)</span> onto <span class="math inline">\(w^*\)</span> is at least <span class="math inline">\(\rho\)</span> (i.e.&nbsp;<span class="math inline">\(|x^Tw^*| \geq \rho\)</span>)</p>
+<p><u>Side note:</u> the reason that the inner product <span class="math inline">\(x^Tw^*\)</span> is the projection of <span class="math inline">\(x\)</span> onto <span class="math inline">\(w^*\)</span> is that at least one of the vectors (in fact both in this case) are unit vectors.</p></li>
+</ol>
+<p>Assumption 1 simply means that the data is <em>linearly separable</em>, which is required for Perceptron to even stand a chance… Assumption 2 is <em>WLOG</em> since <span class="math inline">\(w^{*^{T}}x = ||w^*||_2||x||_2\cos(\alpha)\)</span> where <span class="math inline">\(\alpha\)</span> is the angle between the two. Since the <em>2-norms</em> are always positive, the sign of <span class="math inline">\(w^{*^{T}}x\)</span>, which is all <span class="math inline">\(sign\)</span> cares about, depends only on <span class="math inline">\(cos(\alpha)\)</span>. Assumption 3 is not <em>WLOG</em> but we’ll consider the case of inputs with larger norm separately. Assumption 4 is <em>WLOG</em> since, as we saw earlier, we can include <span class="math inline">\(\theta\)</span> in the mix simply by increasing the dimension of the problem. Assumption 5 goes hand-in-hand with assumption 1. It strengthens assumption 1 by requiring not only that the data be linearly separable, but that there also be a comfortable margin <span class="math inline">\(\rho\)</span> between the data points nearest to the hyperplane on either side.</p>
+<p>Given these assumptions, we can state the following convergence theorem.</p>
+<blockquote class="blockquote">
+<p><strong>Perceptron Convergence Theorem:</strong> The <em>mistake-bound</em> of the Perceptron algorithm is <span class="math inline">\(O(1/ \rho^2)\)</span></p>
+</blockquote>
+<p>Remarkably, the mistake-bound of Perceptron is independent of the dimension of the problem. It only depends on the margin <span class="math inline">\(\rho\)</span>.</p>
+<p><strong>Proof of Convergence Theorem</strong></p>
+<p>Let’s take a leap forward and prove the convergence theorem given two underlying claims which, for now, we’ll take for granted.</p>
+<blockquote class="blockquote">
+<p><strong>Claim 1:</strong> On every mistake <span class="math inline">\(w^Tw^*\)</span> increases by at least <span class="math inline">\(\rho\)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Claim 2:</strong> On every mistake <span class="math inline">\(||w||_2\)</span> increases by at most <span class="math inline">\(1\)</span></p>
+</blockquote>
+<p>First, notice the significance of. each claim.</p>
+<p>Claim 1 deals with the quantity <span class="math inline">\(w^Tw^*\)</span> which is a measure of how much the guess vector <span class="math inline">\(w\)</span> and the true norm <span class="math inline">\(w^*\)</span> are pointing in the same direction. It says that <span class="math inline">\(w\)</span> gets more and more aligned with <span class="math inline">\(w^*\)</span> since <span class="math inline">\(w^Tw^*\)</span> increases by the positive quantity <span class="math inline">\(\rho\)</span>. Claim 2 deals with the quantity <span class="math inline">\(||w||_2\)</span> which is the magnitude of the guess vector. It says that the magnitude of the guess vector does not blow up. Since <span class="math inline">\(sign\)</span> doesn’t care about magnitude anyway, this assumption is significant but not in the way we would expect it to be. Putting together claims 1 and 2, we have that <span class="math inline">\(w\)</span> approaches <span class="math inline">\(w^*\)</span> in direction without blowing up in magnitude, which is certainly a nice framework for convergence.</p>
+<p><u>Proof of Convergence Given the Claims:</u></p>
+<p>Suppose <span class="math inline">\(t\)</span> is the number of mistakes made by Perceptron at some point during its execution.</p>
+<p>Then <span class="math inline">\(t\rho \leq w^Tw^* \leq ||w||_2||w^*||_2\)</span> . The first inequality is due to claim 1 and the fact that <span class="math inline">\(w^Tw^*\)</span> starts at <span class="math inline">\(0\)</span> (since <span class="math inline">\(w_0 = 0^n\)</span>) and grows only when Perceptron makes an update (which happens only when a mistake is made). The second is the <em>Cauchy–Schwarz inequality</em>. But since <span class="math inline">\(||w^*||_2 = 1\)</span> by assumption 2, we have <span class="math inline">\(t\rho \leq w^Tw^* \leq ||w||_2 \ \ \dagger\)</span>.</p>
+<p>By claim 2, we also have that <span class="math inline">\(||w||_2 \leq t\)</span>. Recall that <em>2-norm</em> is defined as the inner product, <span class="math inline">\(w^Tw = w_1^2 + ... + w_n^2\)</span>, so we have that <span class="math inline">\(||w|| \leq \sqrt{t} \ \ \dagger \dagger\)</span> .</p>
+<p>Putting together <span class="math inline">\(\dagger\)</span> and <span class="math inline">\(\dagger \dagger\)</span>, we have <span class="math inline">\(t\rho \leq \sqrt{t}\)</span>. With some algebraic manipulation, we get <span class="math inline">\(t = 1/\rho^2\)</span> which is the claimed mistake bound <span class="math inline">\(^\square\)</span>.</p>
+<p>But we aren’t done here, we still have to prove claims 1 and 2.</p>
+<p><u>Proof of Claim 1:</u></p>
+<p>Suppose Perceptron has made a mistake, prompting an update. Consider the update rule <span class="math inline">\(w_{new} = w_{old} + yx\)</span>. Taking the inner product with <span class="math inline">\(w^*\)</span> on both sides yields <span class="math inline">\(w_{new} \cdot w^* = (w_{old} + yx) \cdot w^*\)</span>. Distributing yields, <span class="math inline">\(w_{new}^Tw^* = w_{old}^Tw^* + yx^Tw^*\)</span>. But by assumption 5, <span class="math inline">\(|x^Tw^*| \geq \rho\)</span>. But <span class="math inline">\(y = f(x) = sign(x^Tw^*)\)</span> (inner product is commutative), so <span class="math inline">\(y\)</span> and <span class="math inline">\(x^Tw^*\)</span> are either both positiive or both negative. This means that <span class="math inline">\(yx^Tw^* = |x^Tw^*| \geq \rho\)</span> where the first equation is by definition of absolute value. Thus, <span class="math inline">\(w_{new}^Tw^* \geq w_{old}^Tw^* + \rho\)</span> which proves the claim <span class="math inline">\(^\square\)</span>.</p>
+<p><u>Proof of Claim 2:</u></p>
+<p>Suppose again that perceptron has made a mistake, prompting an update. Consider <span class="math inline">\(||w_{new}||_2 = w_{new}^Tw_{new} = (w_{old}+yx)^T(w_{old}+yx) = ||w_{old}||_2 + 2yx^Tw_{old} + ||x||_2\)</span>. But since <span class="math inline">\(||x||_2 = 1\)</span> by assumption 3, <span class="math inline">\(||w_{new}||_2 = ||w_{old}||_2 + 2yx^Tw_{old} + 1\)</span>. But <span class="math inline">\(y = sign(x^Tw^*)\)</span> is, as we recall, the true label. Since Perceptron has made a mistake, <span class="math inline">\(x^Tw_{old}\)</span> and <span class="math inline">\(y\)</span> have the opposite sign. Then, <span class="math inline">\(2yx^Tw_{old} &lt; 0\)</span> and <span class="math inline">\(||w_{new}||_2 &lt; ||w_{old}||_2 + 1\)</span> proving the claim <span class="math inline">\(^\square\)</span>.</p>
+<p><strong>Getting Rid of the Simplifying Assumptions</strong></p>
+<p>As we saw earlier, getting rid of assumption 4 is easy. Getting rid of assumption 3 simply yields a mistake bound of <span class="math inline">\(O(R^2/\rho^2)\)</span> where <span class="math inline">\(R\)</span> is s.t. <span class="math inline">\(\forall x, \ \ ||x||_2 \leq R\)</span>. That is, <span class="math inline">\(R\)</span> Is distance of the furthest data point. So, in getting rid of assumption 3 we pay quadratically in <span class="math inline">\(R\)</span>, which is okay.</p>
+</section>
+<section id="decision-trees-wip" class="level1">
+<h1><strong>Decision Trees (WIP)</strong></h1>
+<p>We start our discussion of decision trees with a definition of <em>classification</em> and <em>classifiers</em>.</p>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> <em>Classification</em> is the process of grouping data into discrete categories (<em>class labels</em>).</p>
+</blockquote>
+<p>A common example is the sorting of emails into the binary categories of <em>‘spam’</em> and <em>‘not spam’</em>. The labels in a classification problem need not be binary, they may belong to any discrete set.</p>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> A <em>classifier</em> is any algorithm that performs classification.</p>
+</blockquote>
+<p><em>Decision trees</em> are one type of classifier among many. Other notable examples include <em>logistic regression classifiers</em> (not to be confused with <em>linear regression</em> which solves a problem of <em>line-fitting</em>, not classification), <em>perceptron classifiers</em>, etc.</p>
+<p>In the following discussion, for simplicity, we assume binary input and binary output for decision trees. That is, the training set is <span class="math inline">\(S = \{(x^1,y^1), ... ,(x^k, y^k)\}\)</span> with <span class="math inline">\(x^i \in \{0,1\}^n\)</span> and <span class="math inline">\(y^i \in \{0,1\} \ \ \forall i\)</span>. The nodes of a decision tree correspond to the <em>features</em> (or <em>literals</em>) of the input and its leaves correspond to the class labels. Its paths correspond to the conjunction of features that lead to those class labels.</p>
+<p>Let’s look at two key attributes of decision trees.</p>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> The <em>size</em> of a decision tree is its number of nodes.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Definition:</strong> The <em>depth</em> of a decision tree is its longest root-to-leaf path.</p>
+</blockquote>
+<p>Given a training set <span class="math inline">\(S\)</span> of size <span class="math inline">\(|S|\)</span>, it’s easy to come up with a decision tree of size <span class="math inline">\(\geq |S|\)</span> that classifies all the points in <span class="math inline">\(S\)</span> correctly. We can simply include a path for each conjunction of features leading up to its correct class label. But, in a sense, this tree is not a <em>learner</em>. It has simply memorized the training set <span class="math inline">\(S\)</span> and would perform poorly on a different training set. This phenomenon is referred to as <em>overfitting</em>. The challenge is to come up with a way to build a decision tree that’s not overfitted to any particular training set.</p>
+<p><strong>Preliminary Setup</strong></p>
+<p>First, we define the following <em>potential</em> function: <span class="math inline">\(\Phi(a) = \min(a,1-a)\)</span>. Note a curious property of the potential function: if <span class="math inline">\(a &gt; 1/2\)</span> is the probability of an event occurring, <span class="math inline">\(\Phi(a)\)</span> is the probability of the event not occurring (i.e.&nbsp;the probability of the complementary event occurring).</p>
+<p>We also define <em>training error</em> of a decision tree <span class="math inline">\(T\)</span> as: <span class="math inline">\(E^T_S = \frac{\# \ \ of \ \ mistakes \ \ T \ \ makes \ \ on \ \ S}{|S|}\)</span>. Note that for an overfitted decision tree, as in the discussion above, the training error is <span class="math inline">\(0\)</span>. Training error is a measure of a classifier’s performance on a specific training set. Contrast this with the <em>true error</em> of a classifier which will be defined later on…</p>
+<p><strong>The Simplest Tree</strong></p>
+<p>The simplest decision tree is the one with a single node: a leaf which, as we recall, represents a class label. In this case, it would be wise to choose the label that has the highest incidence in the training set. For instance, suppose a training set <span class="math inline">\(S\)</span> has <span class="math inline">\(5\)</span> labels that are <span class="math inline">\(1\)</span>’s and <span class="math inline">\(10\)</span> labels that are <span class="math inline">\(0\)</span>’s. The leaf would be chosen to represent the <span class="math inline">\(0\)</span> label, so that it is correct on most of the training set.</p>
+<p>Assuming uniform distribution on the training set <span class="math inline">\(S\)</span>, the probability of drawing a point with label <span class="math inline">\(0\)</span> is <span class="math inline">\(2/3\)</span>. Then <span class="math inline">\(\Phi(\mathbb{P}[y = 0]) = \Phi(2/3) = \min(2/3,1-2/3) = 1/3\)</span>. This is the probability of the complementary event (i.e.&nbsp;when the label is actually <span class="math inline">\(1\)</span>), in which case the decision tree has made an error. In fact, since uniform distribution was assumed, note that <span class="math inline">\(\Phi(\mathbb{P}[y = 0]) = \mathbb{P}[y = 1]\)</span> <em>is</em> <span class="math inline">\(E^T_S\)</span> for this simple decision tree.</p>
+<p><strong>Depth-1 Decision Tree</strong></p>
+<p>Suppose we have a feature <span class="math inline">\(x_i\)</span> at the root of the decision tree. Which labels should its left and right leaves correspond to? As before it would make sense to go with the highest incidence of a label in the training set. But the highest incidence is now conditioned upon the value of <span class="math inline">\(x_i\)</span>. So, if <span class="math inline">\(x_i = 0\)</span>, we look at the subset <span class="math inline">\(S|_{x_i = 0} \sube S\)</span> and choose the label with the highest incidence. Similarly, for the case of <span class="math inline">\(x_i = 1\)</span>.</p>
+<p>But which feature should be at the root? It would make sense to choose the feature which has the most impact on the accuracy of the classification so that even a shallow tree would be a decent classifier. In order to quantify this we define the <em>gain</em> in training error as <span class="math inline">\(Gain = E^{T_{old}}_S - E^{T_{new}}_S\)</span> where <span class="math inline">\(E^{T_{old}}_S\)</span> is the training error of the simplest tree.</p>
+<p>We fix each feature <span class="math inline">\(x_i\)</span> at the root and compute the associated training error <span class="math inline">\(E^{T_{new}}_S\)</span>. Now the training error is a weighted average of probabilities. Suppose <span class="math inline">\(y=0\)</span> is the label with highest incidence in both <span class="math inline">\(S|_{x_i = 0}\)</span> and <span class="math inline">\(S|_{x_i = 1}\)</span>, then the new training error would be:</p>
+<p><span class="math inline">\(E^{T_{new}}_S = \mathbb{P}_{x,y \sim S}[x_i = 0] \Phi(\mathbb{P}_{x,y \sim S}[y = 0|x_i = 0]) + \mathbb{P}_{x,y \sim S}[x_i = 1] \Phi(\mathbb{P}_{x,y \sim S}[y = 0|x_i = 1])\)</span></p>
+<p>That is, the weighted sum of the probabilities that <span class="math inline">\(y=0\)</span> was the wrong guess.</p>
+<p><strong>Deeper Decision Trees</strong></p>
+<p>Doing the above procedure for each of the features <span class="math inline">\(x_i\)</span> we choose the feature which results in the biggest gain. This feature is placed at the root of the tree. Then we do the same procedure recursively on the subsets <span class="math inline">\(S|_{x_i = 0}\)</span> and <span class="math inline">\(S|_{x_i = 1}\)</span> for the subtrees.</p>
+<p><strong>The Gini Function</strong></p>
+<p>The structure of a decision tree is obviously defined by the choice of a potential function. Previously we’ve been using <span class="math inline">\(\Phi(a) = \min(a, 1-a)\)</span> which corresponded to training error. Another popular choice, inspired by the afforementioned, is the <em>Gini Function</em> <span class="math inline">\(\Phi(a) = 2a(1-a)\)</span>.</p>
+<p>Let’s examine the graphs of both:</p>
+<p>…</p>
+</section>
+<section id="principal-component-analysis-wip" class="level1">
+<h1><strong>Principal Component Analysis (WIP)</strong></h1>
+<p>In this post we’ll depart from classification problems (those that ultimately divide up a space into <em>decision boundaries</em>) and look at <em>dimensionality reduction</em>. PCA is a simple yet effective way to reduce the dimensionality of a given dataset without the loss of crucial information (i.e.&nbsp;the <em>variation</em> between data points). The hope is to <em>learn</em> the dataset (i.e.&nbsp;make some statistical inferences) based on its most important features — the <em>principal components</em>.</p>
+<p>…</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
+
+
+
+</body></html>

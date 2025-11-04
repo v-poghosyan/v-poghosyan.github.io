@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vahram Poghosyan">
-<meta name="dcterms.date" content="2025-01-29">
+<meta name="dcterms.date" content="2025-04-21">
 
-<title>Leetcode Mental Map – v-poghosyan</title>
+<title>Palletes: Building a Backend - Adding API and Data Layers to a Frontend Project – v-poghosyan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,6 +113,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -118,19 +155,18 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">Leetcode Mental Map</h1>
+    <div class="quarto-title column-page-left">
+      <div class="quarto-title-block"><div><h1 class="title">Palletes: Building a Backend - Adding API and Data Layers to a Frontend Project</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/v-poghosyan/palettes"><i class="bi"></i> Code</button></div></div>
                                 <div class="quarto-categories">
-                <div class="quarto-category">D3</div>
-                <div class="quarto-category">Visualization</div>
-                <div class="quarto-category">JavaScript</div>
-                <div class="quarto-category">TypeScript</div>
+                <div class="quarto-category">Backend Development</div>
+                <div class="quarto-category">Databases</div>
+                <div class="quarto-category">REST APIs</div>
               </div>
                   </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -142,7 +178,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 29, 2025</p>
+        <p class="date">April 21, 2025</p>
       </div>
     </div>
     
@@ -153,23 +189,261 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#grokking-the-project-structure" id="toc-grokking-the-project-structure" class="nav-link" data-scroll-target="#grokking-the-project-structure">Grokking the Project Structure</a>
+  <ul class="collapse">
+  <li><a href="#functional-requirements" id="toc-functional-requirements" class="nav-link" data-scroll-target="#functional-requirements">Functional Requirements</a></li>
+  <li><a href="#api-design" id="toc-api-design" class="nav-link" data-scroll-target="#api-design">API Design</a></li>
+  </ul></li>
+  <li><a href="#backend-architecture" id="toc-backend-architecture" class="nav-link" data-scroll-target="#backend-architecture">Backend Architecture</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<!-- draw.io diagram -->
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#000000&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile>\n  <diagram id=\&quot;Um5UQkkA05jx3OKsi89t\&quot; name=\&quot;Page-1\&quot;>\n    <mxGraphModel dx=\&quot;1561\&quot; dy=\&quot;607\&quot; grid=\&quot;1\&quot; gridSize=\&quot;10\&quot; guides=\&quot;1\&quot; tooltips=\&quot;1\&quot; connect=\&quot;1\&quot; arrows=\&quot;1\&quot; fold=\&quot;1\&quot; page=\&quot;1\&quot; pageScale=\&quot;1\&quot; pageWidth=\&quot;850\&quot; pageHeight=\&quot;1100\&quot; math=\&quot;0\&quot; shadow=\&quot;0\&quot;>\n      <root>\n        <mxCell id=\&quot;0\&quot; />\n        <mxCell id=\&quot;1\&quot; parent=\&quot;0\&quot; />\n        <mxCell id=\&quot;92\&quot; value=\&quot;Leetcode Mental Map\&quot; style=\&quot;swimlane;startSize=20;horizontal=1;containerType=tree;strokeColor=default;fillColor=none;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;>\n          <mxGeometry x=\&quot;473\&quot; y=\&quot;120\&quot; width=\&quot;1087\&quot; height=\&quot;880\&quot; as=\&quot;geometry\&quot;>\n            <mxRectangle x=\&quot;840\&quot; y=\&quot;40\&quot; width=\&quot;90\&quot; height=\&quot;30\&quot; as=\&quot;alternateBounds\&quot; />\n          </mxGeometry>\n        </mxCell>\n        <mxCell id=\&quot;167\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;166\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;170\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=30;entryX=0;entryY=0;entryDx=170;entryDy=32.5;strokeColor=#808080;exitPerimeter=0;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;107\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;97\&quot; value=\&quot;Dictionaries\&quot; style=\&quot;whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;720\&quot; y=\&quot;408\&quot; width=\&quot;100\&quot; height=\&quot;40\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;157\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=30;entryX=0;entryY=0;entryDx=160;entryDy=35;strokeColor=#808080;exitPerimeter=0;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;73\&quot; target=\&quot;156\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;169\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=40;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;73\&quot; target=\&quot;168\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;73\&quot; value=\&quot;Sets\&quot; style=\&quot;whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;475\&quot; y=\&quot;210\&quot; width=\&quot;100\&quot; height=\&quot;40\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;118\&quot; value=\&quot;&amp;lt;font style=&amp;quot;color: rgb(255, 255, 255);&amp;quot;&amp;gt;Manual hashmaps? &amp;lt;br&amp;gt;An array of on 24bits&amp;lt;/font&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};fillColor=#22878E;strokeColor=#0B3236;shape=cube;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;300\&quot; y=\&quot;408\&quot; width=\&quot;175\&quot; height=\&quot;75\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;171\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=35;entryX=0;entryY=0;entryDx=175;entryDy=47.5;strokeColor=#616355;exitPerimeter=0;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;107\&quot; target=\&quot;118\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;107\&quot; value=\&quot;&amp;lt;a href=&amp;quot;https://leetcode.com/problems/group-anagrams/description/&amp;quot;&amp;gt;&amp;lt;font style=&amp;quot;color: rgb(34, 135, 142);&amp;quot;&amp;gt;LC: Group of Anagrams&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;510\&quot; y=\&quot;400\&quot; width=\&quot;170\&quot; height=\&quot;45\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;156\&quot; value=\&quot;&amp;lt;a href=&amp;quot;https://leetcode.com/problems/contains-duplicate/description/&amp;quot;&amp;gt;&amp;lt;font style=&amp;quot;color: rgb(34, 135, 142);&amp;quot;&amp;gt;LC: Contains Duplicate&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;275\&quot; y=\&quot;170\&quot; width=\&quot;160\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;76\&quot; value=\&quot;&amp;lt;font style=&amp;quot;color: rgb(255, 255, 255);&amp;quot;&amp;gt;Compare lenghts&amp;amp;nbsp;&amp;lt;/font&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font style=&amp;quot;color: rgb(255, 255, 255);&amp;quot;&amp;gt;of sets&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;rounded=1;arcSize=50;align=center;verticalAlign=middle;strokeWidth=1;autosize=1;spacing=4;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};fillColor=#22878E;strokeColor=#0B3236;shape=cube;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; collapsed=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;90\&quot; y=\&quot;135\&quot; width=\&quot;140\&quot; height=\&quot;65\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;71\&quot; value=\&quot;\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0;exitDx=10;exitDy=40;entryX=0;entryY=0;entryDx=140;entryDy=42.5;entryPerimeter=0;strokeColor=#808080;exitPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;156\&quot; target=\&quot;76\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;>\n            <Array as=\&quot;points\&quot;>\n              <mxPoint x=\&quot;300\&quot; y=\&quot;220\&quot; />\n            </Array>\n          </mxGeometry>\n        </mxCell>\n        <mxCell id=\&quot;140\&quot; value=\&quot;&amp;lt;font style=&amp;quot;color: rgb(255, 255, 255);&amp;quot;&amp;gt;Comparizon between &amp;lt;br&amp;gt;dictionaries in &amp;lt;br&amp;gt;Python can be done &amp;lt;br&amp;gt;using ==&amp;lt;/font&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#22878E;align=center;verticalAlign=middle;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#0B3236;rounded=1;backgroundOutline=1;darkOpacity=0.05;fixedSize=1;boundedLbl=1;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;160\&quot; y=\&quot;278\&quot; width=\&quot;150\&quot; height=\&quot;90\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;101\&quot; value=\&quot;&amp;lt;a href=&amp;quot;https://leetcode.com/problems/valid-anagram/description/&amp;quot;&amp;gt;&amp;lt;font style=&amp;quot;color: rgb(34, 135, 142);&amp;quot;&amp;gt;LC: Valid Anagram&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;540\&quot; y=\&quot;358\&quot; width=\&quot;140\&quot; height=\&quot;48\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;96\&quot; value=\&quot;\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;strokeColor=#808080;entryX=0;entryY=0;entryDx=140;entryDy=34;entryPerimeter=0;exitX=0;exitY=0;exitDx=10;exitDy=30;exitPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;101\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;161\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=35;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;160\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;>\n            <Array as=\&quot;points\&quot;>\n              <mxPoint x=\&quot;880\&quot; y=\&quot;430\&quot; />\n            </Array>\n          </mxGeometry>\n        </mxCell>\n        <mxCell id=\&quot;163\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;162\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;>\n            <Array as=\&quot;points\&quot;>\n              <mxPoint x=\&quot;870\&quot; y=\&quot;468\&quot; />\n            </Array>\n          </mxGeometry>\n        </mxCell>\n        <mxCell id=\&quot;166\&quot; value=\&quot;Memoization &amp;lt;br&amp;gt;(Caching function results)\&quot; style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;870\&quot; y=\&quot;448\&quot; width=\&quot;170\&quot; height=\&quot;65\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;139\&quot; value=\&quot;\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0;entryY=0;entryDx=150;entryDy=42.5;entryPerimeter=0;exitX=0;exitY=0;exitDx=10;exitDy=38;strokeColor=#808080;exitPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;101\&quot; target=\&quot;138\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;141\&quot; value=\&quot;\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0;entryY=0;entryDx=150;entryDy=55;exitX=0;exitY=0;exitDx=10;exitDy=55;exitPerimeter=0;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;138\&quot; target=\&quot;140\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;138\&quot; value=\&quot;&amp;lt;font style=&amp;quot;color: rgb(255, 255, 255);&amp;quot;&amp;gt;Make a dictionary of &amp;lt;br&amp;gt;character counts&amp;amp;nbsp;&amp;lt;/font&amp;gt;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#22878E;align=center;verticalAlign=middle;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#0B3236;rounded=1;backgroundOutline=1;darkOpacity=0.05;fixedSize=1;boundedLbl=1;darkOpacity2=0.1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;355\&quot; y=\&quot;315\&quot; width=\&quot;150\&quot; height=\&quot;65\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;168\&quot; value=\&quot;Uniqueness checking\&quot; style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;590\&quot; y=\&quot;170\&quot; width=\&quot;170\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;162\&quot; value=\&quot;LRU &amp;lt;br&amp;gt;(Recency Caching)\&quot; style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;870\&quot; y=\&quot;390\&quot; width=\&quot;170\&quot; height=\&quot;65\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <object label=\&quot;Character counting\&quot; tags=\&quot;CharacterCountingTopic\&quot; id=\&quot;160\&quot;>\n          <mxCell style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n            <mxGeometry x=\&quot;870\&quot; y=\&quot;350\&quot; width=\&quot;170\&quot; height=\&quot;45\&quot; as=\&quot;geometry\&quot; />\n          </mxCell>\n        </object>\n        <mxCell id=\&quot;164\&quot; value=\&quot;Graph representaion&amp;lt;br&amp;gt;(adjacency lists)\&quot; style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;870\&quot; y=\&quot;293\&quot; width=\&quot;170\&quot; height=\&quot;65\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;175\&quot; value=\&quot;\&quot; style=\&quot;shape=cube;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fixedSize=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;treeFolding=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;917\&quot; y=\&quot;50\&quot; width=\&quot;40\&quot; height=\&quot;40\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;165\&quot; style=\&quot;edgeStyle=entityRelationEdgeStyle;html=1;startArrow=none;endArrow=none;segment=10;curved=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=10;entryDy=55;strokeColor=#808080;entryPerimeter=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;92\&quot; source=\&quot;97\&quot; target=\&quot;164\&quot;>\n          <mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;178\&quot; value=\&quot;\&quot; style=\&quot;whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};fillColor=#EDF2D0;strokeColor=#616355;shape=cube;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;917\&quot; y=\&quot;100\&quot; width=\&quot;40\&quot; height=\&quot;40\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;179\&quot; value=\&quot;\&quot; style=\&quot;whiteSpace=wrap;html=1;shape=cube;top=0;left=0;bottom=1;right=0;fillColor=#fff2cc;align=center;verticalAlign=bottom;routingCenterY=0.5;snapToPoint=1;autosize=1;treeFolding=1;treeMoving=1;newEdgeStyle={&amp;quot;edgeStyle&amp;quot;:&amp;quot;entityRelationEdgeStyle&amp;quot;,&amp;quot;startArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;endArrow&amp;quot;:&amp;quot;none&amp;quot;,&amp;quot;segment&amp;quot;:10,&amp;quot;curved&amp;quot;:1,&amp;quot;sourcePerimeterSpacing&amp;quot;:0,&amp;quot;targetPerimeterSpacing&amp;quot;:0};strokeColor=#d6b656;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=10;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;917\&quot; y=\&quot;150\&quot; width=\&quot;40\&quot; height=\&quot;40\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;180\&quot; value=\&quot;Concepts\&quot; style=\&quot;text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;970\&quot; y=\&quot;61\&quot; width=\&quot;60\&quot; height=\&quot;30\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;181\&quot; value=\&quot;Data Structures\&quot; style=\&quot;text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;967\&quot; y=\&quot;110\&quot; width=\&quot;100\&quot; height=\&quot;30\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;182\&quot; value=\&quot;Problems\&quot; style=\&quot;text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;975\&quot; y=\&quot;160\&quot; width=\&quot;50\&quot; height=\&quot;30\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n        <mxCell id=\&quot;184\&quot; value=\&quot;\&quot; style=\&quot;whiteSpace=wrap;html=1;aspect=fixed;fillColor=none;\&quot; vertex=\&quot;1\&quot; parent=\&quot;92\&quot;>\n          <mxGeometry x=\&quot;897\&quot; y=\&quot;30\&quot; width=\&quot;180\&quot; height=\&quot;180\&quot; as=\&quot;geometry\&quot; />\n        </mxCell>\n      </root>\n    </mxGraphModel>\n  </diagram>\n</mxfile>\n&quot;}">
-
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>In this notebook, we will explore the process of building a backend for a frontend project called Palletes (<a href="https://v-poghosyan.github.io/palettes">v-poghosyan.github.io/pallets</a>). This was one of the first projects I created to learn React. Creating a backend for it will be a useful exercise in backend engineering (where we’re often given an existing frontend to integrate with). The goal is to create a robust API and data layers that can handle various operations such as creating, reading, updating, and deleting data.</p>
+<p>The Palletes project is a web application that allows users to create and manage color palettes. The frontend is built using React, and we will be adding a Node backend using Express. In the process we will use OpenAPI to document our API, and we will also implement a database to store the color palettes.</p>
+<p>We will also explore serverless backend options using AWS Lambda and DynamoDB, as well as deploying the backend to a cloud provider.</p>
+<section id="grokking-the-project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="grokking-the-project-structure">Grokking the Project Structure</h2>
+<section id="functional-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="functional-requirements">Functional Requirements</h3>
+<p>First, let’s examine the functional requirements of the Palletes project. The frontend allows users to:</p>
+<ul>
+<li>View existing color palettes</li>
+<li>Create a new color palette (pick a name and emoji for it)</li>
+<li>Edit an existing color palette (add/delete colors)</li>
+<li>Delete a color palette</li>
+</ul>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/landing-page.png" class="img-fluid figure-img" data-ref-parent="fig-elephants">
 </div>
-<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) View existing palettes
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/create-palette.png" class="img-fluid figure-img" data-ref-parent="fig-elephants">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Create new color palette
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Main Features
+</figcaption>
+</figure>
+</div>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/pick-color.png" class="img-fluid figure-img" data-ref-parent="fig-elephants">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Pick color
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/name-palette.png" class="img-fluid figure-img" data-ref-parent="fig-elephants">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Name palette
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/pick-emoji.png" class="img-fluid figure-img" data-ref-parent="fig-elephants">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Pick Emoji
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Secondary Features
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="api-design" class="level3">
+<h3 class="anchored" data-anchor-id="api-design">API Design</h3>
+<p>A potential schema to store a Palette can be found in the file <a href="https://github.com/v-poghosyan/palettes/blob/master/src/seedPalettes.js">seedPalettes.js</a>. Here’s one example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a>  <span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="dt">"paletteName"</span><span class="fu">:</span> <span class="st">"Material UI Colors"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="dt">"emoji"</span><span class="fu">:</span> <span class="st">"🎨"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="dt">"colors"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>      <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"red"</span><span class="fu">,</span> <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"#F44336"</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>      <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"blue"</span><span class="fu">,</span> <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"#2196F3"</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>      <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"green"</span><span class="fu">,</span> <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"#4CAF50"</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>      <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"yellow"</span><span class="fu">,</span> <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"#FFEB3B"</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>      <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"purple"</span><span class="fu">,</span> <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"#9C27B0"</span> <span class="fu">}</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="ot">]</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Currently, the user defined palettes are stored in the local storage of the browser. We need to find the places we store the palettes in the frontend code and wrap them with API calls to a backend. Each UI element is its own React component (as usual), so this should be straightforward.</p>
+<p>We use <a href="https://expressjs.com/">Express.js</a> to create a RESTful API layer for an application served with Node. The API will handle the following endpoints:</p>
+<ul>
+<li><code>GET /api/palettes</code>: Retrieve all palettes</li>
+<li><code>GET /api/palettes/:id</code>: Retrieve a specific palette by ID</li>
+<li><code>POST /api/palettes</code>: Create a new palette</li>
+<li><code>PUT /api/palettes/:id</code>: Update an existing palette by ID</li>
+<li><code>DELETE /api/palettes/:id</code>: Delete a palette by ID</li>
+<li><code>GET /api/palettes/:id/colors</code>: Retrieve colors of a specific palette by ID</li>
+<li><code>POST /api/palettes/:id/colors</code>: Add a color to a specific palette by ID</li>
+<li><code>DELETE /api/palettes/:id/colors/:colorId</code>: Delete a color from a specific palette by ID</li>
+<li><code>PUT /api/palettes/:id/colors/:colorId</code>: Update a color in a specific palette by ID</li>
+</ul>
+</section>
+</section>
+<section id="backend-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="backend-architecture">Backend Architecture</h2>
+<p>Here’s a potential architecture for the backend. <strong>Authentication</strong>, <strong>Request Validation</strong>, and <strong>Business Logic</strong> layers can be thought of as Middleware (what’s called between each API to Database call). The API Layer is the Express.js <em>server</em> that handles incoming requests and routes them to the appropriate <em>handlers</em>. The <strong>Data Access Layer</strong> interacts with the database to perform CRUD operations.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    User([User]) --&gt; |HTTP Request| APIGateway[API Gateway]
+    APIGateway --&gt; |Serves| FrontendApp[React App]
+    
+    FrontendApp --&gt; |HTTP/API Calls| APILayer[API Layer]
+    
+    APILayer --&gt; Auth[Authentication]
+    Auth --&gt; Validation[Request Validation]
+    Validation --&gt; BusinessLogic[Business Logic]
+    
+    BusinessLogic --&gt; |Database Queries| DataLayer[Data Access Layer]
+    DataLayer --&gt; |CRUD Operations| DB[(Database)]
+    
+    %% Response flow
+    DB --&gt; |Data| DataLayer
+    DataLayer --&gt; BusinessLogic
+    BusinessLogic --&gt; Validation
+    Validation --&gt; Auth
+    Auth --&gt; APILayer
+    APILayer --&gt; |JSON Response| FrontendApp
+    FrontendApp --&gt; |UI Update| APIGateway
+    APIGateway --&gt; |Rendered Page| User
+    
+    classDef user stroke:#000,stroke-width:2px
+    classDef node stroke:#000,stroke-width:1px
+    
+    class User user
+    class APIGateway,FrontendApp,APILayer,Auth,Validation,BusinessLogic,DataLayer,DB node
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>We can also add a <strong>Caching Layer</strong> to improve performance, especially for read-heavy operations. Redis is a popular choice, but for this project we will keep it simple and use local storage as the cache. In other words, before making a database call, we will check if the data is already in local storage. If it is, we will return it from there instead of hitting the database.</p>
+<p>One other thing, we can move authentication and request validation to the <strong>API Gateway</strong>. This way, we can keep the business logic separate from the authentication and validation logic. This is a common pattern in backend development.</p>
+<p>Benefits of API Gateway authentication include:</p>
+<ul>
+<li>Security perimeter: Authentication happens before requests reach your application code</li>
+<li>Reduced backend load: Unauthorized requests are rejected early</li>
+<li>Centralized authentication logic consistent across all services that need authentication: Implement once, secure all services</li>
+<li>Standard auth methods: Support for JWT, OAuth2, API keys, etc.</li>
+</ul>
+<p>We those changes, our new server architecture looks like this:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    User([User]) --&gt; |HTTP Request| APIGateway[API Gateway]
+    
+    %% Auth and Validation at API Gateway
+    APIGateway --&gt; |Authentication &amp; Validation| APIGateway
+    
+    APIGateway --&gt; |Serves| FrontendApp[React App]
+    
+    %% Local Browser Storage as Cache
+    FrontendApp &lt;--&gt; |Check/Store Cache| LocalStorage[(Local Browser Storage)]
+    
+    %% API calls only if needed
+    FrontendApp --&gt; |HTTP/API Calls if Cache Miss| APILayer[API Layer]
+    
+    APILayer --&gt; BusinessLogic[Business Logic]
+    BusinessLogic --&gt; |Database Queries| DataLayer[Data Access Layer]
+    DataLayer --&gt; |CRUD Operations| DB[(Database)]
+    
+    %% Response flow
+    DB --&gt; |Data| DataLayer
+    DataLayer --&gt; BusinessLogic
+    BusinessLogic --&gt; APILayer
+    APILayer --&gt; |JSON Response| FrontendApp
+    
+    %% Update cache with new data
+    FrontendApp --&gt; |Store Response| LocalStorage
+    
+    FrontendApp --&gt; |UI Update| APIGateway
+    APIGateway --&gt; |Rendered Page| User
+    
+    classDef user stroke:#000,stroke-width:2px
+    classDef node stroke:#000,stroke-width:1px
+    
+    class User user
+    class APIGateway,FrontendApp,LocalStorage,APILayer,BusinessLogic,DataLayer,DB node
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -405,6 +679,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -763,7 +1088,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
 
 
 

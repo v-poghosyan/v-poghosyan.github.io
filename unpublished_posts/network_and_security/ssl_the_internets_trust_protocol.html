@@ -157,10 +157,18 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul>
   <li><a href="#ssltls---the-internets-trust-protocol" id="toc-ssltls---the-internets-trust-protocol" class="nav-link active" data-scroll-target="#ssltls---the-internets-trust-protocol">SSL/TLS - The Internet’s Trust Protocol</a>
   <ul class="collapse">
-  <li><a href="#asymmetric-encryption" id="toc-asymmetric-encryption" class="nav-link" data-scroll-target="#asymmetric-encryption">Asymmetric Encryption</a></li>
+  <li><a href="#asymmetric-encryption-diagrams" id="toc-asymmetric-encryption-diagrams" class="nav-link" data-scroll-target="#asymmetric-encryption-diagrams">Asymmetric Encryption Diagrams</a></li>
   <li><a href="#encryption" id="toc-encryption" class="nav-link" data-scroll-target="#encryption">Encryption</a></li>
   <li><a href="#secure-communication" id="toc-secure-communication" class="nav-link" data-scroll-target="#secure-communication">Secure Communication</a></li>
   <li><a href="#decryption" id="toc-decryption" class="nav-link" data-scroll-target="#decryption">Decryption</a></li>
+  </ul></li>
+  <li><a href="#explanation" id="toc-explanation" class="nav-link" data-scroll-target="#explanation">Explanation</a>
+  <ul class="collapse">
+  <li><a href="#how-are-the-public-and-private-keys-related" id="toc-how-are-the-public-and-private-keys-related" class="nav-link" data-scroll-target="#how-are-the-public-and-private-keys-related">How are the public and private keys related?</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-relationship" id="toc-mathematical-relationship" class="nav-link" data-scroll-target="#mathematical-relationship">Mathematical Relationship</a></li>
+  <li><a href="#key-length-importance" id="toc-key-length-importance" class="nav-link" data-scroll-target="#key-length-importance">Key Length Importance</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -175,8 +183,8 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 <section id="ssltls---the-internets-trust-protocol" class="level1">
 <h1>SSL/TLS - The Internet’s Trust Protocol</h1>
 <p><strong>Secure Sockets Layer</strong> (<strong>SSL</strong>) and its successor <strong>Transport Layer Security</strong> (<strong>TLS</strong>) are cryptographic protocols that provide security in communication over a computer network using a combination of <em>symmetric</em> and <em>asymmetric encryption</em> (both of which are introduced later in this post). The protocol is widely used for such applications as HTTPS (HTTP protocol extended with TLS encryption), email, instant messaging, etc.</p>
-<section id="asymmetric-encryption" class="level2">
-<h2 class="anchored" data-anchor-id="asymmetric-encryption">Asymmetric Encryption</h2>
+<section id="asymmetric-encryption-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="asymmetric-encryption-diagrams">Asymmetric Encryption Diagrams</h2>
 <div id="fig-asymmetric-encryption" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-asymmetric-encryption-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -211,7 +219,7 @@ Figure&nbsp;1: Each party has a set of public and private keys.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram3.drawio.light.png" class="img-fluid figure-img"></p>
-<figcaption>SSL figure 3</figcaption>
+<figcaption>SSL figure 2</figcaption>
 </figure>
 </div>
 </section>
@@ -220,12 +228,39 @@ Figure&nbsp;1: Each party has a set of public and private keys.
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram2.drawio.light.png" class="img-fluid figure-img"></p>
-<figcaption>SSL figure w</figcaption>
+<figcaption>SSL figure 3</figcaption>
 </figure>
 </div>
 <p><img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram1.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram2.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram3.drawio.dark.png" height="0"> <img src="../../assets/network_and_security/ssl_the_internets_trust_protocol/ssl_diagram0.drawio.dark.png" height="0"></p>
+</section>
+</section>
+<section id="explanation" class="level1">
+<h1>Explanation</h1>
+<p>These diagrams illustrate the fundamental concepts of asymmetric encryption and how SSL/TLS prevents man-in-the-middle attacks.</p>
+<p>Basic Encryption/Decryption Process (Images 1 &amp; 2): Image 1 shows decryption: A cipher text is decrypted using a public key Image 2 shows encryption: A message is encrypted using a private key Together, these demonstrate the complementary nature of public/private key pairs Security Against Man-in-the-Middle (Image 3): Shows the secure communication setup between a Sender and Receiver Each party has their own pair of keys: Private key (represented by the solid key icon) Public key (represented by the outlined key icon) The “Man in the middle” attacker (shown with an X) cannot intercept the communication This is because they don’t have access to the private keys needed to decrypt the messages Key Pair Distribution (Image 4): Shows how both Sender and Receiver each maintain their own set of keys</p>
+<p>Each party has: 1. A private key (kept secret) 2. A public key (shared with others) 3. This forms the basis of secure communication 4. The overall SSL/TLS process works by:</p>
+<p>Both parties establish their identities using these key pairs</p>
+<p>Messages are encrypted with the recipient’s public key. Only the intended recipient can decrypt the message using their private key. This ensures that even if someone intercepts the communication, they cannot read the contents without the private key. This asymmetric encryption system is a fundamental part of SSL/TLS security, though in practice, SSL/TLS also uses symmetric encryption for the actual data transfer after the initial handshake for better performance.</p>
+<section id="how-are-the-public-and-private-keys-related" class="level2">
+<h2 class="anchored" data-anchor-id="how-are-the-public-and-private-keys-related">How are the public and private keys related?</h2>
+<p>Public and private keys are mathematically related through complex cryptographic algorithms, but their relationship has some key properties:</p>
+<section id="mathematical-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-relationship">Mathematical Relationship</h3>
+<p>They are generated together using mathematical functions based on prime numbers The most common algorithm (RSA) uses the product of two large prime numbers The security relies on the fact that while multiplying large prime numbers is easy, factoring their product is extremely difficult (known as the factorization problem) Complementary Function: What one key encrypts, only the other key can decrypt If the public key encrypts a message, only the private key can decrypt it If the private key encrypts (signs) a message, only the public key can decrypt (verify) it One-Way Function: While the keys are related, it’s computationally infeasible to derive the private key from the public key This is known as a “trapdoor function” - easy to compute in one direction but extremely difficult to reverse Even if someone has your public key, they cannot use it to figure out your private key</p>
+</section>
+<section id="key-length-importance" class="level3">
+<h3 class="anchored" data-anchor-id="key-length-importance">Key Length Importance</h3>
+<p>The security of this relationship depends on the key length Longer keys (like 2048 or 4096 bits) make it practically impossible with current technology to break the encryption by trying to derive the private key from the public key This mathematical relationship is what makes asymmetric encryption possible while maintaining security - you can freely share your public key while keeping your private key secret, and the two will work together without compromising the system’s security.</p>
+<details>
+<summary>
+Click to expand handwritten notes
+</summary>
+<iframe src="https://drive.google.com/file/d/1nFqPAFZBKuIHN1TonYz-20SGDXcrZXBS/preview" width="100%" height="1200" class="quarto-light" frameborder="0">
+</iframe>
+</details>
 
 
+</section>
 </section>
 </section>
 
