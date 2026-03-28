@@ -33,11 +33,6 @@ website:
 
 format:
   html:
-    syntax-definitions:
-      - syntax/lean4.xml
-    highlight-style:
-      light: pygments
-      dark: breezedark
     page-layout: full
     grid:
       sidebar-width: 450px
