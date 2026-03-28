@@ -164,6 +164,10 @@ code {
     background-color: #d2ccd3 !important;
 }
 
+pre code {
+    min-width: fit-content;
+}
+
 .sourceCode {
     border-radius: 0.25em !important;
     background-color: #d2ccd3 !important;
@@ -219,7 +223,15 @@ a.pagination-link {
     border-left-color: #FCA311;
 }
 
+.callout.callout-style-default.callout-tip.no-icon.callout-titled {
+    border-left-color: #FCA311;
+}
+
 .callout.callout-style-simple.callout-note.no-icon.callout-titled {
+    border-left-color: #00B295;
+}
+
+.callout.callout-style-default.callout-note.no-icon.callout-titled {
     border-left-color: #00B295;
 }
 
@@ -227,8 +239,25 @@ a.pagination-link {
     border-left-color: #F46036;
 }
 
+.callout.callout-style-default.callout-important.no-icon.callout-titled {
+    border-left-color: #F46036;
+}
+
 .callout.callout-style-simple.callout-caution.no-icon.callout-titled {
     border-left-color: #d3370c;
+}
+
+.callout.callout-style-default.callout-caution.no-icon.callout-titled {
+    border-left-color: #d3370c;
+}
+
+.callout-header {
+    background-color: #ebe8e7 !important;
+}
+
+
+.callout-title-container {
+    background-color: #ebe8e7 !important;
 }
 
 // Search Results
