@@ -1,3 +1,5 @@
+Access digital garden at: https://v-poghosyan.github.io
+
 Hi, I’m Vahram!
 
 Welcome to my digital garden — a collection of my notes and ideas shared on the internet.
