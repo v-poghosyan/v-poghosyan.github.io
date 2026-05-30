@@ -121,7 +121,9 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
     <div class="quarto-title column-page-left">
       <h1 class="title">SSL - The Internet’s Trust Protocol</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Network Security</div>
+                <div class="quarto-category">Network</div>
+                <div class="quarto-category">Security</div>
+                <div class="quarto-category">Cryptography</div>
               </div>
                   </div>
   </div>
@@ -168,6 +170,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#mathematical-relationship" id="toc-mathematical-relationship" class="nav-link" data-scroll-target="#mathematical-relationship">Mathematical Relationship</a></li>
   <li><a href="#key-length-importance" id="toc-key-length-importance" class="nav-link" data-scroll-target="#key-length-importance">Key Length Importance</a></li>
+  <li><a href="#ssltls-record-protocol-and-hmac" id="toc-ssltls-record-protocol-and-hmac" class="nav-link" data-scroll-target="#ssltls-record-protocol-and-hmac">SSL/TLS Record Protocol and HMAC</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -251,6 +254,17 @@ Figure&nbsp;1: Each party has a set of public and private keys.
 <section id="key-length-importance" class="level3">
 <h3 class="anchored" data-anchor-id="key-length-importance">Key Length Importance</h3>
 <p>The security of this relationship depends on the key length Longer keys (like 2048 or 4096 bits) make it practically impossible with current technology to break the encryption by trying to derive the private key from the public key This mathematical relationship is what makes asymmetric encryption possible while maintaining security - you can freely share your public key while keeping your private key secret, and the two will work together without compromising the system’s security.</p>
+</section>
+<section id="ssltls-record-protocol-and-hmac" class="level3">
+<h3 class="anchored" data-anchor-id="ssltls-record-protocol-and-hmac">SSL/TLS Record Protocol and HMAC</h3>
+<p>Once the initial TLS handshake is complete and symmetric keys are established, each record (<code>data</code> fragment) transmitted is processed as follows:</p>
+<ol type="1">
+<li>Hashing (Sender Side): The sender computes the HMAC (Hash-based Message Authentication Code) for each chunk to ensure integrity and authenticity using its <strong>MAC key</strong> (which is also established after the TLS handshake). The MAC key is not the same as the symmetric encryption key established after the handshake (in fact, <strong>encryption</strong> is not the same as <strong>hashing</strong>). The symmetric key is used to make the messages <strong>confidential</strong> (i.e., unreadable to eavesdroppers) using AES or ChaCha (which are encryption algorithms that are distinct from hashing algorithms), while the MAC key is used to ensure that the messages are <strong>authentic</strong> and unaltered (i.e.&nbsp;have <strong>integrity</strong>).</li>
+<li>Encryption (Sender Side): The HMAC is appended to the plaintext, and the combined message (<code>data</code> + <code>HMAC</code>) is encrypted using the negotiated symmetric cipher.</li>
+<li>Transmission: The encrypted record is sent.</li>
+<li>Verification (Receiver Side): The receiver decrypts the message using the negotiated symmetric cipher, recomputes the HMAC (from <code>data</code> in the now-plain <code>data</code> + <code>HMAC</code> blob) using the shared <strong>MAC key</strong>, and compares it with the transmitted <code>HMAC</code> from the sender (again, from the plain <code>data</code> + <code>HMAC</code> blob). If they match, the message is authentic and unaltered.</li>
+</ol>
+<p>It’s only because the MAC key is only known to the sender and receiver (and not to any eavesdropper) that the HMAC can provide authenticity and integrity guarantees. So, it’s crucial this happens after the TLS handshake which is when the MAC key is established securely.</p>
 <details>
 <summary>
 Click to expand handwritten notes

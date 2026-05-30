@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2026-03-28">
+
+<title>No BS Guide to Blender – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../assets/site/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">No BS Guide to Blender</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Blender</div>
+                <div class="quarto-category">3D Texturing</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 28, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#basic-modelling-and-texturing" id="toc-basic-modelling-and-texturing" class="nav-link active" data-scroll-target="#basic-modelling-and-texturing">Basic Modelling and Texturing</a>
+  <ul>
+  <li><a href="#basic-model-for-initial-uv-mapping" id="toc-basic-model-for-initial-uv-mapping" class="nav-link" data-scroll-target="#basic-model-for-initial-uv-mapping">Basic model for initial UV mapping</a></li>
+  <li><a href="#uv-mapping" id="toc-uv-mapping" class="nav-link" data-scroll-target="#uv-mapping">UV mapping</a></li>
+  </ul></li>
+  <li><a href="#basic-material-setup" id="toc-basic-material-setup" class="nav-link" data-scroll-target="#basic-material-setup">Basic Material Setup</a></li>
+  <li><a href="#normal-map" id="toc-normal-map" class="nav-link" data-scroll-target="#normal-map">Normal map</a></li>
+  <li><a href="#roughness-map" id="toc-roughness-map" class="nav-link" data-scroll-target="#roughness-map">Roughness map</a></li>
+  <li><a href="#secondary-material" id="toc-secondary-material" class="nav-link" data-scroll-target="#secondary-material">Secondary Material</a></li>
+  <li><a href="#combined-normal-maps-for-carving" id="toc-combined-normal-maps-for-carving" class="nav-link" data-scroll-target="#combined-normal-maps-for-carving">Combined Normal Maps (For Carving)</a></li>
+  <li><a href="#transferring-materials-between-different-software" id="toc-transferring-materials-between-different-software" class="nav-link" data-scroll-target="#transferring-materials-between-different-software">Transferring Materials Between Different Software</a></li>
+  <li><a href="#making-a-water-shader-using-blenders-cycles-engine" id="toc-making-a-water-shader-using-blenders-cycles-engine" class="nav-link" data-scroll-target="#making-a-water-shader-using-blenders-cycles-engine">Making a Water Shader (Using Blender’s Cycles Engine)</a></li>
+  <li><a href="#procedural-materials-playlist" id="toc-procedural-materials-playlist" class="nav-link" data-scroll-target="#procedural-materials-playlist">Procedural Materials Playlist</a></li>
+  <li><a href="#premade-materials-and-objects" id="toc-premade-materials-and-objects" class="nav-link" data-scroll-target="#premade-materials-and-objects">Premade Materials and Objects</a></li>
+  <li><a href="#optimizing-viewport-performance-in-blender" id="toc-optimizing-viewport-performance-in-blender" class="nav-link" data-scroll-target="#optimizing-viewport-performance-in-blender">Optimizing Viewport Performance in Blender</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="basic-modelling-and-texturing" class="level1">
+<h1>Basic Modelling and Texturing</h1>
+<section id="basic-model-for-initial-uv-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="basic-model-for-initial-uv-mapping">Basic model for initial UV mapping</h2>
+<p>Start with an object, make sure to always <strong>“Apply Transformations”</strong> in object mode to avoid any weirdness with scaling and texturing later on. But, in general, avoid detailed modelling before basic texturing. The more faces you have, the more complex the UV mapping will be.</p>
+<p>So, start with the basic object shape, simple quads only. Let’s say you were modelling a Greek column, you would start with the cylinder first, then inset grooves (simple rectangular insets), and finish the basic shape of the column bases. Things like face extrusion can throw off the UV mapping, so it’s best to keep it simple at the beginning. Of course, UV mapping is an iterative process, and you might have to adjust the UV later on. Getting away with simple UV mapping in the beginning will only be possible if you have a good idea already for the final shape of the model (a skill that only comes with practice). For this reason, here are some tips to keep in mind while modelling:</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Save a lower poly version of the model before adding details, so you can always go back to it if you need to adjust the UV mapping. Hide the lower poly version of the model and work on the details on the higher poly version, but keep the lower poly version as a checkpoint.</p>
+<p>Saving a lower poly version of the object is also good practice because of baking (<strong>“light”</strong> or <strong>“texture baking”</strong>). When you bake the normal map (light baking), you want to bake it from the high poly version to the low poly version, so you need to have both versions of the model in your scene. This means that you are transferring the lighting details from the high poly version to the low poly version, so that the low poly version can have the same level of detail as the high poly version without actually having more geometry. This is essentially done simply by creating a normal map from the high poly version and wiring it to the <strong>“normal input”</strong> of the material for the low poly version (see the section on <strong>Normal maps</strong> below).</p>
+<p>In that section we create a normal map from the texture of an image, not from a high poly version of the model, but the principle is the same. Both normal maps can be combined as input to the <strong>“Principled BSDF shader”</strong>, so you can have the details from the high poly version <em>and</em> the details from the texture at the same time.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="uv-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="uv-mapping">UV mapping</h2>
+<p>Then, go to the <strong>“UV Editing workspace,”</strong> select the object, and unwrap it (<kbd class="inline">U</kbd> &gt; <strong>“Unwrap”</strong> or <kbd class="inline">U</kbd> &gt; <strong>“Smart UV Project”</strong>). This will create a UV map for your object, which is basically the projection of its vertices in 2D space. These UV coordinates are mapped between the 3D model and the 2D texture through a node called <strong>“Mapping”</strong> in <strong>“Shader Editor”</strong> (press <kbd class="inline">Ctrl</kbd> + <kbd class="inline">T</kbd> while the “texture node” is selected to show its <strong>“Mapping”</strong> and <strong>“Texture Coordinate”</strong> nodes).</p>
+<p>While smart unwrapping, you want to keep in mind the proportions of the object relative to the texture and its other parts (just confirm there is no stretching or unnecessary tiling). If your texture is not tileable, there is an image editor trick to make it tileable:</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The ideas is to blend the edges of the texture with the opposite edge, so that when it is repeated, the edges will blend together seamlessly. To do this, you can use the <strong>“Clone Stamp”</strong> tool in an image editing software like Photoshop or GIMP. This tool allows you to sample pixels from one area of the image and paint them over another area. You can use it to clone the edges of the texture and paint them over the opposite edges, creating a seamless transition between them. This is best done by enabling tiling in the image editor, then using the move too to move the edge of the texture to the center.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>To make life simpler, you can use <strong>PBR textures</strong> (<strong>Physically Based Rendering</strong>). These textures are made for 3D applications, and typically include a base color (albedo), normal map, roughness map, metallic map, and sometimes an ambient occlusion map. So, we don’t have to generate those (as we do below in this tutorial). They are also tilable by default.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="basic-material-setup" class="level1">
+<h1>Basic Material Setup</h1>
+<p>On top of the simple texture that goes in the base color of the shader node of the material, we have the full power of <a href="https://docs.blender.org/manual/en/latest/render/shader_nodes/shader/principled.html">shaders</a> to define materials in Blender.</p>
+</section>
+<section id="normal-map" class="level1">
+<h1>Normal map</h1>
+<p>We can add a <strong>“normal map”</strong> to give the illusion of depth and detail on the surface of the model. A normal map is a texture that encodes the direction of the surface normals, which are used by the shader (<strong>“Principled BSDF”</strong>) to calculate how light interacts with the surface. This can make a flat surface look like it has bumps, grooves, and other details without actually adding more geometry to the model. You can create a normal map from a height map using an image editing software or a dedicated normal map generator.</p>
+<p>Here are the practical steps:</p>
+<ol type="1">
+<li>Create a height map of your texture. Just duplicate the <strong>Image Texture Node</strong>, and ensure this duplicated node is loading the same texture image.</li>
+<li>Crucially, for this duplicated node, change its <strong>“Color Space”</strong> from sRGB to Non-Color (because we’re going to interpret its brightness values as height, not sRGB color), and connect the <strong>UV output</strong> from your <strong>Texture Coordinate node</strong> to the <strong>Vector input</strong> of this duplicated <strong>Image Texture node</strong>.</li>
+<li>Connect the <strong>Vector output</strong> from your <strong>Mapping node</strong> to the <strong>Vector input</strong> of this duplicated <strong>Image Texture node</strong>.</li>
+<li>Add a Bump Node: Press <kbd class="inline">Shift</kbd> + <kbd class="inline">A</kbd> &gt; <strong>Bump</strong>.</li>
+<li>Connect the Nodes: Connect the <strong>Color output</strong> of your duplicated <strong>Image Texture node</strong> (the one set to Non-Color space) to the Height input of the Bump Node. (The Color output here is effectively providing a grayscale brightness value, which the Bump node interprets as height). Connect the Normal output of the Bump Node to the Normal input of your Principled BSDF node.</li>
+</ol>
+<p>Here’s what that looks like:</p>
+<div id="fig-normal-map-shader-editor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normal-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/normal_map_shader_editor.png" id="fig-normal-map" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The <strong>Shader Editor</strong> showing the composition of the normal map nodes
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="roughness-map" class="level1">
+<h1>Roughness map</h1>
+<p>We can use the same texture for the <strong>“roughness map,”</strong> as well. We need to convert it to grayscale first, as we did for the normal map. This is because the roughness map uses the intensity of the pixels to determine how rough or smooth the surface is. In Blender, you can use the <strong>“RGB to BW”</strong> node to convert the color texture to grayscale before connecting it to the roughness input of the shader. To search for this node, press <kbd class="inline">Shift</kbd> + <kbd class="inline">A</kbd> in the shader editor and type <strong>“RGB to BW”</strong>.</p>
+<p>We can also duplicate the texture node again and set it to non-color space, which will give us the same result as the <strong>RGB to BW node</strong>, but with fewer nodes in the editor.</p>
+<p>See the figure below:</p>
+<div id="fig-roughness-map-shader-editor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-roughness-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/roughness_map_with_map_range_shader_editor.png" id="fig-roughness-map" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-roughness-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+<p>We can also add a <strong>Map Range node</strong> to adjust the contrast of the roughness map. This has the effect of clamping down on the shiny (or matte) areas.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The <strong>Map Range node</strong> could also have been used with the normal map above to adjust the relief information of the normal map. Here is what that looks like, see figure below.</p>
+</div>
+</div>
+</div>
+<div id="fig-normal-map-shader-editor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normal-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/normal_map_with_map_range_shader_editor.png" id="fig-normal-map" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-map-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The <strong>Shader Editor</strong> showing the composition of the normal map nodes
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="secondary-material" class="level1">
+<h1>Secondary Material</h1>
+<p>Applying a second material can be done by:</p>
+<ol type="1">
+<li>Duplicating the Principled BSDF shader node with its texture node, roughness and normal maps (the whole stack)</li>
+<li>Using the <strong>“Mix Shader” node</strong> to mix the two Principled BSDF shaders together</li>
+<li>Plugging the output of the <strong>“Mix Shader” node</strong> into the <strong>Surface input</strong> of the <strong>“Material Output” node</strong>.</li>
+</ol>
+<p>This can be useful for adding weathering effects, such as dirt, chipped stone or wood, or rust, on top of the base material. We can also use a <strong>mask texture</strong> to control where the secondary material is applied, but more on that later.</p>
+<p>Here’s what that looks like:</p>
+<div id="fig-secondary-material-shader-editor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-secondary-material-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/multi-material-stack.png" id="fig-secondary-material" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-secondary-material-shader-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4
+</figcaption>
+</figure>
+</div>
+<p>Notice the Image Texture node. This is the mask texture, plug it into the <strong>Fac input</strong> of the <strong>Mix Shader</strong> node. Then draw over it. Black and white values in the mask will control the blending of the two materials, black will show the base material, white will show the secondary material, and gray will show a mix of both materials depending on the intensity of the gray. For this we need a pressure-sensitive drawing tablet. The Image Texture node is set to non-color space, and it’s 4096x4096. Hit <kbd class="inline">Ctrl</kbd> + <kbd class="inline">Tab</kbd> and select <strong>“Texture Paint”</strong> mode to start drawing on the mask texture (directly on the model!). Use <kbd class="inline">Ctrl</kbd> to toggle the base material and secondary (effectively erasing).</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>An object must be selected to be able to paint on it, so if you want to paint on the model, make sure to select it first in Object mode.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="combined-normal-maps-for-carving" class="level1">
+<h1>Combined Normal Maps (For Carving)</h1>
+<p>This is good for carving details on the surface of the model. We can use a <strong>Bump node</strong> two outputs going into each BSDF shader (for an object with 2 materials), and then use a <strong>Mix RGB node</strong> with two colors (white and black) to pipe it into the height input of the Bump node. Then to the <strong>Fac input</strong> of the Mix RGB node, we can plug in an Image Texture node that has the details we want to carve. We draw on this texture similar to the mask texture for the secondary material, but instead of controlling the blending of two materials, it controls how chiseled the combined surface looks.</p>
+</section>
+<section id="transferring-materials-between-different-software" class="level1">
+<h1>Transferring Materials Between Different Software</h1>
+<p>When transferring materials between different software, such as from Blender to Unreal Engine, we need to bake the color, normal, and roughness maps. This is because different software have different shader systems, and the materials we create in Blender may not be directly compatible with Unreal Engine (i.e.&nbsp;Unreal doesn’t have the same shader nodes). Baking has to be done per material.</p>
+<p>To bake the base color (after texture painting):</p>
+<ol type="1">
+<li>Create a new <strong>Image Texture node</strong> (make it have 4K resolution, i.e.&nbsp;4096x4096).</li>
+<li>Make sure the object is selected in <strong>Object Mode</strong>, select the new Image texture in the <strong>Shader Editor</strong>, and go to the <strong>Render Properties</strong> tab (small TV icon on the right-hand panel). Under the <strong>Bake</strong> section, select <strong>“Diffuse”</strong> for the bake type (the base color is also known as “albedo” or “diffuse”). In the <strong>Contribution</strong> section, uncheck <strong>“Direct”</strong> and <strong>“Indirect”</strong> so that only the color information is baked (not lighting, we will do that separately). Then click the <strong>“Bake”</strong> button to start the baking process.</li>
+</ol>
+<p>This will bake the texture with all the details you painted on it, and you can now save this baked texture to use in Unreal Engine. To make the process fast, lower the <strong>Sampling</strong> to <strong>max samples = 10.</strong></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The same process applies to baking the normal and roughness maps, but instead of selecting <strong>“Diffuse”</strong> for the bake type, you would select <strong>“Normal”</strong> for the normal map and <strong>“Roughness”</strong> for the roughness map.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="making-a-water-shader-using-blenders-cycles-engine" class="level1">
+<h1>Making a Water Shader (Using Blender’s Cycles Engine)</h1>
+<p>Here are all the things we need.</p>
+<p>First we need to define the environment for the body of water. Create a sun light and add an image texture with an HDRI environment map to the world shader. In <strong>World Properties</strong> &gt; <strong>SUrface</strong> &gt; <strong>Colors</strong>select <strong>Environment Texture</strong> and load your HDRI image. You can get HDRI images from <a href="https://polyhaven.com/">polyhaven.com</a>. This will give us realistic lighting and reflections on the water surface.</p>
+<p>Create a cube. The cube will be our water surface (well, not really a plane, since having volume is important). We will be using the volume of the cube in the Shader Editor to create the water material, so it’s important to have a cube instead of a plane.</p>
+<p>Then, we can create the water material with the following nodes:</p>
+<ol type="1">
+<li>Delete the <strong>Principled BSDF</strong> shader that comes with the cube, and replace it with a <strong>“Glass BSDF”</strong> shader (because water is transparent and has refraction)</li>
+<li>Set the <strong>IOR</strong> (Index of Refraction) to 1.333 (the IOR of water)</li>
+<li>Also add a <strong>Transparent BSDF</strong> shader and a <strong>Mix Shader</strong> node to mix the <strong>Glass BSDF</strong> and <strong>Transparent BSDF</strong> together. This will allow us to control the transparency of the water (since water transparency does not behave exactly like glass)</li>
+<li>Add a <strong>Light Path</strong> node and connect its <strong>“Is Shadow Ray”</strong> output to the <strong>Fac input</strong> of the <strong>Mix Shader</strong> node. This will make the water transparent in shadows, which is more realistic. <strong>Is Shadow Ray</strong> refers to the rays that are cast from the light source to the object, and get obstructed by another object. We would have access to this programmatically in shader code as well, potentially, in OpenGL with <a href="../../game_development/computer_graphics/computer_graphics.ipynbl#attributes-uniforms-and-varying">uniform variables</a>. This is just to reinforce that all Blender is doing in the Shader Editor is generating shader code (the nodes describe, just as the code does, the per-pixel logic to calculate the final color of the rendered pixel).</li>
+<li>Add a <strong>Noise Texture</strong> node and connect its output to the <strong>Normal input</strong> of the <strong>Glass BSDF</strong> shader through a <strong>Bump node</strong>.</li>
+<li>Add a <strong>Volume Absorption</strong> shader to give the water some color, and connect it to the <strong>Volume input</strong> of the <strong>Material Output</strong> node. Set the color to a light blue and adjust the density to your liking. The <strong>Volume Absorption</strong> node simulates how light is absorbed as it travels through a volumetric medium (like water, smoke, or clouds). It’s used to give depth and color to transparent objects. The shader code that runs on the GPU knows the volume of the object because it has access to the vertices of the cube.</li>
+<li>Create an <strong>Add Shader</strong> node and connect the volume output of the <strong>Volume Absorption</strong> shader to one shader input of the <strong>Add Shader</strong> node. 9. Create a new <strong>Principled BSDF</strong> shader and connect its output to the other shader input of the <strong>Add Shader</strong> node. Pick a color for the <strong>Principled BSDF</strong> shader. Set emission.</li>
+</ol>
+<p>The steps are slightly different for <strong>EEVEE</strong> (Blender’s newer rendering engine), since EEVEE does not support volume shaders. More on this later.</p>
+<p>I did not notice much difference in the performance of my old AMD Radeon RX 5600 XT GPU on the Cycles engine with this water shader, as compared to my MacBook Pro M3 Pro. Not sure if I’m doing something wrong, but I expected the M3 Pro to be much faster. I will have to do more testing and research on this. GPU is selected as the render device in the Blender system preferences (doing this single step doubled the performance on the Mac).</p>
+<div id="fig-enable-gpu" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-enable-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/enable-gpu.png" id="fig-enable-gpu" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-enable-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>You can group nodes using <kbd class="inline">Ctrl</kbd> + <kbd class="inline">J</kbd> and label the group for better organization using <kbd class="inline">fn</kbd> + <kbd class="inline">F2</kbd>.</p>
+</div>
+</div>
+</div>
+<p>The performance is currently still suboptimal on the Mac, so I want to try the EEVEE engine (with a material specifically created for EEVEE, using the <a href="https://docs.blender.org/manual/en/latest/render/shader_nodes/input/raycast.html"><strong>Raycast</strong> node</a>). But, before that, there are ways to optimize viewport rendering (and rendering in general). This <a href="https://www.youtube.com/watch?v=boMoTlnj9Mw">video</a> goes over some of the optimizations you can make to improve viewport performance in Blender. People report incredible impact, so it’s worth a try.</p>
+</section>
+<section id="procedural-materials-playlist" class="level1">
+<h1>Procedural Materials Playlist</h1>
+<p>This <a href="https://www.youtube.com/playlist?list=PLsGl9GczcgBs6TtApKKK-L_0Nm6fovNPk">playlist</a> has some good tutorials on procedural materials in Blender, which is a powerful way to create materials without relying on image textures. Note, this is an alternative to the texturing process described above, and it can be used in combination with it as well. Image textures usually take less time to set up, but procedural materials can give you more control and flexibility over the final look of the material (and can accommodate changes more easily, since they are not tied to a specific image).</p>
+<p>Be sure to use the <a href="https://docs.blender.org/manual/en/4.0/addons/materials/material_library.html?utm_source=blender-4.0.2"><strong>Material Library</strong> plugin</a> to save your procedural materials, so you can reuse them in other projects.</p>
+</section>
+<section id="premade-materials-and-objects" class="level1">
+<h1>Premade Materials and Objects</h1>
+<p>Blender has an extensive library of premade materials and objects that you can use in your projects called the <a href="https://docs.blender.org/manual/en/latest/editors/asset_browser.html"><strong>Asset Browser</strong></a>. It comes with some materials, and objects, but you can store your own in the form of <code>.blend</code> files in the asset library as well.</p>
+<div id="fig-asset-lib" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-asset-lib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./assets/asset_lib.png" id="fig-asset-lib" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-asset-lib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6
+</figcaption>
+</figure>
+</div>
+<p>After setting up your asset folder as above, you can right click on any material or object in your scene and select <strong>“Mark as Asset”</strong> to add it to the asset library. You can then access it from the <strong>Asset Browser</strong> and drag and drop it into your scene whenever you need it. To access the asset browser, switch to the <strong>“Asset Browser workspace”</strong> from the top of the Blender interface.</p>
+</section>
+<section id="optimizing-viewport-performance-in-blender" class="level1">
+<h1>Optimizing Viewport Performance in Blender</h1>
+<ul>
+<li>Persist some parts of the final render between renders (instead of re-rendering the whole viewport every time).
+<ul>
+<li><strong>Render properties</strong> &gt; <strong>Performance</strong> &gt; <strong>Final Render</strong> &gt; <strong>Persistent Data</strong></li>
+</ul></li>
+<li>Reduce render tile size, this is how much of the image is rendered at a time.
+<ul>
+<li><strong>Performance</strong> &gt; <strong>Memory</strong> &gt; <strong>Tile Size</strong> = 512</li>
+</ul></li>
+<li>To reduce blurriness, reduce pixel size
+<ul>
+<li><strong>Render properties</strong> &gt; <strong>Viewport</strong> &gt; <strong>Pixel Size</strong> = 1</li>
+</ul></li>
+<li>Switch <strong>Light Tree</strong> off, this setting controls how the light bounces are calculated, and can have a big impact on performance. <strong>Render properties</strong> &gt; * <strong>Sampling</strong> &gt; <strong>Lights</strong> &gt; <strong>Light Tree</strong> &gt; Uncheck</li>
+<li>Make sampling automatic (per need). Sampling controls the number of light rays that are cast to calculate the lighting of a single pixel. This setting can have exponential impact on performance. By turning this setting on, Blender samples different areas of the image with different sample counts, depending on how complex the lighting is in that area. This can significantly reduce render times while still maintaining good image quality.
+<ul>
+<li><strong>Render properties</strong> &gt; <strong>Sampling</strong> &gt; <strong>Render</strong> &gt; <strong>Noise Threshold</strong> = 0.1</li>
+</ul></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
+
+
+
+
+</body></html>

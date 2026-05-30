@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/react/react-notes-dump.html</loc>
-    <lastmod>2025-11-04T06:04:03.794Z</lastmod>
+    <loc>https://v-poghosyan.github.io/CLAUDE.html</loc>
+    <lastmod>2026-05-28T07:20:25.952Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/javascript/the_js_event_loop.html</loc>
-    <lastmod>2025-11-04T06:04:49.088Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/manim_in_jupyter/manim_in_jupyter.html</loc>
+    <lastmod>2025-08-10T19:16:17.360Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/javascript/typescript.html</loc>
+    <lastmod>2025-10-07T04:27:12.632Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/parallel_systems/asynchronous_programming.html</loc>
     <lastmod>2024-10-14T22:08:33.738Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/functional_programming/functional_programming.html</loc>
-    <lastmod>2025-03-20T03:34:57.732Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/functional_programming/theorem-prover.html</loc>
+    <lastmod>2026-03-28T19:30:02.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/shell_configs.html</loc>
+    <lastmod>2024-10-31T19:35:07.683Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/set_up_a_local_development_environment_for_ML.html</loc>
@@ -61,16 +69,24 @@
     <lastmod>2025-08-10T19:52:59.604Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/unreal_engine_cheat_sheet.html</loc>
-    <lastmod>2024-11-18T23:06:42.533Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/blender/guide_to_texturing_in_blender.html</loc>
+    <lastmod>2026-05-28T06:55:31.581Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/instructibles/retroarch_setup.html</loc>
-    <lastmod>2024-10-22T05:07:23.720Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/conways_game_of_life.html</loc>
+    <lastmod>2025-05-22T19:13:27.541Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/computer_graphics/computer_graphics.html</loc>
+    <lastmod>2026-04-03T01:50:37.566Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/cryptography_concepts.html</loc>
+    <lastmod>2025-11-06T03:49:32.690Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/ssl_the_internets_trust_protocol.html</loc>
-    <lastmod>2025-05-23T18:06:21.171Z</lastmod>
+    <lastmod>2025-11-06T02:47:12.855Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/network_and_security/aws_tips_and_tricks.html</loc>
@@ -97,28 +113,32 @@
     <lastmod>2024-11-18T23:06:53.762Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/posts/leetcode/lc53_maximum_subarray.html</loc>
-    <lastmod>2025-01-23T07:09:18.117Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html</loc>
-    <lastmod>2025-01-23T07:09:18.116Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html</loc>
-    <lastmod>2025-11-04T06:16:59.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://v-poghosyan.github.io/posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html</loc>
-    <lastmod>2025-11-04T06:16:15.786Z</lastmod>
+    <loc>https://v-poghosyan.github.io/posts/leetcode/lc11_container_with_most_water.html</loc>
+    <lastmod>2025-01-18T19:59:46.365Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/posts/leetcode/lc_connected_sinks_and_sources.html</loc>
     <lastmod>2025-03-15T20:07:16.938Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/posts/leetcode/lc11_container_with_most_water.html</loc>
-    <lastmod>2025-01-18T19:59:46.365Z</lastmod>
+    <loc>https://v-poghosyan.github.io/posts/visualization/d3_in_jupyter_with_deno/d3_js_in_jupyter_with_deno.html</loc>
+    <lastmod>2025-11-04T06:16:15.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/posts/visualization/three_js_in_jupyter/three_js_in_jupyter.html</loc>
+    <lastmod>2025-11-04T06:16:59.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/posts/leetcode/lc121_best_time_to_buy_and_sell_stock.html</loc>
+    <lastmod>2025-01-23T07:09:18.116Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/posts/leetcode/lc53_maximum_subarray.html</loc>
+    <lastmod>2025-01-23T07:09:18.117Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/posts/digital_art/still_life_in_procreate/drawing_a_still_life_in_procreate.html</loc>
+    <lastmod>2026-05-30T06:20:36.255Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/index.html</loc>
@@ -149,12 +169,20 @@
     <lastmod>2024-10-14T22:08:33.742Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/computer_graphics/computer_graphics.html</loc>
-    <lastmod>2025-10-07T04:27:12.631Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/instructibles/retroarch_setup.html</loc>
+    <lastmod>2024-10-22T05:07:23.720Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/conways_game_of_life.html</loc>
-    <lastmod>2025-05-22T19:13:27.541Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/unreal_engine_cheat_sheet.html</loc>
+    <lastmod>2026-03-29T04:03:25.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/farming_game_dev_log/farming_game_dev_log.html</loc>
+    <lastmod>2026-05-16T23:24:25.097Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/game_development/blender/architectural_rendering_in_blender.html</loc>
+    <lastmod>2026-04-22T05:43:23.252Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/python/introduction-to-pandas.html</loc>
@@ -190,26 +218,34 @@
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/superuser_cheatsheet.html</loc>
-    <lastmod>2025-10-17T02:51:57.161Z</lastmod>
+    <lastmod>2026-03-15T05:37:09.809Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/brew.html</loc>
     <lastmod>2024-10-25T06:06:22.377Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/shell_configs.html</loc>
-    <lastmod>2024-10-31T19:35:07.683Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/local_development_setup/network_attached_storage.html</loc>
+    <lastmod>2026-04-02T05:45:50.176Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/functional_programming/functional_programming.html</loc>
+    <lastmod>2025-03-20T03:34:57.732Z</lastmod>
   </url>
   <url>
     <loc>https://v-poghosyan.github.io/unpublished_posts/scala/microservices_in_scala_and_zio.html</loc>
     <lastmod>2024-10-14T22:08:33.732Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/javascript/typescript.html</loc>
-    <lastmod>2025-10-07T04:27:12.632Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/vs_code/using_vs_code_like_a_pro.html</loc>
+    <lastmod>2025-11-08T03:08:29.974Z</lastmod>
   </url>
   <url>
-    <loc>https://v-poghosyan.github.io/unpublished_posts/mathematical_visualization/manim_in_jupyter/manim_in_jupyter.html</loc>
-    <lastmod>2025-08-10T19:16:17.360Z</lastmod>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/javascript/the_js_event_loop.html</loc>
+    <lastmod>2025-11-04T06:04:49.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://v-poghosyan.github.io/unpublished_posts/react/react-notes-dump.html</loc>
+    <lastmod>2025-11-04T06:04:03.794Z</lastmod>
   </url>
 </urlset>
