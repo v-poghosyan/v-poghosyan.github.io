@@ -199,7 +199,7 @@ Tip
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Save a lower poly version of the model before adding details, so you can always go back to it if you need to adjust the UV mapping. Hide the lower poly version of the model and work on the details on the higher poly version, but keep the lower poly version as a checkpoint.</p>
+<p>Save a lower poly version of the model before adding details, so you can always go back to it if you need to adjust the UV mapping. Hide the lower poly version of the model and work on the details of the higher poly version, only keep the lower poly version as a checkpoint.</p>
 <p>Saving a lower poly version of the object is also good practice because of baking (<strong>“light”</strong> or <strong>“texture baking”</strong>). When you bake the normal map (light baking), you want to bake it from the high poly version to the low poly version, so you need to have both versions of the model in your scene. This means that you are transferring the lighting details from the high poly version to the low poly version, so that the low poly version can have the same level of detail as the high poly version without actually having more geometry. This is essentially done simply by creating a normal map from the high poly version and wiring it to the <strong>“normal input”</strong> of the material for the low poly version (see the section on <strong>Normal maps</strong> below).</p>
 <p>In that section we create a normal map from the texture of an image, not from a high poly version of the model, but the principle is the same. Both normal maps can be combined as input to the <strong>“Principled BSDF shader”</strong>, so you can have the details from the high poly version <em>and</em> the details from the texture at the same time.</p>
 </div>
@@ -709,7 +709,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

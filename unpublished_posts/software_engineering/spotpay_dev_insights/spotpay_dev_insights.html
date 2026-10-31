@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2026-10-31">
+
+<title>SpotPay Dev Insights – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../assets/site/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">SpotPay Dev Insights</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Software Engineering</div>
+                <div class="quarto-category">SpotPay</div>
+                <div class="quarto-category">Stripe</div>
+                <div class="quarto-category">Testing</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#insight-1-adding-a-feature-that-impacts-users" id="toc-insight-1-adding-a-feature-that-impacts-users" class="nav-link active" data-scroll-target="#insight-1-adding-a-feature-that-impacts-users">Insight 1: Adding a feature that impacts users</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-a-user-facing-feature-touches-every-layer" id="toc-lesson-1-a-user-facing-feature-touches-every-layer" class="nav-link" data-scroll-target="#lesson-1-a-user-facing-feature-touches-every-layer">Lesson 1: A user-facing feature touches every layer</a></li>
+  <li><a href="#lesson-2-build-bottom-up-in-phases" id="toc-lesson-2-build-bottom-up-in-phases" class="nav-link" data-scroll-target="#lesson-2-build-bottom-up-in-phases">Lesson 2: Build bottom-up, in phases</a></li>
+  <li><a href="#lesson-3-write-the-manual-steps-down" id="toc-lesson-3-write-the-manual-steps-down" class="nav-link" data-scroll-target="#lesson-3-write-the-manual-steps-down">Lesson 3: Write the manual steps down</a></li>
+  <li><a href="#lesson-4-a-test-plan-is-a-spec-and-the-rows-are-the-point" id="toc-lesson-4-a-test-plan-is-a-spec-and-the-rows-are-the-point" class="nav-link" data-scroll-target="#lesson-4-a-test-plan-is-a-spec-and-the-rows-are-the-point">Lesson 4: A test plan is a spec, and the ❌ rows are the point</a></li>
+  </ul></li>
+  <li><a href="#insight-2-payment-link-vs-customer-portal" id="toc-insight-2-payment-link-vs-customer-portal" class="nav-link" data-scroll-target="#insight-2-payment-link-vs-customer-portal">Insight 2: Payment Link vs Customer Portal</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-theyre-two-different-stripe-products" id="toc-lesson-1-theyre-two-different-stripe-products" class="nav-link" data-scroll-target="#lesson-1-theyre-two-different-stripe-products">Lesson 1: They’re two different Stripe products</a></li>
+  <li><a href="#lesson-2-static-link-or-per-request-session-that-decides-where-the-config-lives" id="toc-lesson-2-static-link-or-per-request-session-that-decides-where-the-config-lives" class="nav-link" data-scroll-target="#lesson-2-static-link-or-per-request-session-that-decides-where-the-config-lives">Lesson 2: Static link or per-request session? That decides where the config lives</a></li>
+  <li><a href="#lesson-3-dashboard-config-is-environment-state" id="toc-lesson-3-dashboard-config-is-environment-state" class="nav-link" data-scroll-target="#lesson-3-dashboard-config-is-environment-state">Lesson 3: Dashboard config is environment state</a></li>
+  <li><a href="#lesson-4-payment-links-mint-a-new-customer-every-time" id="toc-lesson-4-payment-links-mint-a-new-customer-every-time" class="nav-link" data-scroll-target="#lesson-4-payment-links-mint-a-new-customer-every-time">Lesson 4: Payment Links mint a new Customer every time</a></li>
+  </ul></li>
+  <li><a href="#insight-3-raw-body-controllers" id="toc-insight-3-raw-body-controllers" class="nav-link" data-scroll-target="#insight-3-raw-body-controllers">Insight 3: Raw-body controllers</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-signature-checks-need-the-exact-bytes" id="toc-lesson-1-signature-checks-need-the-exact-bytes" class="nav-link" data-scroll-target="#lesson-1-signature-checks-need-the-exact-bytes">Lesson 1: Signature checks need the exact bytes</a></li>
+  <li><a href="#lesson-2-mount-order-is-the-whole-game" id="toc-lesson-2-mount-order-is-the-whole-game" class="nav-link" data-scroll-target="#lesson-2-mount-order-is-the-whole-game">Lesson 2: Mount order is the whole game</a></li>
+  <li><a href="#lesson-3-mounting-early-means-skipping-what-comes-later" id="toc-lesson-3-mounting-early-means-skipping-what-comes-later" class="nav-link" data-scroll-target="#lesson-3-mounting-early-means-skipping-what-comes-later">Lesson 3: Mounting early means skipping what comes later</a></li>
+  </ul></li>
+  <li><a href="#insight-4-the-webhook-flow" id="toc-insight-4-the-webhook-flow" class="nav-link" data-scroll-target="#insight-4-the-webhook-flow">Insight 4: The webhook flow</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-each-event-has-one-job" id="toc-lesson-1-each-event-has-one-job" class="nav-link" data-scroll-target="#lesson-1-each-event-has-one-job">Lesson 1: Each event has one job</a></li>
+  <li><a href="#lesson-2-an-ais-account-of-an-api-is-a-hypothesis" id="toc-lesson-2-an-ais-account-of-an-api-is-a-hypothesis" class="nav-link" data-scroll-target="#lesson-2-an-ais-account-of-an-api-is-a-hypothesis">Lesson 2: An AI’s account of an API is a hypothesis</a></li>
+  <li><a href="#lesson-3-the-simplification-was-the-bug.-give-the-state-one-owner" id="toc-lesson-3-the-simplification-was-the-bug.-give-the-state-one-owner" class="nav-link" data-scroll-target="#lesson-3-the-simplification-was-the-bug.-give-the-state-one-owner">Lesson 3: The simplification was the bug. Give the state one owner</a></li>
+  </ul></li>
+  <li><a href="#insight-5-testing-stripe" id="toc-insight-5-testing-stripe" class="nav-link" data-scroll-target="#insight-5-testing-stripe">Insight 5: Testing Stripe</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-fake-the-network-not-your-own-code" id="toc-lesson-1-fake-the-network-not-your-own-code" class="nav-link" data-scroll-target="#lesson-1-fake-the-network-not-your-own-code">Lesson 1: Fake the network, not your own code</a></li>
+  <li><a href="#lesson-2-two-seams-two-kinds-of-fake" id="toc-lesson-2-two-seams-two-kinds-of-fake" class="nav-link" data-scroll-target="#lesson-2-two-seams-two-kinds-of-fake">Lesson 2: Two seams, two kinds of fake</a></li>
+  <li><a href="#lesson-3-a-fake-must-be-at-least-as-strict-as-the-real-thing" id="toc-lesson-3-a-fake-must-be-at-least-as-strict-as-the-real-thing" class="nav-link" data-scroll-target="#lesson-3-a-fake-must-be-at-least-as-strict-as-the-real-thing">Lesson 3: A fake must be at least as strict as the real thing</a></li>
+  <li><a href="#lesson-4-a-forged-event-proves-your-handler-not-your-assumptions" id="toc-lesson-4-a-forged-event-proves-your-handler-not-your-assumptions" class="nav-link" data-scroll-target="#lesson-4-a-forged-event-proves-your-handler-not-your-assumptions">Lesson 4: A forged event proves your handler, not your assumptions</a></li>
+  </ul></li>
+  <li><a href="#insight-6-typeorm-migrations-vs-synchronize" id="toc-insight-6-typeorm-migrations-vs-synchronize" class="nav-link" data-scroll-target="#insight-6-typeorm-migrations-vs-synchronize">Insight 6: TypeORM migrations vs <code>synchronize</code></a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-two-tools-two-purposes" id="toc-lesson-1-two-tools-two-purposes" class="nav-link" data-scroll-target="#lesson-1-two-tools-two-purposes">Lesson 1: Two tools, two purposes</a></li>
+  <li><a href="#lesson-2-a-migration-only-counts-if-something-runs-it" id="toc-lesson-2-a-migration-only-counts-if-something-runs-it" class="nav-link" data-scroll-target="#lesson-2-a-migration-only-counts-if-something-runs-it">Lesson 2: A migration only counts if something runs it</a></li>
+  <li><a href="#lesson-3-fence-synchronize-off-before-production" id="toc-lesson-3-fence-synchronize-off-before-production" class="nav-link" data-scroll-target="#lesson-3-fence-synchronize-off-before-production">Lesson 3: Fence <code>synchronize</code> off before production</a></li>
+  </ul></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<p>SpotPay is the payments app we’re building. The repo is still called <code>spot-trade</code>, which is why that name shows up in the code and in the screenshots. It’s a pnpm + Turborepo monorepo with an Express 5 + TypeORM backend, a React + Vite desktop client, and an Expo mobile client.</p>
+<p>This post collects six insights I screenshotted in March 2026 while adding Stripe subscriptions (PR #53, “Subscription Service”). Most are terminal screenshots of sessions with an AI coding assistant, where an explanation, a plan, or a mistake made something click. For each insight I pull out the lessons the screenshots teach.</p>
+<p>The screenshots are from March and the code kept moving, so I also checked each one against <code>main</code> as of 2026-10-31. Where the code has since changed, or a screenshot turned out to be wrong, there’s an <strong>Update</strong> box. The original screenshots, and the prompt that produced this post, are in the collapsed block at the bottom.</p>
+<section id="insight-1-adding-a-feature-that-impacts-users" class="level1">
+<h1>Insight 1: Adding a feature that impacts users</h1>
+<p>Screenshots 1a to 1d are the plan the assistant produced for “add subscriptions”: a todo list, a phased plan, the manual steps, and a test plan.</p>
+<section id="lesson-1-a-user-facing-feature-touches-every-layer" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-a-user-facing-feature-touches-every-layer">Lesson 1: A user-facing feature touches every layer</h2>
+<p>The todo list (1a) has 16 items, and only a few of them mention Stripe. Grouped by layer:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Items from the todo list</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data model</td>
+<td>Add <code>stripe_customer_id</code> to the <code>User</code> entity; update the User DAOs and mappers; add <code>updateSubscription</code> to <code>UserService</code></td>
+</tr>
+<tr class="even">
+<td>Client auth state</td>
+<td>Add <code>email</code> to <code>AuthContext</code></td>
+</tr>
+<tr class="odd">
+<td>Config</td>
+<td>Add <code>STRIPE_WEBHOOK_SECRET</code> to config</td>
+</tr>
+<tr class="even">
+<td>UI</td>
+<td>Update prices in <code>SubscriptionOptions</code>; wire up the Subscribe button</td>
+</tr>
+<tr class="odd">
+<td>API</td>
+<td><code>StripeWebhookController</code>; <code>SubscriptionService</code>; the subscriptions OpenAPI schema; register the controller in <code>server.ts</code>; the portal session endpoint</td>
+</tr>
+<tr class="even">
+<td>Clients</td>
+<td><code>ManageSubscription</code> desktop component and mobile screen</td>
+</tr>
+<tr class="odd">
+<td>Safety net</td>
+<td>Handle edge cases; integration tests</td>
+</tr>
+</tbody>
+</table>
+<p>Write the blast radius down before the first line of code. Some of these items look unrelated but are load-bearing. <code>email</code> in <code>AuthContext</code> is the best example: the Subscribe button sends the user to Stripe with <code>?prefilled_email=</code>, and when Stripe’s webhook comes back, that email is what ties the payment to a row in our <code>users</code> table (<code>handleCheckoutCompleted</code> looks the user up by it). After that first link, <code>stripe_customer_id</code> takes over as the key. So the first design question wasn’t “how does Stripe work?”, it was “what’s the join key between Stripe’s world and ours?”</p>
+</section>
+<section id="lesson-2-build-bottom-up-in-phases" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-build-bottom-up-in-phases">Lesson 2: Build bottom-up, in phases</h2>
+<p>The plan (1b, 1c) has four phases:</p>
+<ul>
+<li><strong>Phase 0, Foundation:</strong> the <code>stripe_customer_id</code> column with an index, types and mappers, <code>updateSubscription</code> and <code>findUserByStripeCustomerId</code>, <code>email</code> in the auth state and the sign-in response, the webhook secret in config and <code>docker-compose</code>.</li>
+<li><strong>Phase 1, Subscription page:</strong> real prices and a Subscribe button that passes the user’s email.</li>
+<li><strong>Phase 2, Webhook backend:</strong> the webhook controller with signature verification, the subscription service, shared plan definitions, the OpenAPI schema, <code>rawBodyControllers</code> in <code>app.ts</code> (Insight 3), and <code>server.ts</code> restructured to initialize services after the DB connects.</li>
+<li><strong>Phase 3, Manage Subscription:</strong> the portal-session endpoint, plus the desktop component and the mobile screen.</li>
+</ul>
+<p>Each phase only depends on earlier ones, and Phase 0 changes nothing the user can see. It’s the plumbing everything else leans on, which is why it goes first.</p>
+</section>
+<section id="lesson-3-write-the-manual-steps-down" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-write-the-manual-steps-down">Lesson 3: Write the manual steps down</h2>
+<p>The last block of the plan (1c) is “Manual Steps Required”:</p>
+<ol type="1">
+<li>Add <code>STRIPE_WEBHOOK_SECRET=whsec_...</code> to <code>.env</code>, copied from the <code>stripe listen</code> output.</li>
+<li>Replace the <code>********</code> placeholders in <code>subscription-plans.ts</code> and <code>SubscriptionOptions.tsx</code> with real Stripe price IDs and payment links.</li>
+<li>Configure the Stripe dashboard: products, prices, customer portal.</li>
+</ol>
+<p>A chunk of this feature lives outside the repo, as state inside Stripe, and no code review will ever see it. Listing those steps is the difference between a plan that works on your machine and one that works on a teammate’s.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Update: that state turned out to be per-environment">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Update: that state turned out to be per-environment
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The plan doc in the repo records what happened next. The Payment Links and price IDs are not single values: <code>getPlans(env)</code> in <code>packages/shared/types/subscription-plans.ts</code> picks them per environment (local, AWS dev, production), because each Payment Link has its own redirect URL (Insight 2). And a stale build of the shared package once kept serving deactivated Payment Link URLs to the mobile app, which showed up as Stripe’s “this link is no longer active” page.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="lesson-4-a-test-plan-is-a-spec-and-the-rows-are-the-point" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-4-a-test-plan-is-a-spec-and-the-rows-are-the-point">Lesson 4: A test plan is a spec, and the ❌ rows are the point</h2>
+<p>The test plan (1d) lists 10 Cucumber scenarios across the two new controllers:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Endpoint</th>
+<th>Scenario</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>POST /stripe-webhook</code></td>
+<td><code>checkout.session.completed</code></td>
+<td>user becomes active and gets a <code>stripe_customer_id</code></td>
+</tr>
+<tr class="even">
+<td><code>POST /stripe-webhook</code></td>
+<td><code>customer.subscription.updated</code></td>
+<td>plan type changes</td>
+</tr>
+<tr class="odd">
+<td><code>POST /stripe-webhook</code></td>
+<td><code>customer.subscription.deleted</code></td>
+<td>inactive and free</td>
+</tr>
+<tr class="even">
+<td><code>POST /stripe-webhook</code></td>
+<td><code>invoice.payment_failed</code></td>
+<td>logged, 200</td>
+</tr>
+<tr class="odd">
+<td><code>POST /stripe-webhook</code></td>
+<td>missing <code>stripe-signature</code></td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td><code>POST /stripe-webhook</code></td>
+<td>unknown event</td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td><code>POST /subscriptions/portal-session</code></td>
+<td>success</td>
+<td>returns <code>{ url }</code></td>
+</tr>
+<tr class="even">
+<td><code>POST /subscriptions/portal-session</code></td>
+<td>missing <code>returnUrl</code></td>
+<td>400</td>
+</tr>
+<tr class="odd">
+<td><code>POST /subscriptions/portal-session</code></td>
+<td>no <code>stripe_customer_id</code></td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td><code>POST /subscriptions/portal-session</code></td>
+<td>unauthenticated</td>
+<td>401</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>The ❌ marks aren’t failing tests.</strong> They mark scenarios that <em>expect</em> an error status, and I almost misread them. Four of the ten are error paths, which is what makes it a plan and not a demo.</li>
+<li><strong>Unknown event returns 200</strong> because that’s Stripe’s convention: acknowledge everything, act only on the event types you care about. (The feature file has a comment saying exactly this.)</li>
+<li><strong>It reuses an existing seam instead of inventing one.</strong> The Stripe fakes are switched by an env var in <code>server.ts</code>, the “same pattern as <code>MOCK_GOOGLE_SERVICE</code>”.</li>
+<li><strong>Reviewing the plan is the cheap checkpoint.</strong> The menu at the bottom of the screenshot (accept and build, accept with default permissions, exit and prompt myself, suggest changes) is that checkpoint. Correcting ten bullets costs far less than correcting a diff of dozens of files.</li>
+</ul>
+<p>Today the feature file has 12 scenarios: these 10, a check that the mobile deep-link bridge page is served, and an end-to-end checkout-then-portal flow.</p>
+</section>
+</section>
+<section id="insight-2-payment-link-vs-customer-portal" class="level1">
+<h1>Insight 2: Payment Link vs Customer Portal</h1>
+<p>Screenshots 2a to 2c came from a puzzle in the desktop app: Stripe’s Manage Subscription page has a “Back to spot-trade” button, and the Subscribe page doesn’t.</p>
+<section id="lesson-1-theyre-two-different-stripe-products" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-theyre-two-different-stripe-products">Lesson 1: They’re two different Stripe products</h2>
+<p>In 2a I asked what URL the Subscribe button’s <code>href={plan.link + '?prefilled_email=' + encodeURIComponent(email ?? '')}</code> actually goes to. There are two separate Stripe URLs in the app:</p>
+<ul>
+<li><code>plan.link</code> (in <code>SubscriptionOptions</code>) is a <strong>Payment Link</strong> (<code>https://buy.stripe.com/...</code>), for <em>new</em> subscribers to check out the first time. <code>?prefilled_email=</code> pre-fills the email field.</li>
+<li><code>url</code> (in <code>ManageSubscription</code>) is a <strong>Customer Portal</strong> URL (<code>https://billing.stripe.com/session/...</code>), for <em>existing</em> subscribers to cancel, change plan, or update their payment method.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Payment Link</th>
+<th>Customer Portal session</th>
+<th>Checkout Session</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>For</td>
+<td>new subscribers</td>
+<td>existing subscribers</td>
+<td>new subscribers, or one-off payments</td>
+</tr>
+<tr class="even">
+<td>Created</td>
+<td>by hand in the Dashboard, a static URL</td>
+<td>by the API: <code>stripe.billingPortal.sessions.create()</code></td>
+<td>by the API: <code>stripe.checkout.sessions.create()</code></td>
+</tr>
+<tr class="odd">
+<td>Where the user goes afterwards</td>
+<td>set per link in the Dashboard (“After payment”)</td>
+<td><code>returnUrl</code>, passed per session</td>
+<td><code>success_url</code> and <code>cancel_url</code>, passed per session</td>
+</tr>
+<tr class="even">
+<td>Prefilling</td>
+<td><code>?prefilled_email=</code> in the URL</td>
+<td>n/a, the session is created for a known customer</td>
+<td><code>customer_email</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lesson-2-static-link-or-per-request-session-that-decides-where-the-config-lives" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-static-link-or-per-request-session-that-decides-where-the-config-lives">Lesson 2: Static link or per-request session? That decides where the config lives</h2>
+<p>In 2b I asked why the Portal has a “Back to spot-trade” button and the Subscribe page doesn’t. The portal session is created through our API, and we pass it a <code>returnUrl</code>, so Stripe knows where “back” is. A Payment Link is a static URL with no <code>returnUrl</code> parameter. Where the customer lands after paying is configured in the Dashboard, per link. If you want per-request control, switch to API-created Checkout Sessions, which take <code>success_url</code> and <code>cancel_url</code>.</p>
+<p>The general lesson: with a static Dashboard object, the configuration lives in Stripe. With an API-created session, it lives in your code, where it’s versioned and reviewed. Payment Links are the quickest way to start charging, but you trade that control away.</p>
+</section>
+<section id="lesson-3-dashboard-config-is-environment-state" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-dashboard-config-is-environment-state">Lesson 3: Dashboard config is environment state</h2>
+<p>2c is the Dashboard side of the same story: the Payment Link editor’s <strong>After payment</strong> tab, set to “Don’t show confirmation page” and redirecting to <code>http://localhost:5174/manage-subscription</code>. That URL lives in Stripe, not in git, so every environment needs its own link: a <code>localhost</code> one for local dev, another for the deployed dev environment, another for production.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Update: that's exactly how it played out">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Update: that’s exactly how it played out
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The plan doc says <code>getPlans(env)</code> selects Payment Links per environment, “and therefore in each link’s configured ‘After payment’ redirect URL”. On mobile the redirect has to land back inside the app, so the link points at a small backend bridge, <code>GET /subscriptions/success</code>, which serves a page that bounces into the app through the <code>spottrade://subscription-success</code> deep link. One-off invoice payments take the other route from Lesson 2: they use API-created Checkout Sessions (<code>mode: "payment"</code>).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="lesson-4-payment-links-mint-a-new-customer-every-time" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-4-payment-links-mint-a-new-customer-every-time">Lesson 4: Payment Links mint a new Customer every time</h2>
+<p>One more consequence of the static-link approach: every completed Payment Link checkout creates a fresh Stripe Customer, even for someone who has subscribed before. A user who cancels and re-subscribes three months later (an edge case from the original plan) would strand their old customer, and any still-active subscription on it would keep billing. So <code>handleCheckoutCompleted</code> links the new customer first, then deletes the superseded one (deleting a customer cancels its subscriptions). If the delete fails it’s logged but non-fatal.</p>
+</section>
+</section>
+<section id="insight-3-raw-body-controllers" class="level1">
+<h1>Insight 3: Raw-body controllers</h1>
+<p>Screenshot 3a is a few lines of <code>app.ts</code>, and the comment in it is the lesson: some routes need the raw JSON, so they can’t sit behind middleware that parses JSON into objects.</p>
+<section id="lesson-1-signature-checks-need-the-exact-bytes" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-signature-checks-need-the-exact-bytes">Lesson 1: Signature checks need the exact bytes</h2>
+<p>Stripe signs the raw request body. <code>stripe.webhooks.constructEvent(body, signature, secret)</code> recomputes the signature over whatever you hand it. Parse the JSON and re-serialize it and you get equivalent JSON but not identical bytes (whitespace, key order), so verification fails. The SDK doesn’t even attempt it if you pass a parsed object: the installed version (18.5.0) throws “Payload was provided as a parsed JavaScript object instead”.</p>
+</section>
+<section id="lesson-2-mount-order-is-the-whole-game" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-mount-order-is-the-whole-game">Lesson 2: Mount order is the whole game</h2>
+<p>Express body parsers consume the request stream, so whatever is mounted after <code>bodyParser.json()</code> sees <code>req.body</code> as an object. SpotPay’s <code>App</code> takes two separate lists to make that ordering explicit:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// app.ts: raw-body controllers are mounted first, then the global middlewares</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (appInit<span class="op">.</span><span class="at">rawBodyControllers</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">this</span><span class="op">.</span><span class="fu">routes</span>(appInit<span class="op">.</span><span class="at">rawBodyControllers</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">middlewares</span>(appInit<span class="op">.</span><span class="at">middlewares</span>)<span class="op">;</span> <span class="co">// bodyParser.json(), urlencoded, cookieParser, openApiValidator</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="fu">routes</span>(appInit<span class="op">.</span><span class="at">controllers</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// server.ts (simplified): the webhook controller goes in the raw-body list</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> app <span class="op">=</span> <span class="kw">new</span> <span class="fu">App</span>({</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  port<span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  rawBodyControllers<span class="op">:</span> [<span class="kw">new</span> <span class="fu">StripeWebhookController</span>(<span class="co">/* ... */</span>)]<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  controllers<span class="op">:</span> [<span class="co">/* everything else */</span>]<span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  middlewares<span class="op">:</span> [bodyParser<span class="op">.</span><span class="fu">json</span>()<span class="op">,</span> <span class="co">/* ... */</span>]<span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// stripe-webhook.controller.ts: the route itself asks for a Buffer</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">this</span><span class="op">.</span><span class="at">router</span><span class="op">.</span><span class="fu">post</span>(<span class="st">""</span><span class="op">,</span> express<span class="op">.</span><span class="fu">raw</span>({ type<span class="op">:</span> <span class="st">"application/json"</span> })<span class="op">,</span> <span class="kw">this</span><span class="op">.</span><span class="at">handleWebhook</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Turning the constraint into a named constructor parameter means the next raw-body route (another provider’s webhooks, say) has an obvious place to go, and nobody has to remember the rule.</p>
+</section>
+<section id="lesson-3-mounting-early-means-skipping-what-comes-later" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-mounting-early-means-skipping-what-comes-later">Lesson 3: Mounting early means skipping what comes later</h2>
+<p>A raw-body controller never passes through the global middlewares: no JSON parsing, no cookie parsing, and no <code>express-openapi-validator</code>. That’s fine for the webhook, because the signature is the authentication, but it means the handler has to validate for itself. It does: it checks the header, verifies the signature, and falls through to a <code>default:</code> case for events it doesn’t know.</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled" title="Nothing in the test suite guards the mount order">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nothing in the test suite guards the mount order
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>If someone moved the webhook controller below <code>bodyParser.json()</code>, the integration tests would stay green while real webhooks started failing with a 400. The reason is in Insight 5, Lesson 3.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="insight-4-the-webhook-flow" class="level1">
+<h1>Insight 4: The webhook flow</h1>
+<p>Screenshot 4a shows two things in one terminal: the assistant “simplifying” <code>handleCheckoutCompleted</code> so it only sets <code>stripe_customer_id</code> and <code>subscription_status: "active"</code> (leaving the plan type to <code>handleSubscriptionUpdated</code>, and deleting <code>resolveSubscriptionType</code> and its extra Stripe API call), and then my follow-up, “When is <code>handleSubscriptionUpdated</code> called?”</p>
+<section id="lesson-1-each-event-has-one-job" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-each-event-has-one-job">Lesson 1: Each event has one job</h2>
+<p>The assistant’s answer separates two jobs, and the separation is useful on its own:</p>
+<ul>
+<li><code>checkout.session.completed</code> says <strong>who paid</strong>: the Stripe customer ID and email. It’s where we link Stripe’s customer to our user.</li>
+<li><code>customer.subscription.*</code> says <strong>what state the subscription is in</strong>: plan, status, renewal.</li>
+</ul>
+<p>For a new subscriber the screenshot concludes that both events fire: the first links the customer, the second sets the plan type and status.</p>
+</section>
+<section id="lesson-2-an-ais-account-of-an-api-is-a-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-an-ais-account-of-an-api-is-a-hypothesis">Lesson 2: An AI’s account of an API is a hypothesis</h2>
+<p>Item 1 in the assistant’s list says <code>customer.subscription.updated</code> fires when “a new subscription is created (right after <code>checkout.session.completed</code>)”. Stripe has a separate event for that, <code>customer.subscription.created</code>. In March the controller had cases for <code>.updated</code> and <code>.deleted</code> and none for <code>.created</code> (I checked the controller as of PR #53). The result, in the words of a code comment added later: <code>created</code> “used to be unhandled, which is why <code>subscription_type</code> stayed ‘free’ after a first-time subscribe”. PR #63 (2026-10-01) added it.</p>
+<p>The lesson isn’t “don’t trust the assistant”. It’s that any explanation of someone else’s API, from an AI or a blog post, is a hypothesis until you’ve seen the events arrive. <code>stripe listen</code> prints each event as it forwards it, so the real sequence is a few seconds away, and it’s worth checking before deleting code on the strength of the explanation.</p>
+</section>
+<section id="lesson-3-the-simplification-was-the-bug.-give-the-state-one-owner" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-the-simplification-was-the-bug.-give-the-state-one-owner">Lesson 3: The simplification was the bug. Give the state one owner</h2>
+<p>In 4a, removing the “extra Stripe API call” made <code>handleCheckoutCompleted</code> depend on a second event arriving to fill in the plan. Today there’s a single writer, <code>applyStripeStateToUser</code>, which re-reads the customer’s subscriptions from Stripe and writes <code>subscription_status</code>, <code>subscription_type</code> and <code>subscription_expires_at</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Event</th>
+<th>What the payload is used for</th>
+<th>Handler today</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>checkout.session.completed</code> (subscription mode, platform account)</td>
+<td>who paid: customer ID and email</td>
+<td>link <code>stripe_customer_id</code>, then <code>applyStripeStateToUser</code></td>
+</tr>
+<tr class="even">
+<td><code>customer.subscription.created</code>, <code>.updated</code>, <code>.deleted</code></td>
+<td>which customer’s subscription changed</td>
+<td>one handler, <code>handleSubscriptionLifecycleEvent</code>, then <code>applyStripeStateToUser</code></td>
+</tr>
+<tr class="odd">
+<td><code>invoice.payment_failed</code></td>
+<td>a payment failed</td>
+<td>logged (retry and notification are still TODO)</td>
+</tr>
+</tbody>
+</table>
+<p>The payload only identifies <em>which</em> customer changed. The new state always comes from a fresh read. The reason, quoted from Stripe’s docs in the code comment: “Make sure that your event destination isn’t dependent on receiving events in a specific order.” An older <code>updated</code> can arrive after a newer one, and acting on its payload would write stale state over fresh state. Re-reading converges on the same answer whatever the order and however many redeliveries. A <code>POST /subscriptions/sync</code> endpoint exposes the same reconcile as a repair path for a webhook that never arrives.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Update: delivery is at-least-once, too">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Update: delivery is at-least-once, too
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Order isn’t the only thing Stripe doesn’t promise. The webhook controller now claims each event ID by inserting it into a <code>processed_webhook_events</code> table before doing any work. The primary-key insert <em>is</em> the lock, so two concurrent deliveries can’t both proceed, and a duplicate is acknowledged with a 200 and skipped. If the handler then fails, the claim is released so Stripe’s retry can reprocess the event.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="insight-5-testing-stripe" class="level1">
+<h1>Insight 5: Testing Stripe</h1>
+<p>Screenshots 5a and 5b are two halves of a decision about how to test the Stripe boundary in the integration suite.</p>
+<section id="lesson-1-fake-the-network-not-your-own-code" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-fake-the-network-not-your-own-code">Lesson 1: Fake the network, not your own code</h2>
+<p>In 5a I asked why we weren’t using <a href="https://github.com/stripe/stripe-mock">stripe-mock</a>, Stripe’s official mock HTTP server for its REST API. The assistant’s answer: the suite mocked two things, <code>MockSubscriptionService</code> (which fakes <code>createPortalSession()</code>) and webhook signature verification. Since <code>handleCheckoutCompleted</code> and <code>handleSubscriptionUpdated</code> only process webhook data and update the database, stripe-mock would replace the mock for exactly one method, and “adding a Docker container just to avoid mocking a single method probably isn’t worth the added complexity”.</p>
+<p>That’s a fair cost-benefit for the code as it was that day. The argument on the other side is that an in-memory <code>MockSubscriptionService</code> replaces the very class under test, so the test ends up proving the mock works. Pointing the real Stripe SDK at a fake Stripe over HTTP keeps our own code (the parameters we send, serialization, the SDK version) in the loop. 5b shows that second decision being carried out:</p>
+<ul>
+<li>a <code>stripe-mock</code> container in <code>integration-test.docker-compose.yaml</code> (ports 12111 and 12112)</li>
+<li><code>SubscriptionService</code> reads <code>STRIPE_API_BASE</code> from config, and when it’s set the SDK points at stripe-mock instead of <code>api.stripe.com</code></li>
+<li><code>MockSubscriptionService</code> is deleted, because <code>createPortalSession()</code> now calls the real SDK against stripe-mock</li>
+<li>the env var <code>MOCK_STRIPE_SERVICE</code> becomes <code>MOCK_STRIPE_WEBHOOK</code></li>
+</ul>
+</section>
+<section id="lesson-2-two-seams-two-kinds-of-fake" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-two-seams-two-kinds-of-fake">Lesson 2: Two seams, two kinds of fake</h2>
+<p>There are two directions across the Stripe boundary, and they need different fakes:</p>
+<ul>
+<li><strong>Outbound</strong> (we call Stripe): it’s plain HTTP, so a fake HTTP server can stand in. That’s stripe-mock.</li>
+<li><strong>Inbound</strong> (Stripe calls us): webhooks are signed, and a test can’t produce a valid signature, so the verification step is swapped in memory. 5b puts it as “the one thing stripe-mock can’t help with”.</li>
+</ul>
+<p>The rename in 5b’s last bullet is a small lesson of its own: a toggle should be named for what it toggles. After the change <code>MOCK_STRIPE_SERVICE</code> would have implied the whole Stripe boundary was mocked, when it only controlled signature verification.</p>
+</section>
+<section id="lesson-3-a-fake-must-be-at-least-as-strict-as-the-real-thing" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-a-fake-must-be-at-least-as-strict-as-the-real-thing">Lesson 3: A fake must be at least as strict as the real thing</h2>
+<p>The in-memory webhook mock, <code>MockStripeWebhookService</code>, accepts a string, a Buffer, or an already-parsed object (it falls back to <code>JSON.stringify</code>). The real service rejects a parsed object (Insight 3, Lesson 1). That leniency is why the suite can’t notice a broken mount order. A cheap fix, not done yet: make the mock throw on anything that isn’t a Buffer, so a mount-order regression fails loudly in CI.</p>
+</section>
+<section id="lesson-4-a-forged-event-proves-your-handler-not-your-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-4-a-forged-event-proves-your-handler-not-your-assumptions">Lesson 4: A forged event proves your handler, not your assumptions</h2>
+<p>Integration tests post events we built by hand. They can show that the handler copes with the events we thought of, but not which events Stripe really sends. That’s the Insight 4 bug in a nutshell: <code>subscription.feature</code> has no <code>customer.subscription.created</code> scenario and no duplicate-delivery scenario, and a test written under the belief that <code>.updated</code> is the first-subscribe event would have passed. Keeping <code>stripe listen</code>, or <code>stripe trigger</code> against test mode, in the loop is what closes that gap.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Update: stripe-mock never landed">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Update: stripe-mock never landed
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>As of 2026-10-31 none of the 5b change set is in the repo. <code>git log --all -S"stripe-mock"</code> and <code>-S"STRIPE_API_BASE"</code> both come back empty, so it never reached a commit on any branch. <code>integration-test.docker-compose.yaml</code> has no stripe-mock service, <code>MockSubscriptionService</code> still exists, and <code>MOCK_STRIPE_SERVICE</code> still switches all the Stripe fakes in <code>server.ts</code> (the new name survives in one docstring).</p>
+<p>The assistant’s cost-benefit also aged. It was right that only <code>createPortalSession()</code> called Stripe in March, but today every webhook handler re-reads the customer’s subscriptions from Stripe (Insight 4). So <code>MockSubscriptionService</code> grew a <code>listCustomerSubscriptions</code> override that remembers what the mock webhooks said about each customer, effectively playing Stripe. stripe-mock is stateless (its README says so: a POST is validated but not stored), so it couldn’t answer “what is this customer’s subscription now?” differently per scenario. For those tests the stateful in-memory fake has a job stripe-mock can’t do.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="insight-6-typeorm-migrations-vs-synchronize" class="level1">
+<h1>Insight 6: TypeORM migrations vs <code>synchronize</code></h1>
+<p>Screenshot 6a is an explanation of two things that both change the database schema but serve different purposes.</p>
+<section id="lesson-1-two-tools-two-purposes" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-two-tools-two-purposes">Lesson 1: Two tools, two purposes</h2>
+<ul>
+<li><strong>Migration files</strong> (at the time, the SQL files <code>00001_users_schema.up.sql</code> and its siblings) are explicit, versioned schema history. They let you say “at version X we added Y”, make environments reproducible, put DB changes in PR review, and safely update already-running databases with incremental <code>ALTER TABLE</code> steps. They’re the durable record of schema evolution.</li>
+<li><strong><code>synchronize: true</code></strong> (<code>typeorm-config.ts</code>) is an automatic dev convenience. On startup TypeORM compares the entities (for example <code>users.ts</code>) to the live database and mutates the schema to match. That’s fast for local development, but it isn’t a migration history, it isn’t auditable, and it can cause drift across environments.</li>
+</ul>
+</section>
+<section id="lesson-2-a-migration-only-counts-if-something-runs-it" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-a-migration-only-counts-if-something-runs-it">Lesson 2: A migration only counts if something runs it</h2>
+<p>Here’s what happened to the repo after that screenshot:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2026-03-17</td>
+<td>Screenshot 6a: migrations are history, <code>synchronize</code> is a dev convenience</td>
+</tr>
+<tr class="even">
+<td>2026-03-27</td>
+<td>PR #53 adds <code>stripe_customer_id</code>: to the entity, and by editing <code>00001_users_schema.up.sql</code> in place. The <code>00005_add_stripe_customer_id.up.sql</code> from the plan (1b) was never committed</td>
+</tr>
+<tr class="odd">
+<td>2026-10-01</td>
+<td>PR #63 deletes <code>apps/backend/migrations/</code></td>
+</tr>
+<tr class="even">
+<td>2026-10-31</td>
+<td><code>synchronize: true</code>, unconditional, with a TODO above it</td>
+</tr>
+</tbody>
+</table>
+<p>The code comment explains why PR #63 deleted them. The SQL files were only mounted at <code>docker-entrypoint-initdb.d</code>, so they ran when a local Postgres volume was first created and nowhere else. They were never applied to RDS, and they had drifted from the entities. They were deleted once <code>synchronize</code> was confirmed to reproduce the identical schema from scratch.</p>
+<p>So the explanation in 6a held up, but the choice that mattered wasn’t “migrations vs sync”. It was “migrations that run vs sync that runs”. Migrations that nothing executes are documentation, and documentation rots. Even in March the SQL was being edited in place rather than extended with new numbered files, which is a sign it wasn’t functioning as incremental history.</p>
+</section>
+<section id="lesson-3-fence-synchronize-off-before-production" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-fence-synchronize-off-before-production">Lesson 3: Fence <code>synchronize</code> off before production</h2>
+<p><code>synchronize: true</code> now runs in AWS dev and production as well, against RDS. The comment in <code>typeorm-config.ts</code> spells out the risk: on every deploy TypeORM ALTERs and DROPs to make the database match the entities, and “renaming a property can silently drop the old column and its data, with no review and no rollback”. The TODO sketches the fix:</p>
+<ol type="1">
+<li>Add <code>migrations</code> and <code>migrationsRun</code> to the data source.</li>
+<li>Turn <code>synchronize</code> off outside local.</li>
+<li>Generate a baseline migration that returns early when the schema already exists, so environments previously built by <code>synchronize</code> record it instead of trying to recreate their tables.</li>
+</ol>
+</section>
+</section>
+<section id="takeaways" class="level1">
+<h1>Takeaways</h1>
+<ol type="1">
+<li>Write down the blast radius, and the join key between your system and the third party’s, before writing code.</li>
+<li>Build in phases from the data model outward, and list the manual steps that live outside the repo.</li>
+<li>Know whether you’re holding a static Dashboard object or an API-created session. It decides where the config lives and what differs per environment.</li>
+<li>A route that needs raw bytes is mounted before the body parsers, and the constraint gets a name.</li>
+<li>Treat a webhook as a nudge, not as the truth: re-read the state from the source, and de-duplicate by event ID.</li>
+<li>An AI’s explanation of someone else’s API is a hypothesis. Check it against the event stream or the docs.</li>
+<li>Fake the network, not your own code. Keep an in-memory fake only for what can’t be faked, and make sure it isn’t more lenient than the real thing.</li>
+<li>A migration only counts if the pipeline runs it, and <code>synchronize</code> is a dev convenience that needs a fence before production.</li>
+</ol>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="My original screenshots and prompt (click to expand)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+My original screenshots and prompt (click to expand)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This post was written from the prompt below, run against my folder of insight screenshots and the <code>spot-trade</code> repo.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Go through @../../code-insights/Insights/ and add all of these insights as a new post in @../v-poghosyan.github.io/unpublished_posts/ about SpotPay (the app we're building) (reference @../spot-trade/). Make it an ipynb post like the rest of the posts in my digial garden. Derive the key lessons from each screenshot, add the original screenshots and this very prompt to a collapsable Quarto block. ULTRATHINK.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The screenshots follow, grouped by the folder they lived in under <code>code-insights/Insights/</code>, with their original file names. Click an image to zoom in.</p>
+<p><strong>Folder <code>Adding-New-Feature-that- Impacts-Users</code></strong> (Insight 1)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/1a-feature-todo-list.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="1a. Adding-Service-With-User-Impact.png"><img src="./assets/1a-feature-todo-list.png" class="img-fluid figure-img" alt="1a. Adding-Service-With-User-Impact.png"></a></p>
+<figcaption>1a. Adding-Service-With-User-Impact.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/1b-plan-phases-0-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="1b. Plan-1.png"><img src="./assets/1b-plan-phases-0-2.png" class="img-fluid figure-img" alt="1b. Plan-1.png"></a></p>
+<figcaption>1b. Plan-1.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/1c-plan-phase-3-manual-steps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="1c. Plan-2.png"><img src="./assets/1c-plan-phase-3-manual-steps.png" class="img-fluid figure-img" alt="1c. Plan-2.png"></a></p>
+<figcaption>1c. Plan-2.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/1d-test-plan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="1d. Tests.png"><img src="./assets/1d-test-plan.png" class="img-fluid figure-img" alt="1d. Tests.png"></a></p>
+<figcaption>1d. Tests.png</figcaption>
+</figure>
+</div>
+<p>This folder also held <code>Screenshot 2026-03-21 at 4.19.35 PM.png</code> and <code>Screenshot 2026-03-21 at 4.24.11 PM.png</code>. They’re byte-identical copies of 5a and 5b below, so each is shown once.</p>
+<p><strong>Folder <code>Stripe-Customer-Portal-vs-Payment-Link</code></strong> (Insight 2)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/2a-two-stripe-urls.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="2a. Screenshot 2026-03-19 at 9.49.08 PM.png"><img src="./assets/2a-two-stripe-urls.png" class="img-fluid figure-img" alt="2a. Screenshot 2026-03-19 at 9.49.08 PM.png"></a></p>
+<figcaption>2a. Screenshot 2026-03-19 at 9.49.08 PM.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/2b-back-button-portal-vs-link.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="2b. Screenshot 2026-03-19 at 10.08.27 PM.png"><img src="./assets/2b-back-button-portal-vs-link.png" class="img-fluid figure-img" alt="2b. Screenshot 2026-03-19 at 10.08.27 PM.png"></a></p>
+<figcaption>2b. Screenshot 2026-03-19 at 10.08.27 PM.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/2c-payment-link-after-payment.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="2c. Screenshot 2026-03-19 at 10.10.24 PM.png"><img src="./assets/2c-payment-link-after-payment.png" class="img-fluid figure-img" alt="2c. Screenshot 2026-03-19 at 10.10.24 PM.png"></a></p>
+<figcaption>2c. Screenshot 2026-03-19 at 10.10.24 PM.png</figcaption>
+</figure>
+</div>
+<p><strong>Folder <code>Raw-Body-Controller</code></strong> (Insight 3)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/3a-raw-body-controllers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="3a. Some-routes-need-to-get-raw-json-These-can’t-have-middlewares-that-parse-json-into-objects.png"><img src="./assets/3a-raw-body-controllers.png" class="img-fluid figure-img" alt="3a. Some-routes-need-to-get-raw-json-These-can’t-have-middlewares-that-parse-json-into-objects.png"></a></p>
+<figcaption>3a. Some-routes-need-to-get-raw-json-These-can’t-have-middlewares-that-parse-json-into-objects.png</figcaption>
+</figure>
+</div>
+<p><strong>Folder <code>Stripe Webhook Flow</code></strong> (Insight 4)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/4a-subscription-updated-event.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="4a. Webhook-Controller-calls-handleSubscriptionUpdated-even-for-first-time-subscription.png"><img src="./assets/4a-subscription-updated-event.png" class="img-fluid figure-img" alt="4a. Webhook-Controller-calls-handleSubscriptionUpdated-even-for-first-time-subscription.png"></a></p>
+<figcaption>4a. Webhook-Controller-calls-handleSubscriptionUpdated-even-for-first-time-subscription.png</figcaption>
+</figure>
+</div>
+<p><strong>Folder <code>Stripe Testing Flow</code></strong> (Insight 5)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/5a-stripe-mock-question.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="5a. Stripe-API-mocked-as-container-stripe-mock.png"><img src="./assets/5a-stripe-mock-question.png" class="img-fluid figure-img" alt="5a. Stripe-API-mocked-as-container-stripe-mock.png"></a></p>
+<figcaption>5a. Stripe-API-mocked-as-container-stripe-mock.png</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/5b-stripe-mock-change-summary.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="5b. Webhook-verification-still-requires-in-memory-mock.png"><img src="./assets/5b-stripe-mock-change-summary.png" class="img-fluid figure-img" alt="5b. Webhook-verification-still-requires-in-memory-mock.png"></a></p>
+<figcaption>5b. Webhook-verification-still-requires-in-memory-mock.png</figcaption>
+</figure>
+</div>
+<p><strong>Folder <code>TypeORM-Migration-vs-Sync</code></strong> (Insight 6)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/6a-migration-vs-synchronize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="6a. Screenshot 2026-03-17 at 8.23.17 PM.png"><img src="./assets/6a-migration-vs-synchronize.png" class="img-fluid figure-img" alt="6a. Screenshot 2026-03-17 at 8.23.17 PM.png"></a></p>
+<figcaption>6a. Screenshot 2026-03-17 at 8.23.17 PM.png</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../../javascript/light-dark.js"></script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

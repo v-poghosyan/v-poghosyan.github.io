@@ -203,7 +203,7 @@ window.Quarto = {
 
 <section id="start-with-a-floor-plan" class="level1">
 <h1>Start with a floor plan</h1>
-<p>You can make one using some free browser-based tools, but also you can use Blender with <a href="https://docs.bonsaibim.org/">BonsaiBIM</a> extension that allows you to treat Blender as a BIM tool (like AutoCAD) and manage IFC files (things like walls, doors, windows, and much more that are standard in the architectural industry). In theory, an architectural model is just a BIM, and a BIM is just a schema file with the location of all the IFC components. You can either use a BIM builder to create your floor plan, or work with the schema itself by editing the IFC file directly.</p>
+<p>You can make one using some free browser-based tools, but also you can use Blender with <a href="https://docs.bonsaibim.org/">BonsaiBIM</a> extension that allows you to treat Blender as a BIM tool (BIM stands for “Building Information Modeling,” and usually AutoCAD is used for this) and manage IFC files (things like walls, doors, windows, and much more that are standard in the architectural industry). In theory, an architectural model is just a BIM, and a BIM is just a schema file with the location of all the IFC components. You can either use a BIM builder to create your floor plan, or work with the schema itself by editing the IFC file directly.</p>
 <section id="install-bonsaibim-extension-in-blender" class="level2">
 <h2 class="anchored" data-anchor-id="install-bonsaibim-extension-in-blender">Install BonsaiBIM extension in Blender</h2>
 <p>In Blender Go to <strong>Edit</strong> &gt; <strong>Preferences</strong> &gt; <strong>Get Extensions</strong> and <strong>Allow Online Access</strong>, then search for “Bonsai” and install the extension. A new <strong>BIM</strong> tab should now show up at the top, and you can choose <strong>File</strong> &gt; <strong>New IFC Project</strong> to start a new project. You can then use the tools in the BIM tab to create walls, doors, windows, and other architectural elements. You can also import an existing IFC file if you have one, or export your project as an IFC file to use in other software.</p>
@@ -473,7 +473,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

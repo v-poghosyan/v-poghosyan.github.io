@@ -260,8 +260,7 @@ window.Quarto = {
 </div>
 <p>From the below untangled definition of factorial (for <span class="math inline">\(n=4\)</span>) we can surmise what goes on in the stack. The stack first fills up with stack frames for <code>factorial(n)</code> down to <code>factorial(0)</code>, which is the last frame on the stack before it begins to pop and actual evaluation happens.</p>
 <p><span class="math display">\[
-\begin{equation}
-    \begin{split}
+\begin{aligned}
         factorial(4) &amp; = 4 * factorial(3) \\
         &amp; = 4 * (3 * factorial(2)) \\
         &amp; = 4 * (3 * (2 * factorial(1))) \\
@@ -271,8 +270,7 @@ window.Quarto = {
         &amp; = 4 * (3 * 2) \\
         &amp; = 4 * 6 \\
         &amp; = 24
-    \end{split}
-\end{equation}
+    \end{aligned}
 \]</span></p>
 <p>As we can see the function is called for <span class="math inline">\(n = 4\)</span> down to the base case of <span class="math inline">\(n = 0\)</span> (each call stacking up in memory) before evaluation even begins. Evaluation then happens step-by-step inside each stack frame until all of them have popped.</p>
 <p>It’s not immediately clear how to make the calls independent of each other given that there is a multiplicative factor in front of the recursive call (which is what makes this particular function <em>fail</em> to be tail-recursive). It helps to think in terms of <em>carried state</em>. In this case the idea is simple, if we can carry the state of the current stack frame into the next one as input, then we can pop each frame right after it calls the next frame. Why? Because at that point, having carried its state into the next frame, the current frame exhausts its usefulness.</p>
@@ -297,16 +295,14 @@ window.Quarto = {
 </div>
 <p>Let’s unpack this:</p>
 <p><span class="math display">\[
-\begin{equation}
-    \begin{split}
+\begin{aligned}
         factorial(4) &amp; = go(4,1) \\
         &amp; = go(3,4) \\
         &amp; = go(2,12) \\
         &amp; = go(1,24) \\
         &amp; = go(0,24) \\
         &amp; = 24
-    \end{split}
-\end{equation}
+    \end{aligned}
 \]</span></p>
 <p>Right away we can see that, with this approach, we can pop the previous stack frame at any time without losing any information it holds because all state is carried over from the previous frame into the current one by the accumulator and, finally, returned at the end. A visual cue of this fact is that in the expression above evaluation happens immediately, rather than step-by-step (with each step corresponding to the popping of a stack frame), as is the case in the naive implementation.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Note">
@@ -568,7 +564,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

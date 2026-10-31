@@ -373,12 +373,14 @@ window.Quarto = {
 </section>
 <section id="representing-matrices" class="level2">
 <h2 class="anchored" data-anchor-id="representing-matrices">Representing Matrices</h2>
-Let’s represent a <span class="math inline">\(2 \times 3\)</span> matrix $ A =
-<span class="math display">\[\begin{bmatrix}
+<p>Let’s represent a <span class="math inline">\(2 \times 3\)</span> matrix</p>
+<p><span class="math display">\[
+A = \begin{bmatrix}
 1 &amp; 2 &amp; 3\\
 4 &amp; 5 &amp; 6
-\end{bmatrix}\]</span>
-<p>$ using NumPy:</p>
+\end{bmatrix}
+\]</span></p>
+<p>using NumPy:</p>
 <div id="d801bb99" class="cell" data-scrolled="false" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
@@ -482,11 +484,7 @@ Let’s represent a <span class="math inline">\(2 \times 3\)</span> matrix $ A =
 <pre><code>array([1, 4])</code></pre>
 </div>
 </div>
-Finally, let’s print the submatrix $
-<span class="math display">\[\begin{bmatrix}
-2 &amp; 3
-\end{bmatrix}\]</span>
-<p>$:</p>
+<p>Finally, let’s print the submatrix <span class="math inline">\(\begin{bmatrix} 2 &amp; 3 \end{bmatrix}\)</span>:</p>
 <div id="6b1e20d2" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
@@ -925,7 +923,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

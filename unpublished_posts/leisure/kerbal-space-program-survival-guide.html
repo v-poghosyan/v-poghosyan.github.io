@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahram Poghosyan">
+<meta name="dcterms.date" content="2025-12-17">
+
+<title>Kerbal Space Program: Survival Guide – v-poghosyan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KLCX05QFPN"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
+</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/site/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">v-poghosyan</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Info</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Kerbal Space Program: Survival Guide</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Gaming</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Vahram Poghosyan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 17, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#flight-basics" id="toc-flight-basics" class="nav-link" data-scroll-target="#flight-basics">Flight Basics</a>
+  <ul class="collapse">
+  <li><a href="#pitch-yaw-and-roll" id="toc-pitch-yaw-and-roll" class="nav-link" data-scroll-target="#pitch-yaw-and-roll">Pitch, Yaw and Roll</a></li>
+  <li><a href="#s.a.s.-your-best-friend" id="toc-s.a.s.-your-best-friend" class="nav-link" data-scroll-target="#s.a.s.-your-best-friend">S.A.S. — your best friend</a></li>
+  <li><a href="#a-first-suborbital-hop" id="toc-a-first-suborbital-hop" class="nav-link" data-scroll-target="#a-first-suborbital-hop">A first suborbital hop</a></li>
+  <li><a href="#reentry-orientation" id="toc-reentry-orientation" class="nav-link" data-scroll-target="#reentry-orientation">Reentry orientation</a></li>
+  </ul></li>
+  <li><a href="#getting-science" id="toc-getting-science" class="nav-link" data-scroll-target="#getting-science">Getting Science</a></li>
+  <li><a href="#orbiting-101" id="toc-orbiting-101" class="nav-link" data-scroll-target="#orbiting-101">Orbiting 101</a>
+  <ul class="collapse">
+  <li><a href="#what-an-orbit-is" id="toc-what-an-orbit-is" class="nav-link" data-scroll-target="#what-an-orbit-is">What an orbit is</a></li>
+  <li><a href="#the-map-view" id="toc-the-map-view" class="nav-link" data-scroll-target="#the-map-view">The Map View</a></li>
+  <li><a href="#attitude-control-in-vacuum" id="toc-attitude-control-in-vacuum" class="nav-link" data-scroll-target="#attitude-control-in-vacuum">Attitude control in vacuum</a></li>
+  <li><a href="#the-navball-vectors" id="toc-the-navball-vectors" class="nav-link" data-scroll-target="#the-navball-vectors">The NavBall vectors</a></li>
+  <li><a href="#the-golden-rule-of-maneuvers" id="toc-the-golden-rule-of-maneuvers" class="nav-link" data-scroll-target="#the-golden-rule-of-maneuvers">The golden rule of maneuvers</a></li>
+  <li><a href="#inclination" id="toc-inclination" class="nav-link" data-scroll-target="#inclination">Inclination</a></li>
+  </ul></li>
+  <li><a href="#rocket-construction-basics" id="toc-rocket-construction-basics" class="nav-link" data-scroll-target="#rocket-construction-basics">Rocket Construction Basics</a>
+  <ul class="collapse">
+  <li><a href="#vab-camera" id="toc-vab-camera" class="nav-link" data-scroll-target="#vab-camera">VAB camera</a></li>
+  <li><a href="#match-the-engine-to-the-payload" id="toc-match-the-engine-to-the-payload" class="nav-link" data-scroll-target="#match-the-engine-to-the-payload">Match the engine to the payload</a></li>
+  <li><a href="#the-staging-stack" id="toc-the-staging-stack" class="nav-link" data-scroll-target="#the-staging-stack">The Staging Stack</a></li>
+  </ul></li>
+  <li><a href="#building-an-orbital-rocket" id="toc-building-an-orbital-rocket" class="nav-link" data-scroll-target="#building-an-orbital-rocket">Building an Orbital Rocket</a>
+  <ul class="collapse">
+  <li><a href="#the-upper-stage" id="toc-the-upper-stage" class="nav-link" data-scroll-target="#the-upper-stage">The upper stage</a></li>
+  <li><a href="#center-of-mass-and-where-rcs-goes" id="toc-center-of-mass-and-where-rcs-goes" class="nav-link" data-scroll-target="#center-of-mass-and-where-rcs-goes">Center of Mass, and where RCS goes</a></li>
+  <li><a href="#electric-charge" id="toc-electric-charge" class="nav-link" data-scroll-target="#electric-charge">Electric charge</a></li>
+  <li><a href="#the-lower-stage" id="toc-the-lower-stage" class="nav-link" data-scroll-target="#the-lower-stage">The lower stage</a></li>
+  <li><a href="#fix-the-staging" id="toc-fix-the-staging" class="nav-link" data-scroll-target="#fix-the-staging">Fix the staging</a></li>
+  <li><a href="#the-abort-action-group" id="toc-the-abort-action-group" class="nav-link" data-scroll-target="#the-abort-action-group">The abort action group</a></li>
+  </ul></li>
+  <li><a href="#to-the-mun" id="toc-to-the-mun" class="nav-link" data-scroll-target="#to-the-mun">To the Mun</a>
+  <ul class="collapse">
+  <li><a href="#the-transfer-orbit" id="toc-the-transfer-orbit" class="nav-link" data-scroll-target="#the-transfer-orbit">The transfer orbit</a></li>
+  <li><a href="#munar-orbit-insertion" id="toc-munar-orbit-insertion" class="nav-link" data-scroll-target="#munar-orbit-insertion">Munar orbit insertion</a></li>
+  <li><a href="#landing" id="toc-landing" class="nav-link" data-scroll-target="#landing">Landing</a></li>
+  </ul></li>
+  <li><a href="#getting-home" id="toc-getting-home" class="nav-link" data-scroll-target="#getting-home">Getting Home</a>
+  <ul class="collapse">
+  <li><a href="#ascent-from-the-mun" id="toc-ascent-from-the-mun" class="nav-link" data-scroll-target="#ascent-from-the-mun">Ascent from the Mun</a></li>
+  <li><a href="#the-ejection-burn" id="toc-the-ejection-burn" class="nav-link" data-scroll-target="#the-ejection-burn">The ejection burn</a></li>
+  <li><a href="#the-long-road-home" id="toc-the-long-road-home" class="nav-link" data-scroll-target="#the-long-road-home">The long road home</a></li>
+  <li><a href="#reentry-from-the-mun" id="toc-reentry-from-the-mun" class="nav-link" data-scroll-target="#reentry-from-the-mun">Reentry from the Mun</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>These are my distilled notes from working through KSP’s in-game tutorials — flight basics, Orbiting 101, rocket construction, and the full Mun landing + return. The screenshots are from the tutorials themselves (narrated by Gene and Wernher von Kerman, naturally). The goal of this guide: everything you need to not die, in one place.</p>
+</section>
+<section id="flight-basics" class="level1">
+<h1>Flight Basics</h1>
+<section id="pitch-yaw-and-roll" class="level2">
+<h2 class="anchored" data-anchor-id="pitch-yaw-and-roll">Pitch, Yaw and Roll</h2>
+<p>The three rotation axes of your craft. On the keyboard: <strong>W/S</strong> pitch, <strong>A/D</strong> yaw, <strong>Q/E</strong> roll.</p>
+<p><img src="images/Screenshot_20251209_190151.png" class="img-fluid"></p>
+</section>
+<section id="s.a.s.-your-best-friend" class="level2">
+<h2 class="anchored" data-anchor-id="s.a.s.-your-best-friend">S.A.S. — your best friend</h2>
+<p>The Stability Augmentation System counteracts unwanted rotation and holds your current orientation. Hold <strong>[F]</strong> to engage it momentarily, press <strong>[T]</strong> to toggle it. If you’re ever tumbling out of control: hit <strong>[T]</strong> and let it cancel the rotation.</p>
+<p><img src="images/Screenshot_20251209_192317.png" class="img-fluid"></p>
+<p>There’s also a target-following mode: once flying, click the small red button to the lower-left of the navball (the one with the miniature target indicator) and SAS will fly toward the target marker for you.</p>
+</section>
+<section id="a-first-suborbital-hop" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-suborbital-hop">A first suborbital hop</h2>
+<p>The tutorial ascent profile for a simple arcing flight east over the water:</p>
+<ol type="1">
+<li>Launch pointing straight up (90° elevation on the navball).</li>
+<li>Tilt east to <strong>80°</strong> elevation by <strong>150 m/s</strong> (start tilting at 50 m/s).</li>
+<li>Tilt east to <strong>70°</strong> by <strong>400 m/s</strong> (start at 250 m/s).</li>
+<li>After burnout, coast up into space, prepare for reentry, land.</li>
+</ol>
+<p><img src="images/Screenshot_20251209_191809.png" class="img-fluid"></p>
+</section>
+<section id="reentry-orientation" class="level2">
+<h2 class="anchored" data-anchor-id="reentry-orientation">Reentry orientation</h2>
+<p>Reenter <strong>bottom-first</strong> (heat shield / engine end down). If you ascended at ~70° pitch, you’ll naturally reenter at about <strong>−70°</strong>: aim the top of the capsule at the 70° pitch line on the <em>opposite</em> heading (ascended east at 90° → reenter pointing at heading 270, 70° pitch). Turn SAS off, change attitude, turn it back on.</p>
+<p><img src="images/Screenshot_20251209_194306.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="getting-science" class="level1">
+<h1>Getting Science</h1>
+<p>Science comes from crew reports, surface samples, contracts, and experiment parts (like the Mystery Goo Containment Unit), all driven through right-click <strong>context menus</strong> on parts and Kerbals. The catch: raw data only becomes usable science if you <strong>transmit it or physically return it to Kerbin</strong>.</p>
+<p><img src="images/Screenshot_20251209_221525.png" class="img-fluid"></p>
+</section>
+<section id="orbiting-101" class="level1">
+<h1>Orbiting 101</h1>
+<section id="what-an-orbit-is" class="level2">
+<h2 class="anchored" data-anchor-id="what-an-orbit-is">What an orbit is</h2>
+<p>Orbiting is just free-falling fast enough forward that you keep missing the ground. No atmosphere up there means nothing slows you down — no engine needed to stay up.</p>
+<p><img src="images/Screenshot_20251211_181535.png" class="img-fluid"></p>
+</section>
+<section id="the-map-view" class="level2">
+<h2 class="anchored" data-anchor-id="the-map-view">The Map View</h2>
+<p>Press <strong>[M]</strong> to toggle it. Hold right-click and drag to look around; hover over icons (Ap, Pe, etc.) for info, right-click a node to pin it.</p>
+<p><img src="images/Screenshot_20251211_181854.png" class="img-fluid"></p>
+</section>
+<section id="attitude-control-in-vacuum" class="level2">
+<h2 class="anchored" data-anchor-id="attitude-control-in-vacuum">Attitude control in vacuum</h2>
+<p>No drag means every rotational input you apply keeps going until you apply the opposite one. When in doubt, <strong>[T]</strong> for SAS.</p>
+<p><img src="images/Screenshot_20251211_181937.png" class="img-fluid"></p>
+</section>
+<section id="the-navball-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="the-navball-vectors">The NavBall vectors</h2>
+<ul>
+<li><strong>Prograde / Retrograde</strong> — toward / away from where you’re going (your velocity vector).</li>
+<li><strong>Radial in / out</strong> — toward / away from the body you’re orbiting.</li>
+<li><strong>Normal / Antinormal</strong> — perpendicular to the orbital plane, “up” and “down” relative to it.</li>
+</ul>
+<p><img src="images/Screenshot_20251211_182429.png" class="img-fluid"></p>
+</section>
+<section id="the-golden-rule-of-maneuvers" class="level2">
+<h2 class="anchored" data-anchor-id="the-golden-rule-of-maneuvers">The golden rule of maneuvers</h2>
+<p><strong>Everything you do affects the opposite side of your orbit.</strong></p>
+<ul>
+<li>Raise your <strong>apoapsis</strong> → burn <strong>prograde at periapsis</strong>.</li>
+<li>Raise your <strong>periapsis</strong> → burn <strong>prograde at apoapsis</strong>.</li>
+<li>Lower either → burn retrograde at the opposite point.</li>
+</ul>
+<p><img src="images/Screenshot_20251211_182701.png" class="img-fluid"></p>
+<p>Face prograde, check SAS is holding, <strong>[Z]</strong> for full throttle, and watch the far side of the orbit rise:</p>
+<p><img src="images/Screenshot_20251211_182947.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_183037.png" class="img-fluid"></p>
+<p>Also worth internalizing: the higher the orbit, the <em>slower</em> you move. Climbing away from the planet trades speed for altitude, like a thrown ball (the Mun plods along at ~540 m/s while low orbit is ~2,300 m/s).</p>
+<p><img src="images/Screenshot_20251211_183101.png" class="img-fluid"></p>
+</section>
+<section id="inclination" class="level2">
+<h2 class="anchored" data-anchor-id="inclination">Inclination</h2>
+<p>Inclination changes are done by burning <strong>toward normal/antinormal</strong> — 90° to your prograde vector, without changing pitch relative to the surface.</p>
+<p><img src="images/Screenshot_20251211_183336.png" class="img-fluid"></p>
+<p>Key efficiency tip: do inclination changes at the <strong>slowest part of your orbit</strong> (highest point). The slower you’re moving, the less delta-V it takes to swing your velocity vector around — which also means plane changes are cheaper on larger orbits.</p>
+<p><img src="images/Screenshot_20251211_183734.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="rocket-construction-basics" class="level1">
+<h1>Rocket Construction Basics</h1>
+<section id="vab-camera" class="level2">
+<h2 class="anchored" data-anchor-id="vab-camera">VAB camera</h2>
+<p>Orbit: arrow keys or right-mouse drag. Up/down: PageUp/PageDown or scroll wheel. Zoom: +/− or Shift+scroll.</p>
+<p><img src="images/Screenshot_20251211_192239.png" class="img-fluid"></p>
+</section>
+<section id="match-the-engine-to-the-payload" class="level2">
+<h2 class="anchored" data-anchor-id="match-the-engine-to-the-payload">Match the engine to the payload</h2>
+<p>First lesson in rocket design: a solid booster that’s too powerful for a light payload will either burn up on ascent, burn up coming back down, or come in too fast for the chute. Thrust must fit the craft.</p>
+<p><img src="images/Screenshot_20251211_192536.png" class="img-fluid"></p>
+</section>
+<section id="the-staging-stack" class="level2">
+<h2 class="anchored" data-anchor-id="the-staging-stack">The Staging Stack</h2>
+<p>The stack in the bottom right shows which parts activate at each stage. The auto-generated staging is often wrong — e.g.&nbsp;parachute and engine in the same stage. Mouse over a stage to get <strong>+ / −</strong> buttons and split parts into the right order.</p>
+<p><img src="images/Screenshot_20251211_192732.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="building-an-orbital-rocket" class="level1">
+<h1>Building an Orbital Rocket</h1>
+<p>The goal: a two-stage rocket with boosters, capable of ascent to orbit, orbital operations, and safe return.</p>
+<p><img src="images/Screenshot_20251211_193001.png" class="img-fluid"></p>
+<section id="the-upper-stage" class="level2">
+<h2 class="anchored" data-anchor-id="the-upper-stage">The upper stage</h2>
+<p>Shopping list: a stack decoupler, an RCS fuel tank, liquid fuel tanks, 4 RCS thruster blocks, 4 solar panels, 4 batteries, and an efficient vacuum engine.</p>
+<p><img src="images/Screenshot_20251211_193154.png" class="img-fluid"></p>
+<p><strong>Stack decoupler</strong> under the pod — watch the little red arrows, they must point <em>up</em> (toward the part that stays). If they point down, detach and rotate with W/A/S/D.</p>
+<p><img src="images/Screenshot_20251211_193320.png" class="img-fluid"></p>
+<p><strong>RCS tank</strong> (FL-R120) under the decoupler. RCS uses a single propellant (hence <em>mono</em>propellant) and is for fine maneuvers — translation in any direction, not just forward. Right-click the tank and lower it to what you need (the tutorial trims it to 96 units) to save weight.</p>
+<p><img src="images/Screenshot_20251211_193341.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_193454.png" class="img-fluid"></p>
+<p><strong>Propellant tanks</strong>: a tiny FL-T100, then a medium FL-T400 below it.</p>
+<p><img src="images/Screenshot_20251211_193539.png" class="img-fluid"></p>
+<p><strong>Engine</strong>: the LV-909 “Terrier” — nearly useless at sea level but highly efficient in vacuum (and above ~20km). Perfect for an upper stage that only ignites high up.</p>
+<p><img src="images/Screenshot_20251211_193729.png" class="img-fluid"></p>
+</section>
+<section id="center-of-mass-and-where-rcs-goes" class="level2">
+<h2 class="anchored" data-anchor-id="center-of-mass-and-where-rcs-goes">Center of Mass, and where RCS goes</h2>
+<p>Toggle the <strong>CoM indicator</strong> in the engineering tools. Thrust <em>through</em> the CoM translates the ship; thrust <em>around</em> it rotates the ship.</p>
+<p><img src="images/Screenshot_20251211_193816.png" class="img-fluid"></p>
+<p>Crucially, the CoM <strong>moves during flight</strong> as fuel drains. Right-click the tanks and empty them in the editor to see where the “dry” CoM sits versus the “wet” one:</p>
+<p><img src="images/Screenshot_20251211_194033.png" class="img-fluid"></p>
+<p>RCS thrusters must be balanced around the CoM or every translation will also rotate you. Since the CoM moves, place them at a <strong>compromise point between the wet and dry CoM</strong> — for this build, around the tiny fuel tank.</p>
+<p><img src="images/Screenshot_20251211_194407.png" class="img-fluid"></p>
+<p>Turn on Angle Snap (<strong>[C]</strong>), 4x symmetry, and place 4 RV-105 thruster blocks. Fine-tune with the Offset gizmo (snap <em>off</em> for that).</p>
+<p><img src="images/Screenshot_20251211_194613.png" class="img-fluid"></p>
+</section>
+<section id="electric-charge" class="level2">
+<h2 class="anchored" data-anchor-id="electric-charge">Electric charge</h2>
+<p>Don’t keep your engine running in orbit for power — add batteries and generation instead.</p>
+<p><img src="images/Screenshot_20251211_194817.png" class="img-fluid"></p>
+<p>OX-STAT solar panels: hold over the lower end of the tanks, <strong>[A]</strong> to rotate 90°, place in 4x symmetry; then 4 Z-100 batteries between them.</p>
+<p><img src="images/Screenshot_20251211_194855.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_195116.png" class="img-fluid"></p>
+</section>
+<section id="the-lower-stage" class="level2">
+<h2 class="anchored" data-anchor-id="the-lower-stage">The lower stage</h2>
+<p>Two FL-T400 tanks at the bottom of the stack:</p>
+<p><img src="images/Screenshot_20251211_195246.png" class="img-fluid"></p>
+<p><strong>Sustainer engine</strong>: the LV-T45 “Swivel” — it burns from liftoff until well after the boosters separate, sitting between boosters and vacuum engines in Isp terms. (Isp — specific impulse — varies with air pressure: boosters are strong at sea level, the Terrier only in vacuum, the sustainer bridges the gap.)</p>
+<p><img src="images/Screenshot_20251211_195321.png" class="img-fluid"></p>
+<p>At full thrust it’s too powerful for this rocket, so right-click it and set the <strong>thrust limiter to 65</strong> — 65% thrust, but burning 65% of the fuel rate, so it burns longer.</p>
+<p><img src="images/Screenshot_20251211_195621.png" class="img-fluid"></p>
+<p><strong>Boosters</strong>: TT-38K radial decouplers in 2x symmetry near the bottom of the lowest tank, then RT-10 “Hammer” SRBs on them. SRBs can’t be throttled once lit — set their constant thrust <em>before</em> launch: right-click, <strong>thrust limiter to 50</strong>. Tweaks apply to all symmetry counterparts automatically.</p>
+<p><img src="images/Screenshot_20251211_195641.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_195848.png" class="img-fluid"></p>
+<p><strong>Aerodynamics</strong>: nose cones on the flat SRB tops (2x), and AV-R8 winglets in 4x symmetry near the bottom of the lowest tank — they’re control surfaces, adding stability <em>and</em> control authority low in the atmosphere. Make sure they don’t intersect the decouplers or SRBs.</p>
+<p><img src="images/Screenshot_20251211_195933.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_200106.png" class="img-fluid"></p>
+</section>
+<section id="fix-the-staging" class="level2">
+<h2 class="anchored" data-anchor-id="fix-the-staging">Fix the staging</h2>
+<p>Review the stack before rolling out: the auto-staging had the SRBs firing <em>before</em> the sustainer. Drag the Swivel’s icon down into the same stage as the SRBs so they all light together at liftoff.</p>
+<p><img src="images/Screenshot_20251211_200307.png" class="img-fluid"></p>
+</section>
+<section id="the-abort-action-group" class="level2">
+<h2 class="anchored" data-anchor-id="the-abort-action-group">The abort action group</h2>
+<p>Set up an <strong>Abort</strong> action group (career mode needs an upgraded VAB for this): decoupler below the pod → <em>Decouple</em>; each liquid engine → <em>Shutdown</em>; one radial decoupler → <em>Decouple</em> (symmetry covers its twin). Trigger abort in flight and the capsule separates clean, engines dead. Remember to deploy the chute yourself afterwards.</p>
+<p><img src="images/Screenshot_20251211_200557.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251211_201107.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="to-the-mun" class="level1">
+<h1>To the Mun</h1>
+<p>Starting point: Low Kerbin Orbit (LKO), with the flight tutorials and Orbiting 101 under your belt.</p>
+<p><img src="images/Screenshot_20251211_201757.png" class="img-fluid"></p>
+<section id="the-transfer-orbit" class="level2">
+<h2 class="anchored" data-anchor-id="the-transfer-orbit">The transfer orbit</h2>
+<p>A transfer orbit is just an orbit used to move between two orbits: periapsis near Kerbin, apoapsis stretched out to just beyond the Mun’s orbit. Interplanetary trajectories are the same idea, bigger scale.</p>
+<p><img src="images/Screenshot_20251213_001048.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251213_112739.png" class="img-fluid"></p>
+</section>
+<section id="munar-orbit-insertion" class="level2">
+<h2 class="anchored" data-anchor-id="munar-orbit-insertion">Munar orbit insertion</h2>
+<p>When you enter the Mun’s sphere of influence you’ll be on an <em>escape</em> trajectory — moving too fast to be captured. <strong>Burn retrograde at periapsis</strong> to slow below escape velocity and close your orbit (same rule as always: change your apoapsis at periapsis — capture is just dragging your Ap down from “outside the SOI” to “inside it”).</p>
+<p>If your Mun periapsis is <em>below the surface</em>, fix it before you arrive: create a maneuver about halfway there and pull the <strong>radial handles</strong> until the Pe sits at a comfortable altitude (~50km).</p>
+<p><img src="images/Screenshot_20251213_114117.png" class="img-fluid"></p>
+</section>
+<section id="landing" class="level2">
+<h2 class="anchored" data-anchor-id="landing">Landing</h2>
+<p>The descent plan:</p>
+<ol type="1">
+<li>Descent orbit insertion burn (low throttle) — an orbit that <em>almost</em> touches the surface.</li>
+<li>Warp to the new periapsis.</li>
+<li><strong>Braking burn</strong>: retrograde at ~1/3 throttle — don’t kill all your speed early or you’ll just fall and have to cancel the speed again. This is a reverse gravity turn.</li>
+<li>From 1.5km up, descend at a measured pace: <strong>1 m/s of speed per 10m of altitude remaining</strong>.</li>
+<li>Touch down softly.</li>
+</ol>
+<p><img src="images/Screenshot_20251213_175129.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251213_175521.png" class="img-fluid"></p>
+<p>During the braking burn: <strong>[G]</strong> deploys landing gear, keep vertical speed above −100 m/s but never positive, and remember the altimeter reads altitude above <em>sea level</em>, not the terrain under you.</p>
+<p><img src="images/Screenshot_20251213_175704.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="getting-home" class="level1">
+<h1>Getting Home</h1>
+<section id="ascent-from-the-mun" class="level2">
+<h2 class="anchored" data-anchor-id="ascent-from-the-mun">Ascent from the Mun</h2>
+<p>Much easier than a Kerbin launch — weak gravity, no atmosphere, single stage. Throttle up, immediately pitch over down the 90° (east) heading line, cut throttle once apoapsis passes 50km, circularize at apoapsis.</p>
+<p><img src="images/Screenshot_20251213_180925.png" class="img-fluid"></p>
+</section>
+<section id="the-ejection-burn" class="level2">
+<h2 class="anchored" data-anchor-id="the-ejection-burn">The ejection burn</h2>
+<p>Check the geometry in map view from above: you’re orbiting the Mun counter-clockwise, and the Mun orbits Kerbin prograde (same direction). To go home, <strong>eject opposite to the Mun’s direction of travel</strong> — which, counter-intuitively, means burning <em>prograde in your munar orbit</em>. Prograde locally, retrograde with respect to Kerbin: the burn cancels the Mun’s orbital velocity and drops your Kerbin periapsis.</p>
+<p><img src="images/Screenshot_20251213_181424.png" class="img-fluid"></p>
+<p>Practical recipe: make a node anywhere on your Mun orbit, drag prograde until the path escapes the Mun’s SOI, then <strong>slide the node around the orbit</strong> and watch the Kerbin periapsis. It’s lowest when your ejection vector is parallel to the Mun’s track but opposite in direction. Target a <strong>Kerbin Pe between 5km and 32km</strong> (fine-tune with radial handles). Same principle gets you to other planets — plus “transfer windows.”</p>
+<p><img src="images/Screenshot_20251213_181619.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251213_182032.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251213_182209.png" class="img-fluid"></p>
+</section>
+<section id="the-long-road-home" class="level2">
+<h2 class="anchored" data-anchor-id="the-long-road-home">The long road home</h2>
+<p>Click the orbit (at least a Kerbin-radius before periapsis) → <strong>Warp Here</strong>. If you use manual time warp instead, back it off as you approach — Kerbin’s gravity speeds you up a lot near the end.</p>
+<p><img src="images/Screenshot_20251213_182513.png" class="img-fluid"></p>
+</section>
+<section id="reentry-from-the-mun" class="level2">
+<h2 class="anchored" data-anchor-id="reentry-from-the-mun">Reentry from the Mun</h2>
+<p>Transmunar reentry is <em>hot</em> — survivable without a heat shield only barely, from the Mun and no farther. With the shield’s extra mass the pod won’t aerobrake as well, so the craft carries a <strong>drogue chute</strong> on the side plus the main chute on top:</p>
+<ol type="1">
+<li>Reenter shield-first, ride out the plasma.</li>
+<li>Stage the <strong>drogue</strong> as soon as its icon shows safe (no red/orange background) — drogues work at higher speeds and altitudes than regular chutes.</li>
+<li>Once the drogue has slowed you enough that the <strong>main</strong> chute shows safe, stage again.</li>
+</ol>
+<p><img src="images/Screenshot_20251213_182706.png" class="img-fluid"></p>
+<p><img src="images/Screenshot_20251213_182936.png" class="img-fluid"></p>
+<p>Welcome home.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2021, Vahram Poghosyan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/v-poghosyan">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/vahrampoghosyan/">
+      <i class="bi bi-linkedin" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script type="application/javascript" src="../../javascript/light-dark.js"></script>
+
+
+
+
+</body></html>

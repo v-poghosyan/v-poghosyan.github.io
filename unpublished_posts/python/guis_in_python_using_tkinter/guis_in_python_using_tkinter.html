@@ -236,12 +236,7 @@ gtag('config', 'G-KLCX05QFPN', { 'anonymize_ip': true});
 </section>
 <section id="evolving-system-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="evolving-system-diagram">Evolving system diagram</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src=".png" class="img-fluid figure-img"></p>
-<figcaption>Diagram</figcaption>
-</figure>
-</div>
+<!-- TODO: add the evolving-system diagram -->
 <p>The database write operation is mediated by a retry scheduler service. Or we do a synchronous write since data integrity is a priority. Especially if we use this service to remind us about taking any medications or other critical matters.</p>
 <p>There may be some role for queue system as well.</p>
 <p>The downstream services, such as the statistical layer, will need to access</p>
@@ -508,7 +503,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

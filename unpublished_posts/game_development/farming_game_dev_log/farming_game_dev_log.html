@@ -259,6 +259,19 @@ window.Quarto = {
   <li><a href="#action" id="toc-action" class="nav-link" data-scroll-target="#action">Action</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#day-9-2026-10-27" id="toc-day-9-2026-10-27" class="nav-link" data-scroll-target="#day-9-2026-10-27">Day 9 (2026-10-27)</a>
+  <ul class="collapse">
+  <li><a href="#lesson-1-put-the-reference-image-on-a-plane" id="toc-lesson-1-put-the-reference-image-on-a-plane" class="nav-link" data-scroll-target="#lesson-1-put-the-reference-image-on-a-plane">Lesson 1: Put the reference image on a plane</a></li>
+  <li><a href="#lesson-2-fix-the-stretching-in-the-uv-editor" id="toc-lesson-2-fix-the-stretching-in-the-uv-editor" class="nav-link" data-scroll-target="#lesson-2-fix-the-stretching-in-the-uv-editor">Lesson 2: Fix the stretching in the UV Editor</a></li>
+  <li><a href="#lesson-3-center-the-reference-plane-on-the-column" id="toc-lesson-3-center-the-reference-plane-on-the-column" class="nav-link" data-scroll-target="#lesson-3-center-the-reference-plane-on-the-column">Lesson 3: Center the reference plane on the column</a></li>
+  <li><a href="#adding-a-top-down-view" id="toc-adding-a-top-down-view" class="nav-link" data-scroll-target="#adding-a-top-down-view">Adding a top-down view</a></li>
+  <li><a href="#crease-vs.-bevel" id="toc-crease-vs.-bevel" class="nav-link" data-scroll-target="#crease-vs.-bevel">Crease vs.&nbsp;bevel</a></li>
+  <li><a href="#videos-for-the-blender-to-unreal-workflow" id="toc-videos-for-the-blender-to-unreal-workflow" class="nav-link" data-scroll-target="#videos-for-the-blender-to-unreal-workflow">Videos for the Blender to Unreal workflow</a></li>
+  <li><a href="#connecting-claude-to-blender-mcp" id="toc-connecting-claude-to-blender-mcp" class="nav-link" data-scroll-target="#connecting-claude-to-blender-mcp">Connecting Claude to Blender (MCP)</a>
+  <ul class="collapse">
+  <li><a href="#my-setup-on-macos" id="toc-my-setup-on-macos" class="nav-link" data-scroll-target="#my-setup-on-macos">My setup on macOS</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -794,6 +807,184 @@ Tip: Add modifiers to fix the mapping issue from earlier
 <h3 class="anchored" data-anchor-id="action">Action</h3>
 <p>Right click inside Content Drawer, create new <strong>Input</strong> &gt; <strong>Input Action</strong> &gt; <code>AC_Move</code>. Change the <strong>Value</strong> of <code>AC_Move</code> to be a <code>Vector2D</code> (instead of the default Boolean) since we want to capture movement in both the X and Y directions (forward/backward and left/right).</p>
 <p>This fixed my issue with the movement where the character was only moving in one direction regardless of which key I pressed. Next time, we will add camera rotation controls as well, so that we can look around the scene while moving.</p>
+</section>
+</section>
+</section>
+<section id="day-9-2026-10-27" class="level1">
+<h1>Day 9 (2026-10-27)</h1>
+<p>Today I took a break from the game to get better at Blender. I’m modelling a Greek <strong>Corinthian column</strong> in high poly, and I want to find a workflow for baking high poly down to low poly. The column is meant to be a video game asset.</p>
+<p>The plan is to keep two versions:</p>
+<ul>
+<li><strong>High poly:</strong> the full model with PBR materials.</li>
+<li><strong>Low poly:</strong> a light copy that uses baked textures (like the normal map, ambient occlusion, and base color) made from the high poly.</li>
+</ul>
+<p><strong>Nanite:</strong> The high poly model should convert to Nanite easily. The whole point of Nanite is to get rid of the need for the low poly version. There is no retopology, no baking, and no LODs to maintain, which means a lot less toil for me as the developer. In Unreal, I turn on <strong>Enable Nanite</strong> on the static mesh, and, ensuring I take some compatibility measures outlined in tutorial videos, the PBR material works as is.</p>
+<p>First step: set up the reference images.</p>
+<section id="lesson-1-put-the-reference-image-on-a-plane" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-1-put-the-reference-image-on-a-plane">Lesson 1: Put the reference image on a plane</h2>
+<p>You can drag and drop an image into Blender, but it works better to press <kbd class="inline">Shift</kbd>+<kbd class="inline">A</kbd> and add a new <strong>Plane</strong> mesh. Then open the <strong>Shading</strong> workspace and plug an <strong>Image Texture</strong> node into the <strong>Base Color</strong> of the <strong>Principled BSDF</strong> node.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure11.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Image Texture node plugged into Base Color</figcaption>
+</figure>
+</div>
+</section>
+<section id="lesson-2-fix-the-stretching-in-the-uv-editor" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-fix-the-stretching-in-the-uv-editor">Lesson 2: Fix the stretching in the UV Editor</h2>
+<p>The image will look stretched. Open the <strong>UV Editor</strong> and move the UV vertices around until you see the image tile. Then go into <strong>Edit Mode</strong> and use <strong>Loop Cuts</strong> (<kbd class="inline">Cmd</kbd>+<kbd class="inline">R</kbd>) to cut away everything except one tile of the image. You don’t need to be exact here.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure12.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>Fixing the UVs of the reference plane</figcaption>
+</figure>
+</div>
+</section>
+<section id="lesson-3-center-the-reference-plane-on-the-column" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-3-center-the-reference-plane-on-the-column">Lesson 3: Center the reference plane on the column</h2>
+<p>After getting the reference image mapped to the plane, use <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> together with right-click &gt; <strong>Set Origin</strong> to center the reference plane (the plane with the reference image on it) to the world origin. You can make clever use of the 3D cursor here. Note that you need to center the reference planes with respect to a reference point on the Corinthian column itself. In effect, you’re creating a coordinate system of sorts (except it’s actual geometry) around the point of interest on the Corinthian column.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure13.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>The reference planes, centered around the 3D cursor</figcaption>
+</figure>
+</div>
+<p>Right-click and use <strong>Set Origin</strong> &gt; <strong>Origin to 3D Cursor</strong> to move the plane’s origin. So the 3D cursor has to be on the right spot first.</p>
+<p>To get the cursor there, add loop cuts to the plane until one vertex lands on a point of the column (I used the flower at the top of the capital). That vertex is the anchor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure14.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Anchor vertex on the flower of the Corinthian capital</figcaption>
+</figure>
+</div>
+<p>Then use the 3D cursor method:</p>
+<ol type="1">
+<li>Select your object in <strong>Object Mode</strong> and press <kbd class="inline">Tab</kbd> to switch to <strong>Edit Mode</strong>.</li>
+<li>Press <kbd class="inline">1</kbd> to activate <strong>Vertex Select</strong> mode, then click on the target vertex you want to use as the new origin.</li>
+<li>Press <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> to open the <strong>Snap</strong> menu and choose <strong>Cursor to Selected</strong> to move the 3D cursor directly to that vertex.</li>
+<li>Press <kbd class="inline">Tab</kbd> to return to <strong>Object Mode</strong>.</li>
+<li>Right-click the object, go to <strong>Set Origin</strong>, and select <strong>Origin to 3D Cursor</strong>.</li>
+<li>Press <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> &gt; <strong>Cursor to World Origin</strong>, then <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> &gt; <strong>Selection to Cursor</strong>. The anchor is now at the world origin.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure15.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Selection to Cursor</figcaption>
+</figure>
+</div>
+<p>Moving vertices with <kbd class="inline">G</kbd> messes up the UV mapping. To fix it, right-click in the UV Editor and click <strong>Unwrap</strong>. A plain plane is easy for Blender to unwrap. Or use <kbd class="inline">Shift</kbd>+<kbd class="inline">V</kbd> (or press <kbd class="inline">G</kbd> twice) to slide vertices along an edge without touching the UV mapping.</p>
+</section>
+<section id="adding-a-top-down-view" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-top-down-view">Adding a top-down view</h2>
+<p>I added the top-down view of the Corinthian column as another reference plane. It lies flat and crosses the front and side planes, so now I have three views of the column to model from.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/figure16.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Top-down reference plane</figcaption>
+</figure>
+</div>
+</section>
+<section id="crease-vs.-bevel" class="level2">
+<h2 class="anchored" data-anchor-id="crease-vs.-bevel">Crease vs.&nbsp;bevel</h2>
+<p>One of the column tutorials makes edges sharper with either the crease tool or a bevel modifier. They look similar, but they are not interchangeable.</p>
+<ul>
+<li><strong>Crease</strong> (<kbd class="inline">Shift</kbd>+<kbd class="inline">E</kbd> in Edit Mode) only works with a <strong>Subdivision Surface</strong> modifier. It adds no geometry. It keeps an edge sharp on an otherwise smooth surface, with no visible width. The sharpness is a 0 to 1 value.</li>
+<li><strong>Bevel modifier</strong> works with or without Subdivision Surface. It adds real geometry, a small strip with a width and a number of segments that you set. That strip catches the light, like a worn edge.</li>
+</ul>
+<p>Use either one when the mesh is already subdivided and you just want tighter edges. Use the bevel when there is no subdivision, or when you want a visible edge highlight. For my high poly to low poly bake, a real bevel is a good fit for the column edges, because the highlight gets baked into the normal map.</p>
+</section>
+<section id="videos-for-the-blender-to-unreal-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="videos-for-the-blender-to-unreal-workflow">Videos for the Blender to Unreal workflow</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=68oRQvV6GhY">Let’s model a column in Blender (pt.1)</a> (hbitproject): a Corinthian column with non-destructive modeling. Covers the base, the capital, and the acanthus leaf.</li>
+<li><a href="https://www.youtube.com/watch?v=JMrSVhG_rUw">Let’s model a column in Blender (pt.2)</a> (hbitproject): the acanthus rings, caules, volutes, and the base.</li>
+<li><a href="https://www.youtube.com/watch?v=N8y_eH7QB2o">The Blender to Unreal Engine Workflow</a> (School of Motion): the full trip from Blender to Unreal, including Nanite.</li>
+<li><a href="https://www.youtube.com/watch?v=haA37WIogUI">MAKING GAME ASSETS QUICKLY (Blender - UE5)</a> (Crimson): a game asset workflow from Blender to UE5.</li>
+<li><a href="https://www.youtube.com/watch?v=B1LYJlXcUH0">How does the Blender - Quixel Mixer - Unreal Engine workflow/pipeline work?</a> (Ashty): exporting, texturing, and importing PBR textures.</li>
+<li><a href="https://www.youtube.com/watch?v=d6oVxZb6qmc">PBR Guide for 3D Artists</a> (Needle): albedo, normal, metallic, and roughness explained.</li>
+<li><a href="https://www.youtube.com/watch?v=ZOHNRlrd1Ak">Texture Maps Explained</a> (FlippedNormals): the maps I’ll bake for the low poly version.</li>
+</ul>
+</section>
+<section id="connecting-claude-to-blender-mcp" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-claude-to-blender-mcp">Connecting Claude to Blender (MCP)</h2>
+<p>I decided to connect Claude to Blender with the <strong>Blender MCP add-on</strong> and the <strong>MCP server</strong>. The server has to keep running, because it passes messages between Claude and Blender.</p>
+<p>The code for both is here: <a href="https://projects.blender.org/lab/blender_mcp">blender_mcp</a>.</p>
+<p>Here’s the video I followed: <a href="https://www.youtube.com/watch?v=YQBO5de575Y">How to Setup Blender MCP with Claude, Codex &amp; Gemini CLI</a> (Building Aeon, 7 min). What it covers:</p>
+<ul>
+<li><strong>What you need:</strong> Blender 5.1, Python, Node.js, Git, UV, and an AI client.</li>
+<li><strong>Add-on:</strong> drag the install button from the Blender MCP page into Blender (do it twice). Check it under <strong>Edit</strong> &gt; <strong>Preferences</strong> &gt; <strong>Add-ons</strong>.</li>
+<li><strong>Server:</strong> clone the MCP server repo and run it with UV. If you see a missing <code>docutils</code> error, run <code>uv pip install docutils</code> and try again.</li>
+</ul>
+<section id="my-setup-on-macos" class="level3">
+<h3 class="anchored" data-anchor-id="my-setup-on-macos">My setup on macOS</h3>
+<p>The video uses Windows and a slightly different path, so here are the steps I took:</p>
+<ol type="1">
+<li><p>Clone the server code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://projects.blender.org/lab/blender_mcp.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Run the server. The project file is inside the <code>mcp</code> folder, so the video’s <code>--directory .</code> doesn’t work from the repo root. Leave this terminal open, because the server has to keep running:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> blender_mcp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> <span class="at">--directory</span> mcp run blender-mcp <span class="at">--transport</span> http <span class="at">--port</span> 9191</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Add the server to Claude Code. The <code>/</code> at the end of the URL matters, because that’s where the server listens:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add <span class="at">--transport</span> http blender http://127.0.0.1:9191/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Check that it says <strong>Connected</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Restart Claude Code (<code>claude --continue</code> keeps the conversation) so the Blender tools load.</p></li>
+<li><p>Test it with a read-only request. I asked Claude for a summary of the scene, and it listed my camera, light, cube, two planes, and the five reference images.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="My original notes (click to expand)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+My original notes (click to expand)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I decided to take a departure from the game to hone my Blender skills. I am doing high-poly modelling of Greek Corinthian columns, hoping to nail down a workflow for high poly to low poly baking. This is intended as a video game asset. We are going to keep the high poly PBR model and also come up with a low poly version with non-PBR (i.e.&nbsp;baked) textures.</p>
+<p>Lessons to weave through the log:</p>
+<ol type="1">
+<li>Importing a reference image in Blender is as simple as drag and drop, but what works best is using <kbd class="inline">Shift</kbd>+<kbd class="inline">A</kbd> to add a new plane mesh. Then open up the Shading editor and plug an image texture into the base color of the Principled BSDF node.</li>
+<li>After doing that you’ll get some stretching, so enter the UV editor and massage the vertices in the UV editor enough until you see the image tile. You can then go into Edit mode and use loop cuts to get rid of anything but a single tile of the reference image. Note that when doing a loop cut, you don’t need to be precise at this step.</li>
+<li>After getting the reference image reasonably perfectly mapped to the plane, use <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> together with RMB + Set Origin to center the reference plane (the plane plastered with the reference image) to world origin (you can make clever use of the 3D cursor here). Note, you need to center the reference planes w.r.t. a reference point on the Corinthian column itself. For this, you might need to make some loop cuts on the reference plane in order to get a vertex which you can use as an anchor to Set Origin to. Using <kbd class="inline">G</kbd> here is destructive to the UV mapping, but you can always RMB in the UV Editing tab and click “unwrap” again. However, <kbd class="inline">Shift</kbd>+<kbd class="inline">V</kbd> (or double-clicking <kbd class="inline">G</kbd>) can help move vertices along an edge without messing with the UV mapping! But feel free to just use <kbd class="inline">G</kbd> normally and Unwrap, the simple plane projection is easy for Blender to handle without much handholding. In effect, you’re creating a coordinate system of sorts (except it’s actual geometry) around the point of interest on the Corinthian column. Then, you simply use <kbd class="inline">Shift</kbd>+<kbd class="inline">S</kbd> to do Selection to 3D Cursor (which is presumably already at world origin).</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="My follow-up notes (click to expand)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+My follow-up notes (click to expand)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Change “and the PBR material works as is” to “and, ensuring I take some compatibility measures outlined in tutorial videos), the PBR material works as is”. Emphasize how the point of Nanite is to get rid of the need for the low poly version, reducing developer toil. Also go through <code>~/Documents/github/youtube-curator/data/</code> and find the right indexed videos for this Blender to Unreal workflow.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="My third notes (click to expand)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+My third notes (click to expand)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I resynced my YouTube videos using my custom youtube-curator pipeline. There should be 2 new Corinthian column tutorial videos to add to the video section. Examine videos.json again.</p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1037,7 +1228,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/v-poghosyan\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
